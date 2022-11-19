@@ -4,7 +4,7 @@ extends Node2D
 # BUILD MODE VARS
 var build_mode: bool = false
 var build_type: String
-# 0 - left, 90 - up
+# 0 - up, 90 - right
 var build_rotation_degrees: int = 0
 
 # DEMOLISH MODE VARS
@@ -17,7 +17,7 @@ onready var Player := get_node("Player")
 onready var PrevSprite: Sprite = get_node("ObjSprite")
 
 var previews_dict: Dictionary = {
-	"Belt": "res://art/Belt.png"
+	"Belt": "res://art/belt/s.png"
 }
 var objects_dict: Dictionary = {
 	"Belt": "res://src/Utils/Counveyour.tscn"
@@ -35,7 +35,7 @@ func _ready():
 		button.connect("pressed", self, "_on_build_button_pressed", [button.get_name()])
 
 
-func _process(delta):
+func _process(_delta):
 	if build_mode:
 		handle_building()
 	elif demolish_mode:
@@ -55,7 +55,7 @@ func handle_demolition():
 
 
 func destroy_object(grid_pos: Vector2):
-	instances_dict[grid_pos].queue_free()
+	instances_dict[grid_pos].die()
 	instances_dict.erase(grid_pos)
 
 
@@ -77,13 +77,13 @@ func handle_building():
 
 func handle_rotation():
 	if Input.is_action_just_pressed("ui_left"):
-		build_rotation_degrees = 0
-	if Input.is_action_just_pressed("ui_up"):
-		build_rotation_degrees = 90
-	if Input.is_action_just_pressed("ui_right"):
-		build_rotation_degrees = 180
-	if Input.is_action_just_pressed("ui_down"):
 		build_rotation_degrees = 270
+	if Input.is_action_just_pressed("ui_up"):
+		build_rotation_degrees = 0
+	if Input.is_action_just_pressed("ui_right"):
+		build_rotation_degrees = 90
+	if Input.is_action_just_pressed("ui_down"):
+		build_rotation_degrees = 180
 
 
 func _on_build_button_pressed(building_type: String):

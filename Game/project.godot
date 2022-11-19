@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Belt",
+"language": "GDScript",
+"path": "res://src/Utils/Counveyour.gd"
+} ]
+_global_script_class_icons={
+"Belt": ""
+}
+
 [application]
 
 config/name="MyGame"

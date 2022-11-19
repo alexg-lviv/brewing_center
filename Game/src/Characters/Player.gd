@@ -9,7 +9,7 @@ var vel : Vector2 = Vector2()
 func _ready():
 	pass # Replace with function body.
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	vel = Vector2()
 	# INPUTS AND MOVEMENT
 	if Input.is_action_pressed("move_up"):
