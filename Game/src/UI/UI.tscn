@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=2]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]
