@@ -10,3 +10,8 @@ var previews_dict: Dictionary = {
 var objects_dict: Dictionary = {
 	"Belt": "res://src/Utils/Counveyour.tscn"
 }
+
+
+var modulate_clear: String = "ffffff"
+var modulate_green: String = "73feb0"
+var modulate_red:   String = "ff6565"

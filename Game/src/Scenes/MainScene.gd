@@ -42,9 +42,9 @@ func handle_demolition():
 	var mouse_pos = get_global_mouse_position()
 	var grid_pos = get_grid_pos(mouse_pos)
 	if grid_pos != _last_shaded_red and instances_dict.has(_last_shaded_red):
-		instances_dict[_last_shaded_red].modulate = "ffffff"
+		instances_dict[_last_shaded_red].modulate = Glob.modulate_clear
 	if instances_dict.has(grid_pos):
-		instances_dict[grid_pos].modulate = "ff6565"
+		instances_dict[grid_pos].modulate = Glob.modulate_red
 		_last_shaded_red = grid_pos
 		if Input.is_action_just_pressed("click"):
 			destroy_object(grid_pos)
@@ -130,9 +130,9 @@ func update_texture_preview(grid_pos: Vector2, can_build: bool):
 	PrevSprite.global_position = grid_pos
 	PrevSprite.rotation_degrees = build_rotation_degrees
 	if(can_build):
-		PrevSprite.modulate = "73feb0"
+		PrevSprite.modulate = Glob.modulate_green
 	else:
-		PrevSprite.modulate = "ff6565"
+		PrevSprite.modulate = Glob.modulate_red
 
 ## reset preview for preview sprite
 ## make it invisible
