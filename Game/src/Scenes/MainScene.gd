@@ -16,13 +16,8 @@ onready var Tilemap := get_node("TileMap")
 onready var Player := get_node("Player")
 onready var PrevSprite: Sprite = get_node("ObjSprite")
 
-var previews_dict: Dictionary = {
-	"Belt": "res://art/belt/s.png"
-}
-var objects_dict: Dictionary = {
-	"Belt": "res://src/Utils/Counveyour.tscn"
-}
-
+## dictionary of all instanced buildings
+## the key is their grid coords, and the value is reference to the object itself
 var instances_dict: Dictionary = {}
 
 var obj_prev_name: String
@@ -41,7 +36,8 @@ func _process(_delta):
 	elif demolish_mode:
 		handle_demolition()
 
-
+## if we are in demolition mode, the function handles everything connected to it
+## handles input, shades the objects, destroys on click
 func handle_demolition():
 	var mouse_pos = get_global_mouse_position()
 	var grid_pos = get_grid_pos(mouse_pos)
@@ -52,13 +48,18 @@ func handle_demolition():
 		_last_shaded_red = grid_pos
 		if Input.is_action_just_pressed("click"):
 			destroy_object(grid_pos)
+	if Input.is_action_just_pressed("ui_cancel"): demolish_mode = false
 
 
+## destroys the object, calls its death function and removes the object from instances dict
 func destroy_object(grid_pos: Vector2):
 	instances_dict[grid_pos].die()
 	instances_dict.erase(grid_pos)
 
 
+## if we are in build mode, the function handles everything connected to it
+## previews object, shades it, checks if we can place it there
+## handles input and actualy builds
 func handle_building():
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var grid_pos: Vector2 = get_grid_pos(mouse_pos)
@@ -75,6 +76,11 @@ func handle_building():
 	handle_rotation()
 
 
+## handle rotation for the objects
+## 0   == up
+## 90  == right
+## 180 == down
+## 270 == left
 func handle_rotation():
 	if Input.is_action_just_pressed("ui_left"):
 		build_rotation_degrees = 270
@@ -86,8 +92,11 @@ func handle_rotation():
 		build_rotation_degrees = 180
 
 
+## signal that handles UI build button actions
+## it can eather specify which object to build
+## or enter demolition mode
 func _on_build_button_pressed(building_type: String):
-	if building_type == "Reset":
+	if building_type == "Demolish":
 		build_mode = false
 		demolish_mode = true
 		reset_preview()
@@ -98,19 +107,25 @@ func _on_build_button_pressed(building_type: String):
 		set_preview(build_type)
 
 
+## set prewiew of the object we are going to build
+## set texture, z-index, rotation
 func set_preview(prev_name: String):
 	obj_prev_name = prev_name
-	var new_obj_sprite = load(previews_dict[prev_name])
+	var new_obj_sprite = load(Glob.previews_dict[prev_name])
 	PrevSprite.set_texture(new_obj_sprite)
 	PrevSprite.rotation_degrees = build_rotation_degrees
 	PrevSprite.z_index = 4
 
 
-func get_grid_pos(mouse_pos: Vector2) -> Vector2:
+## helper function to gridify the coordinates
+func get_grid_pos(pos: Vector2) -> Vector2:
 	return Vector2(
-		stepify(mouse_pos.x + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2,
-		stepify(mouse_pos.y + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2)
+		stepify(pos.x + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2,
+		stepify(pos.y + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2)
 
+
+## updates preview textures, called from _process
+## responsible for shading if the building can be built on the coordinates or no
 func update_texture_preview(grid_pos: Vector2, can_build: bool):
 	PrevSprite.global_position = grid_pos
 	PrevSprite.rotation_degrees = build_rotation_degrees
@@ -119,13 +134,15 @@ func update_texture_preview(grid_pos: Vector2, can_build: bool):
 	else:
 		PrevSprite.modulate = "ff6565"
 
-
+## reset preview for preview sprite
+## make it invisible
 func reset_preview():
 	PrevSprite.set_texture(null)
 
-
+## create object to scene, set its gridified position and rotation
+## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
-	var NewObj = load(objects_dict[object_name]).instance()
+	var NewObj = load(Glob.objects_dict[object_name]).instance()
 	add_child(NewObj)
 	NewObj.position = grid_pos
 	NewObj.rotation_degrees = build_rotation_degrees

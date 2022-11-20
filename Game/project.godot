@@ -26,7 +26,7 @@ config/icon="res://art/slime.png"
 
 [autoload]
 
-Glob="*res://src/Globals/Constants.gd"
+Glob="*res://src/Globals/Glob.gd"
 
 [display]
 
