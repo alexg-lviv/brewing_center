@@ -1,14 +1,24 @@
-class_name Belt
-extends Area2D
+## Belt
+##
 ## a belt object that transports resources in the game
 
+class_name Belt
+extends Area2D
 
+
+# "double linked list" variables
 var left: Belt = null
 var right: Belt = null
 var back: Belt = null
 var forward: Belt = null
 
+# transporting objects variables
+var object: Object = null
+var send_obj_delay: float = 1
+var ready_to_send: bool = false
+
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+onready var MoveTimer: Timer = get_node("MoveTimer")
 
 
 ## function to update the current animation of the belt
@@ -69,3 +79,23 @@ func die():
 func _on_AreaTo_area_entered(area):
 	forward = area
 	area.add_neighbour(self, rotation_degrees)
+	if ready_to_send: send_obj()
+
+## a signal that is called when transportable object enters the belt  
+## starts a timer and adds an object to variable
+func _on_Conveyour_area_entered(area):
+	if area.is_in_group("TransportableItems"):
+		object = area
+		MoveTimer.start(send_obj_delay)
+		ready_to_send = false
+
+## a signal of timer after which an object starts moving
+func _on_MoveTimer_timeout():
+	ready_to_send = true
+	send_obj()
+
+## function to make object move
+func send_obj():
+	if !forward or !object: return
+	object.move(forward.position)
+	object = null
