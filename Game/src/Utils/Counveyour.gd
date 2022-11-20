@@ -1,6 +1,7 @@
-extends Area2D
-
 class_name Belt
+extends Area2D
+## a belt object that transports resources in the game
+
 
 var left = null
 var right = null
@@ -9,47 +10,62 @@ var forward = null
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 
-func update_neighbours():
+var rotations: Dictionary = {
+	0: back,
+	90: left,
+	270: right,
+	180: forward
+}
+
+## function to update the current animation of the belt
+## called when the belt gains or looses neighbours
+func update_animation():
 	var anim_name: String = ""
-	if !back and !left and !right: anim_name = "s"
-	if back: anim_name += "s"
-	if left: anim_name += "l"
-	if right: anim_name += "r"
+	if !back and !left and !right: anim_name = "back"
+	if back: anim_name += "back"
+	if left: anim_name += "left"
+	if right: anim_name += "right"
 	AnimPlayer.play(anim_name)
 
-# r for rotation
-func add_neighbour(belt: Belt, r: int):
-	# this are hella klever shinenigans
-	# i just hope that I will never come back here...
-	r -= rotation_degrees
-	r += 360
-	r %= 360
-	if r == 0: back = belt
-	elif r == 90: left = belt
-	elif r == 270: right = belt
-	update_neighbours()
+## calculates relative direction from which other belt is connected to current belt 
+func _get_relative_rotation(other_rotation: int) -> int:
+	return ((other_rotation - int(rotation_degrees) + 360) % 360)
 
+## function to update the "double linked list" of belts
+## called on signal from other belt
+## calculates from which direction the neighbour was added
+## and calls update animation
+func add_neighbour(other_belt: Belt, other_rotation: int):
+	rotations[_get_relative_rotation(other_rotation)] = other_belt
+	update_animation()
 
-func delete_neighbour(r: int):
-	r -= rotation_degrees
-	r += 360
-	r %= 360
-	if r == 0: back = null
-	elif r == 90: left = null
-	elif r == 270: right = null
-	update_neighbours()
+## function to update the "double linked list" of belts
+## called on signal from other belt
+## calculates from which direction the neighbour was deleted
+## and calls update animation
+func delete_neighbour(other_rotation: int):
+	rotations[_get_relative_rotation(other_rotation)] = null
+	update_animation()
 
-func _on_AreaTo_area_entered(area):
-	forward = area
-	area.add_neighbour(self, rotation_degrees)
-
+## function that is called on deletion of the next belt
 func del_forward():
 	forward = null
 
+## function of death
+## updates all connected belts
+## and dies
 func die():
-	if right: right.del_forward()
-	if left: left.del_forward()
-	if back: back.del_forward()
-	if forward:
-		forward.delete_neighbour(rotation_degrees)
+	if right:   right.del_forward()
+	if left:    left.del_forward()
+	if back:    back.del_forward()
+	if forward: forward.delete_neighbour(rotation_degrees)
 	queue_free()
+
+
+## a signal tha is called when the belt is placed in front of other belt
+## or pointing towards other belt
+##
+## updates own "linked list" and calls update neighbours for the next belt
+func _on_AreaTo_area_entered(area):
+	forward = area
+	area.add_neighbour(self, rotation_degrees)
