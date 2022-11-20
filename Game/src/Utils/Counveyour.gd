@@ -3,19 +3,13 @@ extends Area2D
 ## a belt object that transports resources in the game
 
 
-var left = null
-var right = null
-var back = null
-var forward = null
+var left: Belt = null
+var right: Belt = null
+var back: Belt = null
+var forward: Belt = null
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 
-var rotations: Dictionary = {
-	0: back,
-	90: left,
-	270: right,
-	180: forward
-}
 
 ## function to update the current animation of the belt
 ## called when the belt gains or looses neighbours
@@ -36,7 +30,10 @@ func _get_relative_rotation(other_rotation: int) -> int:
 ## calculates from which direction the neighbour was added
 ## and calls update animation
 func add_neighbour(other_belt: Belt, other_rotation: int):
-	rotations[_get_relative_rotation(other_rotation)] = other_belt
+	other_rotation = _get_relative_rotation(other_rotation)
+	if other_rotation == 0:   back = other_belt
+	if other_rotation == 90:  left = other_belt
+	if other_rotation == 270: right = other_belt
 	update_animation()
 
 ## function to update the "double linked list" of belts
@@ -44,7 +41,10 @@ func add_neighbour(other_belt: Belt, other_rotation: int):
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
 func delete_neighbour(other_rotation: int):
-	rotations[_get_relative_rotation(other_rotation)] = null
+	other_rotation = _get_relative_rotation(other_rotation)
+	if other_rotation == 0:   back = null
+	if other_rotation == 90:  left = null
+	if other_rotation == 270: right = null
 	update_animation()
 
 ## function that is called on deletion of the next belt
