@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Tilemaps/Tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/UI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Scenes/MainScene.gd" type="Script" id=4]
-[ext_resource path="res://src/TransportableItems/Elixir.tscn" type="PackedScene" id=5]
 
 [node name="Scene" type="Node2D"]
 script = ExtResource( 4 )
@@ -22,6 +21,3 @@ collision_mask = 3
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="ObjSprite" type="Sprite" parent="."]
-
-[node name="Elixir" parent="." instance=ExtResource( 5 )]
-position = Vector2( 238, 271 )

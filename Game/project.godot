@@ -12,10 +12,16 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Belt",
 "language": "GDScript",
-"path": "res://src/Utils/Counveyour.gd"
+"path": "res://src/Buildings/Counveyour.gd"
+}, {
+"base": "Area2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://src/Buildings/Spawner.gd"
 } ]
 _global_script_class_icons={
-"Belt": ""
+"Belt": "",
+"Spawner": ""
 }
 
 [application]
