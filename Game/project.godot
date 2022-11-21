@@ -9,23 +9,29 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
+"base": "Building",
 "class": "Belt",
 "language": "GDScript",
-"path": "res://src/Buildings/Counveyour.gd"
+"path": "res://src/Buildings/Belt.gd"
+}, {
+"base": "Area2D",
+"class": "Building",
+"language": "GDScript",
+"path": "res://src/Buildings/Building.gd"
 }, {
 "base": "Area2D",
 "class": "MovableItem",
 "language": "GDScript",
 "path": "res://src/TransportableItems/Elixir.gd"
 }, {
-"base": "Area2D",
+"base": "Building",
 "class": "Spawner",
 "language": "GDScript",
 "path": "res://src/Buildings/Spawner.gd"
 } ]
 _global_script_class_icons={
 "Belt": "",
+"Building": "",
 "MovableItem": "",
 "Spawner": ""
 }

@@ -1,16 +1,14 @@
 ## Belt
 ##
 ## a belt object that transports resources in the game
-
 class_name Belt
-extends Area2D
+extends Building
 
 
 # "double linked list" variables
-var left    = null
-var right   = null
-var back    = null
-var forward = null
+var left :Building   = null
+var right:Building   = null
+var back :Building   = null
 
 # transporting objects variables
 var object        : Object = null
@@ -34,16 +32,12 @@ func update_animation():
 	if right: anim_name += "right"
 	AnimPlayer.play(anim_name)
 
-## calculates relative direction from which other belt is connected to current belt 
-func _get_relative_rotation(other_rotation: int) -> int:
-	return ((other_rotation - int(rotation_degrees) + 360) % 360)
-
 ## function to update the "double linked list" of belts
 ## called on signal from other belt
 ## calculates from which direction the neighbour was added
 ## and calls update animation
 func add_neighbour(other_belt, other_rotation: int):
-	other_rotation = _get_relative_rotation(other_rotation)
+	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
 		connections.append(back)
@@ -60,7 +54,7 @@ func add_neighbour(other_belt, other_rotation: int):
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
 func delete_neighbour(other_rotation: int):
-	other_rotation = _get_relative_rotation(other_rotation)
+	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		connections.erase(back)
 		back = null
@@ -75,7 +69,7 @@ func delete_neighbour(other_rotation: int):
 
 ## function that is called on deletion of the next belt
 func del_forward():
-	forward = null
+	_forward = null
 
 ## function of death
 ## updates all connected belts
@@ -84,7 +78,7 @@ func die():
 	if right:   right.del_forward()
 	if left:    left.del_forward()
 	if back:    back.del_forward()
-	if forward: forward.delete_neighbour(rotation_degrees)
+	if _forward: _forward.delete_neighbour(rotation_degrees)
 	queue_free()
 
 
@@ -93,13 +87,13 @@ func die():
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
-	forward = area
+	_forward = area
 	area.add_neighbour(self, rotation_degrees)
 	if ready_to_send: send_obj()
 
 ## a signal that is called when transportable object enters the belt  
 ## starts a timer and adds an object to variable
-func _on_Conveyour_area_entered(area):
+func _on_Belt_area_entered(area):
 	if area.is_in_group("TransportableItems"):
 		objs_counter += 1
 		object = area
@@ -113,9 +107,9 @@ func _on_MoveTimer_timeout():
 
 ## function to make object move
 func send_obj():
-	if !forward or !object or forward.busy: return
-	forward.receive()
-	object.move(forward.position)
+	if !_forward or !object or _forward.busy: return
+	_forward.receive()
+	object.move(_forward.position)
 	object = null
 	busy = false
 	

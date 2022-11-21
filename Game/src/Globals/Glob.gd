@@ -9,7 +9,7 @@ var previews_dict: Dictionary = {
 	"Spawner": "res://art/buildings/spawner.png"
 }
 var objects_dict: Dictionary = {
-	"Belt": "res://src/Buildings/Counveyour.tscn",
+	"Belt": "res://src/Buildings/Belt.tscn",
 	"Spawner": "res://src/Buildings/Spawner.tscn"
 }
 
