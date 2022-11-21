@@ -119,15 +119,18 @@ func send_obj():
 	object = null
 	busy = false
 	
-	# TODO REWRITE IT BETTER
+	# a calculation of which neighbour to let through if we have more than one
 	connections[objs_counter % connections.size()].ready_callback()
 	
-#	if back: back.ready_callback()
-#	if left: left.ready_callback()
-#	if right: right.ready_callback()
-
+## after one neighbour commits to send us resource
+## we do not want to accept othe resources until we are ready
+## so we set busy = true
 func receive():
 	busy = true
 
+## callback from the [forward] object signaling that it is now free
+## and we can send an object
+##
+## used to avoid items stacking on the belts
 func ready_callback():
 	send_obj()

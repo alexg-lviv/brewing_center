@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://src/Buildings/Counveyour.gd"
 }, {
 "base": "Area2D",
+"class": "MovableItem",
+"language": "GDScript",
+"path": "res://src/TransportableItems/Elixir.gd"
+}, {
+"base": "Area2D",
 "class": "Spawner",
 "language": "GDScript",
 "path": "res://src/Buildings/Spawner.gd"
 } ]
 _global_script_class_icons={
 "Belt": "",
+"MovableItem": "",
 "Spawner": ""
 }
 
