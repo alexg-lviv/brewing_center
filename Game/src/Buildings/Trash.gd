@@ -11,9 +11,9 @@ func add_neighbour(other_belt, other_rotation: int):
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
-	if other_rotation == 90:  
+	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
 		left = other_belt
-	if other_rotation == 270: 
+	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		right = other_belt
 
 ## signal handling deletion of transportable item or connection of other buildings

@@ -6,7 +6,7 @@ extends Building
 
 # transporting objects variables
 var object        : Object = null
-var send_obj_delay: float  = 1
+var send_obj_delay: float  = 1.5
 var ready_to_send : bool   = true
 var busy          : bool   = false
 var objs_counter  : int    = 0 
@@ -21,9 +21,9 @@ var connections   : Array  = []
 func update_animation():
 	var anim_name: String = ""
 	if !back and !left and !right: anim_name = "back"
-	if back: anim_name += "back"
-	if left: anim_name += "left"
-	if right: anim_name += "right"
+	if left:   anim_name += "left"
+	if back:   anim_name += "back"
+	if right:  anim_name += "right"
 	AnimPlayer.play(anim_name)
 
 ## function to update the "double linked list" of belts
@@ -58,12 +58,11 @@ func delete_neighbour(other_rotation: float):
 	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		connections.erase(right)
 		right = null
-	print(connections.size())
 	update_animation()
 
 ## function that is called checked deletion of the next belt
 func del_forward():
-	_forward = null
+	forward = null
 
 ## function of death
 ## updates all connected belts
@@ -72,8 +71,8 @@ func die():
 	if right:   right.del_forward()
 	if left:    left.del_forward()
 	if back:    back.del_forward()
-	if _forward: _forward.delete_neighbour(rotation)
-	object.die()
+	if forward: forward.delete_neighbour(rotation)
+	if object: object.die()
 	queue_free()
 
 
@@ -82,7 +81,7 @@ func die():
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
-	_forward = area
+	forward = area
 	area.add_neighbour(self, rotation)
 	if ready_to_send: send_obj()
 
@@ -97,19 +96,15 @@ func _on_MoveTimer_timeout():
 	ready_to_send = true
 	send_obj()
 
-## function to make object move
+## function to make object moves
 func send_obj():
-	if !_forward or !ready_to_send or !object or _forward.busy: return
-	_forward.receive(object)
-	object.move(_forward.position)
+	if !forward or !ready_to_send or !object or forward.busy: return
+	forward.receive(object)
+	object.move(forward.position)
 	object = null
 	busy = false
+	notify_ready()
 	
-	# a calculation of which neighbour to let through if we have more than one
-	if connections.size() > 0:
-		connections[objs_counter % connections.size()].ready_callback()
-
-
 ## after one neighbour commits to send us resource
 ## we do not want to accept othe resources until we are ready
 ## so we set busy = true
@@ -126,3 +121,10 @@ func receive(area):
 ## used to avoid items stacking checked the belts
 func ready_callback():
 	send_obj()
+
+
+func notify_ready():
+	# a calculation of which neighbour to let through if we have more than one
+	if connections.size() > 0:
+		connections[objs_counter % connections.size()].ready_callback()
+

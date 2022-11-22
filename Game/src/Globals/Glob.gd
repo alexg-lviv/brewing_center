@@ -1,6 +1,6 @@
 extends Node
 
-const FLOAT_EPSILON = 0.001
+const FLOAT_EPSILON = 0.01
 
 var GRID_STEP: int = 32
 

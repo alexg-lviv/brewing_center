@@ -8,7 +8,7 @@ extends Node2D
 # BUILD MODE VARS
 var build_mode: bool = false
 var build_type: String
-## 0 - up, 90 - right
+## 0 - up, PI/2 - right
 var build_rotation: float = 0
 
 # DEMOLISH MODE VARS
@@ -82,9 +82,9 @@ func handle_building():
 
 ## handle rotation for the objects
 ## 0   == up
-## 90  == right
-## 180 == down
-## 270 == left
+## PI/2  == right
+## PI == down
+## 2*PI/2 == left
 func handle_rotation():
 	if Input.is_action_just_pressed("ui_left"):
 		build_rotation = 3*PI/2

@@ -1,9 +1,11 @@
 res://src/Buildings/Belt.tscn
 res://src/Buildings/Belt.gd
+res://src/Buildings/Building.gd
+res://src/Scenes/MainScene.gd
+res://src/Buildings/Spawner.gd
 res://src/Characters/Player.tscn
 res://src/Scenes/MainScene.tscn
 res://src/Buildings/Trash.tscn
 res://src/Buildings/Building.tscn
 res://src/Buildings/Spawner.tscn
-res://src/UI/UI.tscn
-res://src/UI/HUD.tscn
+res://src/Globals/Glob.gd

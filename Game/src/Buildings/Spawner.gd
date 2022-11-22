@@ -18,28 +18,28 @@ func _ready():
 ## from the "double linked list"
 ## called from the forward object
 func del_forward():
-	_forward = null
+	forward = null
 
 ## a signal tha is called when the belt is placed in front of other belt
 ## or pointing towards other belt
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
-	_forward = area
-	area.add_neighbour(self, rad_to_deg(rotation))
+	forward = area
+	area.add_neighbour(self, rotation)
 	if ready_to_send: send_obj()
 
 
 ## function to make object move
 func send_obj():
-	if !_forward or !ready_to_send or _forward.busy: return
+	if !forward or !ready_to_send or forward.busy: return
 	ready_to_send = false
 	var new_object = Item.instantiate()
-	_forward.receive(new_object)
+	forward.receive(new_object)
 	get_parent().call_deferred("add_child", new_object)
-	new_object.set_deferred("position", position + Vector2(sin(rotation), cos(rotation)*(Glob.GRID_STEP/2)))
-	new_object.call_deferred("move", _forward.position)
-	SpawnTimer.start()
+	new_object.set_deferred("position", position + Vector2(sin(rotation), cos(rotation)*-1)*(Glob.GRID_STEP/2))
+	new_object.call_deferred("move", forward.position)
+	SpawnTimer.start(send_obj_delay)
 
 
 ## signal for timer tospawn an object
@@ -53,3 +53,7 @@ func _on_SpawnTimer_timeout():
 ## used to avoid items stacking checked the belts
 func ready_callback():
 	if ready_to_send: send_obj()
+
+func die():
+	if forward: forward.delete_neighbour(rotation)
+	queue_free()
