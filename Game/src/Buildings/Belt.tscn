@@ -182,5 +182,4 @@ libraries = {
 "": SubResource("AnimationLibrary_xjegb")
 }
 
-[connection signal="area_entered" from="." to="." method="_on_Belt_area_entered"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

@@ -9,7 +9,7 @@ extends Node2D
 var build_mode: bool = false
 var build_type: String
 ## 0 - up, 90 - right
-var build_rotation_degrees: int = 0
+var build_rotation: float = 0
 
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false
@@ -87,13 +87,13 @@ func handle_building():
 ## 270 == left
 func handle_rotation():
 	if Input.is_action_just_pressed("ui_left"):
-		build_rotation_degrees = 270
+		build_rotation = 3*PI/2
 	if Input.is_action_just_pressed("ui_up"):
-		build_rotation_degrees = 0
+		build_rotation = 0
 	if Input.is_action_just_pressed("ui_right"):
-		build_rotation_degrees = 90
+		build_rotation = PI/2
 	if Input.is_action_just_pressed("ui_down"):
-		build_rotation_degrees = 180
+		build_rotation = PI
 
 
 ## signal that handles UI build button actions
@@ -117,7 +117,7 @@ func set_preview(prev_name: String):
 	obj_prev_name = prev_name
 	var new_obj_sprite = load(Glob.previews_dict[prev_name])
 	PrevSprite.set_texture(new_obj_sprite)
-	PrevSprite.rotation = deg_to_rad(build_rotation_degrees)
+	PrevSprite.rotation = build_rotation
 	PrevSprite.z_index = 4
 
 
@@ -132,7 +132,7 @@ func get_grid_pos(pos: Vector2) -> Vector2:
 ## responsible for shading if the building can be built checked the coordinates or no
 func update_texture_preview(grid_pos: Vector2, can_build: bool):
 	PrevSprite.global_position = grid_pos
-	PrevSprite.rotation = deg_to_rad(build_rotation_degrees)
+	PrevSprite.rotation = build_rotation
 	if(can_build):
 		PrevSprite.modulate = Glob.modulate_green
 	else:
@@ -149,5 +149,5 @@ func place_object(object_name: String, grid_pos: Vector2):
 	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
 	add_child(NewObj)
 	NewObj.position = grid_pos
-	NewObj.rotation = deg_to_rad(build_rotation_degrees)
+	NewObj.rotation = build_rotation
 	instances_dict[grid_pos] = NewObj

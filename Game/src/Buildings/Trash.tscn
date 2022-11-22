@@ -22,6 +22,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="AreaTo" index="0"]
+position = Vector2(-10, 10)
 disabled = true
 
 [node name="Sprite2d" type="Sprite2D" parent="." index="2"]

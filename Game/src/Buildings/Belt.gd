@@ -30,15 +30,15 @@ func update_animation():
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was added
 ## and calls update animation
-func add_neighbour(other_belt, other_rotation: int):
+func add_neighbour(other_belt, other_rotation: float):
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
 		connections.append(back)
-	if other_rotation == 90:  
+	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
 		left = other_belt
 		connections.append(left)
-	if other_rotation == 270: 
+	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		right = other_belt
 		connections.append(right)
 	update_animation()
@@ -47,15 +47,15 @@ func add_neighbour(other_belt, other_rotation: int):
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
-func delete_neighbour(other_rotation: int):
+func delete_neighbour(other_rotation: float):
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		connections.erase(back)
 		back = null
-	if other_rotation == 90:  
+	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
 		connections.erase(left)
 		left = null
-	if other_rotation == 270: 
+	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		connections.erase(right)
 		right = null
 	print(connections.size())
@@ -72,7 +72,7 @@ func die():
 	if right:   right.del_forward()
 	if left:    left.del_forward()
 	if back:    back.del_forward()
-	if _forward: _forward.delete_neighbour(rad_to_deg(rotation))
+	if _forward: _forward.delete_neighbour(rotation)
 	object.die()
 	queue_free()
 
@@ -83,7 +83,7 @@ func die():
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
 	_forward = area
-	area.add_neighbour(self, rad_to_deg(rotation))
+	area.add_neighbour(self, rotation)
 	if ready_to_send: send_obj()
 
 ## a signal that is called when transportable object enters the belt  

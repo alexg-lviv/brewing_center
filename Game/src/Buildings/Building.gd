@@ -15,8 +15,9 @@ var _forward :Building  = null
 
 
 ## calculates relative direction from which other belt is connected to current belt 
-func get_relative_rotation(other_rotation: int) -> int:
-	return ((other_rotation - int(rad_to_deg(rotation)) + 360) % 360)
+func get_relative_rotation(other_rotation: float) -> float:
+	var rel_rotation: float = other_rotation - rotation
+	return rel_rotation if rel_rotation > 0 else rel_rotation+2*PI
 
 
 func _on_AreaTo_area_entered(area):
