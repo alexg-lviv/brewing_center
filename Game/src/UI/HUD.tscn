@@ -1,81 +1,104 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://bhy2scbfp31d6"]
 
-[ext_resource path="res://art/bg.png" type="Texture" id=1]
-[ext_resource path="res://art/belt/s.png" type="Texture" id=2]
-[ext_resource path="res://art/cross.png" type="Texture" id=3]
-[ext_resource path="res://art/buildings/spawner.png" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://dnlrifiiyx3vw" path="res://art/bg.png" id="1_4utof"]
+[ext_resource type="Texture2D" uid="uid://cojwruflmgxy6" path="res://art/belt/s.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dp182kd3b1ndt" path="res://art/cross.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cl47y8vbwfqd7" path="res://art/buildings/Trash.png" id="5_n221g"]
 
 [node name="HUD" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -122.0
-color = Color( 0.384314, 0.447059, 0.643137, 1 )
+offset_top = -122.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.384314, 0.447059, 0.643137, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -125.0
-margin_top = -95.0
-margin_right = 3.0
-margin_bottom = -63.0
-rect_scale = Vector2( 2, 2 )
+offset_left = -125.0
+offset_top = -95.0
+offset_right = 3.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
 alignment = 1
 
 [node name="Demolish" type="TextureButton" parent="ColorRect/HBoxContainer" groups=["BuildButton"]]
-margin_left = 12.0
-margin_right = 44.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 1 )
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer/Demolish"]
+texture_filter = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 24.0
-margin_bottom = 24.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3")
 
 [node name="Spawner" type="TextureButton" parent="ColorRect/HBoxContainer" groups=["BuildButton"]]
-margin_left = 48.0
-margin_right = 80.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 1 )
+offset_left = 36.0
+offset_right = 68.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer/Spawner"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 24.0
-margin_bottom = 24.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 4 )
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4")
 
 [node name="Belt" type="TextureButton" parent="ColorRect/HBoxContainer" groups=["BuildButton"]]
-margin_left = 84.0
-margin_right = 116.0
-margin_bottom = 32.0
-texture_normal = ExtResource( 1 )
+offset_left = 72.0
+offset_right = 104.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer/Belt"]
-anchor_left = 0.25
-anchor_top = 0.25
-anchor_right = 0.25
-anchor_bottom = 0.25
-margin_right = 32.0
-margin_bottom = 32.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")
+
+[node name="Trash" type="TextureButton" parent="ColorRect/HBoxContainer" groups=["BuildButton"]]
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer/Trash"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_n221g")

@@ -4,22 +4,16 @@
 class_name Belt
 extends Building
 
-
-# "double linked list" variables
-var left :Building   = null
-var right:Building   = null
-var back :Building   = null
-
 # transporting objects variables
 var object        : Object = null
 var send_obj_delay: float  = 1
-var ready_to_send : bool   = false
+var ready_to_send : bool   = true
 var busy          : bool   = false
 var objs_counter  : int    = 0 
 var connections   : Array  = []
 
-onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
-onready var MoveTimer: Timer = get_node("MoveTimer")
+@onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+@onready var MoveTimer: Timer = get_node("MoveTimer")
 
 
 ## function to update the current animation of the belt
@@ -33,7 +27,7 @@ func update_animation():
 	AnimPlayer.play(anim_name)
 
 ## function to update the "double linked list" of belts
-## called on signal from other belt
+## called checked signal from other belt
 ## calculates from which direction the neighbour was added
 ## and calls update animation
 func add_neighbour(other_belt, other_rotation: int):
@@ -50,7 +44,7 @@ func add_neighbour(other_belt, other_rotation: int):
 	update_animation()
 
 ## function to update the "double linked list" of belts
-## called on signal from other belt
+## called checked signal from other belt
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
 func delete_neighbour(other_rotation: int):
@@ -67,7 +61,7 @@ func delete_neighbour(other_rotation: int):
 	print(connections.size())
 	update_animation()
 
-## function that is called on deletion of the next belt
+## function that is called checked deletion of the next belt
 func del_forward():
 	_forward = null
 
@@ -78,7 +72,8 @@ func die():
 	if right:   right.del_forward()
 	if left:    left.del_forward()
 	if back:    back.del_forward()
-	if _forward: _forward.delete_neighbour(rotation_degrees)
+	if _forward: _forward.delete_neighbour(rad_to_deg(rotation))
+	object.die()
 	queue_free()
 
 
@@ -88,17 +83,14 @@ func die():
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
 	_forward = area
-	area.add_neighbour(self, rotation_degrees)
+	area.add_neighbour(self, rad_to_deg(rotation))
 	if ready_to_send: send_obj()
 
 ## a signal that is called when transportable object enters the belt  
 ## starts a timer and adds an object to variable
-func _on_Belt_area_entered(area):
-	if area.is_in_group("TransportableItems"):
-		objs_counter += 1
-		object = area
-		MoveTimer.start(send_obj_delay)
-		ready_to_send = false
+#func _on_Belt_area_entered(area):
+#	if area.is_in_group("TransportableItems"):
+#		pass
 
 ## a signal of timer after which an object starts moving
 func _on_MoveTimer_timeout():
@@ -107,24 +99,30 @@ func _on_MoveTimer_timeout():
 
 ## function to make object move
 func send_obj():
-	if !_forward or !object or _forward.busy: return
-	_forward.receive()
+	if !_forward or !ready_to_send or !object or _forward.busy: return
+	_forward.receive(object)
 	object.move(_forward.position)
 	object = null
 	busy = false
 	
 	# a calculation of which neighbour to let through if we have more than one
-	connections[objs_counter % connections.size()].ready_callback()
-	
+	if connections.size() > 0:
+		connections[objs_counter % connections.size()].ready_callback()
+
+
 ## after one neighbour commits to send us resource
 ## we do not want to accept othe resources until we are ready
 ## so we set busy = true
-func receive():
+func receive(area):
 	busy = true
+	objs_counter += 1
+	object = area
+	ready_to_send = false
+	MoveTimer.start(send_obj_delay)
 
 ## callback from the [forward] object signaling that it is now free
 ## and we can send an object
 ##
-## used to avoid items stacking on the belts
+## used to avoid items stacking checked the belts
 func ready_callback():
 	send_obj()

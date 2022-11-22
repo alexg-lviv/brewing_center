@@ -1,24 +1,24 @@
-## Main Scene
+## Main game world
 ##
-## maaaaain scene
-
+## a field  for construction, harvesting and all the gameplay
+class_name GameWorld
 extends Node2D
 
 
 # BUILD MODE VARS
 var build_mode: bool = false
 var build_type: String
-# 0 - up, 90 - right
+## 0 - up, 90 - right
 var build_rotation_degrees: int = 0
 
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false
 
 
-onready var UI := get_node("UI")
-onready var Tilemap := get_node("TileMap")
-onready var Player := get_node("Player")
-onready var PrevSprite: Sprite = get_node("ObjSprite")
+@onready var UI := get_node("UI")
+@onready var Tilemap := get_node("TileMap")
+@onready var Player := get_node("Player")
+@onready var PrevSprite: Sprite2D = get_node("ObjSprite")
 
 ## dictionary of all instanced buildings
 ## the key is their grid coords, and the value is reference to the object itself
@@ -31,7 +31,7 @@ var _last_shaded_red: Vector2 = Vector2.ZERO
 
 func _ready():
 	for button in get_tree().get_nodes_in_group("BuildButton"):
-		button.connect("pressed", self, "_on_build_button_pressed", [button.get_name()])
+		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
 
 
 func _process(_delta):
@@ -41,7 +41,7 @@ func _process(_delta):
 		handle_demolition()
 
 ## if we are in demolition mode, the function handles everything connected to it
-## handles input, shades the objects, destroys on click
+## handles input, shades the objects, destroys checked click
 func handle_demolition():
 	var mouse_pos = get_global_mouse_position()
 	var grid_pos = get_grid_pos(mouse_pos)
@@ -117,22 +117,22 @@ func set_preview(prev_name: String):
 	obj_prev_name = prev_name
 	var new_obj_sprite = load(Glob.previews_dict[prev_name])
 	PrevSprite.set_texture(new_obj_sprite)
-	PrevSprite.rotation_degrees = build_rotation_degrees
+	PrevSprite.rotation = deg_to_rad(build_rotation_degrees)
 	PrevSprite.z_index = 4
 
 
 ## helper function to gridify the coordinates
 func get_grid_pos(pos: Vector2) -> Vector2:
 	return Vector2(
-		stepify(pos.x + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2,
-		stepify(pos.y + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2)
+		snapped(pos.x + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2,
+		snapped(pos.y + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2)
 
 
 ## updates preview textures, called from _process
-## responsible for shading if the building can be built on the coordinates or no
+## responsible for shading if the building can be built checked the coordinates or no
 func update_texture_preview(grid_pos: Vector2, can_build: bool):
 	PrevSprite.global_position = grid_pos
-	PrevSprite.rotation_degrees = build_rotation_degrees
+	PrevSprite.rotation = deg_to_rad(build_rotation_degrees)
 	if(can_build):
 		PrevSprite.modulate = Glob.modulate_green
 	else:
@@ -146,8 +146,8 @@ func reset_preview():
 ## create object to scene, set its gridified position and rotation
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
-	var NewObj = load(Glob.objects_dict[object_name]).instance()
+	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
 	add_child(NewObj)
 	NewObj.position = grid_pos
-	NewObj.rotation_degrees = build_rotation_degrees
+	NewObj.rotation = deg_to_rad(build_rotation_degrees)
 	instances_dict[grid_pos] = NewObj

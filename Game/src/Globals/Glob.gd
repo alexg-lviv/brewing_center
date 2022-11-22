@@ -6,11 +6,13 @@ var exit_build_mode_on_build: bool = false
 
 var previews_dict: Dictionary = {
 	"Belt": "res://art/belt/s.png",
-	"Spawner": "res://art/buildings/spawner.png"
+	"Spawner": "res://art/buildings/spawner.png",
+	"Trash": "res://art/buildings/Trash.png"
 }
 var objects_dict: Dictionary = {
 	"Belt": "res://src/Buildings/Belt.tscn",
-	"Spawner": "res://src/Buildings/Spawner.tscn"
+	"Spawner": "res://src/Buildings/Spawner.tscn",
+	"Trash": "res://src/Buildings/Trash.tscn"
 }
 
 

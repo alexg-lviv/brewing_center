@@ -1,0 +1,12 @@
+res://src/Buildings/Spawner.tscn
+res://src/Characters/Player.tscn
+res://src/Scenes/MainScene.tscn
+res://src/Buildings/Trash.tscn
+res://src/Buildings/Building.tscn
+res://src/UI/UI.tscn
+res://src/UI/HUD.tscn
+res://src/Buildings/Trash.gd
+res://src/Buildings/Belt.tscn
+res://src/Buildings/Building.gd
+res://src/Buildings/Belt.gd
+res://src/Buildings/Spawner.gd

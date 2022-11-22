@@ -6,17 +6,23 @@
 class_name Building
 extends Area2D
 
-var _forward: Building = null
+# "double linked list" variables
+var left     :Building  = null
+var right    :Building  = null
+var back     :Building  = null
+var _forward :Building  = null
+
+
 
 ## calculates relative direction from which other belt is connected to current belt 
 func get_relative_rotation(other_rotation: int) -> int:
-	return ((other_rotation - int(rotation_degrees) + 360) % 360)
+	return ((other_rotation - int(rad_to_deg(rotation)) + 360) % 360)
 
 
 func _on_AreaTo_area_entered(area):
 	pass
 
-## function that is called on deletion of the next belt
+## function that is called checked deletion of the next belt
 func del_forward():
 	_forward = null
 
@@ -28,3 +34,6 @@ func send_obj():
 
 func ready_callback():
 	send_obj()
+
+func receive(area):
+	pass

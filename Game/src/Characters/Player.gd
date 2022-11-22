@@ -1,5 +1,5 @@
-# main player script, movement, hp, and so on
-extends KinematicBody2D
+# main player script, movement, hp, and so checked
+extends CharacterBody2D
 
 var moveSpeed : int = 250
 var vel : Vector2 = Vector2()
@@ -24,4 +24,6 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_right"):
 		vel.x += 1
 	
-	move_and_slide(vel * moveSpeed)
+	set_velocity(vel * moveSpeed)
+	move_and_slide()
+	velocity

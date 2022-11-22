@@ -8,3 +8,6 @@ extends Area2D
 func move(dest_position: Vector2):
 	var tween := get_tree().create_tween()
 	tween.tween_property(self, "position", dest_position, 0.5)
+
+func die():
+	queue_free()
