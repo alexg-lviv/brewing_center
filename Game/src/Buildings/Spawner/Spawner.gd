@@ -1,9 +1,7 @@
-## Spawners
 extends Building
 class_name Spawner
+## Spawner creates objects
 
-var spawn_delay: float = 1
-var busy: bool = true
 
 ## delay to spawn objects
 var send_obj_delay: float = 1
@@ -13,7 +11,7 @@ var ready_to_send: bool = false
 @onready var Item := preload("res://src/TransportableItems/Elixir.tscn")
 
 func _ready():
-	SpawnTimer.start(spawn_delay)
+	SpawnTimer.start(send_obj_delay)
 
 ## clear the forward transporting object or building
 ## from the "double linked list"
@@ -21,6 +19,9 @@ func _ready():
 func del_forward():
 	forward = null
 
+## function of death  
+## clear dependencies  
+## and die
 func die():
 	if forward: forward.delete_neighbour(rotation)
 	queue_free()
@@ -45,7 +46,7 @@ func send_object():
 	new_object.call_deferred("move", forward.position)
 	SpawnTimer.start(send_obj_delay)
 
-
+## signal of timer to send objects every n seconds if possible
 func _on_spawn_timer_timeout():
 	if forward: forward.enqueue(direction_to_next)
 	ready_to_send = true

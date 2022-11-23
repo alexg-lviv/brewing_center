@@ -8,13 +8,20 @@ extends Building
 var object        : Object = null
 var send_obj_delay: float  = 1.5
 var ready_to_send : bool   = false
-var busy          : bool   = false
 var objs_counter  : int    = 0 
-var connections   : Array  = []
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 @onready var MoveTimer: Timer = get_node("MoveTimer")
 
+func _process(_delta):
+	ask_send_object()
+
+#########################################
+#########################################
+## Functions related to belts building ##
+## and animation                       ##
+#########################################
+#########################################
 
 ## function to update the current animation of the belt
 ## called when the belt gains or looses neighbours
@@ -35,15 +42,12 @@ func add_neighbour(other_belt, other_rotation: float):
 	if other_rotation == 0:   
 		back = other_belt
 		other_belt.direction_to_next = "back"
-		connections.append(back)
 	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
 		left = other_belt
 		other_belt.direction_to_next = "left"
-		connections.append(left)
 	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		right = other_belt
 		other_belt.direction_to_next = "right"
-		connections.append(right)
 	update_animation()
 
 ## function to update the "double linked list" of belts
@@ -51,16 +55,7 @@ func add_neighbour(other_belt, other_rotation: float):
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
 func delete_neighbour(other_rotation: float):
-	other_rotation = get_relative_rotation(other_rotation)
-	if other_rotation == 0:   
-		connections.erase(back)
-		back = null
-	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
-		connections.erase(left)
-		left = null
-	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
-		connections.erase(right)
-		right = null
+	super(other_rotation)
 	update_animation()
 
 ## function that is called checked deletion of the next belt
@@ -71,13 +66,9 @@ func del_forward():
 ## updates all connected belts
 ## and dies
 func die():
-	if right:   right.del_forward()
-	if left:    left.del_forward()
-	if back:    back.del_forward()
-	if forward: forward.delete_neighbour(rotation)
+	super()
 	if object: object.die()
 	queue_free()
-
 
 ## a signal tha is called when the belt is placed in front of other belt
 ## or pointing towards other belt
@@ -88,10 +79,22 @@ func _on_AreaTo_area_entered(area):
 	forward = area
 	if ready_to_send: forward.enqueue(direction_to_next)
 
+###########################################
+###########################################
+## Functions related to objects movement ##
+###########################################
+###########################################
+
+## function to notify belt the it will receive object
+## save object to variable and start timer to count
+## when to send it further
 func receive_object(obj: MovableItem):
 	object = obj
 	MoveTimer.start(send_obj_delay)
 
+## actually send object
+## make it move, notify next building that we send it  
+## and ask to send object to this belt if there are any
 func send_object():
 	if !object: return
 	ready_to_send = false
@@ -100,10 +103,15 @@ func send_object():
 	object = null
 	ask_send_object()
 
+## notify next building that we are ready to send object
+## and set the variable
 func _on_move_timer_timeout():
 	if forward: forward.enqueue(direction_to_next)
 	ready_to_send = true
 
+## function to ask to send us objects
+## if there are any obkects in the queue
+## and send them
 func ask_send_object():
 	if object or receiving_queue.is_empty(): return
 	var build: String = dequeue()
@@ -111,5 +119,3 @@ func ask_send_object():
 	elif build == "left" and left  != null:  left.send_object()
 	elif build == "right"and right != null: right.send_object()
 
-func _process(_delta):
-	ask_send_object()

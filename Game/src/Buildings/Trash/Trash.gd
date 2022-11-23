@@ -1,11 +1,7 @@
 class_name Trash
 extends Building
+## Trash deletes objects
 
-var busy = false
-
-func enqueue(direction_from: String):
-	super(direction_from)
-	ask_send_object()
 
 ## function to update the "double linked list" of belts
 ## called checked signal from other belt
@@ -23,6 +19,14 @@ func add_neighbour(other_belt, other_rotation: float):
 		right = other_belt
 		other_belt.direction_to_next = "right"
 
+## function just to meet the code API  
+##
+## immideately after we get ti enqueue, we ask to send the object
+func enqueue(direction_from: String):
+	super(direction_from)
+	ask_send_object()
+
+## ask all the connections to send us object
 func ask_send_object():
 	if receiving_queue.is_empty(): return
 	var build: String = dequeue()
@@ -30,9 +34,8 @@ func ask_send_object():
 	elif build == "left" and left  != null:  left.send_object()
 	elif build == "right"and right != null: right.send_object()
 
-func receive_object(_object):
-	pass
-
+## just delete all the transportable objects
+## and add other buildings as neighbiurs
 func _on_trash_area_entered(area):
 	if area.is_in_group("TransportableItems"):
 		area.die()
