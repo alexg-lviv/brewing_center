@@ -1,8 +1,9 @@
 ## Spawners
-class_name Spawner
 extends Building
+class_name Spawner
 
-var spawn_delay = 1
+var spawn_delay: float = 1
+var busy: bool = true
 
 ## delay to spawn objects
 var send_obj_delay: float = 1
@@ -20,6 +21,10 @@ func _ready():
 func del_forward():
 	forward = null
 
+func die():
+	if forward: forward.delete_neighbour(rotation)
+	queue_free()
+
 ## a signal tha is called when the belt is placed in front of other belt
 ## or pointing towards other belt
 ##
@@ -27,33 +32,20 @@ func del_forward():
 func _on_AreaTo_area_entered(area):
 	forward = area
 	area.add_neighbour(self, rotation)
-	if ready_to_send: send_obj()
+	if ready_to_send: forward.enqueue(direction_to_next)
 
 
-## function to make object move
-func send_obj():
-	if !forward or !ready_to_send or forward.busy: return
+### function to make object move
+func send_object():
 	ready_to_send = false
 	var new_object = Item.instantiate()
-	forward.receive(new_object)
+	forward.receive_object(new_object)
 	get_parent().call_deferred("add_child", new_object)
 	new_object.set_deferred("position", position + Vector2(sin(rotation), cos(rotation)*-1)*(Glob.GRID_STEP/2))
 	new_object.call_deferred("move", forward.position)
 	SpawnTimer.start(send_obj_delay)
 
 
-## signal for timer tospawn an object
-func _on_SpawnTimer_timeout():
+func _on_spawn_timer_timeout():
+	if forward: forward.enqueue(direction_to_next)
 	ready_to_send = true
-	send_obj()
-
-## callback from the [forward] object signaling that it is now free
-## and we can send an object
-##
-## used to avoid items stacking checked the belts
-func ready_callback():
-	if ready_to_send: send_obj()
-
-func die():
-	if forward: forward.delete_neighbour(rotation)
-	queue_free()

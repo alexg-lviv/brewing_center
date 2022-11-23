@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://2l27t5xtd4wq"]
+[gd_scene load_steps=13 format=3 uid="uid://2l27t5xtd4wq"]
 
 [ext_resource type="PackedScene" uid="uid://cq5ogkcpmu2un" path="res://src/Tilemaps/Tilemap.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bs3sl6u5krqgw" path="res://src/Characters/Player.tscn" id="2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/Scenes/MainScene.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://b1dka1gpo8bqh" path="res://art/grass1.png" id="4_47i46"]
 [ext_resource type="Texture2D" uid="uid://hwcl1beq3pmy" path="res://art/dirt.png" id="5_1vubq"]
+[ext_resource type="PackedScene" uid="uid://beaa6qy6s3o36" path="res://src/TransportableItems/Elixir.tscn" id="8_vfxjv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_unmsv"]
 texture = ExtResource("3_h4107")
@@ -47,3 +48,6 @@ collision_mask = 3
 [node name="UI" parent="." instance=ExtResource("3")]
 
 [node name="ObjSprite" type="Sprite2D" parent="."]
+
+[node name="Elixir" parent="." instance=ExtResource("8_vfxjv")]
+position = Vector2(273, 243)

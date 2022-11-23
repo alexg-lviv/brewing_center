@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvit5cbddxa3x"]
+
+[ext_resource type="PackedScene" uid="uid://cgp4vg1kml22h" path="res://src/Buildings/Abstracts/Building.tscn" id="1_ke4rl"]
+[ext_resource type="Script" path="res://src/Buildings/Spawner/Spawner.gd" id="2_58bf3"]
+[ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="3_egs6g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gqxa"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6jm8"]
+size = Vector2(20, 4)
+
+[node name="Spawner" instance=ExtResource("1_ke4rl")]
+script = ExtResource("2_58bf3")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_1gqxa")
+
+[node name="CollisionShape2D" parent="AreaTo" index="0"]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_g6jm8")
+
+[node name="Sprite2d" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_egs6g")
+
+[node name="SpawnTimer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

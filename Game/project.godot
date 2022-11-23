@@ -12,12 +12,12 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"Belt",
 "language": &"GDScript",
-"path": "res://src/Buildings/Belt.gd"
+"path": "res://src/Buildings/Belt/Belt.gd"
 }, {
 "base": "Area2D",
 "class": &"Building",
 "language": &"GDScript",
-"path": "res://src/Buildings/Building.gd"
+"path": "res://src/Buildings/Abstracts/Building.gd"
 }, {
 "base": "Node2D",
 "class": &"GameWorld",
@@ -32,12 +32,12 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"Spawner",
 "language": &"GDScript",
-"path": "res://src/Buildings/Spawner.gd"
+"path": "res://src/Buildings/Spawner/Spawner.gd"
 }, {
 "base": "Building",
 "class": &"Trash",
 "language": &"GDScript",
-"path": "res://src/Buildings/Trash.gd"
+"path": "res://src/Buildings/Trash/Trash.gd"
 }]
 _global_script_class_icons={
 "Belt": "",
@@ -102,6 +102,8 @@ click={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="character"
+2d_physics/layer_4="transportable objects"
+2d_physics/layer_5="buildings"
 
 [physics]
 

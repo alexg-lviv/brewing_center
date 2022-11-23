@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://phm1e3u2o3yh"]
+
+[ext_resource type="PackedScene" uid="uid://cgp4vg1kml22h" path="res://src/Buildings/Abstracts/Building.tscn" id="1_alhyp"]
+[ext_resource type="Texture2D" uid="uid://cl47y8vbwfqd7" path="res://art/buildings/Trash.png" id="2_dtklh"]
+[ext_resource type="Script" path="res://src/Buildings/Trash/Trash.gd" id="2_piwfk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfiwg"]
+size = Vector2(30, 30)
+
+[node name="Trash" instance=ExtResource("1_alhyp")]
+script = ExtResource("2_piwfk")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_wfiwg")
+
+[node name="Sprite2d" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_dtklh")
+
+[connection signal="area_entered" from="." to="." method="_on_trash_area_entered"]

@@ -12,7 +12,8 @@ var right    :Building  = null
 var back     :Building  = null
 var forward  :Building  = null
 
-
+var direction_to_next: String
+var receiving_queue: Array
 
 ## calculates relative direction from which other belt is connected to current belt 
 func get_relative_rotation(other_rotation: float) -> float:
@@ -38,3 +39,11 @@ func ready_callback():
 
 func receive(area):
 	pass
+
+func dequeue() -> String:
+	return receiving_queue.pop_front()
+
+func enqueue(direction_from: String):
+	if   direction_from == "back" : receiving_queue.push_back("back")
+	elif direction_from == "left" : receiving_queue.push_back("left")
+	elif direction_from == "right": receiving_queue.push_back("right")

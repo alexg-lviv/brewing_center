@@ -12,9 +12,9 @@ var previews_dict: Dictionary = {
 	"Trash": "res://art/buildings/Trash.png"
 }
 var objects_dict: Dictionary = {
-	"Belt": "res://src/Buildings/Belt.tscn",
-	"Spawner": "res://src/Buildings/Spawner.tscn",
-	"Trash": "res://src/Buildings/Trash.tscn"
+	"Belt": "res://src/Buildings/Belt/Belt.tscn",
+	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
+	"Trash": "res://src/Buildings/Trash/Trash.tscn"
 }
 
 

@@ -7,7 +7,7 @@ extends Building
 # transporting objects variables
 var object        : Object = null
 var send_obj_delay: float  = 1.5
-var ready_to_send : bool   = true
+var ready_to_send : bool   = false
 var busy          : bool   = false
 var objs_counter  : int    = 0 
 var connections   : Array  = []
@@ -21,8 +21,8 @@ var connections   : Array  = []
 func update_animation():
 	var anim_name: String = ""
 	if !back and !left and !right: anim_name = "back"
-	if left:   anim_name += "left"
 	if back:   anim_name += "back"
+	if left:   anim_name += "left"
 	if right:  anim_name += "right"
 	AnimPlayer.play(anim_name)
 
@@ -34,12 +34,15 @@ func add_neighbour(other_belt, other_rotation: float):
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
+		other_belt.direction_to_next = "back"
 		connections.append(back)
 	if abs(other_rotation - PI/2) < Glob.FLOAT_EPSILON:  
 		left = other_belt
+		other_belt.direction_to_next = "left"
 		connections.append(left)
 	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		right = other_belt
+		other_belt.direction_to_next = "right"
 		connections.append(right)
 	update_animation()
 
@@ -81,50 +84,32 @@ func die():
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
 func _on_AreaTo_area_entered(area):
-	forward = area
 	area.add_neighbour(self, rotation)
-	if ready_to_send: send_obj()
+	forward = area
+	if ready_to_send: forward.enqueue(direction_to_next)
 
-## a signal that is called when transportable object enters the belt  
-## starts a timer and adds an object to variable
-#func _on_Belt_area_entered(area):
-#	if area.is_in_group("TransportableItems"):
-#		pass
-
-## a signal of timer after which an object starts moving
-func _on_MoveTimer_timeout():
-	ready_to_send = true
-	send_obj()
-
-## function to make object moves
-func send_obj():
-	if !forward or !ready_to_send or !object or forward.busy: return
-	forward.receive(object)
-	object.move(forward.position)
-	object = null
-	busy = false
-	notify_ready()
-	
-## after one neighbour commits to send us resource
-## we do not want to accept othe resources until we are ready
-## so we set busy = true
-func receive(area):
-	busy = true
-	objs_counter += 1
-	object = area
-	ready_to_send = false
+func receive_object(obj: MovableItem):
+	object = obj
 	MoveTimer.start(send_obj_delay)
 
-## callback from the [forward] object signaling that it is now free
-## and we can send an object
-##
-## used to avoid items stacking checked the belts
-func ready_callback():
-	send_obj()
+func send_object():
+	if !object: return
+	ready_to_send = false
+	forward.receive_object(object)
+	object.move(forward.position)
+	object = null
+	ask_send_object()
 
+func _on_move_timer_timeout():
+	if forward: forward.enqueue(direction_to_next)
+	ready_to_send = true
 
-func notify_ready():
-	# a calculation of which neighbour to let through if we have more than one
-	if connections.size() > 0:
-		connections[objs_counter % connections.size()].ready_callback()
+func ask_send_object():
+	if object or receiving_queue.is_empty(): return
+	var build: String = dequeue()
+	if   build == "back" and back  != null:  back.send_object()
+	elif build == "left" and left  != null:  left.send_object()
+	elif build == "right"and right != null: right.send_object()
 
+func _process(_delta):
+	ask_send_object()
