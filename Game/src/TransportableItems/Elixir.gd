@@ -11,3 +11,4 @@ func move(dest_position: Vector2):
 
 func die():
 	queue_free()
+

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhy2scbfp31d6"]
+[gd_scene load_steps=7 format=3 uid="uid://bhy2scbfp31d6"]
 
 [ext_resource type="Texture2D" uid="uid://dnlrifiiyx3vw" path="res://art/bg.png" id="1_4utof"]
+[ext_resource type="Script" path="res://src/UI/HUD.gd" id="1_ald1r"]
 [ext_resource type="Texture2D" uid="uid://cojwruflmgxy6" path="res://art/belt/s.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://dp182kd3b1ndt" path="res://art/cross.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="4"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ald1r")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 12
@@ -102,3 +104,21 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_n221g")
+
+[node name="FPS" type="Label" parent="."]
+offset_left = 1002.0
+offset_top = 2.0
+offset_right = 1093.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 32
+text = "fps"
+text_direction = 1
+
+[node name="Delta" type="Label" parent="."]
+offset_left = 998.0
+offset_top = 51.0
+offset_right = 1089.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 32
+text = "delta"
+text_direction = 1

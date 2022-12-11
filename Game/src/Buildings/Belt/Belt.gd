@@ -16,6 +16,7 @@ var objs_counter  : int    = 0
 func _process(_delta):
 	ask_send_object()
 
+
 #########################################
 #########################################
 ## Functions related to belts building ##
