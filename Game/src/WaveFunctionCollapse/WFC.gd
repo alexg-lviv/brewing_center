@@ -25,7 +25,7 @@ const CELLS: Dictionary = {
 	Vector3i(0, 1, 0): [1, 1, 2, 2,    10], # top    center dirt tile
 	Vector3i(0, 2, 0): [1, 1, 1, 2,    10], # top    right  dirt tile
 	Vector3i(0, 0, 1): [1, 2, 2, 1,    10], # center left   dirt tile
-	Vector3i(0, 1, 1): [2, 2, 2, 2,    50], # center center dirt tile
+	Vector3i(0, 1, 1): [2, 2, 2, 2,    10], # center center dirt tile
 	Vector3i(0, 2, 1): [2, 1, 1, 2,    10], # center right  dirt tile
 	Vector3i(0, 0, 2): [1, 2, 1, 1,    10], # bottom left   dirt tile
 	Vector3i(0, 1, 2): [2, 2, 1, 1,    10], # bottom center dirt tile
@@ -35,11 +35,21 @@ const CELLS: Dictionary = {
 	Vector3i(1, 1, 0): [2, 2, 1, 1,    10], # top    center grass tile
 	Vector3i(1, 2, 0): [2, 2, 2, 1,    10], # top    right  grass tile
 	Vector3i(1, 0, 1): [2, 1, 1, 2,    10], # center left   grass tile
-	Vector3i(1, 1, 1): [1, 1, 1, 1,    10], # center center grass tile
+	Vector3i(1, 1, 1): [1, 1, 1, 1,    100], # center center grass tile
 	Vector3i(1, 2, 1): [1, 2, 2, 1,    10], # center right  grass tile
 	Vector3i(1, 0, 2): [2, 1, 2, 2,    10], # bottom left   grass tile
 	Vector3i(1, 1, 2): [1, 1, 2, 2,    10], # bottom center grass tile
-	Vector3i(1, 2, 2): [1, 2, 2, 2,    10]  # bottom right  grass tile
+	Vector3i(1, 2, 2): [1, 2, 2, 2,    10],  # bottom right  grass tile
+	
+	Vector3i(2, 0, 0): [1, 1, 3, 1,    1], # top    left   grass tile
+	Vector3i(2, 1, 0): [1, 1, 3, 3,    1], # top    center grass tile
+	Vector3i(2, 2, 0): [1, 1, 1, 3,    1], # top    right  grass tile
+	Vector3i(2, 0, 1): [1, 3, 3, 1,    1], # center left   grass tile
+	Vector3i(2, 1, 1): [3, 3, 3, 3,    1], # center center grass tile
+	Vector3i(2, 2, 1): [3, 1, 1, 3,    1], # center right  grass tile
+	Vector3i(2, 0, 2): [1, 3, 1, 1,    1], # bottom left   grass tile
+	Vector3i(2, 1, 2): [3, 3, 1, 1,    1], # bottom center grass tile
+	Vector3i(2, 2, 2): [3, 1, 1, 1,    1],  # bottom right  grass tile
 }
 
 
@@ -78,6 +88,7 @@ func _ready():
 	fill_adjs()
 	create_world()
 
+
 ## function to inisialize the adjacency Dictionary
 func fill_adjs():
 	for tile in CELLS.keys():
@@ -93,6 +104,7 @@ func fill_adjs():
 			else:
 				adjs[direction][edges] = [tile]
 
+
 ## main function to create the world [br]
 ## iterates over the rectangle and fills it out [br]
 ## in the future, if want to make generation more interesting - this is the place to look at) [br]
@@ -101,6 +113,7 @@ func create_world():
 		for j in range(height):
 			var pos: Vector2i = Vector2i(i, j)
 			var chosen: Vector3i = chose_cell(pos)
+			if chosen == Vector3i(1000, 1000, 1000): continue
 			Map.set_cell(0, pos, chosen[0], Vector2i(chosen[1], chosen[2]))
 			
 			if timer_delay:
@@ -118,10 +131,12 @@ func intercect(arr1: Array, arr2: Array) -> Array:
 		if arr2.has(el): out.append(el)
 	return out
 
+
 ## function to chose one random element from array [br]
 ## currently unused
 func chose_one_of(arr: Array) -> Variant:
 	return arr[randi_range(0, arr.size()-1)]
+
 
 ## function to chose one weighted tile [br]
 ## takes tiles probabilities from the CELLS map [br]
@@ -139,7 +154,8 @@ func chose_one_of_weighted(arr: Array[Vector3i]) -> Vector3i:
 	
 	# should never come here but who knows...
 	print("Error: no tile was selected")
-	return Vector3i.ZERO
+	return Vector3i(1000, 1000, 1000)
+
 
 ## chose one cell that can be placed on the position [br]
 ## according to the constraints of the already placed cells [br]
