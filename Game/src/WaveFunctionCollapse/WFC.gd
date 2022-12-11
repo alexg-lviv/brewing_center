@@ -5,31 +5,32 @@ extends Node2D
 @onready var Map: TileMap = get_node("WFCMap")
 @onready var T: Timer = get_node("Timer")
 
-@export  var height: int   = 20
-@export  var width : int   = 40
+@export  var height: int   = 80
+@export  var width : int   = 140
 @export  var delay : float = 0.0002
+@export  var timer_delay: bool = false
 
 
 const CELLS: Dictionary = {
-	Vector3i(0, 0, 0): [1, 1, 2, 1], # top    left   dirt tile
-	Vector3i(0, 1, 0): [1, 1, 2, 2], # top    center dirt tile
-	Vector3i(0, 2, 0): [1, 1, 1, 2], # top    right  dirt tile
-	Vector3i(0, 0, 1): [1, 2, 2, 1], # center left   dirt tile
-	Vector3i(0, 1, 1): [2, 2, 2, 2], # center center dirt tile
-	Vector3i(0, 2, 1): [2, 1, 1, 2], # center right  dirt tile
-	Vector3i(0, 0, 2): [1, 2, 1, 1], # bottom left   dirt tile
-	Vector3i(0, 1, 2): [2, 2, 1, 1], # bottom center dirt tile
-	Vector3i(0, 2, 2): [2, 1, 1, 1], # bottom right  dirt tile
+	Vector3i(0, 0, 0): [1, 1, 2, 1,    10], # top    left   dirt tile
+	Vector3i(0, 1, 0): [1, 1, 2, 2,    10], # top    center dirt tile
+	Vector3i(0, 2, 0): [1, 1, 1, 2,    10], # top    right  dirt tile
+	Vector3i(0, 0, 1): [1, 2, 2, 1,    10], # center left   dirt tile
+	Vector3i(0, 1, 1): [2, 2, 2, 2,    50], # center center dirt tile
+	Vector3i(0, 2, 1): [2, 1, 1, 2,    10], # center right  dirt tile
+	Vector3i(0, 0, 2): [1, 2, 1, 1,    10], # bottom left   dirt tile
+	Vector3i(0, 1, 2): [2, 2, 1, 1,    10], # bottom center dirt tile
+	Vector3i(0, 2, 2): [2, 1, 1, 1,    10], # bottom right  dirt tile
 	
-	Vector3i(1, 0, 0): [2, 2, 1, 2], # top    left   grass tile
-	Vector3i(1, 1, 0): [2, 2, 1, 1], # top    center grass tile
-	Vector3i(1, 2, 0): [2, 2, 2, 1], # top    right  grass tile
-	Vector3i(1, 0, 1): [2, 1, 1, 2], # center left   grass tile
-	Vector3i(1, 1, 1): [1, 1, 1, 1], # center center grass tile
-	Vector3i(1, 2, 1): [1, 2, 2, 1], # center right  grass tile
-	Vector3i(1, 0, 2): [2, 1, 2, 2], # bottom left   grass tile
-	Vector3i(1, 1, 2): [1, 1, 2, 2], # bottom center grass tile
-	Vector3i(1, 2, 2): [1, 2, 2, 2]  # bottom right  grass tile
+	Vector3i(1, 0, 0): [2, 2, 1, 2,    10], # top    left   grass tile
+	Vector3i(1, 1, 0): [2, 2, 1, 1,    10], # top    center grass tile
+	Vector3i(1, 2, 0): [2, 2, 2, 1,    10], # top    right  grass tile
+	Vector3i(1, 0, 1): [2, 1, 1, 2,    10], # center left   grass tile
+	Vector3i(1, 1, 1): [1, 1, 1, 1,    10], # center center grass tile
+	Vector3i(1, 2, 1): [1, 2, 2, 1,    10], # center right  grass tile
+	Vector3i(1, 0, 2): [2, 1, 2, 2,    10], # bottom left   grass tile
+	Vector3i(1, 1, 2): [1, 1, 2, 2,    10], # bottom center grass tile
+	Vector3i(1, 2, 2): [1, 2, 2, 2,    10]  # bottom right  grass tile
 }
 
 var adjs: Dictionary = {
@@ -75,6 +76,22 @@ func intercect(arr1: Array, arr2: Array) -> Array:
 func chose_one_of(arr: Array) -> Variant:
 	return arr[randi_range(0, arr.size()-1)]
 
+func chose_one_of_weighted(arr: Array[Vector3i]) -> Vector3i:
+	var cumulative_prob: int = 0
+	for tile in arr:
+		# TODO: replace 4 with constant
+		cumulative_prob += CELLS[tile][4]
+	var chosen_num: int = randi_range(0, cumulative_prob)
+	var cur_prob: int = 0
+	for tile in arr:
+		# TODO: replace 4 with constant
+		cur_prob += CELLS[tile][4]
+		if cur_prob >= chosen_num:
+			return tile
+
+	print("Error: no tile was selected")
+	return Vector3i.ZERO
+
 func create_world():
 	for i in range(width):
 		for j in range(height):
@@ -93,8 +110,9 @@ func create_world():
 					CELLS[n_tile][directions[direction][1]],
 					CELLS[n_tile][directions[direction][0]])
 				possible_tiles = intercect(possible_tiles, adjs[dir_names[k]][n_tile_constraints])
-			var chosen: Vector3i = chose_one_of(possible_tiles)
+			var chosen: Vector3i = chose_one_of_weighted(possible_tiles)
 			Map.set_cell(0, pos, chosen[0], Vector2i(chosen[1], chosen[2]))
-
-			T.start(delay)
-			await(T.timeout)
+			
+			if timer_delay:
+				T.start(delay)
+				await(T.timeout)
