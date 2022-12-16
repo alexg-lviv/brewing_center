@@ -59,10 +59,6 @@ func delete_neighbour(other_rotation: float):
 	super(other_rotation)
 	update_animation()
 
-## function that is called checked deletion of the next belt
-func del_forward():
-	forward = null
-
 ## function of death
 ## updates all connected belts
 ## and dies

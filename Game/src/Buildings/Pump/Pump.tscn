@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3mcgs5drte2g"]
+
+[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_2lxvs"]
+[ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="3_0ipqw"]
+
+[sub_resource type="GDScript" id="GDScript_p8rly"]
+script/source = "extends Building
+class_name Extractor
+## extracts resources from the resource load
+
+
+## delay to spawn objects
+var extraction_rate: float = 1
+var ready_to_send: bool = false
+
+@onready var ExtractionTimer: Timer = get_node(\"ExtractionTimer\")
+@onready var Item := preload(\"res://src/TransportableItems/Elixir.tscn\")
+
+func _ready():
+	pass
+
+
+### function to make object move
+func send_object():
+	ready_to_send = false
+	var new_object = Item.instantiate()
+	forward.receive_object(new_object)
+	get_parent().call_deferred(\"add_child\", new_object)
+	new_object.set_deferred(\"position\", position + Vector2(sin(rotation), cos(rotation)*-1)*(Glob.GRID_STEP/2))
+	new_object.call_deferred(\"move\", forward.position)
+	ExtractionTimer.start(extraction_rate)
+
+
+## function of death  
+## clear dependencies  
+## and die
+func die():
+	if forward: forward.delete_neighbour(rotation)
+	queue_free()
+
+## a signal tha is called when the belt is placed in front of other belt
+## or pointing towards other belt
+##
+## updates own \"linked list\" and calls update neighbours for the next belt
+func _on_AreaTo_area_entered(area):
+	forward = area
+	area.add_neighbour(self, rotation)
+	if ready_to_send: forward.enqueue(direction_to_next)
+
+
+func _on_extraction_timer_timeout() -> void:
+	if forward: forward.enqueue(direction_to_next)
+	ready_to_send = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gqxa"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6jm8"]
+size = Vector2(20, 4)
+
+[node name="Pump" instance=ExtResource("1_2lxvs")]
+script = SubResource("GDScript_p8rly")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_1gqxa")
+
+[node name="CollisionShape2D" parent="AreaTo" index="0"]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_g6jm8")
+
+[node name="Sprite2d" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_0ipqw")
+
+[node name="ExtractionTimer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[connection signal="timeout" from="ExtractionTimer" to="." method="_on_extraction_timer_timeout"]

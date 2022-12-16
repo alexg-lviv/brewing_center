@@ -8,6 +8,7 @@ extends Node2D
 # BUILD MODE VARS
 var build_mode: bool = false
 var build_type: String
+var can_build: bool = false
 ## 0 - up, PI/2 - right
 var build_rotation: float = 0
 
@@ -61,19 +62,20 @@ func destroy_object(grid_pos: Vector2):
 	instances_dict.erase(grid_pos)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and build_mode and can_build:
+		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
+		place_object(build_type, grid_pos)
+
 ## if we are in build mode, the function handles everything connected to it
 ## previews object, shades it, checks if we can place it there
 ## handles input and actualy builds
 func handle_building():
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var grid_pos: Vector2 = get_grid_pos(mouse_pos)
-	var can_build: bool = !instances_dict.has(grid_pos)
+	can_build = !instances_dict.has(grid_pos)
 	update_texture_preview(grid_pos, can_build)
-	if can_build and Input.is_action_just_pressed("click"):
-		place_object(build_type, grid_pos)
-		if Glob.exit_build_mode_on_build:
-			build_mode = false
-			reset_preview()
+	
 	if Input.is_action_just_pressed("ui_cancel"):
 		build_mode = false
 		reset_preview()
@@ -151,3 +153,7 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.position = grid_pos
 	NewObj.rotation = build_rotation
 	instances_dict[grid_pos] = NewObj
+	
+	if Glob.exit_build_mode_on_build:
+			build_mode = false
+			reset_preview()

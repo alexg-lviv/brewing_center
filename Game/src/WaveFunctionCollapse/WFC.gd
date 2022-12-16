@@ -35,21 +35,21 @@ const CELLS: Dictionary = {
 	Vector3i(1, 1, 0): [2, 2, 1, 1,    10], # top    center grass tile
 	Vector3i(1, 2, 0): [2, 2, 2, 1,    10], # top    right  grass tile
 	Vector3i(1, 0, 1): [2, 1, 1, 2,    10], # center left   grass tile
-	Vector3i(1, 1, 1): [1, 1, 1, 1,    100], # center center grass tile
+	Vector3i(1, 1, 1): [1, 1, 1, 1,    10], # center center grass tile
 	Vector3i(1, 2, 1): [1, 2, 2, 1,    10], # center right  grass tile
 	Vector3i(1, 0, 2): [2, 1, 2, 2,    10], # bottom left   grass tile
 	Vector3i(1, 1, 2): [1, 1, 2, 2,    10], # bottom center grass tile
 	Vector3i(1, 2, 2): [1, 2, 2, 2,    10],  # bottom right  grass tile
 	
-	Vector3i(2, 0, 0): [1, 1, 3, 1,    1], # top    left   grass tile
-	Vector3i(2, 1, 0): [1, 1, 3, 3,    1], # top    center grass tile
-	Vector3i(2, 2, 0): [1, 1, 1, 3,    1], # top    right  grass tile
-	Vector3i(2, 0, 1): [1, 3, 3, 1,    1], # center left   grass tile
-	Vector3i(2, 1, 1): [3, 3, 3, 3,    1], # center center grass tile
-	Vector3i(2, 2, 1): [3, 1, 1, 3,    1], # center right  grass tile
-	Vector3i(2, 0, 2): [1, 3, 1, 1,    1], # bottom left   grass tile
-	Vector3i(2, 1, 2): [3, 3, 1, 1,    1], # bottom center grass tile
-	Vector3i(2, 2, 2): [3, 1, 1, 1,    1],  # bottom right  grass tile
+#	Vector3i(2, 0, 0): [1, 1, 3, 1,    1],
+#	Vector3i(2, 1, 0): [1, 1, 3, 3,    1],
+#	Vector3i(2, 2, 0): [1, 1, 1, 3,    1],
+#	Vector3i(2, 0, 1): [1, 3, 3, 1,    1],
+#	Vector3i(2, 1, 1): [3, 3, 3, 3,    1],
+#	Vector3i(2, 2, 1): [3, 1, 1, 3,    1],
+#	Vector3i(2, 0, 2): [1, 3, 1, 1,    1],
+#	Vector3i(2, 1, 2): [3, 3, 1, 1,    1],
+#	Vector3i(2, 2, 2): [3, 1, 1, 1,    1],
 }
 
 
@@ -85,6 +85,7 @@ var all_tiles  : Array[Vector3i] = []
 
 ## initialize the adjs dictionary and create the world :D
 func _ready():
+	pass
 	fill_adjs()
 	create_world()
 

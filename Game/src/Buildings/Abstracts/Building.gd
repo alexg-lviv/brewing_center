@@ -43,7 +43,9 @@ func delete_neighbour(other_rotation: float):
 	if abs(other_rotation - 3*PI/2) < Glob.FLOAT_EPSILON: 
 		right = null
 
-## function that is called checked deletion of the next belt
+## clear the forward transporting object or building
+## from the "double linked list"
+## called from the forward object
 func del_forward():
 	forward = null
 
