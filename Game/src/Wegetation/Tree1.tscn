@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://geui3elwps5w"]
+
+[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/trees/tree1.png" id="1_g5adc"]
+[ext_resource type="Shader" path="res://src/Wegetation/Tree1.gdshader" id="1_mtwd0"]
+[ext_resource type="Script" path="res://src/Wegetation/Tree1.gd" id="3_0wn5x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exmmm"]
+resource_local_to_scene = true
+shader = ExtResource("1_mtwd0")
+shader_parameter/active = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+
+[node name="Tree1" type="Sprite2D"]
+material = SubResource("ShaderMaterial_exmmm")
+position = Vector2(0, -64)
+texture = ExtResource("1_g5adc")
+script = ExtResource("3_0wn5x")
+
+[node name="Area2d" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="Area2d"]
+polygon = PackedVector2Array(0, -64, -7, -61, -32, -8, -30, 32, -8, 56, -16, 64, 16, 64, 8, 56, 29, 33, 32, -8, 8, -62)
+
+[connection signal="mouse_entered" from="Area2d" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2d" to="." method="_on_area_2d_mouse_exited"]

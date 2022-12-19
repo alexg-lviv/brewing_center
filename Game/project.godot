@@ -65,7 +65,7 @@ _global_script_class_icons={
 config/name="MyGame"
 run/main_scene="res://src/Scenes/MainScene.tscn"
 config/features=PackedStringArray("4.0")
-config/icon="res://art/slime.png"
+config/icon="res://art/witch/witch_down/witch_walk_down1.png"
 
 [autoload]
 
