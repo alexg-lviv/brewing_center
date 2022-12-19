@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2wf8b2yyk2up"]
+[gd_scene load_steps=6 format=3 uid="uid://c6k1t2k1rbxju"]
 
-[ext_resource type="PackedScene" uid="uid://bv4r3ptsriesk" path="res://src/Interactables/Abstract/InteractableObject.tscn" id="1_01cw2"]
-[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_t6agi"]
-[ext_resource type="Script" path="res://src/Interactables/log.gd" id="3_26a2o"]
-[ext_resource type="Texture2D" uid="uid://c1w20qp54pf1l" path="res://art/trees/log.png" id="3_vkoge"]
+[ext_resource type="PackedScene" uid="uid://l032ugses10v" path="res://src/Interactables/Abstract/Movable.tscn" id="1_8a41y"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_8eqdy"]
+[ext_resource type="Texture2D" uid="uid://c1w20qp54pf1l" path="res://art/trees/log.png" id="3_bqa34"]
+[ext_resource type="Script" path="res://src/Interactables/Log.gd" id="4_dmwmc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2w5ff"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pubxf"]
 resource_local_to_scene = true
-shader = ExtResource("2_t6agi")
+shader = ExtResource("2_8eqdy")
 shader_parameter/active = false
 shader_parameter/flipColors = null
 shader_parameter/intensity = 50
@@ -17,10 +17,10 @@ shader_parameter/precision = 0.02
 shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
 
-[node name="Log" instance=ExtResource("1_01cw2")]
-material = SubResource("ShaderMaterial_2w5ff")
-texture = ExtResource("3_vkoge")
-script = ExtResource("3_26a2o")
+[node name="Log" instance=ExtResource("1_8a41y")]
+material = SubResource("ShaderMaterial_pubxf")
+texture = ExtResource("3_bqa34")
+script = ExtResource("4_dmwmc")
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="Area2d" index="1"]
 polygon = PackedVector2Array(-26, 17, -14, 30, 31, -14, 18, -28)

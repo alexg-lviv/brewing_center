@@ -37,7 +37,7 @@ _global_script_classes=[{
 "base": "Movable",
 "class": &"Log",
 "language": &"GDScript",
-"path": "res://src/Interactables/log.gd"
+"path": "res://src/Interactables/Log.gd"
 }, {
 "base": "Interactable",
 "class": &"Movable",
