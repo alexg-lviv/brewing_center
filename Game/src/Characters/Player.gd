@@ -26,7 +26,7 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_right"):
 		vel.x += 1
 	
-	
+	z_index = 10 + position.y / 10
 	handle_anims()
 	set_velocity(vel * moveSpeed)
 	move_and_slide()

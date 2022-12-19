@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://2l27t5xtd4wq"]
+[gd_scene load_steps=12 format=3 uid="uid://2l27t5xtd4wq"]
 
 [ext_resource type="PackedScene" uid="uid://cq5ogkcpmu2un" path="res://src/Tilemaps/Tilemap.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bs3sl6u5krqgw" path="res://src/Characters/Player.tscn" id="2"]
@@ -8,14 +8,28 @@
 [ext_resource type="Shader" path="res://src/Wegetation/Tree1.gdshader" id="7_bgu35"]
 [ext_resource type="PackedScene" uid="uid://cjyiffio6f27x" path="res://src/WaveFunctionCollapse/WFC.tscn" id="9_vn2um"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lu2wa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knccb"]
 resource_local_to_scene = true
 shader = ExtResource("7_bgu35")
 shader_parameter/active = false
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/width = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qmil"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kifaa"]
+resource_local_to_scene = true
+shader = ExtResource("7_bgu35")
+shader_parameter/active = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r216c"]
+resource_local_to_scene = true
+shader = ExtResource("7_bgu35")
+shader_parameter/active = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqxdu"]
 resource_local_to_scene = true
 shader = ExtResource("7_bgu35")
 shader_parameter/active = false
@@ -28,7 +42,6 @@ script = ExtResource("4")
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(512, 192)
-z_index = 10
 collision_layer = 2
 collision_mask = 3
 
@@ -41,12 +54,20 @@ height = 50
 width = 100
 
 [node name="Tree1" parent="." instance=ExtResource("6_fhi6r")]
-material = SubResource("ShaderMaterial_lu2wa")
-position = Vector2(392, 152)
+material = SubResource("ShaderMaterial_knccb")
+position = Vector2(448, 264)
 
 [node name="Tree2" parent="." instance=ExtResource("6_fhi6r")]
-material = SubResource("ShaderMaterial_1qmil")
-position = Vector2(624, 296)
+material = SubResource("ShaderMaterial_kifaa")
+position = Vector2(408, 224)
+
+[node name="Tree3" parent="." instance=ExtResource("6_fhi6r")]
+material = SubResource("ShaderMaterial_r216c")
+position = Vector2(472, 200)
+
+[node name="Tree4" parent="." instance=ExtResource("6_fhi6r")]
+material = SubResource("ShaderMaterial_lqxdu")
+position = Vector2(416, 168)
 
 [node name="TileMap" parent="." instance=ExtResource("1")]
 position = Vector2(0, 232)
