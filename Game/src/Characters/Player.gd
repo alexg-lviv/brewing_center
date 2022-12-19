@@ -2,7 +2,7 @@
 extends CharacterBody2D
 
 var moveSpeed : int = 250
-var vel : Vector2 = Vector2()
+var vel : Vector2 = Vector2.ZERO
 
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
@@ -15,21 +15,31 @@ func _physics_process(_delta):
 	vel = Vector2()
 	# INPUTS AND MOVEMENT
 	if Input.is_action_pressed("move_up"):
-		AnimPlayer.play("up")
 		vel.y -= 1
 	
 	if Input.is_action_pressed("move_down"):
-		AnimPlayer.play("down")
 		vel.y += 1
 	
 	if Input.is_action_pressed("move_left"):
-		AnimPlayer.play("left")
 		vel.x += -1
 	
 	if Input.is_action_pressed("move_right"):
-		AnimPlayer.play("right")
 		vel.x += 1
 	
+	
+	handle_anims()
 	set_velocity(vel * moveSpeed)
 	move_and_slide()
 	velocity
+
+func handle_anims():
+	if vel.x == 1:
+		AnimPlayer.play("right")
+	elif vel.x == -1:
+		AnimPlayer.play("left")
+	elif vel.y == -1:
+		AnimPlayer.play("up")
+	elif vel.y == 1:
+		AnimPlayer.play("down")
+	elif vel == Vector2.ZERO:
+		AnimPlayer.play("idle")

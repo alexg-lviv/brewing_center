@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bs3sl6u5krqgw"]
+[gd_scene load_steps=51 format=3 uid="uid://bs3sl6u5krqgw"]
 
 [ext_resource type="Script" path="res://src/Characters/Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbehsfawlhx5x" path="res://art/witch-export.png" id="2_jdtkm"]
@@ -125,17 +125,33 @@ tracks/0/keys = {
 "values": [ExtResource("13_ycy2a"), ExtResource("14_pqwff"), ExtResource("15_k8ysa"), ExtResource("16_3uyqd"), ExtResource("17_brs1g"), ExtResource("18_hy6nu"), ExtResource("19_qpj4g"), ExtResource("20_l6wes"), ExtResource("21_lad5t"), ExtResource("22_u2ecf")]
 }
 
+[sub_resource type="Animation" id="Animation_j0pp2"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_wre6p")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5r3c5"]
 _data = {
 "RESET": SubResource("Animation_u78wn"),
 "down": SubResource("Animation_jhetw"),
+"idle": SubResource("Animation_j0pp2"),
 "left": SubResource("Animation_yj6hk"),
 "right": SubResource("Animation_87y5t"),
 "up": SubResource("Animation_vj77x")
 }
 
 [node name="Player" type="CharacterBody2D"]
-show_behind_parent = true
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

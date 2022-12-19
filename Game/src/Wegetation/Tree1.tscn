@@ -14,6 +14,7 @@ shader_parameter/width = 2.0
 [node name="Tree1" type="Sprite2D"]
 material = SubResource("ShaderMaterial_exmmm")
 position = Vector2(0, -64)
+z_index = 2
 texture = ExtResource("1_g5adc")
 script = ExtResource("3_0wn5x")
 
