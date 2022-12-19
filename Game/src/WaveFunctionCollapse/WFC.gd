@@ -35,7 +35,7 @@ const CELLS: Dictionary = {
 	Vector3i(1, 1, 0): [2, 2, 1, 1,    10], # top    center grass tile
 	Vector3i(1, 2, 0): [2, 2, 2, 1,    10], # top    right  grass tile
 	Vector3i(1, 0, 1): [2, 1, 1, 2,    10], # center left   grass tile
-	Vector3i(1, 1, 1): [1, 1, 1, 1,    10], # center center grass tile
+	Vector3i(1, 1, 1): [1, 1, 1, 1,    100], # center center grass tile
 	Vector3i(1, 2, 1): [1, 2, 2, 1,    10], # center right  grass tile
 	Vector3i(1, 0, 2): [2, 1, 2, 2,    10], # bottom left   grass tile
 	Vector3i(1, 1, 2): [1, 1, 2, 2,    10], # bottom center grass tile

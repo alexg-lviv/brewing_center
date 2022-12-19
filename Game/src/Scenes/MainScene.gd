@@ -6,14 +6,13 @@ extends Node2D
 
 
 # BUILD MODE VARS
-var build_mode: bool = false
 var build_type: String
 var can_build: bool = false
 ## 0 - up, PI/2 - right
 var build_rotation: float = 0
 
-# DEMOLISH MODE VARS
-var demolish_mode: bool = false
+
+var last_object: Interactable = null
 
 
 @onready var UI := get_node("UI")
@@ -33,12 +32,23 @@ var _last_shaded_red: Vector2 = Vector2.ZERO
 func _ready():
 	for button in get_tree().get_nodes_in_group("BuildButton"):
 		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
+	
+	Signals.connect("object_howered", Callable(self,"_on_object_howered"))
+	Signals.connect("object_unhowered", Callable(self,"_on_object_unhowered"))
 
+func _on_object_howered(object):
+	if is_instance_valid(last_object):
+		last_object.exit()
+	last_object = object
+
+func _on_object_unhowered(object):
+	if object == last_object:
+		last_object = null
 
 func _process(_delta):
-	if build_mode:
+	if Glob.build_mode:
 		handle_building()
-	elif demolish_mode:
+	elif Glob.demolish_mode:
 		handle_demolition()
 
 ## if we are in demolition mode, the function handles everything connected to it
@@ -53,7 +63,7 @@ func handle_demolition():
 		_last_shaded_red = grid_pos
 		if Input.is_action_just_pressed("click"):
 			destroy_object(grid_pos)
-	if Input.is_action_just_pressed("ui_cancel"): demolish_mode = false
+	if Input.is_action_just_pressed("ui_cancel"): Glob.demolish_mode = false
 
 
 ## destroys the object, calls its death function and removes the object from instances dict
@@ -63,7 +73,7 @@ func destroy_object(grid_pos: Vector2):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and build_mode and can_build:
+	if event is InputEventMouseButton and event.pressed and Glob.build_mode and can_build:
 		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
 		place_object(build_type, grid_pos)
 
@@ -77,7 +87,7 @@ func handle_building():
 	update_texture_preview(grid_pos, can_build)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		build_mode = false
+		Glob.build_mode = false
 		reset_preview()
 	handle_rotation()
 
@@ -103,12 +113,12 @@ func handle_rotation():
 ## or enter demolition mode
 func _on_build_button_pressed(building_type: String):
 	if building_type == "Demolish":
-		build_mode = false
-		demolish_mode = true
+		Glob.build_mode = false
+		Glob.demolish_mode = true
 		reset_preview()
 	else:
-		build_mode = true
-		demolish_mode = false
+		Glob.build_mode = true
+		Glob.demolish_mode = false
 		build_type = building_type
 		set_preview(build_type)
 
@@ -155,5 +165,5 @@ func place_object(object_name: String, grid_pos: Vector2):
 	instances_dict[grid_pos] = NewObj
 	
 	if Glob.exit_build_mode_on_build:
-			build_mode = false
+			Glob.build_mode = false
 			reset_preview()

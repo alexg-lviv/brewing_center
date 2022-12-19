@@ -77,6 +77,22 @@ tracks/0/keys = {
 "values": [ExtResource("3_wre6p"), ExtResource("4_fx4t5"), ExtResource("5_dalbm"), ExtResource("6_3h7ti"), ExtResource("7_smoqv"), ExtResource("8_adkgx"), ExtResource("9_nnpfj"), ExtResource("10_n7rv5"), ExtResource("11_kjj8u"), ExtResource("12_1nxll")]
 }
 
+[sub_resource type="Animation" id="Animation_j0pp2"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_wre6p")]
+}
+
 [sub_resource type="Animation" id="Animation_yj6hk"]
 resource_name = "left"
 loop_mode = 1
@@ -123,22 +139,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("13_ycy2a"), ExtResource("14_pqwff"), ExtResource("15_k8ysa"), ExtResource("16_3uyqd"), ExtResource("17_brs1g"), ExtResource("18_hy6nu"), ExtResource("19_qpj4g"), ExtResource("20_l6wes"), ExtResource("21_lad5t"), ExtResource("22_u2ecf")]
-}
-
-[sub_resource type="Animation" id="Animation_j0pp2"]
-resource_name = "idle"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_wre6p")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5r3c5"]

@@ -5,6 +5,10 @@ const FLOAT_EPSILON = 0.01
 var GRID_STEP: int = 32
 
 var exit_build_mode_on_build: bool = false
+var build_mode: bool = false
+
+# DEMOLISH MODE VARS
+var demolish_mode: bool = false
 
 var previews_dict: Dictionary = {
 	"Belt": "res://art/belt/s.png",

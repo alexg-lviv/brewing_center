@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx7qyff6exy57"]
+
+[ext_resource type="PackedScene" uid="uid://bv4r3ptsriesk" path="res://src/Interactables/Abstract/InteractableObject.tscn" id="1_71jgc"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_dkxjr"]
+[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/trees/tree1.png" id="3_fptgg"]
+[ext_resource type="Script" path="res://src/Interactables/Tree1.gd" id="4_rgosu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb5m8"]
+resource_local_to_scene = true
+shader = ExtResource("2_dkxjr")
+shader_parameter/active = false
+shader_parameter/flipColors = false
+shader_parameter/intensity = 50
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/precision = 0.02
+shader_parameter/useTexture = false
+shader_parameter/use_outline_uv = false
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8cm7m"]
+radius = 32.0
+height = 128.0
+
+[node name="Tree1" instance=ExtResource("1_71jgc")]
+material = SubResource("ShaderMaterial_lb5m8")
+position = Vector2(0, -64)
+texture = ExtResource("3_fptgg")
+script = ExtResource("4_rgosu")
+
+[node name="CollisionShape2d" parent="Area2d" index="0"]
+shape = SubResource("CapsuleShape2D_8cm7m")

@@ -29,6 +29,16 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/Scenes/MainScene.gd"
 }, {
+"base": "Sprite2D",
+"class": &"Interactable",
+"language": &"GDScript",
+"path": "res://src/Interactables/Abstract/InteractableObject.gd"
+}, {
+"base": "Interactable",
+"class": &"Log",
+"language": &"GDScript",
+"path": "res://src/Interactables/log.gd"
+}, {
 "base": "Area2D",
 "class": &"MovableItem",
 "language": &"GDScript",
@@ -54,6 +64,8 @@ _global_script_class_icons={
 "Building": "",
 "Extractor": "",
 "GameWorld": "",
+"Interactable": "",
+"Log": "",
 "MovableItem": "",
 "Spawner": "",
 "Trash": "",
@@ -70,6 +82,7 @@ config/icon="res://art/witch/witch_down/witch_walk_down1.png"
 [autoload]
 
 Glob="*res://src/Globals/Glob.gd"
+Signals="*res://src/Globals/Signals.gd"
 
 [display]
 

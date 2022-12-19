@@ -154,6 +154,7 @@ script = ExtResource("1_jnroi")
 height = 20
 width = 40
 delay = 0.02
+timer_delay = true
 
 [node name="WFCMap" parent="." instance=ExtResource("2_nymvo")]
 tile_set = SubResource("TileSet_7ka0s")
