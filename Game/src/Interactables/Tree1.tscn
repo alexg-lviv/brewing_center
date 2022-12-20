@@ -29,3 +29,8 @@ script = ExtResource("4_rgosu")
 
 [node name="CollisionShape2d" parent="Area2d" index="0"]
 shape = SubResource("CapsuleShape2D_8cm7m")
+
+[node name="InteractionTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[connection signal="timeout" from="InteractionTimer" to="." method="_on_interaction_timer_timeout"]

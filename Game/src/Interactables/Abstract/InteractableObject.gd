@@ -7,7 +7,7 @@ var own_z: int = 10
 
 
 func _process(_delta) -> void:
-	if modify_z: z_index = own_z + global_position.y / 10
+	if modify_z: z_index = own_z + global_position.y / 10.
 
 func _on_area_2d_mouse_entered() -> void:
 	if !Glob.demolish_mode and !Glob.build_mode:

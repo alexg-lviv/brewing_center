@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6k1t2k1rbxju"]
+[gd_scene load_steps=6 format=3 uid="uid://7ax3enxo1gq6"]
 
 [ext_resource type="PackedScene" uid="uid://l032ugses10v" path="res://src/Interactables/Abstract/Movable.tscn" id="1_8a41y"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_8eqdy"]

@@ -30,7 +30,6 @@ func _physics_process(_delta):
 	handle_anims()
 	set_velocity(vel * moveSpeed)
 	move_and_slide()
-	velocity
 
 func handle_anims():
 	if vel.x == 1:

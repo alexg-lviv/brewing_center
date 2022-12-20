@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgyf8u2tjj7ne"]
+
+[ext_resource type="Texture2D" uid="uid://drkh6vpmysdau" path="res://art/progress/progress1.png" id="1_e4ri5"]
+[ext_resource type="Script" path="res://src/UI/InteractionProgress.gd" id="1_wo7gh"]
+[ext_resource type="Texture2D" uid="uid://b7x8tir765u0e" path="res://art/progress/progress2.png" id="2_xoidb"]
+
+[node name="Control" type="CanvasLayer"]
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+script = ExtResource("1_wo7gh")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("1_e4ri5")
+texture_progress = ExtResource("2_xoidb")
