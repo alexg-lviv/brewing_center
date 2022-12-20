@@ -13,11 +13,15 @@ func _ready():
 	own_z = 2
 	z_index = 2
 
-func move(dest_position: Vector2) -> void:
+func move(dest_position: Vector2, time: float = 0.75) -> void:
 	var tween := get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "position", dest_position, 0.5)
+	tween.tween_property(self, "position", dest_position, time)
 
 func _process(delta: float) -> void:
+	if follow_cursor and Input.is_action_just_released("click"):
+		follow_cursor = false
+		continue_followig = true
+		last_mouse_pos = get_global_mouse_position()
 	if follow_cursor:
 		position = lerp(position, get_global_mouse_position(), 0.05)
 	elif continue_followig:
@@ -29,14 +33,6 @@ func compare(first: Vector2, second: Vector2) -> bool:
 	if abs(first.x - second.x) < 1 and abs(first.y - second.y) < 1:
 		return false
 	return true
-
-func _unhandled_input(event: InputEvent) -> void:
-	super(event)
-	if follow_cursor and can_unfollow and event is InputEventMouseButton and event.pressed:
-		follow_cursor = false
-		continue_followig = true
-		last_mouse_pos = get_global_mouse_position()
-
 
 func interact():
 	follow_cursor = true

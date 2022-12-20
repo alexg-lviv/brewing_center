@@ -22,5 +22,9 @@ material = SubResource("ShaderMaterial_pubxf")
 texture = ExtResource("3_bqa34")
 script = ExtResource("4_dmwmc")
 
+[node name="Area2d" parent="." index="0"]
+collision_layer = 8
+collision_mask = 0
+
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="Area2d" index="1"]
 polygon = PackedVector2Array(-26, 17, -14, 30, 31, -14, 18, -28)
