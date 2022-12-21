@@ -26,7 +26,7 @@ func _process(_delta):
 
 ## function to update the current animation of the belt
 ## called when the belt gains or looses neighbours
-func update_animation():
+func update_animation() -> void:
 	var anim_name: String = ""
 	if !back and !left and !right: anim_name = "back"
 	if back:   anim_name += "back"
@@ -38,7 +38,7 @@ func update_animation():
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was added
 ## and calls update animation
-func add_neighbour(other_belt, other_rotation: float):
+func add_neighbour(other_belt, other_rotation: float) -> void:
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
@@ -55,14 +55,14 @@ func add_neighbour(other_belt, other_rotation: float):
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was deleted
 ## and calls update animation
-func delete_neighbour(other_rotation: float):
+func delete_neighbour(other_rotation: float) -> void:
 	super(other_rotation)
 	update_animation()
 
 ## function of death
 ## updates all connected belts
 ## and dies
-func die():
+func die() -> void:
 	super()
 	if object: object.die()
 	queue_free()
@@ -71,7 +71,7 @@ func die():
 ## or pointing towards other belt
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
-func _on_AreaTo_area_entered(area):
+func _on_AreaTo_area_entered(area) -> void:
 	area.add_neighbour(self, rotation)
 	forward = area
 	if ready_to_send: forward.enqueue(direction_to_next)
@@ -85,14 +85,14 @@ func _on_AreaTo_area_entered(area):
 ## function to notify belt the it will receive object
 ## save object to variable and start timer to count
 ## when to send it further
-func receive_object(obj: MovableItem):
+func receive_object(obj: MovableItem) -> void:
 	object = obj
 	MoveTimer.start(send_obj_delay)
 
 ## actually send object
 ## make it move, notify next building that we send it  
 ## and ask to send object to this belt if there are any
-func send_object():
+func send_object() -> void:
 	if !object: return
 	ready_to_send = false
 	forward.receive_object(object)
@@ -102,14 +102,14 @@ func send_object():
 
 ## notify next building that we are ready to send object
 ## and set the variable
-func _on_move_timer_timeout():
+func _on_move_timer_timeout() -> void:
 	if forward: forward.enqueue(direction_to_next)
 	ready_to_send = true
 
 ## function to ask to send us objects
 ## if there are any obkects in the queue
 ## and send them
-func ask_send_object():
+func ask_send_object() -> void:
 	if object or receiving_queue.is_empty(): return
 	var build: String = dequeue()
 	if   build == "back" and back  != null:  back.send_object()

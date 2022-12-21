@@ -16,13 +16,13 @@ func _ready():
 ## clear the forward transporting object or building
 ## from the "double linked list"
 ## called from the forward object
-func del_forward():
+func del_forward() -> void:
 	forward = null
 
 ## function of death  
 ## clear dependencies  
 ## and die
-func die():
+func die() -> void:
 	if forward: forward.delete_neighbour(rotation)
 	queue_free()
 
@@ -30,14 +30,14 @@ func die():
 ## or pointing towards other belt
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
-func _on_AreaTo_area_entered(area):
+func _on_AreaTo_area_entered(area) -> void:
 	forward = area
 	area.add_neighbour(self, rotation)
 	if ready_to_send: forward.enqueue(direction_to_next)
 
 
 ### function to make object move
-func send_object():
+func send_object() -> void:
 	ready_to_send = false
 	var new_object = Item.instantiate()
 	forward.receive_object(new_object)
@@ -47,6 +47,6 @@ func send_object():
 	SpawnTimer.start(send_obj_delay)
 
 ## signal of timer to send objects every n seconds if possible
-func _on_spawn_timer_timeout():
+func _on_spawn_timer_timeout() -> void:
 	if forward: forward.enqueue(direction_to_next)
 	ready_to_send = true

@@ -7,7 +7,7 @@ extends Building
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was added
 ## and calls update animation
-func add_neighbour(other_belt, other_rotation: float):
+func add_neighbour(other_belt, other_rotation: float) -> void:
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = other_belt
@@ -22,12 +22,12 @@ func add_neighbour(other_belt, other_rotation: float):
 ## function just to meet the code API  
 ##
 ## immideately after we get ti enqueue, we ask to send the object
-func enqueue(direction_from: String):
+func enqueue(direction_from: String) -> void:
 	super(direction_from)
 	ask_send_object()
 
 ## ask all the connections to send us object
-func ask_send_object():
+func ask_send_object() -> void:
 	if receiving_queue.is_empty(): return
 	var build: String = dequeue()
 	if   build == "back" and back  != null:  back.send_object()
@@ -36,7 +36,7 @@ func ask_send_object():
 
 ## just delete all the transportable objects
 ## and add other buildings as neighbiurs
-func _on_trash_area_entered(area):
+func _on_trash_area_entered(area) -> void:
 	if area.is_in_group("TransportableItems"):
 		area.die()
 	elif area.is_in_group("Buildings"):

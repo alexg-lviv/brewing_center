@@ -23,18 +23,18 @@ func get_relative_rotation(other_rotation: float) -> float:
 func dequeue() -> String:
 	return receiving_queue.pop_front()
 
-func enqueue(direction_from: String):
+func enqueue(direction_from: String) -> void:
 	if   direction_from == "back" : receiving_queue.push_back("back")
 	elif direction_from == "left" : receiving_queue.push_back("left")
 	elif direction_from == "right": receiving_queue.push_back("right")
 
-func _on_AreaTo_area_entered(area):
+func _on_AreaTo_area_entered(area) -> void:
 	pass
 
 ## function to update the "double linked list" of belts
 ## called checked signal from other belt
 ## calculates from which direction the neighbour was deleted
-func delete_neighbour(other_rotation: float):
+func delete_neighbour(other_rotation: float) -> void:
 	other_rotation = get_relative_rotation(other_rotation)
 	if other_rotation == 0:   
 		back = null
@@ -46,21 +46,21 @@ func delete_neighbour(other_rotation: float):
 ## clear the forward transporting object or building
 ## from the "double linked list"
 ## called from the forward object
-func del_forward():
+func del_forward() -> void:
 	forward = null
 
 ## default die function
 ## you would BETTER owerride it in successors classes!!!
-func die():
+func die() -> void:
 	if right:   right.del_forward()
 	if left:    left.del_forward()
 	if back:    back.del_forward()
 	if forward: forward.delete_neighbour(rotation)
 	queue_free()
 
-func receive(area):
+func receive(area) -> void:
 	pass
 
-func receive_object(_object):
+func receive_object(_object) -> void:
 	pass
 

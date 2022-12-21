@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	set_velocity(vel * moveSpeed)
 	move_and_slide()
 
-func handle_anims():
+func handle_anims() -> void:
 	if vel.x == 1:
 		AnimPlayer.play("right")
 	elif vel.x == -1:

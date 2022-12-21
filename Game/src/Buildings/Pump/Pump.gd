@@ -15,7 +15,7 @@ func _ready():
 
 
 ### function to make object move
-func send_object():
+func send_object() -> void:
 	ready_to_send = false
 	var new_object = Item.instantiate()
 	forward.receive_object(new_object)
@@ -28,7 +28,7 @@ func send_object():
 ## function of death  
 ## clear dependencies  
 ## and die
-func die():
+func die() -> void:
 	if forward: forward.delete_neighbour(rotation)
 	queue_free()
 
@@ -36,7 +36,7 @@ func die():
 ## or pointing towards other belt
 ##
 ## updates own "linked list" and calls update neighbours for the next belt
-func _on_AreaTo_area_entered(area):
+func _on_AreaTo_area_entered(area) -> void:
 	forward = area
 	area.add_neighbour(self, rotation)
 	if ready_to_send: forward.enqueue(direction_to_next)

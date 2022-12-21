@@ -2,7 +2,6 @@ extends InteractableTimed
 
 @onready var log := preload("res://src/Interactables/Log.tscn")
 
-
 func _ready():
 	modify_z = true
 	own_z = 10
@@ -10,8 +9,9 @@ func _ready():
 func interact() -> void:
 	super()
 
-func continue_interaction():
+func continue_interaction() -> void:
 	super()
+	if interaction_stopped: return
 	for i in range(randi_range(1, 3)):
 		var instance = log.instantiate()
 		get_parent().add_child(instance)
