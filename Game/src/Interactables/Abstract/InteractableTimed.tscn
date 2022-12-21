@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvllcws5pag8k"]
+
+[ext_resource type="PackedScene" uid="uid://bv4r3ptsriesk" path="res://src/Interactables/Abstract/InteractableObject.tscn" id="1_766r3"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_2rtdg"]
+[ext_resource type="Script" path="res://src/Interactables/Abstract/InteractableTimed.gd" id="3_xyhpf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5gmi"]
+resource_local_to_scene = true
+shader = ExtResource("2_2rtdg")
+shader_parameter/active = false
+shader_parameter/flipColors = null
+shader_parameter/intensity = 50
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/precision = 0.02
+shader_parameter/useTexture = null
+shader_parameter/use_outline_uv = null
+
+[node name="InteractableTimed" instance=ExtResource("1_766r3")]
+material = SubResource("ShaderMaterial_o5gmi")
+script = ExtResource("3_xyhpf")
+
+[node name="InteractionTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[connection signal="timeout" from="InteractionTimer" to="." method="_on_interaction_timer_timeout"]

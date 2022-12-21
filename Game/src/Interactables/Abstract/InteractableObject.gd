@@ -6,6 +6,7 @@ var modify_z: bool = false
 var own_z: int = 10
 
 
+
 func _process(_delta) -> void:
 	if modify_z: z_index = own_z + global_position.y / 10.
 

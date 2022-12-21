@@ -4,7 +4,7 @@ extends CanvasLayer
 var _timer: Timer
 
 func _physics_process(_delta: float) -> void:
-	Progress.global_position = Progress.get_global_mouse_position() + Vector2(20, 20)
+	Progress.global_position = Progress.get_global_mouse_position() - Progress.size / 2
 	Progress.value = Progress.max_value - _timer.time_left
 	
 	if Progress.value == Progress.max_value:
