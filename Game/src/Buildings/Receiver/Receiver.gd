@@ -39,7 +39,7 @@ func _on_area_from_area_entered(area: Area2D) -> void:
 		forward.enqueue(direction_to_next)
 		enqueued = true
 
-func _on_area_from_area_exited(area: Area2D) -> void:
+func _on_area_from_area_exited(_area: Area2D) -> void:
 	print("SMTH EXITED")
 
 

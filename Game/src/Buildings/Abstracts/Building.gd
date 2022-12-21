@@ -67,5 +67,5 @@ func receive(_area) -> void:
 func receive_object(_object) -> void:
 	pass
 
-func forget_about_item(item: Interactable) -> void:
+func forget_about_item(_item: Interactable) -> void:
 	pass

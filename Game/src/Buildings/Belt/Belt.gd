@@ -117,7 +117,7 @@ func ask_send_object() -> void:
 	elif build == "left" and left  != null:  left.send_object()
 	elif build == "right"and right != null: right.send_object()
 
-func forget_about_item(item: Interactable) -> void:
+func forget_about_item(_item: Interactable) -> void:
 	print("FORGETTING")
 	object = null
 	try_dequeue(self)

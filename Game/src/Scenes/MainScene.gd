@@ -84,7 +84,7 @@ func handle_building():
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var grid_pos: Vector2 = get_grid_pos(mouse_pos)
 	can_build = !instances_dict.has(grid_pos)
-	update_texture_preview(grid_pos, can_build)
+	update_texture_preview(grid_pos)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		Glob.build_mode = false
@@ -142,7 +142,7 @@ func get_grid_pos(pos: Vector2) -> Vector2:
 
 ## updates preview textures, called from _process
 ## responsible for shading if the building can be built checked the coordinates or no
-func update_texture_preview(grid_pos: Vector2, can_build: bool):
+func update_texture_preview(grid_pos: Vector2):
 	PrevSprite.global_position = grid_pos
 	PrevSprite.rotation = build_rotation
 	if(can_build):

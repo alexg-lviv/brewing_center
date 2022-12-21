@@ -1,6 +1,6 @@
 extends InteractableTimed
 
-@onready var log := preload("res://src/Interactables/Log.tscn")
+@onready var wooden_log := preload("res://src/Interactables/Log.tscn")
 
 func _ready():
 	modify_z = true
@@ -13,7 +13,7 @@ func continue_interaction() -> void:
 	super()
 	if interaction_stopped: return
 	for i in range(randi_range(1, 3)):
-		var instance = log.instantiate()
+		var instance = wooden_log.instantiate()
 		get_parent().add_child(instance)
 		instance.position = position
 		instance.move(position + Vector2(randi_range(-10, 10) * 5, randi_range(-10, 10) * 5))
