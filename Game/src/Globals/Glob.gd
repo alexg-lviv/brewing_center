@@ -15,13 +15,15 @@ var previews_dict: Dictionary = {
 	"Belt": "res://art/belt/s.png",
 	"Spawner": "res://art/buildings/spawner.png",
 	"Trash": "res://art/buildings/Trash.png",
-	"Extractor": "res://art/buildings/spawner.png"
+	"Extractor": "res://art/buildings/spawner.png",
+	"Receiver": "res://art/buildings/sender.png"
 }
 var objects_dict: Dictionary = {
 	"Belt": "res://src/Buildings/Belt/Belt.tscn",
 	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
 	"Trash": "res://src/Buildings/Trash/Trash.tscn",
-	"Extractor": "res://src/Buildings/Pump/Pump.tscn"
+	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
+	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn"
 }
 
 

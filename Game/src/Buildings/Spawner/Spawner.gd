@@ -8,16 +8,10 @@ var send_obj_delay: float = 1
 var ready_to_send: bool = false
 
 @onready var SpawnTimer: Timer = get_node("SpawnTimer")
-@onready var Item := preload("res://src/TransportableItems/Elixir.tscn")
+@onready var Item := preload("res://src/Interactables/Log.tscn")
 
 func _ready():
 	SpawnTimer.start(send_obj_delay)
-
-## clear the forward transporting object or building
-## from the "double linked list"
-## called from the forward object
-func del_forward() -> void:
-	forward = null
 
 ## function of death  
 ## clear dependencies  

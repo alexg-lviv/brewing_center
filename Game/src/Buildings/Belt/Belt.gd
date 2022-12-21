@@ -5,7 +5,7 @@ class_name Belt
 extends Building
 
 # transporting objects variables
-var object        : Object = null
+var object        : Interactable = null
 var send_obj_delay: float  = 1.5
 var ready_to_send : bool   = false
 var objs_counter  : int    = 0 
@@ -85,8 +85,9 @@ func _on_AreaTo_area_entered(area) -> void:
 ## function to notify belt the it will receive object
 ## save object to variable and start timer to count
 ## when to send it further
-func receive_object(obj: MovableItem) -> void:
+func receive_object(obj: Interactable) -> void:
 	object = obj
+	obj.get_taken_by_building(self)
 	MoveTimer.start(send_obj_delay)
 
 ## actually send object
@@ -103,11 +104,11 @@ func send_object() -> void:
 ## notify next building that we are ready to send object
 ## and set the variable
 func _on_move_timer_timeout() -> void:
-	if forward: forward.enqueue(direction_to_next)
+	if forward and object: forward.enqueue(direction_to_next)
 	ready_to_send = true
 
 ## function to ask to send us objects
-## if there are any obkects in the queue
+## if there are any objects in the queue
 ## and send them
 func ask_send_object() -> void:
 	if object or receiving_queue.is_empty(): return
@@ -116,3 +117,8 @@ func ask_send_object() -> void:
 	elif build == "left" and left  != null:  left.send_object()
 	elif build == "right"and right != null: right.send_object()
 
+func forget_about_item(item: Interactable) -> void:
+	print("FORGETTING")
+	object = null
+	try_dequeue(self)
+	ask_send_object()

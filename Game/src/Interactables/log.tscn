@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://7ax3enxo1gq6"]
+[gd_scene load_steps=7 format=3 uid="uid://7ax3enxo1gq6"]
 
 [ext_resource type="PackedScene" uid="uid://l032ugses10v" path="res://src/Interactables/Abstract/Movable.tscn" id="1_8a41y"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_8eqdy"]
@@ -17,14 +17,25 @@ shader_parameter/precision = 0.02
 shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s10y5"]
+resource_local_to_scene = true
+shader = ExtResource("2_8eqdy")
+shader_parameter/active = false
+shader_parameter/flipColors = null
+shader_parameter/intensity = 50
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/precision = 0.02
+shader_parameter/useTexture = false
+shader_parameter/use_outline_uv = null
+
 [node name="Log" instance=ExtResource("1_8a41y")]
 material = SubResource("ShaderMaterial_pubxf")
-texture = ExtResource("3_bqa34")
 script = ExtResource("4_dmwmc")
 
-[node name="Area2d" parent="." index="0"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="Area2d" index="1"]
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-26, 17, -14, 30, 31, -14, 18, -28)
+
+[node name="Sprite2d" parent="." index="2"]
+material = SubResource("ShaderMaterial_s10y5")
+texture = ExtResource("3_bqa34")

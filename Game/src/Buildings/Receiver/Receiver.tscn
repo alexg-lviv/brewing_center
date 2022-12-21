@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf8eyjostg1jl"]
+
+[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_gp2ew"]
+[ext_resource type="Script" path="res://src/Buildings/Receiver/Receiver.gd" id="2_yb1a2"]
+[ext_resource type="Texture2D" uid="uid://dbwbwtyuvabqr" path="res://art/buildings/sender.png" id="3_qy54x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evm4t"]
+size = Vector2(30.5, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btjf8"]
+size = Vector2(20, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_savbt"]
+size = Vector2(23, 11.25)
+
+[node name="Building" instance=ExtResource("1_gp2ew")]
+script = ExtResource("2_yb1a2")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0.25, -7)
+shape = SubResource("RectangleShape2D_evm4t")
+
+[node name="CollisionShape2D" parent="AreaTo" index="0"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_btjf8")
+
+[node name="Sprite2d" type="Sprite2D" parent="." index="2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_qy54x")
+
+[node name="AreaFrom" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="AreaFrom" index="0"]
+position = Vector2(0, 9.125)
+shape = SubResource("RectangleShape2D_savbt")
+
+[node name="SpawnTimer" type="Timer" parent="." index="4"]
+
+[connection signal="area_entered" from="AreaFrom" to="." method="_on_area_from_area_entered"]
+[connection signal="area_exited" from="AreaFrom" to="." method="_on_area_from_area_exited"]

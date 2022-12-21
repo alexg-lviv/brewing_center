@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://ciqmeplowpp4m"]
 
-[ext_resource type="PackedScene" uid="uid://cyfgsgr07wvav" path="res://src/Buildings/Abstracts/Building.tscn" id="1_alhyp"]
+[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_alhyp"]
 [ext_resource type="Texture2D" uid="uid://cl47y8vbwfqd7" path="res://art/buildings/Trash.png" id="2_dtklh"]
 [ext_resource type="Script" path="res://src/Buildings/Trash/Trash.gd" id="2_piwfk"]
 

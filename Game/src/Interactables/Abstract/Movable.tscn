@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://l032ugses10v"]
+[gd_scene load_steps=6 format=3 uid="uid://l032ugses10v"]
 
 [ext_resource type="PackedScene" uid="uid://bv4r3ptsriesk" path="res://src/Interactables/Abstract/InteractableObject.tscn" id="1_64pyx"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_6yr6w"]
@@ -16,6 +16,21 @@ shader_parameter/precision = 0.02
 shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
 
-[node name="Movable" instance=ExtResource("1_64pyx")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_72kfu"]
+resource_local_to_scene = true
+shader = ExtResource("2_6yr6w")
+shader_parameter/active = false
+shader_parameter/flipColors = null
+shader_parameter/intensity = 50
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/precision = 0.02
+shader_parameter/useTexture = false
+shader_parameter/use_outline_uv = null
+
+[node name="Movable" groups=["Movables"] instance=ExtResource("1_64pyx")]
 material = SubResource("ShaderMaterial_w6jh7")
 script = ExtResource("3_oewal")
+
+[node name="Sprite2d" parent="." index="1"]
+material = SubResource("ShaderMaterial_72kfu")

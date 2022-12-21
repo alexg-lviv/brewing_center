@@ -37,7 +37,7 @@ func ask_send_object() -> void:
 ## just delete all the transportable objects
 ## and add other buildings as neighbiurs
 func _on_trash_area_entered(area) -> void:
-	if area.is_in_group("TransportableItems"):
+	if area.is_in_group("Movables"):
 		area.die()
 	elif area.is_in_group("Buildings"):
 		add_neighbour(area, area.rotation)

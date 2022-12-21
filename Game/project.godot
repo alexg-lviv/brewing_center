@@ -29,7 +29,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/Scenes/MainScene.gd"
 }, {
-"base": "Sprite2D",
+"base": "Area2D",
 "class": &"Interactable",
 "language": &"GDScript",
 "path": "res://src/Interactables/Abstract/InteractableObject.gd"
@@ -53,6 +53,11 @@ _global_script_classes=[{
 "class": &"MovableItem",
 "language": &"GDScript",
 "path": "res://src/TransportableItems/Elixir.gd"
+}, {
+"base": "Building",
+"class": &"Receiver",
+"language": &"GDScript",
+"path": "res://src/Buildings/Receiver/Receiver.gd"
 }, {
 "base": "Building",
 "class": &"Spawner",
@@ -79,6 +84,7 @@ _global_script_class_icons={
 "Log": "",
 "Movable": "",
 "MovableItem": "",
+"Receiver": "",
 "Spawner": "",
 "Trash": "",
 "WFC": ""

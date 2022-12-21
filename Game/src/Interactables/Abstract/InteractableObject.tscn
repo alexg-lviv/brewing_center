@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv4r3ptsriesk"]
+[gd_scene load_steps=5 format=3 uid="uid://bv4r3ptsriesk"]
 
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_le1hd"]
 [ext_resource type="Script" path="res://src/Interactables/Abstract/InteractableObject.gd" id="2_sb5gl"]
@@ -15,15 +15,29 @@ shader_parameter/precision = 0.02
 shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
 
-[node name="Interactable" type="Sprite2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmbqo"]
+resource_local_to_scene = true
+shader = ExtResource("1_le1hd")
+shader_parameter/active = false
+shader_parameter/flipColors = null
+shader_parameter/intensity = 50
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/precision = 0.02
+shader_parameter/useTexture = false
+shader_parameter/use_outline_uv = null
+
+[node name="Interactable" type="Area2D"]
 material = SubResource("ShaderMaterial_exmmm")
 z_index = 10
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("2_sb5gl")
 
-[node name="Area2d" type="Area2D" parent="."]
-monitoring = false
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 
-[node name="CollisionShape2d" type="CollisionShape2D" parent="Area2d"]
+[node name="Sprite2d" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kmbqo")
 
-[connection signal="mouse_entered" from="Area2d" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2d" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_interactable_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_interactable_mouse_exited"]

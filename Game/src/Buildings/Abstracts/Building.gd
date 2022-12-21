@@ -23,12 +23,15 @@ func get_relative_rotation(other_rotation: float) -> float:
 func dequeue() -> String:
 	return receiving_queue.pop_front()
 
+func try_dequeue(to_dequeue: Building) -> void:
+	receiving_queue.erase(to_dequeue)
+
 func enqueue(direction_from: String) -> void:
 	if   direction_from == "back" : receiving_queue.push_back("back")
 	elif direction_from == "left" : receiving_queue.push_back("left")
 	elif direction_from == "right": receiving_queue.push_back("right")
 
-func _on_AreaTo_area_entered(area) -> void:
+func _on_AreaTo_area_entered(_area) -> void:
 	pass
 
 ## function to update the "double linked list" of belts
@@ -58,9 +61,11 @@ func die() -> void:
 	if forward: forward.delete_neighbour(rotation)
 	queue_free()
 
-func receive(area) -> void:
+func receive(_area) -> void:
 	pass
 
 func receive_object(_object) -> void:
 	pass
 
+func forget_about_item(item: Interactable) -> void:
+	pass
