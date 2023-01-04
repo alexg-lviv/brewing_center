@@ -182,8 +182,8 @@ func get_grid_pos(pos: Vector2, dismensions: bool) -> Vector2:
 		snapped(pos.x, Glob.GRID_STEP),
 		snapped(pos.y, Glob.GRID_STEP))
 	else: return Vector2(
-		snapped(pos.x - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2,
-		snapped(pos.y - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2)
+		snapped(pos.x - Glob.GRID_STEP/2., Glob.GRID_STEP) + Glob.GRID_STEP/2.,
+		snapped(pos.y - Glob.GRID_STEP/2., Glob.GRID_STEP) + Glob.GRID_STEP/2.)
 
 ## helper function to get all the tiles that are covered by building
 ## now works only for 1x1 and 2x2 buildings but if needed to extend - its easy to do
@@ -232,9 +232,9 @@ func create_trees(world_size: Vector2) -> void:
 	for i in range(0, world_size.x, Glob.GRID_STEP):
 		for j in range(0, world_size.y, Glob.GRID_STEP):
 			if randf_range(0, 1) < trees_prob:
-				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2, j - Glob.GRID_STEP/2)
+				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
 				var tree: Interactable = Tree1.instantiate()
-				get_parent().call_deferred("add_child", tree)
+				call_deferred("add_child", tree)
 				tree.set_deferred("position", pos)
 				tree.set_deferred("scene", self)
 				tree.set_deferred("center_pos", pos)

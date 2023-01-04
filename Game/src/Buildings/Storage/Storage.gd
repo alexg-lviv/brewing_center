@@ -14,8 +14,8 @@ var temp_obj
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
 ## TODO: add visibility notifiers for optimisation
-func _process(delta: float) -> void:
-	if Glob.drag_mode:
+func _process(_delta: float) -> void:
+	if Glob.drag_mode and stored_objects < 9:
 		AnimPlayer.play("Pulsing")
 		if stored_objects >= 9:
 			Pulser.self_modulate = "#ff0000"

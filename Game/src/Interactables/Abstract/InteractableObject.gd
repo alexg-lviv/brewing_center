@@ -14,7 +14,7 @@ func _process(_delta) -> void:
 ## update z-index foe the trees and other objects to appear in front or behind the character
 ## TODO: rework this whole system
 func update_z():
-	z_index = own_z + global_position.y / 10.
+	z_index = own_z + int(global_position.y / 10.)
 
 ## called when mouse enters the object
 ## sets outline shader to active if the mode allows
