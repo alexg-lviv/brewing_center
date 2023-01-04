@@ -6,6 +6,8 @@
 class_name Building
 extends Area2D
 
+@export var health: int = 100
+
 # "double linked list" variables
 var left     :Building  = null
 var right    :Building  = null

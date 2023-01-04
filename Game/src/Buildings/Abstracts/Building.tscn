@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://src/Buildings/Abstracts/Building.gd" id="1_25kah"]
 
 [node name="Building" type="Area2D" groups=["Buildings"]]
+z_index = 4
 texture_filter = 1
 scale = Vector2(2, 2)
-z_index = 4
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("1_25kah")

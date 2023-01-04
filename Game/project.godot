@@ -104,6 +104,9 @@ Signals="*res://src/Globals/Signals.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/always_on_top=true
 window/stretch/mode="viewport"
 
 [global]
@@ -152,4 +155,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snap/snap_2d_transforms_to_pixel=true
 environment/default_environment="res://default_env.tres"

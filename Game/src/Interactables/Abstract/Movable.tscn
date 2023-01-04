@@ -7,30 +7,31 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w6jh7"]
 resource_local_to_scene = true
 shader = ExtResource("2_6yr6w")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = null
+shader_parameter/active = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_72kfu"]
 resource_local_to_scene = true
 shader = ExtResource("2_6yr6w")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = false
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = false
+shader_parameter/active = false
 
 [node name="Movable" groups=["Movables"] instance=ExtResource("1_64pyx")]
 material = SubResource("ShaderMaterial_w6jh7")
 script = ExtResource("3_oewal")
+own_z = 30
 
 [node name="Sprite2d" parent="." index="1"]
 material = SubResource("ShaderMaterial_72kfu")

@@ -13,8 +13,7 @@ var current_building : Building = null
 ## set own z-index and set its modification to false
 func _ready():
 	modify_z = false
-	own_z = 5
-	z_index = 5
+	z_index = own_z
 
 ## function to move object to specific position
 ## used to spread objects on drop or to move them via conveyours
@@ -30,10 +29,12 @@ func _process(_delta: float) -> void:
 	if follow_cursor and Input.is_action_just_released("click"):
 		Glob.drag_mode = false
 		follow_cursor = false
+		if !in_focus: Sprite.material.set_shader_parameter("active", false)
 		continue_followig = true
 		last_mouse_pos = get_global_mouse_position()
 	if follow_cursor:
 		position = lerp(position, get_global_mouse_position() + mouse_pos_offset, 0.05)
+		Sprite.material.set_shader_parameter("active", true)
 	elif continue_followig:
 		if Glob.compare(position, last_mouse_pos) and !taken_by_building:
 			position = lerp(position, last_mouse_pos + mouse_pos_offset, 0.05)

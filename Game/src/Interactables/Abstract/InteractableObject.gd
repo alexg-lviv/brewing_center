@@ -3,7 +3,7 @@ extends Area2D
 
 var in_focus: bool = false
 var modify_z: bool = false
-var own_z: int = 10
+@export var own_z: int = 10
 
 @onready var Sprite = get_node("Sprite2d")
 

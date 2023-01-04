@@ -40,7 +40,7 @@ func _on_area_from_area_entered(area: Area2D) -> void:
 		enqueued = true
 
 func _on_area_from_area_exited(_area: Area2D) -> void:
-	print("SMTH EXITED")
+	pass
 
 
 
