@@ -155,5 +155,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-2d/snap/snap_2d_transforms_to_pixel=true
+textures/decals/filter=0
 environment/default_environment="res://default_env.tres"

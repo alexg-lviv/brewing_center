@@ -5,42 +5,43 @@
 [ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/trees/tree1.png" id="3_fptgg"]
 [ext_resource type="Script" path="res://src/Interactables/Tree1.gd" id="4_rgosu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bha1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_10cj2"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = null
+shader_parameter/active = false
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h23ls"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ajk4m"]
 radius = 32.0
 height = 128.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_os3e6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qx6s"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = false
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = false
+shader_parameter/active = false
 
 [node name="Tree" instance=ExtResource("1_f0qfb")]
-material = SubResource("ShaderMaterial_3bha1")
-position = Vector2(0, -64)
+material = SubResource("ShaderMaterial_10cj2")
 script = ExtResource("4_rgosu")
 
 [node name="CollisionShape2d" parent="." index="0"]
-shape = SubResource("CapsuleShape2D_h23ls")
+position = Vector2(0, -64)
+shape = SubResource("CapsuleShape2D_ajk4m")
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_os3e6")
+material = SubResource("ShaderMaterial_2qx6s")
+position = Vector2(0, -64)
 texture = ExtResource("3_fptgg")

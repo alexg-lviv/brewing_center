@@ -12,6 +12,7 @@ extends Area2D
 @export var self_cells_size: Vector2i = Vector2i(1,1)
 
 var center_pos: Vector2
+var destructable = true
 
 # "double linked list" variables
 var left     :Building  = null

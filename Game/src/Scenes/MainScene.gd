@@ -20,6 +20,8 @@ var last_object: Interactable = null
 @onready var Player := get_node("Player")
 @onready var PrevSprite: Sprite2D = get_node("ObjSprite")
 
+@onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
+
 ## dictionary of all instanced buildings
 ## the key is their grid coords, and the value is reference to the object itself
 var instances_dict: Dictionary = {}
@@ -30,6 +32,8 @@ var _last_shaded_red: Vector2 = Vector2.ZERO
 
 
 func _ready():
+	create_environment(Vector2(1000, 1000))
+	
 	for button in get_tree().get_nodes_in_group("BuildButton"):
 		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
 	
@@ -59,7 +63,7 @@ func handle_demolition():
 
 	if grid_pos != _last_shaded_red and instances_dict.has(_last_shaded_red) and is_instance_valid(instances_dict[_last_shaded_red]):
 		instances_dict[_last_shaded_red].modulate = Glob.modulate_clear
-	if instances_dict.has(grid_pos) and is_instance_valid(instances_dict[grid_pos]):
+	if instances_dict.has(grid_pos) and is_instance_valid(instances_dict[grid_pos]) and instances_dict[grid_pos].destructable:
 		instances_dict[grid_pos].modulate = Glob.modulate_red
 		_last_shaded_red = grid_pos
 		if Input.is_action_just_pressed("click"):
@@ -207,4 +211,21 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 	var covering_positions = get_covering_positions(obj_pos, dimensions)
 	for pos in covering_positions:
 		instances_dict.erase(pos)
-	
+
+
+
+func create_environment(world_size: Vector2) -> void:
+	var trees_prob: float = 0.1
+	create_trees(trees_prob, world_size)
+
+func create_trees(prob: float, world_size: Vector2) -> void:
+	for i in range(0, world_size.x, Glob.GRID_STEP):
+		for j in range(0, world_size.y, Glob.GRID_STEP):
+			if randf_range(0, 1) < prob:
+				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2, j - Glob.GRID_STEP/2)
+				var tree: Interactable = Tree1.instantiate()
+				get_parent().call_deferred("add_child", tree)
+				tree.set_deferred("position", pos)
+				tree.scene = self
+				tree.center_pos = pos
+				instances_dict[pos] = tree
