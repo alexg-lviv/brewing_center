@@ -19,8 +19,9 @@ func continue_interaction() -> void:
 	for i in range(randi_range(1, 3)):
 		var instance = wooden_log.instantiate()
 		get_parent().add_child(instance)
-		instance.position = position
-		instance.move(position + Vector2(randi_range(-10, 10) * 5, randi_range(-10, 10) * 5))
+		# TODO: remove magic constants
+		instance.position = position + Vector2(0, -64)
+		instance.move(instance.position + Vector2(randi_range(-10, 10) * 5, randi_range(-10, 10) * 5))
 	die()
 	
 func die():
