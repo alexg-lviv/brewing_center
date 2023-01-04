@@ -34,6 +34,7 @@ shader_parameter/useTexture = false
 shader_parameter/active = false
 
 [node name="Tree" instance=ExtResource("1_f0qfb")]
+z_as_relative = false
 material = SubResource("ShaderMaterial_654sj")
 script = ExtResource("4_rgosu")
 

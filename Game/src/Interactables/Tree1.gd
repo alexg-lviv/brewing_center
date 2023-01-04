@@ -7,7 +7,6 @@ var center_pos: Vector2
 var destructable = false
 
 func _ready():
-	modify_z = true
 	own_z = 10
 
 func interact() -> void:

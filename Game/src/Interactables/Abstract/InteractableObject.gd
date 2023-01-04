@@ -2,7 +2,6 @@ class_name Interactable
 extends Area2D
 
 var in_focus: bool = false
-var modify_z: bool = false
 @export var own_z: int = 10
 
 @onready var Sprite = get_node("Sprite2d")
@@ -10,7 +9,12 @@ var modify_z: bool = false
 ## if needed, change self z-index according to y.position
 ## needed to ve able to pass the pbjects from the back as the player
 func _process(_delta) -> void:
-	if modify_z: z_index = own_z + global_position.y / 10.
+	pass
+
+## update z-index foe the trees and other objects to appear in front or behind the character
+## TODO: rework this whole system
+func update_z():
+	z_index = own_z + global_position.y / 10.
 
 ## called when mouse enters the object
 ## sets outline shader to active if the mode allows

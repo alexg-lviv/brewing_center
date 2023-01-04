@@ -5,6 +5,8 @@ class_name GameWorld
 extends Node2D
 
 
+@export var trees_prob: float = 0.2
+
 # BUILD MODE VARS
 var build_type: String
 var can_build: bool = false
@@ -183,7 +185,9 @@ func get_grid_pos(pos: Vector2, dismensions: bool) -> Vector2:
 		snapped(pos.x - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2,
 		snapped(pos.y - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2)
 
-
+## helper function to get all the tiles that are covered by building
+## now works only for 1x1 and 2x2 buildings but if needed to extend - its easy to do
+## TODO: try to unify it and get rid of several if branches for every possible size
 func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2]:
 	var positions: Array[Vector2] = []
 	if dismesions == Vector2i(1, 1):
@@ -194,12 +198,14 @@ func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2
 				positions.append(Vector2(pos.x + Glob.GRID_STEP * (i-0.5), pos.y + Glob.GRID_STEP * (j-0.5)))
 	return positions
 
-
-
+## put an item to the positions dict and
+## if the building spans more than one cell, iterate over them
 func add_to_positions_dict(grid_pos: Vector2, object: Object) -> void:
 	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
 		instances_dict[pos] = object
 
+## check if the building can be built on this position
+## takes into account the size of the building
 func check_if_free_cells_to_build(grid_pos: Vector2) -> void:
 	can_build = true
 	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
@@ -207,6 +213,9 @@ func check_if_free_cells_to_build(grid_pos: Vector2) -> void:
 			can_build = false
 			return
 
+## helper function to delete the building from the dict
+## instead of searching every appearance of the building - simply recalculate its positions
+## and iterate over those
 func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i) -> void:
 	var covering_positions = get_covering_positions(obj_pos, dimensions)
 	for pos in covering_positions:
@@ -214,18 +223,20 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 
 
 
+## helper function to create environment and populate it with all the requiered resources
 func create_environment(world_size: Vector2) -> void:
-	var trees_prob: float = 0.1
-	create_trees(trees_prob, world_size)
+	create_trees(world_size)
 
-func create_trees(prob: float, world_size: Vector2) -> void:
+## function to create trees with specific probability over the specific area
+func create_trees(world_size: Vector2) -> void:
 	for i in range(0, world_size.x, Glob.GRID_STEP):
 		for j in range(0, world_size.y, Glob.GRID_STEP):
-			if randf_range(0, 1) < prob:
+			if randf_range(0, 1) < trees_prob:
 				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2, j - Glob.GRID_STEP/2)
 				var tree: Interactable = Tree1.instantiate()
 				get_parent().call_deferred("add_child", tree)
 				tree.set_deferred("position", pos)
-				tree.scene = self
-				tree.center_pos = pos
+				tree.set_deferred("scene", self)
+				tree.set_deferred("center_pos", pos)
+				tree.call_deferred("update_z")
 				instances_dict[pos] = tree

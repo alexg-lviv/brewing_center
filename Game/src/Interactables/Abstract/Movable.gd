@@ -12,7 +12,6 @@ var current_building : Building = null
 
 ## set own z-index and set its modification to false
 func _ready():
-	modify_z = false
 	z_index = own_z
 
 ## function to move object to specific position
@@ -50,6 +49,8 @@ func interact():
 	mouse_pos_offset = position - get_global_mouse_position()
 	follow_cursor = true
 
+## function that reserves item by the building
+## beeing called from the building script and saves the current building to the variable
 func get_taken_by_building(building: Building):
 	taken_by_building = true
 	current_building = building
