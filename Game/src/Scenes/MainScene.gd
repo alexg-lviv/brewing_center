@@ -55,10 +55,11 @@ func _process(_delta):
 ## handles input, shades the objects, destroys checked click
 func handle_demolition():
 	var mouse_pos = get_global_mouse_position()
-	var grid_pos = get_grid_pos(mouse_pos)
-	if grid_pos != _last_shaded_red and instances_dict.has(_last_shaded_red):
+	var grid_pos = get_grid_pos(mouse_pos, false)
+
+	if grid_pos != _last_shaded_red and instances_dict.has(_last_shaded_red) and is_instance_valid(instances_dict[_last_shaded_red]):
 		instances_dict[_last_shaded_red].modulate = Glob.modulate_clear
-	if instances_dict.has(grid_pos):
+	if instances_dict.has(grid_pos) and is_instance_valid(instances_dict[grid_pos]):
 		instances_dict[grid_pos].modulate = Glob.modulate_red
 		_last_shaded_red = grid_pos
 		if Input.is_action_just_pressed("click"):
@@ -68,13 +69,16 @@ func handle_demolition():
 
 ## destroys the object, calls its death function and removes the object from instances dict
 func destroy_object(grid_pos: Vector2):
+	var obj_pos = instances_dict[grid_pos].center_pos
+	var dimensions = instances_dict[grid_pos].self_cells_size
 	instances_dict[grid_pos].die()
-	instances_dict.erase(grid_pos)
+	remove_building_from_instances_dict(obj_pos, dimensions)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and Glob.build_mode and can_build:
-		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
+		var dismensions: bool = true if (Glob.dismensions_dict[build_type].x % 2 == 0) else false
+		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position(), dismensions)
 		place_object(build_type, grid_pos)
 
 ## if we are in build mode, the function handles everything connected to it
@@ -82,8 +86,10 @@ func _unhandled_input(event: InputEvent) -> void:
 ## handles input and actualy builds
 func handle_building():
 	var mouse_pos: Vector2 = get_global_mouse_position()
-	var grid_pos: Vector2 = get_grid_pos(mouse_pos)
-	can_build = !instances_dict.has(grid_pos)
+	var dismensions: bool = true if (Glob.dismensions_dict[build_type].x % 2 == 0) else false
+	var grid_pos: Vector2 = get_grid_pos(mouse_pos, dismensions)
+	
+	check_if_free_cells_to_build(grid_pos)
 	update_texture_preview(grid_pos)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -125,20 +131,11 @@ func _on_build_button_pressed(building_type: String):
 
 ## set prewiew of the object we are going to build
 ## set texture, z-index, rotation
-func set_preview(prev_name: String):
-	obj_prev_name = prev_name
-	var new_obj_sprite = load(Glob.previews_dict[prev_name])
+func set_preview(preview_name: String):
+	obj_prev_name = preview_name
+	var new_obj_sprite = load(Glob.previews_dict[preview_name])
 	PrevSprite.set_texture(new_obj_sprite)
 	PrevSprite.rotation = build_rotation
-	PrevSprite.z_index = 4
-
-
-## helper function to gridify the coordinates
-func get_grid_pos(pos: Vector2) -> Vector2:
-	return Vector2(
-		snapped(pos.x + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2,
-		snapped(pos.y + Glob.GRID_STEP / 2, Glob.GRID_STEP) - Glob.GRID_STEP / 2)
-
 
 ## updates preview textures, called from _process
 ## responsible for shading if the building can be built checked the coordinates or no
@@ -162,8 +159,52 @@ func place_object(object_name: String, grid_pos: Vector2):
 	add_child(NewObj)
 	NewObj.position = grid_pos
 	NewObj.rotation = build_rotation
-	instances_dict[grid_pos] = NewObj
+	NewObj.center_pos = grid_pos
+	add_to_positions_dict(grid_pos, NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
 			reset_preview()
+
+
+## helper function to gridify the coordinates
+## dimensions - true for even, false for odd
+## if dismensions is true - snaps to intersections of tiles
+## if dismensions is false  - snaps to centers of tiles
+func get_grid_pos(pos: Vector2, dismensions: bool) -> Vector2:
+	if dismensions: return Vector2(
+		snapped(pos.x, Glob.GRID_STEP),
+		snapped(pos.y, Glob.GRID_STEP))
+	else: return Vector2(
+		snapped(pos.x - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2,
+		snapped(pos.y - Glob.GRID_STEP/2, Glob.GRID_STEP) + Glob.GRID_STEP/2)
+
+
+func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2]:
+	var positions: Array[Vector2] = []
+	if dismesions == Vector2i(1, 1):
+		positions.append(Vector2(pos))
+	if dismesions == Vector2i(2, 2):
+		for i in range(0, 2):
+			for j in range(0, 2):
+				positions.append(Vector2(pos.x + Glob.GRID_STEP * (i-0.5), pos.y + Glob.GRID_STEP * (j-0.5)))
+	return positions
+
+
+
+func add_to_positions_dict(grid_pos: Vector2, object: Object) -> void:
+	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
+		instances_dict[pos] = object
+
+func check_if_free_cells_to_build(grid_pos: Vector2) -> void:
+	can_build = true
+	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
+		if instances_dict.has(pos) and is_instance_valid(instances_dict[pos]): 
+			can_build = false
+			return
+
+func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i) -> void:
+	var covering_positions = get_covering_positions(obj_pos, dimensions)
+	for pos in covering_positions:
+		instances_dict.erase(pos)
+	

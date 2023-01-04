@@ -155,7 +155,7 @@ _data = {
 "right": SubResource("Animation_grf87")
 }
 
-[node name="Belt" instance=ExtResource("1_uucqt")]
+[node name="Area2D" instance=ExtResource("1_uucqt")]
 script = ExtResource("1_rnvw8")
 
 [node name="CollisionShape2D" parent="." index="0"]

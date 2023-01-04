@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn2u3wi2drkv5"
-path="res://.godot/imported/witch.png-00f768809e755ca2a31a2258a3825f5c.ctex"
+uid="uid://db6624v2f8waj"
+path="res://.godot/imported/storage.png-9825741b8052e4d91e6c1e6da7c2301d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Tilemaps/witch.png"
-dest_files=["res://.godot/imported/witch.png-00f768809e755ca2a31a2258a3825f5c.ctex"]
+source_file="res://art/buildings/storage.png"
+dest_files=["res://.godot/imported/storage.png-9825741b8052e4d91e6c1e6da7c2301d.ctex"]
 
 [params]
 

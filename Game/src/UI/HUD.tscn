@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhy2scbfp31d6"]
+[gd_scene load_steps=9 format=3 uid="uid://bhy2scbfp31d6"]
 
 [ext_resource type="Texture2D" uid="uid://dnlrifiiyx3vw" path="res://art/bg.png" id="1_4utof"]
 [ext_resource type="Script" path="res://src/UI/HUD.gd" id="1_ald1r"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cl47y8vbwfqd7" path="res://art/buildings/Trash.png" id="5_n221g"]
 [ext_resource type="Texture2D" uid="uid://dbwbwtyuvabqr" path="res://art/buildings/sender.png" id="7_tq52d"]
+[ext_resource type="Texture2D" uid="uid://db6624v2f8waj" path="res://art/buildings/storage.png" id="8_o0qfd"]
 
 [node name="HUD" type="Control"]
 texture_filter = 1
@@ -20,7 +21,6 @@ mouse_filter = 2
 script = ExtResource("1_ald1r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -37,14 +37,12 @@ alignment = 1
 
 [node name="Demolish" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
 offset_right = 32.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Demolish"]
 texture_filter = 1
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -61,14 +59,12 @@ texture = ExtResource("3")
 
 [node name="Spawner" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
 offset_left = 36.0
 offset_right = 68.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Spawner"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -78,14 +74,12 @@ texture = ExtResource("4")
 
 [node name="Belt" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
 offset_left = 72.0
 offset_right = 104.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Belt"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -95,14 +89,12 @@ texture = ExtResource("2")
 
 [node name="Trash" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
 offset_left = 108.0
 offset_right = 140.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Trash"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -112,14 +104,12 @@ texture = ExtResource("5_n221g")
 
 [node name="Receiver" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
 offset_left = 144.0
 offset_right = 176.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Receiver"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -127,8 +117,22 @@ offset_bottom = 40.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_tq52d")
 
+[node name="Storage" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
+self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
+offset_left = 180.0
+offset_right = 212.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Storage"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_o0qfd")
+
 [node name="FPS" type="Label" parent="."]
-layout_mode = 0
 offset_left = 1002.0
 offset_top = 2.0
 offset_right = 1093.0
@@ -138,7 +142,6 @@ text = "fps"
 text_direction = 1
 
 [node name="Delta" type="Label" parent="."]
-layout_mode = 0
 offset_left = 998.0
 offset_top = 51.0
 offset_right = 1089.0

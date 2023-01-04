@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dapsxmkh5uxkf"]
+
+[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_gebhk"]
+[ext_resource type="Texture2D" uid="uid://db6624v2f8waj" path="res://art/buildings/storage.png" id="2_me8y8"]
+[ext_resource type="Script" path="res://src/Buildings/Storage/Storage.gd" id="2_vc3g6"]
+
+[node name="Storage" instance=ExtResource("1_gebhk")]
+scale = Vector2(1.99698, 2)
+script = ExtResource("2_vc3g6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_me8y8")
+
+[node name="StorageSlots" type="Node2D" parent="." index="3"]
+
+[node name="Slot1" type="Marker2D" parent="StorageSlots" index="0"]
+position = Vector2(-20, -20)
+
+[node name="Slot2" type="Marker2D" parent="StorageSlots" index="1"]
+position = Vector2(0, -20)
+
+[node name="Slot3" type="Marker2D" parent="StorageSlots" index="2"]
+position = Vector2(20, -20)
+
+[node name="Slot4" type="Marker2D" parent="StorageSlots" index="3"]
+position = Vector2(-20, 2.08165e-12)
+
+[node name="Slot5" type="Marker2D" parent="StorageSlots" index="4"]
+
+[node name="Slot6" type="Marker2D" parent="StorageSlots" index="5"]
+position = Vector2(20, 2.08165e-12)
+
+[node name="Slot7" type="Marker2D" parent="StorageSlots" index="6"]
+position = Vector2(-20, 20)
+
+[node name="Slot8" type="Marker2D" parent="StorageSlots" index="7"]
+position = Vector2(2.08165e-12, 20)
+
+[node name="Slot9" type="Marker2D" parent="StorageSlots" index="8"]
+position = Vector2(20, 20)

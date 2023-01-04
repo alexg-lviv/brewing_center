@@ -16,16 +16,26 @@ var previews_dict: Dictionary = {
 	"Spawner": "res://art/buildings/spawner.png",
 	"Trash": "res://art/buildings/Trash.png",
 	"Extractor": "res://art/buildings/spawner.png",
-	"Receiver": "res://art/buildings/sender.png"
+	"Receiver": "res://art/buildings/sender.png",
+	"Storage": "res://art/buildings/storage.png"
 }
 var objects_dict: Dictionary = {
 	"Belt": "res://src/Buildings/Belt/Belt.tscn",
 	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
 	"Trash": "res://src/Buildings/Trash/Trash.tscn",
 	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
-	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn"
+	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
+	"Storage": "res://src/Buildings/Storage/Storage.tscn"
 }
 
+var dismensions_dict: Dictionary = {
+	"Belt": Vector2i(1, 1),
+	"Spawner": Vector2i(1, 1),
+	"Trash": Vector2i(1, 1),
+	"Extractor": Vector2i(1, 1),
+	"Receiver": Vector2i(1, 1),
+	"Storage": Vector2i(2, 2)
+}
 
 var modulate_clear: String = "ffffff"
 var modulate_green: String = "73feb0"

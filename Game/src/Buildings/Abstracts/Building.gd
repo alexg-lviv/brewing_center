@@ -8,11 +8,17 @@ extends Area2D
 
 @export var health: int = 100
 
+## size of the building in grid cells of game
+@export var self_cells_size: Vector2i = Vector2i(1,1)
+
+var center_pos: Vector2
+
 # "double linked list" variables
 var left     :Building  = null
 var right    :Building  = null
 var back     :Building  = null
 var forward  :Building  = null
+
 
 var direction_to_next: String
 var receiving_queue: Array

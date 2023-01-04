@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://g5gpc16n0kjp"]
+
+[ext_resource type="PackedScene" uid="uid://ciqmeplowpp4m" path="res://src/Buildings/Trash/Trash.tscn" id="7_2hsrc"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k50be"]
+resource_name = "trees"
+scenes/1/scene = ExtResource("7_2hsrc")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ercux"]
+resource_name = "Buildings"
+
+[sub_resource type="TileSet" id="TileSet_4ofyt"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_k50be")
+sources/1 = SubResource("TileSetScenesCollectionSource_ercux")
+
+[node name="ObjMap" type="TileMap"]
+tile_set = SubResource("TileSet_4ofyt")
+format = 2
+layer_0/tile_data = PackedInt32Array(65541, 1, 327680, 7, 1, 393216, 65543, 1, 393216)

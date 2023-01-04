@@ -1,11 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq5ogkcpmu2un"]
+[gd_scene load_steps=2 format=3 uid="uid://bq5572wyp80be"]
 
-[ext_resource type="TileSet" uid="uid://bj2hi5waf6j18" path="res://src/Tilemaps/TileSet.tres" id="1_kibkg"]
-[ext_resource type="Script" path="res://src/Tilemaps/Tilemap.gd" id="2_7gual"]
+[ext_resource type="TileSet" uid="uid://bj2hi5waf6j18" path="res://src/Tilemaps/WorldSet.tres" id="1_euxih"]
 
-[node name="TileMap" type="TileMap"]
+[node name="WorldMap" type="TileMap"]
 texture_filter = 1
-tile_set = ExtResource("1_kibkg")
+tile_set = ExtResource("1_euxih")
 format = 2
 layer_0/name = "ground"
 layer_1/name = "rss"
@@ -15,4 +14,3 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
-script = ExtResource("2_7gual")
