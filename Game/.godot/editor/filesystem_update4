@@ -1,8 +1,0 @@
-res://src/WaveFunctionCollapse/WFC.tscn
-res://src/WaveFunctionCollapse/WFC.gd
-res://src/Tilemaps/WFCMap.tscn
-res://src/Tilemaps/Tilemap.tscn
-res://src/Buildings/Belt/Belt.tscn
-res://src/Buildings/Abstracts/Building.tscn
-res://src/UI/HUD.tscn
-res://src/Scenes/MainScene.tscn
