@@ -9,7 +9,7 @@ var StoredItems: Array = Array([null, null, null, null, null, null, null, null, 
 
 
 var stored_objects = 0
-var temp_obj
+var temp_obj: Movable = null
 
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
@@ -23,16 +23,22 @@ func _process(_delta: float) -> void:
 			Pulser.self_modulate = "#00ff00"
 	else:
 		AnimPlayer.play("Idle")
-	
-	if Glob.drag_mode and Input.is_action_just_released("click") and is_instance_valid(temp_obj) and stored_objects < 9:
-		temp_obj.get_taken_by_building(self)
-		take_object()
 
 
 ## accept the object if there is free place and add to counter
-func take_object() -> void:
-	for i in range(len(StoredItems)):
-		if StoredItems[i] == null:
+func take_object(from_skeleton: bool = false, object: Movable = null) -> void:
+	if from_skeleton:
+		for i in range(len(StoredItems)):
+			if StoredItems[i] != null: continue
+			object.get_taken_by_building(self)
+			object.move(Slots[i].global_position)
+			StoredItems[i] = object
+			stored_objects += 1
+			break
+	else:
+		for i in range(len(StoredItems)):
+			if StoredItems[i] != null: continue
+			temp_obj.get_taken_by_building(self)
 			temp_obj.move(Slots[i].global_position)
 			StoredItems[i] = temp_obj
 			temp_obj = null
@@ -48,8 +54,10 @@ func forget_about_item(item: Interactable) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Movables"):
 		temp_obj = area
+		area.get_reserved_by_building(self)
 
 ## ok forget about it, its GONE
 func _on_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Movables"):
+		area.forget_about_reservation_building()
 		temp_obj = null

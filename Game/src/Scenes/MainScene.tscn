@@ -20,7 +20,19 @@ scale = Vector2(0.996981, 1.00323)
 script = ExtResource("4")
 
 [node name="Skeleton" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(48.1453, 55.8197)
+position = Vector2(978.955, 550.223)
+
+[node name="Skeleton2" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1139.44, 478.455)
+
+[node name="Skeleton3" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(946.859, 725.656)
+
+[node name="Skeleton4" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(818.471, 454.532)
+
+[node name="Skeleton5" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1035.12, 430.609)
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(641.938, 358.841)

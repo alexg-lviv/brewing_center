@@ -260,14 +260,13 @@ func set_nav(pos: Vector2) -> void:
 func get_dropped_materials() -> Array[Movable]:
 	var res : Array[Movable] = []
 	for item in DroppedResources.get_children():
-		if item.taken_by_building: continue
-		
+		if item.taken_by_building or item.reserved_by_skeleton or item.taken_by_skeleton: continue
 		res.append(item)
 	return res
 
 func get_storages() -> Array[Storage]:
 	var res : Array[Storage] = []
-	for storage in BuildingsContainer.get_node("Storage"):
+	for storage in BuildingsContainer.get_node("Storage").get_children():
 		if storage.stored_objects < 9:
 			res.append(storage)
 	return res
