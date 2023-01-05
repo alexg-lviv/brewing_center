@@ -89,6 +89,7 @@ _data = {
 [node name="Storage" instance=ExtResource("1_gebhk")]
 scale = Vector2(1.99698, 2)
 script = ExtResource("2_vc3g6")
+self_cells_size = Vector2i(2, 2)
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_lkawj")

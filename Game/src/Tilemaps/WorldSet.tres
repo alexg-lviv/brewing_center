@@ -1,10 +1,22 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bj2hi5waf6j18"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://bj2hi5waf6j18"]
 
+[ext_resource type="Texture2D" uid="uid://bdvb4ajix3y7p" path="res://art/empty.png" id="1_tscgh"]
 [ext_resource type="Texture2D" uid="uid://cnd4ly4e4ia0o" path="res://art/grass/trava3.png" id="7_piaxj"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lv8ey"]
+vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+outlines = [PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow1yp"]
+texture = ExtResource("1_tscgh")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lv8ey")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37rco"]
 texture = ExtResource("7_piaxj")
-texture_region_size = Vector2i(32, 32)
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -18,10 +30,9 @@ texture_region_size = Vector2i(32, 32)
 10:0/0 = 0
 11:0/0 = 0
 12:0/0 = 0
-12:0/0/probability = 40.0
 
 [resource]
-tile_size = Vector2i(32, 32)
+tile_size = Vector2i(64, 64)
 terrain_set_0/mode = 1
 terrain_set_0/terrain_0/name = "ground"
 terrain_set_0/terrain_0/color = Color(0.619608, 0.262745, 0, 1)
@@ -30,6 +41,8 @@ terrain_set_0/terrain_1/color = Color(0.490196, 0.45098, 0, 1)
 terrain_set_1/mode = 1
 terrain_set_1/terrain_0/name = "elixir"
 terrain_set_1/terrain_0/color = Color(0.580392, 0, 0.737255, 1)
+navigation_layer_0/layers = 1
 custom_data_layer_0/name = "terrains"
 custom_data_layer_0/type = 13
 sources/7 = SubResource("TileSetAtlasSource_37rco")
+sources/2 = SubResource("TileSetAtlasSource_ow1yp")

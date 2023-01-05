@@ -18,11 +18,15 @@ var last_object: Interactable = null
 
 
 @onready var UI := get_node("UI")
-@onready var Tilemap := get_node("TileMap")
+@onready var Tilemap : TileMap = get_node("TileMap")
 @onready var Player := get_node("Player")
 @onready var PrevSprite: Sprite2D = get_node("ObjSprite")
+@onready var EnvironmentContainer: Node2D = get_node("Environment")
+@onready var DroppedResources: Node2D = get_node("DroppedResources")
+
 
 @onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
+
 
 ## dictionary of all instanced buildings
 ## the key is their grid coords, and the value is reference to the object itself
@@ -203,6 +207,7 @@ func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2
 func add_to_positions_dict(grid_pos: Vector2, object: Object) -> void:
 	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
 		instances_dict[pos] = object
+		clear_nav(pos)
 
 ## check if the building can be built on this position
 ## takes into account the size of the building
@@ -218,8 +223,11 @@ func check_if_free_cells_to_build(grid_pos: Vector2) -> void:
 ## and iterate over those
 func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i) -> void:
 	var covering_positions = get_covering_positions(obj_pos, dimensions)
+	print(covering_positions)
 	for pos in covering_positions:
 		instances_dict.erase(pos)
+		print(pos)
+		set_nav(pos)
 
 
 
@@ -234,9 +242,17 @@ func create_trees(world_size: Vector2) -> void:
 			if randf_range(0, 1) < trees_prob:
 				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
 				var tree: Interactable = Tree1.instantiate()
-				call_deferred("add_child", tree)
+				EnvironmentContainer.call_deferred("add_child", tree)
 				tree.set_deferred("position", pos)
 				tree.set_deferred("scene", self)
 				tree.set_deferred("center_pos", pos)
 				tree.call_deferred("update_z")
 				instances_dict[pos] = tree
+				clear_nav(pos)
+
+
+func clear_nav(pos: Vector2) -> void:
+	Tilemap.set_cell(1, pos/Glob.GRID_STEP, -1)
+
+func set_nav(pos: Vector2) -> void:
+	Tilemap.set_cell(1, Vector2i(pos.x/Glob.GRID_STEP, pos.y/Glob.GRID_STEP), 2, Vector2i(0, 0))
