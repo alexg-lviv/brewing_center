@@ -47,3 +47,17 @@ layer_0/tile_data = PackedInt32Array()
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="DroppedResources" type="Node2D" parent="."]
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Belt" type="Node2D" parent="Buildings"]
+
+[node name="Pump" type="Node2D" parent="Buildings"]
+
+[node name="Receiver" type="Node2D" parent="Buildings"]
+
+[node name="Spawner" type="Node2D" parent="Buildings"]
+
+[node name="Storage" type="Node2D" parent="Buildings"]
+
+[node name="Trash" type="Node2D" parent="Buildings"]

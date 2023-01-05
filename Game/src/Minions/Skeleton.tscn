@@ -10,10 +10,12 @@ height = 48.0
 z_index = 10
 script = ExtResource("1_50q6l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_1bdfl")
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("CapsuleShape2D_1bdfl")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
 texture = ExtResource("1_3imrd")

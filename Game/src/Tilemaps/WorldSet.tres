@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bdvb4ajix3y7p" path="res://art/empty.png" id="1_tscgh"]
 [ext_resource type="Texture2D" uid="uid://cnd4ly4e4ia0o" path="res://art/grass/trava3.png" id="7_piaxj"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_lv8ey"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h4col"]
 vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 polygons = [PackedInt32Array(0, 1, 2, 3)]
 outlines = [PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)]
@@ -12,7 +12,7 @@ outlines = [PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)]
 texture = ExtResource("1_tscgh")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lv8ey")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_h4col")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37rco"]
 texture = ExtResource("7_piaxj")

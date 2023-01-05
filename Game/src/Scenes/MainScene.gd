@@ -23,6 +23,7 @@ var last_object: Interactable = null
 @onready var PrevSprite: Sprite2D = get_node("ObjSprite")
 @onready var EnvironmentContainer: Node2D = get_node("Environment")
 @onready var DroppedResources: Node2D = get_node("DroppedResources")
+@onready var BuildingsContainer: Node2D = get_node("Buildings")
 
 
 @onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
@@ -166,7 +167,7 @@ func reset_preview():
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
 	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
-	add_child(NewObj)
+	BuildingsContainer.get_node(object_name).add_child(NewObj)
 	NewObj.position = grid_pos
 	NewObj.rotation = build_rotation
 	NewObj.center_pos = grid_pos
@@ -223,10 +224,8 @@ func check_if_free_cells_to_build(grid_pos: Vector2) -> void:
 ## and iterate over those
 func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i) -> void:
 	var covering_positions = get_covering_positions(obj_pos, dimensions)
-	print(covering_positions)
 	for pos in covering_positions:
 		instances_dict.erase(pos)
-		print(pos)
 		set_nav(pos)
 
 
@@ -239,20 +238,36 @@ func create_environment(world_size: Vector2) -> void:
 func create_trees(world_size: Vector2) -> void:
 	for i in range(0, world_size.x, Glob.GRID_STEP):
 		for j in range(0, world_size.y, Glob.GRID_STEP):
-			if randf_range(0, 1) < trees_prob:
-				var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
-				var tree: Interactable = Tree1.instantiate()
-				EnvironmentContainer.call_deferred("add_child", tree)
-				tree.set_deferred("position", pos)
-				tree.set_deferred("scene", self)
-				tree.set_deferred("center_pos", pos)
-				tree.call_deferred("update_z")
-				instances_dict[pos] = tree
-				clear_nav(pos)
+			if randf_range(0, 1) > trees_prob: continue
+			var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
+			var tree: Interactable = Tree1.instantiate()
+			EnvironmentContainer.call_deferred("add_child", tree)
+			tree.set_deferred("position", pos)
+			tree.set_deferred("scene", self)
+			tree.set_deferred("center_pos", pos)
+			tree.call_deferred("update_z")
+			instances_dict[pos] = tree
+			clear_nav(pos)
 
 
 func clear_nav(pos: Vector2) -> void:
 	Tilemap.set_cell(1, pos/Glob.GRID_STEP, -1)
 
 func set_nav(pos: Vector2) -> void:
-	Tilemap.set_cell(1, Vector2i(pos.x/Glob.GRID_STEP, pos.y/Glob.GRID_STEP), 2, Vector2i(0, 0))
+	Tilemap.set_cell(1, pos/Glob.GRID_STEP, 2, Vector2i(0, 0))
+
+
+func get_dropped_materials() -> Array[Movable]:
+	var res : Array[Movable] = []
+	for item in DroppedResources.get_children():
+		if item.taken_by_building: continue
+		
+		res.append(item)
+	return res
+
+func get_storages() -> Array[Storage]:
+	var res : Array[Storage] = []
+	for storage in BuildingsContainer.get_node("Storage"):
+		if storage.stored_objects < 9:
+			res.append(storage)
+	return res
