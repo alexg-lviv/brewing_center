@@ -83,19 +83,26 @@ func get_taken_by_building(building: Building):
 	monitorable = true
 	monitoring = false
 
+## the function that is being called from the building script to reserve an object by the building
+## used in storage script to wait until the player releases the button and storage takes the object
 func get_reserved_by_building(building: Building):
 	reserved_by_building = true
 	reservation_building = building
 
+## the function to remove building reservation
+## called when object exits the storage and wasnt placed
 func forget_about_reservation_building():
 	reserved_by_building = false
 	reservation_building = null
 
-
+## reservation by skeleton
+## makes it so 2 skeletons dont run for the same objects
 func get_reserved_by_skeleton(skeleton: Skeleton):
 	reserved_by_skeleton = true
 	reservation_skeleton = skeleton
 
+## save the skeleton position where we should move
+## turn off monitorable and monitoring
 func get_taken_by_skeleton(skeleton: Skeleton):
 	taken_by_skeleton = true
 	current_skeleton = skeleton

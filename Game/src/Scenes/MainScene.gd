@@ -39,7 +39,7 @@ var _last_shaded_red: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	create_environment(Vector2(1000, 1000))
+	create_environment(Vector2(5000, 3000))
 	
 	for button in get_tree().get_nodes_in_group("BuildButton"):
 		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
@@ -250,13 +250,16 @@ func create_trees(world_size: Vector2) -> void:
 			clear_nav(pos)
 
 
+## remove navigation tile on the position (in absolute world coordinates, not tilemap ones)
 func clear_nav(pos: Vector2) -> void:
 	Tilemap.set_cell(1, pos/Glob.GRID_STEP, -1)
 
+## set navigation tile on the position
 func set_nav(pos: Vector2) -> void:
 	Tilemap.set_cell(1, pos/Glob.GRID_STEP, 2, Vector2i(0, 0))
 
 
+## get all the movable resources on the scene that are not stored and are not reserved by anyone
 func get_dropped_materials() -> Array[Movable]:
 	var res : Array[Movable] = []
 	for item in DroppedResources.get_children():
@@ -264,6 +267,7 @@ func get_dropped_materials() -> Array[Movable]:
 		res.append(item)
 	return res
 
+## get all the storages to which are not full
 func get_storages() -> Array[Storage]:
 	var res : Array[Storage] = []
 	for storage in BuildingsContainer.get_node("Storage").get_children():

@@ -8,11 +8,11 @@ height = 48.0
 
 [node name="Skeleton" type="Area2D"]
 z_index = 10
+monitoring = false
+monitorable = false
 script = ExtResource("1_50q6l")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 5.0
-target_desired_distance = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)

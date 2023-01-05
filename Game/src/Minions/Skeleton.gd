@@ -19,6 +19,7 @@ func _ready() -> void:
 	pass
 
 
+## every tick chose tje target where to go and actualy move
 func _process(delta: float) -> void:
 	if clear_floor_state:
 		chose_target_to_clear_or_store()
@@ -27,11 +28,16 @@ func _process(delta: float) -> void:
 		var direction := global_position.direction_to(NavAgent.get_next_location())
 		global_position += direction * 100. * delta
 
+## reset the states and forget about an object you were going to
+## if there are other things you have to do - it will take new tatget the next tick
 func forget_about_object():
 	target = null
 	heading_to_object = false
 	heading_to_storage = false
 
+## has 2 conditions the first one stands for chosing an item that we will follow  
+## the second one is for the storage  
+## change desired distances respectively to the type of destination we are heading to
 func chose_target_to_clear_or_store() -> void:
 	if !heading_to_object and !heading_to_storage:
 		NavAgent.target_desired_distance = 5
@@ -47,7 +53,7 @@ func chose_target_to_clear_or_store() -> void:
 		var storage_selected = get_min_distance_object(storages)
 		target = storage_selected
 
-
+## get the clothes one from an array
 func get_min_distance_object(objects: Array) -> Variant:
 	if objects.is_empty(): return null
 	var min_dist: float  = global_position.distance_squared_to(objects[0].global_position)
@@ -59,6 +65,8 @@ func get_min_distance_object(objects: Array) -> Variant:
 			min_obj = item
 	return min_obj
 
+## pick up an obkect
+## reset the states and callback to object
 func pick_up_object() -> void:
 	object_in_hands = target
 	target = null
@@ -66,6 +74,8 @@ func pick_up_object() -> void:
 	heading_to_storage = true
 	object_in_hands.get_taken_by_skeleton(self)
 
+## release object tht you are carrying
+## reset the states and make the storage take the object
 func place_object_to_storage() -> void:
 	target.take_object(true, object_in_hands)
 	target = null
@@ -73,6 +83,7 @@ func place_object_to_storage() -> void:
 	heading_to_storage = false
 	object_in_hands = null
 
+## regarding to the states, do different things
 func _on_navigation_agent_2d_target_reached() -> void:
 	if clear_floor_state and heading_to_object:
 		pick_up_object()

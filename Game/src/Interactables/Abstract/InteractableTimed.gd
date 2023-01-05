@@ -5,7 +5,7 @@ extends Interactable
 @onready var InteractionTimer : Timer = get_node("InteractionTimer")
 
 var bar
-var interaction_time : float = 1
+var interaction_time : float = 0.2
 var interaction_going: bool = false
 var interaction_stopped: bool = false
 
