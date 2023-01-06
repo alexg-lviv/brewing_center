@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/Interactables/Log.gd" id="4_dmwmc"]
 [ext_resource type="Texture2D" uid="uid://bugqp5j8seww7" path="res://art/trees/log1.png" id="4_njkhc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dk1b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4b18"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 50
@@ -17,7 +17,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhlax"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpvnj"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 18
@@ -30,12 +30,12 @@ shader_parameter/useTexture = false
 shader_parameter/active = false
 
 [node name="Log" instance=ExtResource("1_8a41y")]
-material = SubResource("ShaderMaterial_1dk1b")
+material = SubResource("ShaderMaterial_t4b18")
 script = ExtResource("4_dmwmc")
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-16, 8, -8, 16, 16, -8, 8, -16)
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_yhlax")
+material = SubResource("ShaderMaterial_kpvnj")
 texture = ExtResource("4_njkhc")

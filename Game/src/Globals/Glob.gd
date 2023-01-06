@@ -7,6 +7,7 @@ var GRID_STEP: int = 64
 var exit_build_mode_on_build: bool = false
 var build_mode: bool = false
 var drag_mode : bool = false
+var draw_clear_area_mode: bool = false
 
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false

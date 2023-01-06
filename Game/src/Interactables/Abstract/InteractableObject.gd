@@ -20,7 +20,8 @@ func update_z():
 ## sets outline shader to active if the mode allows
 ## emits signal to avoid multiple selections
 func _on_interactable_mouse_entered() -> void:
-	if !Glob.demolish_mode and !Glob.build_mode and !Glob.drag_mode:
+	# TODO: extract these checks to a function
+	if !Glob.demolish_mode and !Glob.build_mode and !Glob.drag_mode and !Glob.draw_clear_area_mode:
 		in_focus = true
 		Sprite.material.set_shader_parameter("active", true)
 		Signals.emit_signal("object_howered", self)

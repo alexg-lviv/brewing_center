@@ -11,6 +11,8 @@ var clear_floor_state:  bool = true
 var heading_to_object:  bool = false
 var heading_to_storage: bool = false
 
+var harvest_resources_state: bool = false
+
 var object_in_hands: Movable = null
 
 var target = null

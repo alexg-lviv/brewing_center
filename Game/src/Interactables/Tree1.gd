@@ -21,8 +21,8 @@ func continue_interaction() -> void:
 		# Strong dependence on the scene structure!!!
 		get_parent().get_parent().get_node("DroppedResources").add_child(instance)
 		# TODO: remove magic constants
-		instance.position = position + Vector2(0, -64)
-		instance.move(instance.position + Vector2(randi_range(-10, 10) * 5, randi_range(-10, 10) * 5))
+		instance.position = position + Vector2(0, -48)
+		instance.move(instance.position + Vector2(randi_range(-5, 5) * 5, randi_range(-5, 5) * 5))
 	die()
 	
 func die():

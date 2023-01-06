@@ -57,10 +57,33 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3")
 
-[node name="Spawner" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
+[node name="Pickup" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
 offset_left = 36.0
 offset_right = 68.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_4utof")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Pickup"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3")
+
+[node name="Spawner" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
+self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
+offset_left = 72.0
+offset_right = 104.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
@@ -74,8 +97,8 @@ texture = ExtResource("4")
 
 [node name="Belt" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 72.0
-offset_right = 104.0
+offset_left = 108.0
+offset_right = 140.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
@@ -89,8 +112,8 @@ texture = ExtResource("2")
 
 [node name="Trash" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
+offset_left = 144.0
+offset_right = 176.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
@@ -104,8 +127,8 @@ texture = ExtResource("5_n221g")
 
 [node name="Receiver" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 144.0
-offset_right = 176.0
+offset_left = 180.0
+offset_right = 212.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
@@ -119,8 +142,8 @@ texture = ExtResource("7_tq52d")
 
 [node name="Storage" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 180.0
-offset_right = 212.0
+offset_left = 216.0
+offset_right = 248.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
