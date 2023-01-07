@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3mcgs5drte2g"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_2lxvs"]
-[ext_resource type="Script" path="res://src/Buildings/Pump/Pump.gd" id="2_qdn8g"]
+[ext_resource type="PackedScene" path="res://src/OldBuildings/Abstracts/Building.tscn" id="1_2lxvs"]
+[ext_resource type="Script" path="res://src/OldBuildings/Pump/Pump.gd" id="2_qdn8g"]
 [ext_resource type="Texture2D" uid="uid://dcbuljqienewh" path="res://art/buildings/spawner.png" id="3_0ipqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1gqxa"]

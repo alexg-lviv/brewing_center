@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://rujqwchmvdn8"]
+[gd_scene load_steps=8 format=3 uid="uid://c5tyh6hoah2th"]
 
 [ext_resource type="PackedScene" uid="uid://bvllcws5pag8k" path="res://src/Interactables/Abstract/InteractableTimed.tscn" id="1_f0qfb"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_dkxjr"]
-[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/trees/tree1.png" id="3_fptgg"]
+[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/rss/tree1.png" id="3_fptgg"]
 [ext_resource type="Script" path="res://src/Interactables/Tree1.gd" id="4_rgosu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cv245"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7r336"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
 shader_parameter/intensity = 50
@@ -17,11 +17,11 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2f8kl"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5am6o"]
 radius = 32.0
 height = 128.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ie0sp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vxivq"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
 shader_parameter/intensity = 50
@@ -33,17 +33,16 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[node name="Stone" instance=ExtResource("1_f0qfb")]
+[node name="Tree1" instance=ExtResource("1_f0qfb")]
 z_as_relative = false
-material = SubResource("ShaderMaterial_cv245")
+material = SubResource("ShaderMaterial_7r336")
 script = ExtResource("4_rgosu")
-interaction_time = 2.0
 
 [node name="CollisionShape2d" parent="." index="0"]
 position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_2f8kl")
+shape = SubResource("CapsuleShape2D_5am6o")
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_ie0sp")
+material = SubResource("ShaderMaterial_vxivq")
 position = Vector2(0, -32)
 texture = ExtResource("3_fptgg")

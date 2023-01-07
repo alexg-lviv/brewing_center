@@ -1,6 +1,8 @@
 class_name Movable
 extends Interactable
 
+@export var rss_name: String = ""
+
 var follow_cursor: bool = false
 var continue_followig: bool = false
 var last_mouse_pos  : Vector2

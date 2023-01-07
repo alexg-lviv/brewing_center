@@ -1,4 +1,4 @@
-extends Building
+extends Building1
 class_name Extractor
 ## extracts resources from the resource load
 

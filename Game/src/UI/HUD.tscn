@@ -23,7 +23,6 @@ mouse_filter = 2
 script = ExtResource("1_ald1r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -40,12 +39,13 @@ alignment = 1
 
 [node name="Demolish" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 18.0
+offset_right = 50.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Demolish"]
 texture_filter = 1
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -62,13 +62,14 @@ texture = ExtResource("3")
 
 [node name="Clear" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 54.0
+offset_right = 86.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Clear"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -86,12 +87,13 @@ texture = ExtResource("4_g3p2b")
 
 [node name="Harvest" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 90.0
+offset_right = 122.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Harvest"]
 texture_filter = 1
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -110,11 +112,12 @@ texture = ExtResource("5_eojv5")
 [node name="Spawner" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Spawner"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -125,11 +128,12 @@ texture = ExtResource("4")
 [node name="Belt" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Belt"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -140,11 +144,12 @@ texture = ExtResource("2")
 [node name="Trash" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Trash"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -155,11 +160,12 @@ texture = ExtResource("5_n221g")
 [node name="Receiver" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 108.0
+offset_right = 140.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Receiver"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -169,11 +175,12 @@ texture = ExtResource("7_tq52d")
 
 [node name="Storage" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_left = 126.0
+offset_right = 158.0
+offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Storage"]
-layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
@@ -182,7 +189,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_o0qfd")
 
 [node name="FPS" type="Label" parent="."]
-layout_mode = 0
 offset_left = 1002.0
 offset_top = 2.0
 offset_right = 1093.0
@@ -192,7 +198,6 @@ text = "fps"
 text_direction = 1
 
 [node name="Delta" type="Label" parent="."]
-layout_mode = 0
 offset_left = 998.0
 offset_top = 51.0
 offset_right = 1089.0

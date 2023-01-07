@@ -1,4 +1,4 @@
-extends Building
+extends Building1
 class_name Spawner
 ## Spawner creates objects
 

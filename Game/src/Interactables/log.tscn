@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://7ax3enxo1gq6"]
+[gd_scene load_steps=7 format=3 uid="uid://de47lad0f16an"]
 
 [ext_resource type="PackedScene" uid="uid://l032ugses10v" path="res://src/Interactables/Abstract/Movable.tscn" id="1_8a41y"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_8eqdy"]
-[ext_resource type="Texture2D" uid="uid://bugqp5j8seww7" path="res://art/trees/log1.png" id="4_njkhc"]
+[ext_resource type="Texture2D" uid="uid://bugqp5j8seww7" path="res://art/rss/log1.png" id="3_hxg7l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dxpm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2b0bp"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 50
@@ -16,12 +16,12 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="GDScript" id="GDScript_xcacl"]
+[sub_resource type="GDScript" id="GDScript_wka26"]
 script/source = "class_name Log
 extends Movable
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmc6j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wulcy"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 18
@@ -34,12 +34,12 @@ shader_parameter/useTexture = false
 shader_parameter/active = false
 
 [node name="Log" instance=ExtResource("1_8a41y")]
-material = SubResource("ShaderMaterial_8dxpm")
-script = SubResource("GDScript_xcacl")
+material = SubResource("ShaderMaterial_2b0bp")
+script = SubResource("GDScript_wka26")
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-16, 8, -8, 16, 16, -8, 8, -16)
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_mmc6j")
-texture = ExtResource("4_njkhc")
+material = SubResource("ShaderMaterial_wulcy")
+texture = ExtResource("3_hxg7l")

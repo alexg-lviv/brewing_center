@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf8eyjostg1jl"]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_gp2ew"]
-[ext_resource type="Script" path="res://src/Buildings/Receiver/Receiver.gd" id="2_yb1a2"]
+[ext_resource type="PackedScene" path="res://src/OldBuildings/Abstracts/Building.tscn" id="1_gp2ew"]
+[ext_resource type="Script" path="res://src/OldBuildings/Receiver/Receiver.gd" id="2_yb1a2"]
 [ext_resource type="Texture2D" uid="uid://dbwbwtyuvabqr" path="res://art/buildings/sender.png" id="3_qy54x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evm4t"]

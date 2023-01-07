@@ -31,6 +31,7 @@ shader_parameter/active = false
 [node name="Movable" groups=["Movables"] instance=ExtResource("1_64pyx")]
 material = SubResource("ShaderMaterial_w6jh7")
 script = ExtResource("3_oewal")
+rss_name = ""
 own_z = 30
 
 [node name="Sprite2d" parent="." index="1"]

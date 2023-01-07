@@ -13,29 +13,36 @@ var draw_area_mode: bool = false
 var demolish_mode: bool = false
 
 var previews_dict: Dictionary = {
-	"Belt": "res://art/belt/s.png",
-	"Spawner": "res://art/buildings/spawner.png",
-	"Trash": "res://art/buildings/Trash.png",
-	"Extractor": "res://art/buildings/spawner.png",
-	"Receiver": "res://art/buildings/sender.png",
+#	"Belt": "res://art/belt/s.png",
+#	"Spawner": "res://art/buildings/spawner.png",
+#	"Trash": "res://art/buildings/Trash.png",
+#	"Extractor": "res://art/buildings/spawner.png",
+#	"Receiver": "res://art/buildings/sender.png",
 	"Storage": "res://art/buildings/storage.png"
 }
 var objects_dict: Dictionary = {
-	"Belt": "res://src/Buildings/Belt/Belt.tscn",
-	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
-	"Trash": "res://src/Buildings/Trash/Trash.tscn",
-	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
-	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
-	"Storage": "res://src/Buildings/Storage/Storage.tscn"
+#	"Belt": "res://src/Buildings/Belt/Belt.tscn",
+#	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
+#	"Trash": "res://src/Buildings/Trash/Trash.tscn",
+#	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
+#	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
+	"Storage": "res://src/Buildings/Storage.tscn"
 }
 
 var dismensions_dict: Dictionary = {
-	"Belt": Vector2i(1, 1),
-	"Spawner": Vector2i(1, 1),
-	"Trash": Vector2i(1, 1),
-	"Extractor": Vector2i(1, 1),
-	"Receiver": Vector2i(1, 1),
+#	"Belt": Vector2i(1, 1),
+#	"Spawner": Vector2i(1, 1),
+#	"Trash": Vector2i(1, 1),
+#	"Extractor": Vector2i(1, 1),
+#	"Receiver": Vector2i(1, 1),
 	"Storage": Vector2i(2, 2)
+}
+
+var build_cost_dict: Dictionary = {
+	"Storage": {
+		"Stone": 1,
+		"Wood": 2,
+	}
 }
 
 var modulate_clear: String = "ffffff"

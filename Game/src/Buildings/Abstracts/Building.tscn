@@ -1,10 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpwk48wg7cpyv"]
+[gd_scene load_steps=2 format=3 uid="uid://cqrbqisqsq1mv"]
 
 [ext_resource type="Script" path="res://src/Buildings/Abstracts/Building.gd" id="1_25kah"]
 
-[node name="Building" type="Area2D" groups=["Buildings"]]
-z_index = 4
-texture_filter = 1
+[node name="Building" type="Area2D"]
 scale = Vector2(2, 2)
 collision_layer = 16
 collision_mask = 8
@@ -12,10 +10,4 @@ script = ExtResource("1_25kah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="AreaTo" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTo"]
-
-[connection signal="area_entered" from="AreaTo" to="." method="_on_AreaTo_area_entered"]
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,5 +1,5 @@
 class_name Trash
-extends Building
+extends Building1
 ## Trash deletes objects
 
 

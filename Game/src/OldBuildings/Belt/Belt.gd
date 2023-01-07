@@ -2,7 +2,7 @@
 ##
 ## a belt object that transports resources in the game
 class_name Belt
-extends Building
+extends Building1
 
 # transporting objects variables
 var object        : Interactable = null

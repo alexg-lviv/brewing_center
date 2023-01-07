@@ -268,7 +268,7 @@ func reset_preview():
 ## create object to scene, set its gridified position and rotation
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
-	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
+	var NewObj = load("res://src/Buildings/Abstracts/InProgressBuilding.tscn").instantiate()
 	BuildingsContainer.get_node(object_name).add_child(NewObj)
 	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation
@@ -377,8 +377,8 @@ func get_dropped_materials() -> Array[Movable]:
 	return res
 
 ## get all the storages to which are not full
-func get_storages() -> Array[Storage]:
-	var res : Array[Storage] = []
+func get_storages() -> Array:
+	var res: Array = []
 	for storage in BuildingsContainer.get_node("Storage").get_children():
 		if storage.stored_objects < 9:
 			res.append(storage)

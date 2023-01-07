@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciqmeplowpp4m"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bpwk48wg7cpyv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_alhyp"]
+[ext_resource type="PackedScene" path="res://src/OldBuildings/Abstracts/Building.tscn" id="1_alhyp"]
 [ext_resource type="Texture2D" uid="uid://cl47y8vbwfqd7" path="res://art/buildings/Trash.png" id="2_dtklh"]
-[ext_resource type="Script" path="res://src/Buildings/Trash/Trash.gd" id="2_piwfk"]
+[ext_resource type="Script" path="res://src/OldBuildings/Trash/Trash.gd" id="2_piwfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wfiwg"]
 size = Vector2(30, 30)

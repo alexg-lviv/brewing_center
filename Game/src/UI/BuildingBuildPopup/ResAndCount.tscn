@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb0dpvuffq33k"]
+
+[ext_resource type="Script" path="res://src/UI/BuildingBuildPopup/ResAndCount.gd" id="1_2ok7m"]
+[ext_resource type="Texture2D" uid="uid://dcv4qy1s1fvqn" path="res://art/rss/stone.png" id="1_rfotd"]
+
+[node name="Container" type="HBoxContainer"]
+texture_filter = 1
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 29.0
+offset_bottom = 16.0
+pivot_offset = Vector2(40, 24)
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+script = ExtResource("1_2ok7m")
+
+[node name="Texture" type="TextureRect" parent="."]
+texture = ExtResource("1_rfotd")
+
+[node name="Count" type="Label" parent="."]
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1

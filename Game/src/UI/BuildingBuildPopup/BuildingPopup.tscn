@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8mirukmbig14"]
+
+[ext_resource type="Script" path="res://src/UI/BuildingBuildPopup/BuildingPopup.gd" id="1_lmqui"]
+[ext_resource type="Texture2D" uid="uid://dfeun2darp3o6" path="res://art/popup.png" id="1_r22e3"]
+
+[node name="BuildingPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_lmqui")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -31.0
+offset_right = 54.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r22e3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 62.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1

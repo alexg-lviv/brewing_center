@@ -1,5 +1,5 @@
 class_name Receiver
-extends Building
+extends Building1
 
 
 ## delay to spawn objects

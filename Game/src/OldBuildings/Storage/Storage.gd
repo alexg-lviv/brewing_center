@@ -1,5 +1,5 @@
-class_name Storage
-extends Building
+class_name Storage1
+extends Building1
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 @onready var Pulser := get_node("Polygon2D")

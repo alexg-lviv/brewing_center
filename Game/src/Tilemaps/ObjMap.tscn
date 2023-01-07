@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://g5gpc16n0kjp"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" uid="uid://ciqmeplowpp4m" path="res://src/Buildings/Trash/Trash.tscn" id="7_2hsrc"]
+[ext_resource type="PackedScene" path="res://src/OldBuildings/Trash/Trash.tscn" id="7_2hsrc"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_k50be"]
 resource_name = "trees"
