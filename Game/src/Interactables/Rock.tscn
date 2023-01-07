@@ -1,18 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb6vb22pmiejm"]
+[gd_scene load_steps=8 format=3 uid="uid://bb6vb22pmiejm"]
 
 [ext_resource type="PackedScene" uid="uid://bvllcws5pag8k" path="res://src/Interactables/Abstract/InteractableTimed.tscn" id="1_npmol"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_ggkbb"]
 [ext_resource type="Script" path="res://src/Interactables/Rock.gd" id="3_87c13"]
 [ext_resource type="Texture2D" uid="uid://i5pq7t40tdmt" path="res://art/trees/rock.png" id="3_iwkyb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvap0"]
+resource_local_to_scene = true
+shader = ExtResource("2_ggkbb")
+shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = null
+shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qjn0h"]
 radius = 32.9848
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgko5"]
+resource_local_to_scene = true
+shader = ExtResource("2_ggkbb")
+shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = false
+shader_parameter/active = false
+
 [node name="Rock" instance=ExtResource("1_npmol")]
+material = SubResource("ShaderMaterial_kvap0")
 script = ExtResource("3_87c13")
-interaction_time = 3.0
+interaction_time = 5.0
 
 [node name="CollisionShape2d" parent="." index="0"]
 shape = SubResource("CircleShape2D_qjn0h")
 
 [node name="Sprite2d" parent="." index="2"]
+material = SubResource("ShaderMaterial_wgko5")
 texture = ExtResource("3_iwkyb")
