@@ -1,3 +1,4 @@
+class_name Tree1
 extends InteractableTimed
 
 @onready var wooden_log := preload("res://src/Interactables/Log.tscn")
@@ -21,10 +22,11 @@ func continue_interaction() -> void:
 		# Strong dependence on the scene structure!!!
 		get_parent().get_parent().get_node("DroppedResources").add_child(instance)
 		# TODO: remove magic constants
-		instance.position = position + Vector2(0, -48)
-		instance.move(instance.position + Vector2(randi_range(-5, 5) * 5, randi_range(-5, 5) * 5))
+		instance.global_position = global_position + Vector2(0, -48)
+		instance.move(instance.global_position + Vector2(randi_range(-5, 5) * 5, randi_range(-5, 5) * 5))
 	die()
 	
 func die():
 	scene.remove_building_from_instances_dict(center_pos, Vector2i(1, 1))
 	super()
+

@@ -23,7 +23,7 @@ script = ExtResource("4")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="Skeleton" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(978.955, 550.223)
+position = Vector2(1404.24, 494.403)
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(641.938, 358.841)
@@ -33,6 +33,7 @@ collision_mask = 3
 [node name="UI" parent="." instance=ExtResource("3")]
 
 [node name="AreaPreview" type="Sprite2D" parent="."]
+visible = false
 z_index = 102
 texture = ExtResource("5_q8gg8")
 

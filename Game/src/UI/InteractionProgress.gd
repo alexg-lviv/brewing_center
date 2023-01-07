@@ -2,9 +2,15 @@ extends CanvasLayer
 
 @onready var Progress:= get_node("TextureProgressBar")
 var _timer: Timer
+var follow_cursor: bool = true
 
-func _physics_process(_delta: float) -> void:
-	Progress.global_position = Progress.get_global_mouse_position() - Progress.size / 2
+var skeleton_overhead_position: Marker2D
+
+func _process(_delta: float) -> void:
+	if follow_cursor:
+		Progress.position = Progress.get_global_mouse_position() - Progress.size / 2
+	if skeleton_overhead_position != null:
+		Progress.position = (skeleton_overhead_position.global_position - Progress.size / 2)
 	Progress.value = Progress.max_value - _timer.time_left
 	
 	if Progress.value == Progress.max_value:

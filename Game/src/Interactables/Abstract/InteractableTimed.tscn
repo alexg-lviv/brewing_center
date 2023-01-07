@@ -7,26 +7,26 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o5gmi"]
 resource_local_to_scene = true
 shader = ExtResource("2_2rtdg")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = null
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = null
+shader_parameter/active = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tb7h0"]
 resource_local_to_scene = true
 shader = ExtResource("2_2rtdg")
-shader_parameter/active = false
-shader_parameter/flipColors = null
 shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
-shader_parameter/precision = 0.02
-shader_parameter/useTexture = false
 shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = false
+shader_parameter/active = false
 
 [node name="InteractableTimed" instance=ExtResource("1_766r3")]
 material = SubResource("ShaderMaterial_o5gmi")

@@ -79,6 +79,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/Buildings/Trash/Trash.gd"
 }, {
+"base": "InteractableTimed",
+"class": &"Tree1",
+"language": &"GDScript",
+"path": "res://src/Interactables/Tree1.gd"
+}, {
 "base": "Node2D",
 "class": &"WFC",
 "language": &"GDScript",
@@ -99,6 +104,7 @@ _global_script_class_icons={
 "Spawner": "",
 "Storage": "",
 "Trash": "",
+"Tree1": "",
 "WFC": ""
 }
 
@@ -165,6 +171,11 @@ right_click={
 2d_physics/layer_2="character"
 2d_physics/layer_4="transportable objects"
 2d_physics/layer_5="buildings"
+
+[navigation]
+
+2d/default_edge_connection_margin=0
+2d/default_link_connection_radius=0
 
 [physics]
 

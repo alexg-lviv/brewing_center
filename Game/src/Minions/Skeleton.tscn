@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cy3f5r1duanx3" path="res://art/skeleton.png" id="1_3imrd"]
 [ext_resource type="Script" path="res://src/Minions/Skeleton.gd" id="1_50q6l"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bdfl"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eff0i"]
 height = 48.0
 
 [node name="Skeleton" type="Area2D"]
@@ -16,13 +16,16 @@ script = ExtResource("1_50q6l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)
-shape = SubResource("CapsuleShape2D_1bdfl")
+shape = SubResource("CapsuleShape2D_eff0i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
 texture = ExtResource("1_3imrd")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Hand" type="Marker2D" parent="."]
 position = Vector2(8, -24)
+
+[node name="OverHead" type="Marker2D" parent="."]
+position = Vector2(0, -56)
 
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

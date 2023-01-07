@@ -29,7 +29,7 @@ func send_object() -> void:
 	var obj_to_send = objects_queue.pop_back()
 	obj_to_send.get_taken_by_building(self)
 	forward.receive_object(obj_to_send)
-	obj_to_send.move(forward.position)
+	obj_to_send.move(forward.global_position)
 	enqueued = false
 
 

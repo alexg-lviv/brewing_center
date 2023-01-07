@@ -1,9 +1,11 @@
 class_name Skeleton
 extends Area2D
 
-@onready var player = get_node("../Player")
+# TODO: SWITCH NAVIGATION TO ASTAR2DGRID
+
 @onready var NavAgent :NavigationAgent2D = get_node("NavigationAgent2D")
-@onready var HandsMarker: Marker2D = get_node("Marker2D")
+@onready var HandsMarker: Marker2D = get_node("Hand")
+@onready var OverHeadMarker: Marker2D = get_node("OverHead")
 
 @onready var Scene :GameWorld = get_parent() 
 
@@ -12,6 +14,8 @@ var heading_to_object:  bool = false
 var heading_to_storage: bool = false
 
 var harvest_resources_state: bool = false
+var harvesting:              bool = false
+var heading_to_resource:     bool = false
 
 var object_in_hands: Movable = null
 
@@ -23,12 +27,41 @@ func _ready() -> void:
 
 ## every tick chose tje target where to go and actualy move
 func _process(delta: float) -> void:
+	handle_states(delta)
+#	if clear_floor_state:
+#		chose_target_to_clear_or_store()
+#		if is_instance_valid(target):
+#			NavAgent.set_target_location(target.global_position)
+#			var direction := global_position.direction_to(NavAgent.get_next_location())
+#			global_position += direction * 100. * delta
+
+
+func handle_states(delta) -> void:
 	if clear_floor_state:
-		chose_target_to_clear_or_store()
-		if !is_instance_valid(target): return
-		NavAgent.set_target_location(target.global_position)
-		var direction := global_position.direction_to(NavAgent.get_next_location())
-		global_position += direction * 100. * delta
+		if !heading_to_object and !heading_to_storage:
+			chose_target_to_clear()
+		if heading_to_storage:
+			chose_target_to_store()
+		if is_instance_valid(target):
+			NavAgent.set_target_location(target.global_position)
+			var direction := global_position.direction_to(NavAgent.get_next_location())
+			global_position += direction * 100. * delta
+		else:
+			clear_floor_state = false
+			harvest_resources_state = true
+	
+	if harvest_resources_state:
+		if !heading_to_resource and !harvesting:
+			chose_target_to_harvest()
+		if is_instance_valid(target):
+			if !harvesting:
+				clear_floor_state = false
+				NavAgent.set_target_location(target.global_position)
+				var direction := global_position.direction_to(NavAgent.get_next_location())
+				global_position += direction * 100. * delta
+		else:
+			harvest_resources_state = false
+			clear_floor_state = true
 
 ## reset the states and forget about an object you were going to
 ## if there are other things you have to do - it will take new tatget the next tick
@@ -37,23 +70,36 @@ func forget_about_object():
 	heading_to_object = false
 	heading_to_storage = false
 
+func chose_target_to_harvest() -> void:
+	NavAgent.target_desired_distance = 50
+	var resources: Array = Scene.get_resources()
+	var resource_selected = get_min_distance_object(resources)
+	if resource_selected == null: return
+	resource_selected.get_reserved_by_skeleton(self)
+	target = resource_selected
+	heading_to_resource = true
+
+func chose_target_to_store() -> void:
+	NavAgent.target_desired_distance = 70
+	var storages: Array = Scene.get_storages()
+	var storage_selected = get_min_distance_object(storages)
+	if storage_selected == null: return
+	target = storage_selected
+
+func chose_target_to_clear() -> void:
+	NavAgent.target_desired_distance = 5
+	var objects : Array = Scene.get_dropped_materials()
+	var selected_object: Movable = get_min_distance_object(objects)
+	if selected_object == null: return
+	heading_to_object = true
+	target = selected_object
+	selected_object.get_reserved_by_skeleton(self)
+
 ## has 2 conditions the first one stands for chosing an item that we will follow  
 ## the second one is for the storage  
 ## change desired distances respectively to the type of destination we are heading to
 func chose_target_to_clear_or_store() -> void:
-	if !heading_to_object and !heading_to_storage:
-		NavAgent.target_desired_distance = 5
-		var objects : Array = Scene.get_dropped_materials()
-		var selected_object: Movable = get_min_distance_object(objects)
-		if selected_object == null: return
-		heading_to_object = true
-		target = selected_object
-		selected_object.get_reserved_by_skeleton(self)
-	if heading_to_storage:
-		NavAgent.target_desired_distance = 70
-		var storages: Array = Scene.get_storages()
-		var storage_selected = get_min_distance_object(storages)
-		target = storage_selected
+	pass
 
 ## get the clothes one from an array
 func get_min_distance_object(objects: Array) -> Variant:
@@ -85,9 +131,21 @@ func place_object_to_storage() -> void:
 	heading_to_storage = false
 	object_in_hands = null
 
+func harvest_resource():
+	target.get_harvested_by_skeleton(self, 10)
+	harvesting = true
+	heading_to_resource = false
+
+func finish_harvesting():
+	clear_floor_state = true
+	harvest_resources_state = false
+	harvesting = false
+
 ## regarding to the states, do different things
 func _on_navigation_agent_2d_target_reached() -> void:
 	if clear_floor_state and heading_to_object:
 		pick_up_object()
 	elif clear_floor_state and heading_to_storage:
 		place_object_to_storage()
+	elif harvest_resources_state:
+		harvest_resource()

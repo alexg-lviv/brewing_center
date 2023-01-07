@@ -97,7 +97,7 @@ func send_object() -> void:
 	if !object: return
 	ready_to_send = false
 	forward.receive_object(object)
-	object.move(forward.position)
+	object.move(forward.global_position)
 	object = null
 	ask_send_object()
 

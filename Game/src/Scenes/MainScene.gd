@@ -32,6 +32,15 @@ var is_erasing: bool = false
 
 @onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
 
+var areas_dict: Dictionary = {
+	"Clear": 0,
+	"Harvest": 1
+}
+
+var areas_modulate: Dictionary ={
+	"Clear": "73feb0",
+	"Harvest": "ff6565"
+}
 
 ## dictionary of all instanced buildings
 ## the key is their grid coords, and the value is reference to the object itself
@@ -44,9 +53,12 @@ var _last_shaded_red: Vector2 = Vector2.ZERO
 var drawn_pickup_area: Dictionary = {}
 var pickup_tiles: Array
 
+var drawn_harvest_area: Dictionary = {}
+var harvest_tiles: Array
+
 
 func _ready():
-	create_environment(Vector2(5000, 3000))
+	create_environment(Vector2(1000, 1000))
 	
 	for button in get_tree().get_nodes_in_group("BuildButton"):
 		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
@@ -68,33 +80,38 @@ func _process(_delta):
 		handle_building()
 	elif Glob.demolish_mode:
 		handle_demolition()
-	elif Glob.draw_clear_area_mode:
+	elif Glob.draw_area_mode:
 		handle_areas_drawing()
 
-func update_drawn_array() -> Array:
+func update_drawn_array(dict: Dictionary) -> Array:
 	var res: Array = []
-	for key in drawn_pickup_area.keys():
-		if drawn_pickup_area[key] != null: res.append(key)
+	for key in dict.keys():
+		if dict[key] != null: res.append(key)
 	return res
 	
 
 func handle_areas_drawing() -> void:
 	if Input.is_action_pressed("ui_cancel"): 
-		Glob.draw_clear_area_mode = false
+		Glob.draw_area_mode = false
 		reset_areas_prewiew()
 		return
 
+	var layer = areas_dict[build_type]
+	
 	if Input.is_action_just_pressed("click"):
 		is_drawing = true
 	if Input.is_action_just_released("click"):
 		is_drawing = false
-		pickup_tiles = update_drawn_array()
+		pickup_tiles = update_drawn_array(drawn_pickup_area)
+		harvest_tiles = update_drawn_array(drawn_harvest_area)
+		
 
 	if Input.is_action_just_pressed("right_click"):
 		is_erasing = true
 	if Input.is_action_just_released("right_click"):
 		is_erasing = false
-		pickup_tiles = update_drawn_array()
+		pickup_tiles = update_drawn_array(drawn_pickup_area)
+		harvest_tiles = update_drawn_array(drawn_harvest_area)
 		
 
 	set_area_prewiew()
@@ -102,22 +119,30 @@ func handle_areas_drawing() -> void:
 	
 	if is_drawing:
 		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
-		HighlightMap.set_cell(0, grid_pos / Glob.GRID_STEP, 0, Vector2(1, 1))
-		drawn_pickup_area[grid_pos] = 1
+		HighlightMap.set_cell(layer, grid_pos / Glob.GRID_STEP, 0, Vector2(1, 1))
+		if layer == 0:
+			drawn_pickup_area[grid_pos] = 1
+		elif layer == 1:
+			drawn_harvest_area[grid_pos] = 1
 	
 	if is_erasing:
 		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
-		HighlightMap.set_cell(0, grid_pos / Glob.GRID_STEP)
-		drawn_pickup_area.erase(grid_pos)
+		HighlightMap.set_cell(layer, grid_pos / Glob.GRID_STEP)
+		if layer == 0:
+			drawn_pickup_area.erase(grid_pos)
+		elif layer == 1:
+			drawn_harvest_area.erase(grid_pos)
 
 func reset_areas_prewiew() -> void:
 	AreaPrev.visible = false
 	HighlightMap.set_layer_enabled(0, false)
+	HighlightMap.set_layer_enabled(1, false)
 
 func set_area_prewiew() -> void:
 	AreaPrev.visible = true
-	AreaPrev.modulate = Glob.modulate_green
-	HighlightMap.set_layer_enabled(0, true)
+	AreaPrev.modulate = areas_modulate[build_type]
+	var layer = areas_dict[build_type]
+	HighlightMap.set_layer_enabled(layer, true)
 	
 
 func update_area_prewiew() -> void:
@@ -195,19 +220,20 @@ func _on_build_button_pressed(building_type: String):
 		# TODO: REWRITE IT TO SETTER
 		Glob.build_mode = false
 		Glob.demolish_mode = true
-		Glob.draw_clear_area_mode = false
+		Glob.draw_area_mode = false
 		reset_preview()
 		reset_areas_prewiew()
-	elif building_type == "Pickup":
-		Glob.draw_clear_area_mode = true
+	elif building_type == "Clear" or building_type == "Harvest":
+		Glob.draw_area_mode = true
 		Glob.build_mode = false
 		Glob.demolish_mode = false
+		build_type = building_type
 		reset_preview()
 	else:
 		# TODO: REWRITE IT TO SETTER
 		Glob.build_mode = true
 		Glob.demolish_mode = false
-		Glob.draw_clear_area_mode = false
+		Glob.draw_area_mode = false
 		build_type = building_type
 		set_preview(build_type)
 		reset_areas_prewiew()
@@ -241,7 +267,7 @@ func reset_preview():
 func place_object(object_name: String, grid_pos: Vector2):
 	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
 	BuildingsContainer.get_node(object_name).add_child(NewObj)
-	NewObj.position = grid_pos
+	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation
 	NewObj.center_pos = grid_pos
 	add_to_positions_dict(grid_pos, NewObj)
@@ -315,7 +341,7 @@ func create_trees(world_size: Vector2) -> void:
 			var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
 			var tree: Interactable = Tree1.instantiate()
 			ResourcesContainer.call_deferred("add_child", tree)
-			tree.set_deferred("position", pos)
+			tree.set_deferred("global_position", pos)
 			tree.set_deferred("scene", self)
 			tree.set_deferred("center_pos", pos)
 			tree.call_deferred("update_z")
@@ -348,7 +374,10 @@ func get_storages() -> Array[Storage]:
 			res.append(storage)
 	return res
 
-
-
-
-
+func get_resources() -> Array[InteractableTimed]:
+	var res: Array[InteractableTimed] = []
+	for resource in ResourcesContainer.get_children():
+		if resource.reserved_by_skeleton: continue
+		if get_grid_pos(resource.global_position) in harvest_tiles:
+			res.append(resource)
+	return res

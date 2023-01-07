@@ -20,8 +20,8 @@ func send_object() -> void:
 	var new_object = Item.instantiate()
 	forward.receive_object(new_object)
 	get_parent().call_deferred("add_child", new_object)
-	new_object.set_deferred("position", position + Vector2(sin(rotation), cos(rotation)*-1)*(Glob.GRID_STEP/2))
-	new_object.call_deferred("move", forward.position)
+	new_object.set_deferred("global_position", global_position + Vector2(sin(rotation), cos(rotation)*-1)*(Glob.GRID_STEP/2))
+	new_object.call_deferred("move", forward.global_position)
 	ExtractionTimer.start(extraction_rate)
 
 

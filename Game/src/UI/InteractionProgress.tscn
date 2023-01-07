@@ -5,19 +5,28 @@
 [ext_resource type="Texture2D" uid="uid://b7x8tir765u0e" path="res://art/progress/progress2.png" id="2_xoidb"]
 
 [node name="Control" type="CanvasLayer"]
-scale = Vector2(0.1, 0.1)
-transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+follow_viewport_enabled = true
 script = ExtResource("1_wo7gh")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = -488.0
+offset_right = -512.0
+offset_bottom = -232.0
 grow_horizontal = 2
 grow_vertical = 2
-step = 0.01
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(128, 128)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = -0.99
 fill_mode = 4
 texture_under = ExtResource("1_e4ri5")
 texture_progress = ExtResource("2_xoidb")
+metadata/_edit_use_anchors_ = true
