@@ -6,6 +6,7 @@ extends Node2D
 
 
 @export var trees_prob: float = 0.2
+@export var rock_prob: float = 0.05
 
 # BUILD MODE VARS
 var build_type: String
@@ -31,6 +32,7 @@ var is_erasing: bool = false
 
 
 @onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
+@onready var Rock = preload("res://src/Interactables/Rock.tscn")
 
 var areas_dict: Dictionary = {
 	"Clear": 0,
@@ -337,15 +339,22 @@ func create_environment(world_size: Vector2) -> void:
 func create_trees(world_size: Vector2) -> void:
 	for i in range(0, world_size.x, Glob.GRID_STEP):
 		for j in range(0, world_size.y, Glob.GRID_STEP):
-			if randf_range(0, 1) > trees_prob: continue
+			var to_spawn: bool = false
+			var obj: Interactable
+			if randf_range(0, 1) < trees_prob: 
+				to_spawn = true
+				obj = Tree1.instantiate()
+			elif randf_range(0, 1) < rock_prob:
+				to_spawn = true
+				obj = Rock.instantiate()
+			if !to_spawn: continue
 			var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
-			var tree: Interactable = Tree1.instantiate()
-			ResourcesContainer.call_deferred("add_child", tree)
-			tree.set_deferred("global_position", pos)
-			tree.set_deferred("scene", self)
-			tree.set_deferred("center_pos", pos)
-			tree.call_deferred("update_z")
-			instances_dict[pos] = tree
+			ResourcesContainer.call_deferred("add_child", obj)
+			obj.set_deferred("global_position", pos)
+			obj.set_deferred("scene", self)
+			obj.set_deferred("center_pos", pos)
+			obj.call_deferred("update_z")
+			instances_dict[pos] = obj
 			clear_nav(pos)
 
 
