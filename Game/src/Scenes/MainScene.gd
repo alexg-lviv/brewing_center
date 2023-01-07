@@ -7,6 +7,7 @@ extends Node2D
 
 @export var trees_prob: float = 0.2
 @export var rock_prob: float = 0.05
+@export var scene_size: Vector2 = Vector2(1000, 1000)
 
 # BUILD MODE VARS
 var build_type: String
@@ -60,7 +61,7 @@ var harvest_tiles: Array
 
 
 func _ready():
-	create_environment(Vector2(1000, 1000))
+	create_environment(scene_size)
 	
 	for button in get_tree().get_nodes_in_group("BuildButton"):
 		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))

@@ -132,7 +132,7 @@ func place_object_to_storage() -> void:
 	object_in_hands = null
 
 func harvest_resource():
-	target.get_harvested_by_skeleton(self, 10)
+	target.get_harvested_by_skeleton(self, 3)
 	harvesting = true
 	heading_to_resource = false
 

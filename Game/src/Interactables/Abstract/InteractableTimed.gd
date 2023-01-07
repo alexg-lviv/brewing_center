@@ -60,13 +60,13 @@ func get_reserved_by_skeleton(skeleton: Skeleton):
 	reservation_skeleton = skeleton
 
 
-func get_harvested_by_skeleton(skeleton: Skeleton, time: float = 2.):
+func get_harvested_by_skeleton(skeleton: Skeleton, time_multiplier: float = 2.):
 	being_harvested_by_skeleton = true
-	InteractionTimer.start(time)
+	InteractionTimer.start(interaction_time * time_multiplier)
 	bar = progress.instantiate()
 	bar.follow_cursor = false
 	bar.skeleton_overhead_position = skeleton.OverHeadMarker
 	add_child(bar)
-	bar.start(time, InteractionTimer)
+	bar.start(interaction_time * time_multiplier, InteractionTimer)
 	interaction_stopped = false
 	interaction_going = true
