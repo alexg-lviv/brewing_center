@@ -29,13 +29,6 @@ func _ready() -> void:
 ## every tick chose tje target where to go and actualy move
 func _process(delta: float) -> void:
 	handle_states(delta)
-#	if clear_floor_state:
-#		chose_target_to_clear_or_store()
-#		if is_instance_valid(target):
-#			NavAgent.set_target_location(target.global_position)
-#			var direction := global_position.direction_to(NavAgent.get_next_location())
-#			global_position += direction * 100. * delta
-
 
 func handle_states(delta) -> void:
 	if clear_floor_state:
