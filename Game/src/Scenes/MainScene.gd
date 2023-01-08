@@ -291,8 +291,7 @@ func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
 	NewObj.global_position = grid_pos
 	NewObj.rotation = b_rotation
 	NewObj.center_pos = grid_pos
-	build_type = object_name
-	add_to_positions_dict(grid_pos, NewObj)
+	add_to_positions_dict(grid_pos, NewObj, object_name)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
@@ -325,8 +324,9 @@ func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2
 
 ## put an item to the positions dict and
 ## if the building spans more than one cell, iterate over them
-func add_to_positions_dict(grid_pos: Vector2, object: Object) -> void:
-	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[build_type]):
+func add_to_positions_dict(grid_pos: Vector2, object: Object, type: String = "") -> void:
+	if type == "": type = build_type
+	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[type]):
 		instances_dict[pos] = object
 		clear_nav(pos)
 

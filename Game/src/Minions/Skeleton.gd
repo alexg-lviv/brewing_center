@@ -77,7 +77,6 @@ func forget_about_object():
 func chose_target_to_build() -> void:
 	NavAgent.target_desired_distance = 70
 	var buildings: Array = Scene.get_building(object_in_hands.rss_name)
-	print(buildings)
 	var building_selected = get_min_distance_object(buildings)
 	target = building_selected
 	if target != null:

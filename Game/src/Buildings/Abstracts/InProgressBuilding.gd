@@ -36,7 +36,6 @@ func initiate_building(build_type: String):
 	popup.position.y -= Glob.GRID_STEP * (dismensions.y / 2)
 	
 	for key in resources.keys():
-		print(key, " ", resources[key])
 		popup.add_resource(key, resources[key])
 		my_demand[key] = resources[key]
 		scene.update_rss_demand(key, my_demand[key], self)
@@ -47,7 +46,6 @@ func get_resource(item: Movable):
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
 	scene.update_rss_demand(resource_name, my_demand[resource_name], self)
-	print(my_demand)
 	
 	var done = true
 	for val in my_demand.values():
