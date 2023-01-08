@@ -33,7 +33,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[node name="sssss" instance=ExtResource("1_8a41y")]
+[node name="Log" instance=ExtResource("1_8a41y")]
 material = SubResource("ShaderMaterial_40ud1")
 script = SubResource("GDScript_7sv0q")
 rss_name = "Wood"

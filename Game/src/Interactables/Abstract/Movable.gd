@@ -122,6 +122,9 @@ func get_taken_by_skeleton(skeleton: Skeleton):
 	reserved_by_skeleton = false
 	reservation_skeleton = null
 	
+	if current_building:
+		current_building.forget_about_item(self)
+	
 	skeleton_arms = skeleton.HandsMarker
 	
 	monitoring = false

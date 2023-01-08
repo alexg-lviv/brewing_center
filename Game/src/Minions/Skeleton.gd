@@ -6,6 +6,7 @@ extends Area2D
 @onready var NavAgent :NavigationAgent2D = get_node("NavigationAgent2D")
 @onready var HandsMarker: Marker2D = get_node("Hand")
 @onready var OverHeadMarker: Marker2D = get_node("OverHead")
+@onready var StatesManager: SkeletonStatesManager = get_node("StatesManager")
 
 @onready var Scene :GameWorld = get_parent() 
 
@@ -15,20 +16,22 @@ var heading_to_storage: bool = false
 var heading_to_building: bool = false
 
 var harvest_resources_state: bool = false
-var harvesting:              bool = false
 var heading_to_resource:     bool = false
-
+var harvesting:              bool = false
+var finished_harvesting:     bool = false
 var object_in_hands: Movable = null
 
 var target = null
 
 func _ready() -> void:
-	pass
+	StatesManager.initialise(self)
 
 
 ## every tick chose tje target where to go and actualy move
 func _process(delta: float) -> void:
-	handle_states(delta)
+	
+	pass
+#	handle_states(delta)
 
 func handle_states(delta) -> void:
 	if clear_floor_state:
@@ -67,6 +70,27 @@ func forget_about_object():
 	heading_to_storage = false
 	heading_to_building = false
 
+func chooose_target_to_build_and_resource() -> Array:
+	var result: Array = []
+	NavAgent.target_desired_distance = 70
+	var buildings: Array = Scene.get_demanding_buildings()
+	# iterate through all the buildings that need something
+	for building in buildings:
+		# iterate through resources that this building needs
+		for res in building.my_demand:
+			# check if it still needs resources, and if they are not reserved
+			if (building.my_demand[res] - building.my_reserved_demand[res].size()) > 0:
+				# get all the instances of the resource on scene that can be taken
+				var resources = Scene.get_all_resources_by_name(res)
+				if resources.is_empty(): continue
+				var closest: Movable = get_min_distance_object(resources)
+				closest.get_reserved_by_skeleton(self)
+				if closest.current_building != null: 
+					Scene.try_remove_stored_resource(closest.current_building, closest.rss_name)
+				return [building, closest]
+	return []
+
+
 func chose_target_to_build() -> void:
 	NavAgent.target_desired_distance = 70
 	var buildings: Array = Scene.get_building(object_in_hands.rss_name)
@@ -83,7 +107,9 @@ func chose_target_to_harvest() -> void:
 	NavAgent.target_desired_distance = 50
 	var resources: Array = Scene.get_resources()
 	var resource_selected = get_min_distance_object(resources)
-	if resource_selected == null: return
+	if resource_selected == null: 
+		target = null
+		return
 	resource_selected.get_reserved_by_skeleton(self)
 	target = resource_selected
 	heading_to_resource = true
@@ -100,7 +126,6 @@ func chose_target_to_clear() -> void:
 	var objects : Array = Scene.get_dropped_materials()
 	var selected_object: Movable = get_min_distance_object(objects)
 	if selected_object == null: return
-	heading_to_object = true
 	target = selected_object
 	selected_object.get_reserved_by_skeleton(self)
 
@@ -126,10 +151,6 @@ func get_min_distance_object(objects: Array) -> Variant:
 ## reset the states and callback to object
 func pick_up_object() -> void:
 	object_in_hands = target
-	target = null
-	heading_to_object = false
-	heading_to_building = false
-	heading_to_storage = true
 	object_in_hands.get_taken_by_skeleton(self)
 
 ## release object tht you are carrying
@@ -144,15 +165,13 @@ func place_object_to_storage() -> void:
 func harvest_resource():
 	target.get_harvested_by_skeleton(self, 3)
 	harvesting = true
-	heading_to_resource = false
 
 func finish_harvesting():
-	clear_floor_state = true
-	harvest_resources_state = false
 	harvesting = false
+	finished_harvesting = true
 
 func place_object_to_building():
-	target.get_resource(object_in_hands)
+	target.get_resource(object_in_hands, self)
 	target = null
 	heading_to_object = false
 	heading_to_storage = false
@@ -161,11 +180,12 @@ func place_object_to_building():
 
 ## regarding to the states, do different things
 func _on_navigation_agent_2d_target_reached() -> void:
-	if clear_floor_state and heading_to_object:
-		pick_up_object()
-	elif clear_floor_state and heading_to_storage:
-		place_object_to_storage()
-	elif clear_floor_state and heading_to_building:
-		place_object_to_building()
-	elif harvest_resources_state:
-		harvest_resource()
+	pass
+#	if clear_floor_state and heading_to_object:
+#		pick_up_object()
+#	elif clear_floor_state and heading_to_storage:
+#		place_object_to_storage()
+#	elif clear_floor_state and heading_to_building:
+#		place_object_to_building()
+#	elif harvest_resources_state:
+#		harvest_resource()

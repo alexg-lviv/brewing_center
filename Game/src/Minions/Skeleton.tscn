@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hmeyhd4ujwj"]
+[gd_scene load_steps=5 format=3 uid="uid://hmeyhd4ujwj"]
 
 [ext_resource type="Texture2D" uid="uid://cy3f5r1duanx3" path="res://art/skeleton.png" id="1_3imrd"]
 [ext_resource type="Script" path="res://src/Minions/Skeleton.gd" id="1_50q6l"]
+[ext_resource type="PackedScene" uid="uid://cc46axed4bnmj" path="res://src/Minions/States/StatesManager.tscn" id="3_e4ywr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eff0i"]
 height = 48.0
@@ -28,4 +29,9 @@ position = Vector2(8, -24)
 [node name="OverHead" type="Marker2D" parent="."]
 position = Vector2(0, -56)
 
+[node name="StatesManager" parent="." instance=ExtResource("3_e4ywr")]
+
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="target_reached" from="NavigationAgent2D" to="StatesManager" method="_on_navigation_agent_2d_target_reached"]
+
+[editable path="StatesManager"]

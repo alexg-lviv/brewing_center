@@ -64,6 +64,51 @@ var harvest_tiles: Array
 
 var demand_res_dict: Dictionary = {}
 
+
+
+
+## array of buildings that need resources to build
+var demand_buildings: Array
+var storages: Array
+var resources_in_storages: Dictionary = {
+	"Wood": [],
+	"Stone": []
+}
+var amount_in_storages: Dictionary = {
+	"Wood": [],
+	"Stone": []
+}
+
+func add_stored_resource(storage: Storage, resource: String) -> void:
+	var index: int = resources_in_storages[resource].find(storage)
+	if index != -1:
+		amount_in_storages[resource][index] += 1
+	else:
+		resources_in_storages[resource].push_back(storage)
+		amount_in_storages[resource].push_back(1)
+
+func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
+	var index: int = resources_in_storages[resource].find(storage)
+	if index != -1:
+		amount_in_storages[resource][index] -= 1
+		if amount_in_storages[resource][index] <= 0:
+			amount_in_storages[resource].pop_at(index)
+			resources_in_storages[resource].pop_at(index)
+		return true
+	return false
+
+func get_demanding_buildings() -> Array:
+	return demand_buildings
+
+func get_all_resources_by_name(res_name: String) -> Array[Movable]:
+	var result: Array[Movable] = []
+	for res in DroppedResources.get_children():
+		if (res.rss_name == res_name 
+				and res.current_skeleton     == null 
+				and res.reservation_skeleton == null):
+			result.append(res)
+	return result
+
 func _ready():
 	create_environment(scene_size)
 	
@@ -280,6 +325,8 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.build_type = build_type
 	NewObj.initiate_building(build_type)
 	add_to_positions_dict(grid_pos, NewObj)
+	
+	demand_buildings.push_back(NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false

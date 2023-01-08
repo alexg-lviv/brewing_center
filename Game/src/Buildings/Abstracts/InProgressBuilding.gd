@@ -10,6 +10,7 @@ extends Building
 @onready var Pulser := get_node("Polygon2D")
 
 var my_demand: Dictionary = {}
+var my_reserved_demand: Dictionary = {}
 
 var build_type: String
 
@@ -38,11 +39,16 @@ func initiate_building(build_type: String):
 	for key in resources.keys():
 		popup.add_resource(key, resources[key])
 		my_demand[key] = resources[key]
+		my_reserved_demand[key] = []
 		scene.update_rss_demand(key, my_demand[key], self)
 
 
-func get_resource(item: Movable):
+func get_resource(item: Movable, skeleton: Skeleton = null):
 	var resource_name = item.rss_name
+	if skeleton != null:
+		my_reserved_demand[resource_name].erase(skeleton)
+	
+	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
 	scene.update_rss_demand(resource_name, my_demand[resource_name], self)
@@ -61,6 +67,7 @@ func take_object():
 
 func finish_building() -> void:
 	scene.build_object(build_type, center_pos, rotation)
+	scene.demand_buildings.erase(self)
 	queue_free()
 
 
@@ -75,3 +82,6 @@ func _on_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Movables"):
 		area.forget_about_reservation_building()
 		temp_obj = null
+
+func reserve_demanded_res_by_skeleton(skeleton: Skeleton, resource: String):
+	my_reserved_demand[resource].append(skeleton)

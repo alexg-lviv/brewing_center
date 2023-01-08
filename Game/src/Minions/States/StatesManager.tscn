@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc46axed4bnmj"]
+
+[ext_resource type="Script" path="res://src/Minions/States/StatesManager.gd" id="1_nbbk7"]
+[ext_resource type="Script" path="res://src/Minions/States/HarvestState.gd" id="2_e7kk6"]
+[ext_resource type="Script" path="res://src/Minions/States/CleanState.gd" id="3_vjcxa"]
+[ext_resource type="Script" path="res://src/Minions/States/BuildState.gd" id="3_xmugp"]
+
+[node name="StatesManager" type="Node2D"]
+script = ExtResource("1_nbbk7")
+
+[node name="HarvestState" type="Node" parent="."]
+script = ExtResource("2_e7kk6")
+
+[node name="BuildState" type="Node" parent="."]
+script = ExtResource("3_xmugp")
+
+[node name="CleanState" type="Node" parent="."]
+script = ExtResource("3_vjcxa")
