@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://beaajjrsycnys"]
+[gd_scene load_steps=9 format=3 uid="uid://beaajjrsycnys"]
 
 [ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_xo0ce"]
 [ext_resource type="Script" path="res://src/Buildings/Abstracts/InProgressBuilding.gd" id="2_8el8l"]
@@ -6,13 +6,103 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqoww"]
 
+[sub_resource type="Animation" id="Animation_1w0an"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdx1y"]
+resource_name = "Pulsing"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.12549, 0.541176, 0, 0.858824), Color(0.12549, 0.541176, 0, 0.858824)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wex3q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.341176, 0.65098, 0.160784, 0.505882)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngw51"]
+_data = {
+"Idle": SubResource("Animation_1w0an"),
+"Pulsing": SubResource("Animation_kdx1y"),
+"RESET": SubResource("Animation_wex3q")
+}
+
 [node name="InProgressBuilding" instance=ExtResource("1_xo0ce")]
 position = Vector2(704, 256)
 script = ExtResource("2_8el8l")
-health = null
-self_cells_size = null
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_iqoww")
 
 [node name="BuildingPopup" parent="." index="2" instance=ExtResource("3_onp86")]
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="3"]
+color = Color(0.341176, 0.65098, 0.160784, 0.505882)
+polygon = PackedVector2Array(-28.0423, -32, -32.0484, -28, -32.0484, 28, -28.0423, 32, 28.0423, 32, 32.0484, 28, 32.0484, -28, 28.0423, -32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+root_node = NodePath("../Polygon2D")
+libraries = {
+"": SubResource("AnimationLibrary_ngw51")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

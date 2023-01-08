@@ -277,12 +277,26 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation
 	NewObj.center_pos = grid_pos
+	NewObj.build_type = build_type
+	NewObj.initiate_building(build_type)
 	add_to_positions_dict(grid_pos, NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
 			reset_preview()
 
+func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
+	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
+	BuildingsContainer.get_node(object_name).add_child(NewObj)
+	NewObj.global_position = grid_pos
+	NewObj.rotation = b_rotation
+	NewObj.center_pos = grid_pos
+	build_type = object_name
+	add_to_positions_dict(grid_pos, NewObj)
+	
+	if Glob.exit_build_mode_on_build:
+			Glob.build_mode = false
+			reset_preview()
 
 ## helper function to gridify the coordinates
 ## dimensions - true for even, false for odd
@@ -333,7 +347,6 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 	for pos in covering_positions:
 		instances_dict.erase(pos)
 		set_nav(pos)
-
 
 
 ## helper function to create environment and populate it with all the requiered resources
@@ -396,20 +409,23 @@ func get_resources() -> Array[InteractableTimed]:
 			res.append(resource)
 	return res
 
-func get_building(resource: String) -> InProgressBuilding:
-	var result: InProgressBuilding = null
-	if demand_res_dict.has(resource) and demand_res_dict[resource] != null:
-		demand_res_dict[resource][0][0] -= 1
-		result = demand_res_dict[resource][0][1]
-		if demand_res_dict[resource][0][0] <= 0:
-			demand_res_dict[resource].pop_back()
+func get_building(resource: String) -> Array[InProgressBuilding]:
+	var result: Array[InProgressBuilding] = []
+	if !demand_res_dict.has(resource): return result
+	for build in demand_res_dict[resource]:
+		if build != null:
+			result.append(build)
+
 	return result
 
 func update_rss_demand(res: String, amount: int, building: InProgressBuilding):
-	if demand_res_dict.has(res):
-		demand_res_dict[res].append([amount, building])
+	if amount > 0:
+		if demand_res_dict.has(res):
+			if !demand_res_dict[res].has(building):
+				demand_res_dict[res].append(building)
+		else:
+			demand_res_dict[res] = [building]
 	else:
-		demand_res_dict[res] = [[amount, building]]
-		
-	var a = 0
+		if demand_res_dict.has(res):
+			demand_res_dict[res].erase(building)
 

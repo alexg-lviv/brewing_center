@@ -33,6 +33,15 @@ func move(dest_position: Vector2, time: float = 0.75) -> void:
 	var tween := get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "global_position", dest_position, time)
 
+func move_and_die(dest_position: Vector2, time: float = 0.75) -> void:
+	continue_followig = false
+	var tween := get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "global_position", dest_position, time)
+	await tween.finished
+	queue_free()
+	
+
+
 ## basically, input handling and manipulation of states
 ## if the follow_cursor is true - moves using lerp
 ## not a tween because the position of cursor always changes

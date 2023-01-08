@@ -18,7 +18,6 @@ shader = SubResource("Shader_bxf5m")
 [node name="Scene" type="Node2D"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_y36bm")
-scale = Vector2(0.996981, 1.00323)
 script = ExtResource("4")
 metadata/_edit_horizontal_guides_ = []
 

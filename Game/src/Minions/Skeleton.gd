@@ -39,13 +39,10 @@ func _process(delta: float) -> void:
 
 func handle_states(delta) -> void:
 	if clear_floor_state:
-		if !heading_to_object and !heading_to_storage:
+		if !heading_to_object and !heading_to_storage and !heading_to_building:
 			chose_target_to_clear()
-		if heading_to_storage:
+		if heading_to_storage or heading_to_building:
 			chose_target_to_build()
-			if target != null:
-				heading_to_storage = false
-				heading_to_building = true
 		if heading_to_storage:
 			chose_target_to_store()
 		if is_instance_valid(target):
@@ -79,8 +76,16 @@ func forget_about_object():
 
 func chose_target_to_build() -> void:
 	NavAgent.target_desired_distance = 70
-	target = Scene.get_building(object_in_hands.rss_name)
-	
+	var buildings: Array = Scene.get_building(object_in_hands.rss_name)
+	print(buildings)
+	var building_selected = get_min_distance_object(buildings)
+	target = building_selected
+	if target != null:
+		heading_to_building = true
+		heading_to_storage = false
+	else:
+		heading_to_building = false
+		heading_to_storage = true
 
 func chose_target_to_harvest() -> void:
 	NavAgent.target_desired_distance = 50
@@ -155,7 +160,12 @@ func finish_harvesting():
 	harvesting = false
 
 func place_object_to_building():
-	pass
+	target.get_resource(object_in_hands)
+	target = null
+	heading_to_object = false
+	heading_to_storage = false
+	heading_to_building = false
+	object_in_hands = null
 
 ## regarding to the states, do different things
 func _on_navigation_agent_2d_target_reached() -> void:

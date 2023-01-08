@@ -6,9 +6,23 @@ extends Building
 @onready var popup = get_node("BuildingPopup")
 @onready var scene: GameWorld = get_node("../../..")
 
+@onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+@onready var Pulser := get_node("Polygon2D")
 
-func _ready():
-	initiate_building("Storage")
+var my_demand: Dictionary = {}
+
+var build_type: String
+
+var temp_obj: Movable
+
+## if the drag_mode is active - all the storages signal that they are available to place items
+## TODO: add visibility notifiers for optimisation
+func _process(_delta: float) -> void:
+	if Glob.drag_mode:
+		AnimPlayer.play("Pulsing")
+		Pulser.self_modulate = "#00ff00"
+	else:
+		AnimPlayer.play("Idle")
 
 
 func initiate_building(build_type: String):
@@ -17,18 +31,49 @@ func initiate_building(build_type: String):
 	var resources: Dictionary = Glob.build_cost_dict[build_type]
 	var dismensions: Vector2 = Glob.dismensions_dict[build_type]
 	
-	collision.shape.size = Vector2(dismensions.x * Glob.GRID_STEP, dismensions.y * Glob.GRID_STEP)
+	collision.shape.size = Vector2(dismensions.x * Glob.GRID_STEP / 2, dismensions.y * Glob.GRID_STEP / 2)
 	
 	popup.position.y -= Glob.GRID_STEP * (dismensions.y / 2)
 	
 	for key in resources.keys():
 		print(key, " ", resources[key])
 		popup.add_resource(key, resources[key])
-		
-		scene.update_rss_demand(key, resources[key], self)
+		my_demand[key] = resources[key]
+		scene.update_rss_demand(key, my_demand[key], self)
+
+
+func get_resource(item: Movable):
+	var resource_name = item.rss_name
+	item.move_and_die(center_pos)
+	my_demand[resource_name] -= 1
+	scene.update_rss_demand(resource_name, my_demand[resource_name], self)
+	print(my_demand)
 	
+	var done = true
+	for val in my_demand.values():
+		if val != 0: done = false
+	
+	popup.update_res_count(resource_name, my_demand[resource_name])
+	
+	if done: finish_building()
+
+func take_object():
+	get_resource(temp_obj)
+	temp_obj = null
+
+func finish_building() -> void:
+	scene.build_object(build_type, center_pos, rotation)
+	queue_free()
 
 
-func get_resources():
-	pass
+## remember that item entered yourself
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Movables"):
+		temp_obj = area
+		area.get_reserved_by_building(self)
 
+## ok forget about it, its GONE
+func _on_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Movables"):
+		area.forget_about_reservation_building()
+		temp_obj = null
