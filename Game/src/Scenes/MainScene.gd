@@ -35,6 +35,8 @@ var is_erasing: bool = false
 @onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
 @onready var Rock = preload("res://src/Interactables/Rock.tscn")
 
+
+
 var areas_dict: Dictionary = {
 	"Clear": 0,
 	"Harvest": 1
@@ -59,6 +61,8 @@ var pickup_tiles: Array
 var drawn_harvest_area: Dictionary = {}
 var harvest_tiles: Array
 
+
+var demand_res_dict: Dictionary = {}
 
 func _ready():
 	create_environment(scene_size)
@@ -269,7 +273,7 @@ func reset_preview():
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
 	var NewObj = load("res://src/Buildings/Abstracts/InProgressBuilding.tscn").instantiate()
-	BuildingsContainer.get_node(object_name).add_child(NewObj)
+	BuildingsContainer.get_node("InProgress").add_child(NewObj)
 	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation
 	NewObj.center_pos = grid_pos
@@ -391,3 +395,21 @@ func get_resources() -> Array[InteractableTimed]:
 		if get_grid_pos(resource.global_position) in harvest_tiles:
 			res.append(resource)
 	return res
+
+func get_building(resource: String) -> InProgressBuilding:
+	var result: InProgressBuilding = null
+	if demand_res_dict.has(resource) and demand_res_dict[resource] != null:
+		demand_res_dict[resource][0][0] -= 1
+		result = demand_res_dict[resource][0][1]
+		if demand_res_dict[resource][0][0] <= 0:
+			demand_res_dict[resource].pop_back()
+	return result
+
+func update_rss_demand(res: String, amount: int, building: InProgressBuilding):
+	if demand_res_dict.has(res):
+		demand_res_dict[res].append([amount, building])
+	else:
+		demand_res_dict[res] = [[amount, building]]
+		
+	var a = 0
+

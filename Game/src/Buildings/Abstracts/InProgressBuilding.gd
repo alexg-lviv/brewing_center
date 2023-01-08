@@ -4,6 +4,7 @@ extends Building
 @onready var sprite: Sprite2D = get_node("Sprite2D")
 @onready var collision: CollisionShape2D = get_node("CollisionShape2D")
 @onready var popup = get_node("BuildingPopup")
+@onready var scene: GameWorld = get_node("../../..")
 
 
 func _ready():
@@ -23,7 +24,10 @@ func initiate_building(build_type: String):
 	for key in resources.keys():
 		print(key, " ", resources[key])
 		popup.add_resource(key, resources[key])
+		
+		scene.update_rss_demand(key, resources[key], self)
 	
+
 
 func get_resources():
 	pass

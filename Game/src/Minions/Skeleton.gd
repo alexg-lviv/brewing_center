@@ -12,6 +12,7 @@ extends Area2D
 var clear_floor_state:  bool = true
 var heading_to_object:  bool = false
 var heading_to_storage: bool = false
+var heading_to_building: bool = false
 
 var harvest_resources_state: bool = false
 var harvesting:              bool = false
@@ -41,6 +42,11 @@ func handle_states(delta) -> void:
 		if !heading_to_object and !heading_to_storage:
 			chose_target_to_clear()
 		if heading_to_storage:
+			chose_target_to_build()
+			if target != null:
+				heading_to_storage = false
+				heading_to_building = true
+		if heading_to_storage:
 			chose_target_to_store()
 		if is_instance_valid(target):
 			NavAgent.set_target_location(target.global_position)
@@ -69,6 +75,12 @@ func forget_about_object():
 	target = null
 	heading_to_object = false
 	heading_to_storage = false
+	heading_to_building = false
+
+func chose_target_to_build() -> void:
+	NavAgent.target_desired_distance = 70
+	target = Scene.get_building(object_in_hands.rss_name)
+	
 
 func chose_target_to_harvest() -> void:
 	NavAgent.target_desired_distance = 50
@@ -119,6 +131,7 @@ func pick_up_object() -> void:
 	object_in_hands = target
 	target = null
 	heading_to_object = false
+	heading_to_building = false
 	heading_to_storage = true
 	object_in_hands.get_taken_by_skeleton(self)
 
@@ -141,11 +154,16 @@ func finish_harvesting():
 	harvest_resources_state = false
 	harvesting = false
 
+func place_object_to_building():
+	pass
+
 ## regarding to the states, do different things
 func _on_navigation_agent_2d_target_reached() -> void:
 	if clear_floor_state and heading_to_object:
 		pick_up_object()
 	elif clear_floor_state and heading_to_storage:
 		place_object_to_storage()
+	elif clear_floor_state and heading_to_building:
+		place_object_to_building()
 	elif harvest_resources_state:
 		harvest_resource()
