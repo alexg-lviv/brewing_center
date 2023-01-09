@@ -112,7 +112,6 @@ func chose_target_to_harvest() -> void:
 		return
 	resource_selected.get_reserved_by_skeleton(self)
 	target = resource_selected
-	heading_to_resource = true
 
 func chose_target_to_store() -> void:
 	NavAgent.target_desired_distance = 70
@@ -152,6 +151,10 @@ func get_min_distance_object(objects: Array) -> Variant:
 func pick_up_object() -> void:
 	object_in_hands = target
 	object_in_hands.get_taken_by_skeleton(self)
+
+func drop_object() -> void:
+	object_in_hands.get_dropped_by_skeleton()
+	object_in_hands = null
 
 ## release object tht you are carrying
 ## reset the states and make the storage take the object

@@ -1,3 +1,5 @@
 Game/.import/
 .DS_Store
 Game/.godot
+Game/fonts
+Game/export_presets.cfg

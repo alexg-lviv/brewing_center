@@ -105,7 +105,9 @@ func get_all_resources_by_name(res_name: String) -> Array[Movable]:
 	for res in DroppedResources.get_children():
 		if (res.rss_name == res_name 
 				and res.current_skeleton     == null 
-				and res.reservation_skeleton == null):
+				and res.reservation_skeleton == null
+				and (get_grid_pos(res.global_position) in pickup_tiles
+					or res.taken_by_building)):
 			result.append(res)
 	return result
 
@@ -339,10 +341,18 @@ func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
 	NewObj.rotation = b_rotation
 	NewObj.center_pos = grid_pos
 	add_to_positions_dict(grid_pos, NewObj, object_name)
+	if object_name == "Storage":
+		storages.append(NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
 			reset_preview()
+
+func check_available_storages() -> bool:
+	for storage in storages:
+		if storage.stored_objects < 9:
+			return true
+	return false
 
 ## helper function to gridify the coordinates
 ## dimensions - true for even, false for odd

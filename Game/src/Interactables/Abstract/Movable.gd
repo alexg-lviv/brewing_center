@@ -129,3 +129,15 @@ func get_taken_by_skeleton(skeleton: Skeleton):
 	
 	monitoring = false
 	monitorable = false
+
+func get_dropped_by_skeleton():
+	taken_by_skeleton = false
+	current_skeleton = null
+	reserved_by_building = false
+	reservation_building = null
+	reserved_by_skeleton = false
+	reservation_skeleton = null
+	skeleton_arms = null
+	
+	monitoring = true
+	monitorable = true

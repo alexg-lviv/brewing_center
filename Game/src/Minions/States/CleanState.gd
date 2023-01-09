@@ -15,6 +15,10 @@ func exit() -> void:
 
 func process(delta: float, target_reached: bool) -> int:
 	if skeleton.target == null: return States.HarvestState
+	if !skeleton.Scene.check_available_storages():
+		if skeleton.object_in_hands:
+			skeleton.drop_object()
+		return States.HarvestState
 
 	if target_reached and heading_to_resource:
 		heading_to_resource = false

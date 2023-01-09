@@ -23,7 +23,8 @@ func exit() -> void:
 	pass
 
 func process(delta: float, target_reached: bool) -> int:
-	if resource_chosen == null: return States.CleanState
+	if resource_chosen == null: 
+		return States.CleanState
 	if target_reached and heading_to_resource:
 		heading_to_resource = false
 		heading_to_building = true
@@ -35,7 +36,8 @@ func process(delta: float, target_reached: bool) -> int:
 		skeleton.place_object_to_building()
 		heading_to_building = false
 		skeleton.target = null
-		return States.CleanState
+		enter()
+		return States.NullState
 	
 	# TODO: if the building reservation for me disappeared (was rejected by had-dropping of rss)
 	# - return States.CleanState
