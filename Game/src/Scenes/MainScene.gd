@@ -79,38 +79,6 @@ var amount_in_storages: Dictionary = {
 	"Stone": []
 }
 
-func add_stored_resource(storage: Storage, resource: String) -> void:
-	var index: int = resources_in_storages[resource].find(storage)
-	if index != -1:
-		amount_in_storages[resource][index] += 1
-	else:
-		resources_in_storages[resource].push_back(storage)
-		amount_in_storages[resource].push_back(1)
-
-func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
-	var index: int = resources_in_storages[resource].find(storage)
-	if index != -1:
-		amount_in_storages[resource][index] -= 1
-		if amount_in_storages[resource][index] <= 0:
-			amount_in_storages[resource].pop_at(index)
-			resources_in_storages[resource].pop_at(index)
-		return true
-	return false
-
-func get_demanding_buildings() -> Array:
-	return demand_buildings
-
-func get_all_resources_by_name(res_name: String) -> Array[Movable]:
-	var result: Array[Movable] = []
-	for res in DroppedResources.get_children():
-		if (res.rss_name == res_name 
-				and res.current_skeleton     == null 
-				and res.reservation_skeleton == null
-				and (get_grid_pos(res.global_position) in pickup_tiles
-					or res.taken_by_building)):
-			result.append(res)
-	return result
-
 func _ready():
 	create_environment(scene_size)
 	
@@ -136,6 +104,14 @@ func _process(_delta):
 		handle_demolition()
 	elif Glob.draw_area_mode:
 		handle_areas_drawing()
+
+
+#########################################
+#########################################
+#### clear and harvest areas drawing ####
+#########################################
+#########################################
+
 
 func update_drawn_array(dict: Dictionary) -> Array:
 	var res: Array = []
@@ -197,10 +173,17 @@ func set_area_prewiew() -> void:
 	AreaPrev.modulate = areas_modulate[build_type]
 	var layer = areas_dict[build_type]
 	HighlightMap.set_layer_enabled(layer, true)
-	
 
 func update_area_prewiew() -> void:
 	AreaPrev.global_position = get_grid_pos(get_global_mouse_position())
+
+
+
+####################
+####################
+#### demolition ####
+####################
+####################
 
 ## if we are in demolition mode, the function handles everything connected to it
 ## handles input, shades the objects, destroys checked click
@@ -232,6 +215,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		var dismensions: bool = true if (Glob.dismensions_dict[build_type].x % 2 == 0) else false
 		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position(), dismensions)
 		place_object(build_type, grid_pos)
+
+####################
+####################
+####  building  ####
+####################
+####################
 
 ## if we are in build mode, the function handles everything connected to it
 ## previews object, shades it, checks if we can place it there
@@ -265,6 +254,12 @@ func handle_rotation():
 	if Input.is_action_just_pressed("ui_down"):
 		build_rotation = PI
 
+
+####################
+####################
+####  preview   ####
+####################
+####################
 
 ## signal that handles UI build button actions
 ## it can eather specify which object to build
@@ -316,6 +311,14 @@ func update_texture_preview(grid_pos: Vector2):
 func reset_preview():
 	PrevSprite.set_texture(null)
 
+
+
+##############################
+##############################
+#### add objects to scene ####
+##############################
+##############################
+
 ## create object to scene, set its gridified position and rotation
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
@@ -348,11 +351,12 @@ func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
 			Glob.build_mode = false
 			reset_preview()
 
-func check_available_storages() -> bool:
-	for storage in storages:
-		if storage.stored_objects < 9:
-			return true
-	return false
+
+###############################
+###############################
+#### positions shenenigans ####
+###############################
+###############################
 
 ## helper function to gridify the coordinates
 ## dimensions - true for even, false for odd
@@ -406,6 +410,12 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 		set_nav(pos)
 
 
+##############################
+##############################
+#### environmant creation ####
+##############################
+##############################
+
 ## helper function to create environment and populate it with all the requiered resources
 func create_environment(world_size: Vector2) -> void:
 	create_trees(world_size)
@@ -433,6 +443,12 @@ func create_trees(world_size: Vector2) -> void:
 			clear_nav(pos)
 
 
+################################
+################################
+#### navigation shenenigans ####
+################################
+################################
+
 ## remove navigation tile on the position (in absolute world coordinates, not tilemap ones)
 func clear_nav(pos: Vector2) -> void:
 	Tilemap.set_cell(1, pos/Glob.GRID_STEP, -1)
@@ -441,6 +457,13 @@ func clear_nav(pos: Vector2) -> void:
 func set_nav(pos: Vector2) -> void:
 	Tilemap.set_cell(1, pos/Glob.GRID_STEP, 2, Vector2i(0, 0))
 
+
+
+#########################################
+#########################################
+#### materials/resources shenenigans ####
+#########################################
+#########################################
 
 ## get all the movable resources on the scene that are not stored and are not reserved by anyone
 func get_dropped_materials() -> Array[Movable]:
@@ -486,3 +509,48 @@ func update_rss_demand(res: String, amount: int, building: InProgressBuilding):
 		if demand_res_dict.has(res):
 			demand_res_dict[res].erase(building)
 
+## when the resource is added to the storage,
+## update the scene dictionary with the resourcources as keys and arrays of storages as values
+## two dictionaries are maintained: one with storages and the other one is with quantities of those rss
+func add_stored_resource(storage: Storage, resource: String) -> void:
+	var index: int = resources_in_storages[resource].find(storage)
+	if index != -1:
+		amount_in_storages[resource][index] += 1
+	else:
+		resources_in_storages[resource].push_back(storage)
+		amount_in_storages[resource].push_back(1)
+
+## when we want to reserve a resource from the storage, this fumction is called
+## maintains 2 dictionaries as in the above example
+func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
+	var index: int = resources_in_storages[resource].find(storage)
+	if index != -1:
+		amount_in_storages[resource][index] -= 1
+		if amount_in_storages[resource][index] <= 0:
+			amount_in_storages[resource].pop_at(index)
+			resources_in_storages[resource].pop_at(index)
+		return true
+	return false
+
+## simply a getter
+func get_demanding_buildings() -> Array:
+	return demand_buildings
+
+## get all the available resource of this type by rss name
+func get_all_resources_by_name(res_name: String) -> Array[Movable]:
+	var result: Array[Movable] = []
+	for res in DroppedResources.get_children():
+		if (res.rss_name == res_name 
+				and res.current_skeleton     == null 
+				and res.reservation_skeleton == null
+				and (get_grid_pos(res.global_position) in pickup_tiles
+					or res.taken_by_building)):
+			result.append(res)
+	return result
+
+
+func check_available_storages() -> bool:
+	for storage in storages:
+		if storage.stored_objects < 9:
+			return true
+	return false

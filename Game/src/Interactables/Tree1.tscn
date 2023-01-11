@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/rss/tree1.png" id="3_fptgg"]
 [ext_resource type="Script" path="res://src/Interactables/Tree1.gd" id="4_rgosu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4i7v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obaj6"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
 shader_parameter/intensity = 50
@@ -17,11 +17,11 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui8ck"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ncgpi"]
 radius = 32.0
 height = 128.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6j2pj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vls7v"]
 resource_local_to_scene = true
 shader = ExtResource("2_dkxjr")
 shader_parameter/intensity = 50
@@ -35,14 +35,14 @@ shader_parameter/active = false
 
 [node name="Tree1" instance=ExtResource("1_f0qfb")]
 z_as_relative = false
-material = SubResource("ShaderMaterial_l4i7v")
+material = SubResource("ShaderMaterial_obaj6")
 script = ExtResource("4_rgosu")
 
 [node name="CollisionShape2d" parent="." index="0"]
 position = Vector2(0, -32)
-shape = SubResource("CapsuleShape2D_ui8ck")
+shape = SubResource("CapsuleShape2D_ncgpi")
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_6j2pj")
+material = SubResource("ShaderMaterial_vls7v")
 position = Vector2(0, -32)
 texture = ExtResource("3_fptgg")

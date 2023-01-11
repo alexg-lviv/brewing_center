@@ -10,7 +10,7 @@ var resource_chosen: Movable = null
 func enter() -> void:
 	building = null
 	resource_chosen = null
-	var building_and_res: Array = skeleton.chooose_target_to_build_and_resource()
+	var building_and_res: Array = skeleton.chooose_target_and_resource_to_build()
 	if building_and_res.size() == 2:
 		building = building_and_res[0]
 		resource_chosen = building_and_res[1]

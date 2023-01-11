@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_8eqdy"]
 [ext_resource type="Texture2D" uid="uid://bugqp5j8seww7" path="res://art/rss/log1.png" id="3_hxg7l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nx5h3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swqn3"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 50
@@ -16,12 +16,12 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="GDScript" id="GDScript_rrstp"]
+[sub_resource type="GDScript" id="GDScript_y3thh"]
 script/source = "class_name Log
 extends Movable
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_skxba"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvvq0"]
 resource_local_to_scene = true
 shader = ExtResource("2_8eqdy")
 shader_parameter/intensity = 18
@@ -34,13 +34,13 @@ shader_parameter/useTexture = false
 shader_parameter/active = false
 
 [node name="Log" instance=ExtResource("1_8a41y")]
-material = SubResource("ShaderMaterial_nx5h3")
-script = SubResource("GDScript_rrstp")
+material = SubResource("ShaderMaterial_swqn3")
+script = SubResource("GDScript_y3thh")
 rss_name = "Wood"
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(-16, 8, -8, 16, 16, -8, 8, -16)
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_skxba")
+material = SubResource("ShaderMaterial_nvvq0")
 texture = ExtResource("3_hxg7l")

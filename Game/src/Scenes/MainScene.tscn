@@ -24,6 +24,21 @@ metadata/_edit_horizontal_guides_ = []
 [node name="Skeleton" parent="." instance=ExtResource("2_sjh5k")]
 position = Vector2(1404.24, 494.403)
 
+[node name="Skeleton2" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1404.24, 494.403)
+
+[node name="Skeleton3" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1404.24, 494.403)
+
+[node name="Skeleton4" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1404.24, 494.403)
+
+[node name="Skeleton5" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1404.24, 494.403)
+
+[node name="Skeleton6" parent="." instance=ExtResource("2_sjh5k")]
+position = Vector2(1404.24, 494.403)
+
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(641.938, 358.841)
 collision_layer = 2
