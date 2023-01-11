@@ -1,5 +1,6 @@
-class_name Skeleton
 extends Area2D
+class_name Skeleton
+@icon("res://art/icons/skeleton.png")
 
 # TODO: SWITCH NAVIGATION TO ASTAR2DGRID
 

@@ -1,5 +1,6 @@
-class_name Tree1
 extends InteractableTimed
+class_name Tree1
+@icon("res://art/icons/tree.png")
 
 @onready var wooden_log := preload("res://src/Interactables/Log.tscn")
 

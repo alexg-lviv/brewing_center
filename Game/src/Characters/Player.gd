@@ -1,5 +1,7 @@
-# main player script, movement, hp, and so checked
 extends CharacterBody2D
+class_name Player
+@icon("res://art/icons/witch.png")
+# main player script, movement, hp, and so checked
 
 var moveSpeed : int = 250
 var vel : Vector2 = Vector2.ZERO

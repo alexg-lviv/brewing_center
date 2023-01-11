@@ -1,8 +1,9 @@
 ## Main game world
 ##
 ## a field  for construction, harvesting and all the gameplay
-class_name GameWorld
 extends Node2D
+class_name GameWorld
+@icon("res://art/icons/world.png")
 
 
 @export var trees_prob: float = 0.2

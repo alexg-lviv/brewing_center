@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/Interactables/Rock.gd" id="3_87c13"]
 [ext_resource type="Texture2D" uid="uid://i5pq7t40tdmt" path="res://art/rss/rock.png" id="4_v6olr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2xgg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tq2i1"]
 resource_local_to_scene = true
 shader = ExtResource("2_ggkbb")
 shader_parameter/intensity = 50
@@ -17,10 +17,10 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7s5fd"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_bxfys"]
 radius = 32.9848
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfdch"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqvwh"]
 resource_local_to_scene = true
 shader = ExtResource("2_ggkbb")
 shader_parameter/intensity = 50
@@ -33,13 +33,13 @@ shader_parameter/useTexture = false
 shader_parameter/active = false
 
 [node name="Rock" instance=ExtResource("1_npmol")]
-material = SubResource("ShaderMaterial_u2xgg")
+material = SubResource("ShaderMaterial_tq2i1")
 script = ExtResource("3_87c13")
 interaction_time = 5.0
 
 [node name="CollisionShape2d" parent="." index="0"]
-shape = SubResource("CircleShape2D_7s5fd")
+shape = SubResource("CircleShape2D_bxfys")
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_cfdch")
+material = SubResource("ShaderMaterial_hqvwh")
 texture = ExtResource("4_v6olr")

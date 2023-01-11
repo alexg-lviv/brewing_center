@@ -1,5 +1,6 @@
-class_name Rock
 extends InteractableTimed
+class_name Rock
+@icon("res://art/icons/rock.png")
 
 @onready var stone := preload("res://src/Interactables/Stone.tscn")
 
