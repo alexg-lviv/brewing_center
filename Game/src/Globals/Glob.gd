@@ -18,7 +18,8 @@ var previews_dict: Dictionary = {
 #	"Trash": "res://art/buildings/Trash.png",
 #	"Extractor": "res://art/buildings/spawner.png",
 #	"Receiver": "res://art/buildings/sender.png",
-	"Storage": "res://art/buildings/storage.png"
+	"Storage": "res://art/buildings/storage.png",
+	"Furnace": "res://art/buildings/Furnace.png"
 }
 var objects_dict: Dictionary = {
 #	"Belt": "res://src/Buildings/Belt/Belt.tscn",
@@ -26,7 +27,8 @@ var objects_dict: Dictionary = {
 #	"Trash": "res://src/Buildings/Trash/Trash.tscn",
 #	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
 #	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
-	"Storage": "res://src/Buildings/Storage.tscn"
+	"Storage": "res://src/Buildings/Storage.tscn",
+	"Furnace": "res://src/Buildings/Furnace.tscn"
 }
 
 var dismensions_dict: Dictionary = {
@@ -35,13 +37,17 @@ var dismensions_dict: Dictionary = {
 #	"Trash": Vector2i(1, 1),
 #	"Extractor": Vector2i(1, 1),
 #	"Receiver": Vector2i(1, 1),
-	"Storage": Vector2i(2, 2)
+	"Storage": Vector2i(2, 2),
+	"Furnace": Vector2i(2, 2)
 }
 
 var build_cost_dict: Dictionary = {
 	"Storage": {
 		"Stone": 1,
 		"Log": 2,
+	},
+	"Furnace": {
+		"Stone": 4
 	}
 }
 

@@ -1,0 +1,167 @@
+[gd_scene load_steps=14 format=3 uid="uid://bw7rrlh787rod"]
+
+[ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_r627i"]
+[ext_resource type="Script" path="res://src/Buildings/Furnace.gd" id="2_ecsnp"]
+[ext_resource type="Texture2D" uid="uid://d4h17xuvephks" path="res://art/buildings/Furnace.png" id="3_tvlmp"]
+[ext_resource type="Texture2D" uid="uid://873snkap7iuu" path="res://art/buildings/FurnaceBurning.png" id="4_h0bis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kybo"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_42uya"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_tvlmp")]
+}
+
+[sub_resource type="Animation" id="Animation_g33qx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_tvlmp")]
+}
+
+[sub_resource type="Animation" id="Animation_lc3bd"]
+resource_name = "Active"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_h0bis")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_461u3"]
+_data = {
+"Active": SubResource("Animation_lc3bd"),
+"Idle": SubResource("Animation_42uya"),
+"RESET": SubResource("Animation_g33qx")
+}
+
+[sub_resource type="Animation" id="Animation_1w0an"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdx1y"]
+resource_name = "Pulsing"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.12549, 0.541176, 0, 0.858824), Color(0.12549, 0.541176, 0, 0.858824)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wex3q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.341176, 0.65098, 0.160784, 0.505882)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngw51"]
+_data = {
+"Idle": SubResource("Animation_1w0an"),
+"Pulsing": SubResource("Animation_kdx1y"),
+"RESET": SubResource("Animation_wex3q")
+}
+
+[node name="Furnace" instance=ExtResource("1_r627i")]
+script = ExtResource("2_ecsnp")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_7kybo")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_tvlmp")
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="2"]
+position = Vector2(0.0131836, 0)
+color = Color(0.341176, 0.65098, 0.160784, 0.505882)
+polygon = PackedVector2Array(-4, -16, -12, -8, -12, 16, 12, 16, 12, -8, 4, -16)
+
+[node name="FurnaceAnimation" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_461u3")
+}
+
+[node name="AvailabilityAnimaion" type="AnimationPlayer" parent="." index="4"]
+root_node = NodePath("../Polygon2D")
+libraries = {
+"": SubResource("AnimationLibrary_ngw51")
+}

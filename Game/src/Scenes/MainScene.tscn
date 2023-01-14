@@ -88,3 +88,5 @@ layer_0/tile_data = PackedInt32Array()
 [node name="Trash" type="Node2D" parent="Buildings"]
 
 [node name="InProgress" type="Node2D" parent="Buildings"]
+
+[node name="Furnace" type="Node2D" parent="Buildings"]
