@@ -4,14 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dfeun2darp3o6" path="res://art/popup.png" id="1_r22e3"]
 
 [node name="BuildingPopup" type="Control"]
+z_index = 100
 layout_mode = 3
 anchors_preset = 0
 offset_top = 8.0
 offset_bottom = 8.0
 scale = Vector2(0.6, 0.6)
+mouse_filter = 2
 script = ExtResource("1_lmqui")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,6 +29,7 @@ grow_vertical = 2
 texture = ExtResource("1_r22e3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
