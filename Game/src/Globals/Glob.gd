@@ -41,7 +41,7 @@ var dismensions_dict: Dictionary = {
 var build_cost_dict: Dictionary = {
 	"Storage": {
 		"Stone": 1,
-		"Wood": 2,
+		"Log": 2,
 	}
 }
 

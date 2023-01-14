@@ -24,6 +24,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/OldBuildings/Abstracts/Building.gd"
 }, {
+"base": "Movable",
+"class": &"DroppedResource",
+"language": &"GDScript",
+"path": "res://src/Interactables/DroppedResource.gd"
+}, {
 "base": "Building1",
 "class": &"Extractor",
 "language": &"GDScript",
@@ -48,11 +53,6 @@ _global_script_classes=[{
 "class": &"InteractableTimed",
 "language": &"GDScript",
 "path": "res://src/Interactables/Abstract/InteractableTimed.gd"
-}, {
-"base": "Movable",
-"class": &"Log",
-"language": &"GDScript",
-"path": "res://src/Interactables/Log.gd"
 }, {
 "base": "Interactable",
 "class": &"Movable",
@@ -80,9 +80,9 @@ _global_script_classes=[{
 "path": "res://src/UI/BuildingBuildPopup/ResAndCount.gd"
 }, {
 "base": "InteractableTimed",
-"class": &"Rock",
+"class": &"Rss",
 "language": &"GDScript",
-"path": "res://src/Interactables/Rock.gd"
+"path": "res://src/Interactables/Resource.gd"
 }, {
 "base": "Area2D",
 "class": &"Skeleton",
@@ -119,11 +119,6 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/OldBuildings/Spawner/Spawner.gd"
 }, {
-"base": "Movable",
-"class": &"Stone",
-"language": &"GDScript",
-"path": "res://src/Interactables/Stone.gd"
-}, {
 "base": "Building",
 "class": &"Storage",
 "language": &"GDScript",
@@ -139,11 +134,6 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/OldBuildings/Trash/Trash.gd"
 }, {
-"base": "InteractableTimed",
-"class": &"Tree1",
-"language": &"GDScript",
-"path": "res://src/Interactables/Tree1.gd"
-}, {
 "base": "Node2D",
 "class": &"WFC",
 "language": &"GDScript",
@@ -153,18 +143,18 @@ _global_script_class_icons={
 "Belt": "",
 "Building": "",
 "Building1": "",
+"DroppedResource": "res://art/icons/log1.png",
 "Extractor": "",
 "GameWorld": "res://art/icons/world.png",
 "InProgressBuilding": "",
 "Interactable": "",
 "InteractableTimed": "",
-"Log": "res://art/icons/log1.png",
 "Movable": "",
 "MovableItem": "",
 "Player": "res://art/icons/witch.png",
 "Receiver": "",
 "ResAndCount": "",
-"Rock": "res://art/icons/rock.png",
+"Rss": "res://art/icons/tree.png",
 "Skeleton": "res://art/icons/skeleton.png",
 "SkeletonBaseState": "",
 "SkeletonBuildState": "",
@@ -172,11 +162,9 @@ _global_script_class_icons={
 "SkeletonHarvestState": "",
 "SkeletonStatesManager": "",
 "Spawner": "",
-"Stone": "res://art/icons/stone.png",
 "Storage": "",
 "Storage1": "",
 "Trash": "",
-"Tree1": "res://art/icons/tree.png",
 "WFC": ""
 }
 
@@ -191,6 +179,7 @@ config/icon="res://art/witch/witch_down/witch_walk_down1.png"
 
 Glob="*res://src/Globals/Glob.gd"
 Signals="*res://src/Globals/Signals.gd"
+ResDescription="*res://src/Globals/ResDescription.gd"
 
 [display]
 

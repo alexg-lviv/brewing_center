@@ -6,9 +6,11 @@ class_name GameWorld
 @icon("res://art/icons/world.png")
 
 
-@export var trees_prob: float = 0.2
-@export var rock_prob: float = 0.05
-@export var scene_size: Vector2 = Vector2(1000, 1000)
+@export var trees_prob: float = 0.1
+@export var rock_prob: float = 0.08
+@export var coal_prob: float = 0.02
+@export var iron_ore_prob: float = 0.005
+@export var scene_size: Vector2 = Vector2(3000, 1000)
 
 # BUILD MODE VARS
 var build_type: String
@@ -33,9 +35,7 @@ var is_erasing: bool = false
 @onready var HighlightMap: TileMap = get_node("HighlightMap")
 
 
-@onready var Tree1 = preload("res://src/Interactables/Tree1.tscn")
-@onready var Rock = preload("res://src/Interactables/Rock.tscn")
-
+@onready var RssOnMap = preload("res://src/Interactables/Resource.tscn")
 
 
 var areas_dict: Dictionary = {
@@ -72,11 +72,11 @@ var demand_res_dict: Dictionary = {}
 var demand_buildings: Array
 var storages: Array
 var resources_in_storages: Dictionary = {
-	"Wood": [],
+	"Log": [],
 	"Stone": []
 }
 var amount_in_storages: Dictionary = {
-	"Wood": [],
+	"Log": [],
 	"Stone": []
 }
 
@@ -427,19 +427,29 @@ func create_trees(world_size: Vector2) -> void:
 		for j in range(0, world_size.y, Glob.GRID_STEP):
 			var to_spawn: bool = false
 			var obj: Interactable
+			var curr_obj: String = ""
 			if randf_range(0, 1) < trees_prob: 
 				to_spawn = true
-				obj = Tree1.instantiate()
+				curr_obj = "Tree"
 			elif randf_range(0, 1) < rock_prob:
 				to_spawn = true
-				obj = Rock.instantiate()
+				curr_obj = "Rock"
+			elif randf_range(0, 1) < coal_prob:
+				to_spawn = true
+				curr_obj = "CoalOre"
+			elif randf_range(0, 1) < iron_ore_prob:
+				to_spawn = true
+				curr_obj = "IronOre"
+				
 			if !to_spawn: continue
+			obj = RssOnMap.instantiate()
 			var pos: Vector2 = Vector2(i - Glob.GRID_STEP/2., j - Glob.GRID_STEP/2.)
 			ResourcesContainer.call_deferred("add_child", obj)
 			obj.set_deferred("global_position", pos)
 			obj.set_deferred("scene", self)
 			obj.set_deferred("center_pos", pos)
 			obj.call_deferred("update_z")
+			obj.set_deferred("rss_name", curr_obj)
 			instances_dict[pos] = obj
 			clear_nav(pos)
 

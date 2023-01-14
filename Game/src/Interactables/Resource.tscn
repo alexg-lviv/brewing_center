@@ -1,0 +1,265 @@
+[gd_scene load_steps=18 format=3 uid="uid://eibxl1ngbpu2"]
+
+[ext_resource type="PackedScene" uid="uid://bvllcws5pag8k" path="res://src/Interactables/Abstract/InteractableTimed.tscn" id="1_3gcpl"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_5dyu5"]
+[ext_resource type="Script" path="res://src/Interactables/Resource.gd" id="3_mt3tt"]
+[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/rss/tree1.png" id="4_5112l"]
+[ext_resource type="Texture2D" uid="uid://dh32v2ac7iaxa" path="res://art/Resources/Rock1.png" id="5_iaa60"]
+[ext_resource type="Texture2D" uid="uid://e2m3v4i65jgb" path="res://art/Resources/IronOre1.png" id="6_qwqhc"]
+[ext_resource type="Texture2D" uid="uid://ct6o3a4626fmj" path="res://art/Resources/CoalOre1.png" id="7_bjrtu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnt4l"]
+resource_local_to_scene = true
+shader = ExtResource("2_5dyu5")
+shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = null
+shader_parameter/active = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56hto"]
+resource_local_to_scene = true
+shader = ExtResource("2_5dyu5")
+shader_parameter/intensity = 50
+shader_parameter/precision = 0.02
+shader_parameter/flipColors = null
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color_2 = Color(1, 1, 1, 1)
+shader_parameter/use_outline_uv = null
+shader_parameter/useTexture = false
+shader_parameter/active = false
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_727r3"]
+radius = 32.0
+height = 128.0
+
+[sub_resource type="Animation" id="Animation_56vlw"]
+resource_name = "Tree"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_5112l")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_727r3")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_mhj5e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_teou2"]
+size = Vector2(64, 40)
+
+[sub_resource type="Animation" id="Animation_kknq7"]
+resource_name = "Rock"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_iaa60")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_teou2")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_343qe"]
+resource_name = "IronOre"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_qwqhc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_teou2")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_kegx4"]
+resource_name = "CoalOre"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_bjrtu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_teou2")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqkgu"]
+_data = {
+"CoalOre": SubResource("Animation_kegx4"),
+"IronOre": SubResource("Animation_343qe"),
+"RESET": SubResource("Animation_mhj5e"),
+"Rock": SubResource("Animation_kknq7"),
+"Tree": SubResource("Animation_56vlw")
+}
+
+[node name="Resource" instance=ExtResource("1_3gcpl")]
+z_as_relative = false
+material = SubResource("ShaderMaterial_fnt4l")
+script = ExtResource("3_mt3tt")
+
+[node name="CollisionShape2d" parent="." index="0"]
+position = Vector2(0, -32)
+
+[node name="Sprite2d" parent="." index="2"]
+material = SubResource("ShaderMaterial_56hto")
+position = Vector2(0, -32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_uqkgu")
+}

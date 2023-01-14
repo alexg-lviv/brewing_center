@@ -7,7 +7,7 @@ extends Control
 
 
 var resources: Dictionary = {
-	"Wood": "res://art/rss/log1.png",
+	"Log": "res://art/rss/log1.png",
 	"Stone": "res://art/rss/stone.png" 
 }
 
