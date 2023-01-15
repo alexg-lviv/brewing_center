@@ -328,8 +328,8 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation
 	NewObj.center_pos = grid_pos
-	NewObj.build_type = build_type
-	NewObj.initiate_building(build_type)
+	NewObj.build_type = object_name
+	NewObj.initiate_building(object_name)
 	add_to_positions_dict(grid_pos, NewObj)
 	
 	demand_buildings.push_back(NewObj)

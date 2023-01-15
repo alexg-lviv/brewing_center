@@ -14,12 +14,11 @@ var my_reserved_demand: Dictionary = {}
 
 var build_type: String
 
-var temp_obj: Movable
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
 ## TODO: add visibility notifiers for optimisation
 func _process(_delta: float) -> void:
-	if Glob.drag_mode:
+	if Glob.drag_mode and (Glob.drag_rss.rss_name in my_demand.keys() and my_demand[Glob.drag_rss.rss_name] > 0):
 		AnimPlayer.play("Pulsing")
 		Pulser.self_modulate = "#00ff00"
 	else:
@@ -48,7 +47,6 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	if skeleton != null:
 		my_reserved_demand[resource_name].erase(skeleton)
 	
-	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
 	scene.update_rss_demand(resource_name, my_demand[resource_name], self)
@@ -62,6 +60,8 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	if done: finish_building()
 
 func take_object():
+	# TODO: well maybe we will tell skeleton that he doesnt have to bring
+	#       that rss anymore???????????
 	get_resource(temp_obj)
 	temp_obj = null
 

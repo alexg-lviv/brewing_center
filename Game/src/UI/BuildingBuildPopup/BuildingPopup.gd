@@ -5,24 +5,17 @@ extends Control
 
 @onready var element = preload("res://src/UI/BuildingBuildPopup/ResAndCount.tscn")
 
-
-var resources: Dictionary = {
-	"Log": "res://art/rss/log1.png",
-	"Stone": "res://art/rss/stone.png" 
-}
-
 func _ready():
 	update_container()
 
 func update_container():
-	if container.size.x > texture.size.x - 30:
-		container.scale = Vector2((texture.size.x - 30) / container.size.x, (texture.size.x - 30) / container.size.x)
-		container.pivot_offset = container.size / 2
+	container.scale = Vector2((texture.size.x - 30) / container.size.x, (texture.size.x - 30) / container.size.x)
+	container.pivot_offset = container.size / 2
 
 func add_resource(resource: String, desired_amount: int) -> void:
 	var instance = element.instantiate()
 	container.call_deferred("add_child", instance)
-	instance.call_deferred("update_texture", resources[resource])
+	instance.call_deferred("update_texture", ResDescription.dropped_rss_sprites[resource])
 	instance.call_deferred("set_desired_amount", desired_amount)
 	instance.set_deferred("name", resource)
 	call_deferred("update_container")

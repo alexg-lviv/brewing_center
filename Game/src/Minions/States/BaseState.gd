@@ -27,5 +27,5 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process(delta: float, target_reached: bool) -> int:
+func process(_delta: float, _target_reached: bool) -> int:
 	return States.NullState

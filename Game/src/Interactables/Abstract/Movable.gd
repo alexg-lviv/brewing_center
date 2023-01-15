@@ -49,6 +49,7 @@ func _process(_delta: float) -> void:
 		return
 	if follow_cursor and Input.is_action_just_released("click"):
 		Glob.drag_mode = false
+		Glob.drag_rss = null
 		follow_cursor = false
 		if !in_focus: Sprite.material.set_shader_parameter("active", false)
 		if reserved_by_building: 
@@ -71,6 +72,7 @@ func interact():
 	current_building = null
 	taken_by_building = false
 	Glob.drag_mode = true
+	Glob.drag_rss  = self
 	mouse_pos_offset = position - get_global_mouse_position()
 	follow_cursor = true
 

@@ -9,6 +9,8 @@ extends Area2D
 var center_pos: Vector2
 var destructable = true
 
+var temp_obj: DroppedResource = null
+
 
 ## calculates relative direction from which other belt is connected to current belt 
 func get_relative_rotation(other_rotation: float) -> float:

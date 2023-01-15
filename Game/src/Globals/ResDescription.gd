@@ -16,6 +16,11 @@ var dropped_rss_sprites: Dictionary = {
 	"Coal":    "res://art/Resources/Dropped/Coal.png",
 }
 
+var dropped_rss_types: Dictionary = {
+	"Coal": "Fuel",
+	"Iron": "Burnable"
+}
+
 var rss_drop_bounds: Dictionary = {
 	"Rock":    Vector2i(1, 2),
 	"IronOre": Vector2i(1, 1),

@@ -22,8 +22,7 @@ func _ready() -> void:
 
 
 ## every tick chose tje target where to go and actualy move
-func _process(delta: float) -> void:
-	
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -33,7 +32,6 @@ func forget_about_object():
 	target = null
 
 func chooose_target_and_resource_to_build() -> Array:
-	var result: Array = []
 	NavAgent.target_desired_distance = 70
 	var buildings: Array = Scene.get_demanding_buildings()
 	# iterate through all the buildings that need something

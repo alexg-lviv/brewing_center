@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dn4fmvwo02ss6" path="res://art/Resources/Dropped/IronBar.png" id="7_6f37g"]
 [ext_resource type="Texture2D" uid="uid://do68k6u000ryd" path="res://art/Resources/Dropped/Iron.png" id="8_o3au0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xg1hl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_svfns"]
 resource_local_to_scene = true
 shader = ExtResource("2_s3mka")
 shader_parameter/intensity = 50
@@ -21,7 +21,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cvgi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivy4j"]
 resource_local_to_scene = true
 shader = ExtResource("2_s3mka")
 shader_parameter/intensity = 18
@@ -33,129 +33,10 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[sub_resource type="Animation" id="Animation_0keop"]
-resource_name = "Log"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_7ojpl")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2d:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array(-16, 8, -8, 16, 16, -8, 8, -16)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:shape")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
-[sub_resource type="Animation" id="Animation_j8ykl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2d:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array()]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:shape")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uicsi"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_330pn"]
 radius = 16.0
 
-[sub_resource type="Animation" id="Animation_61aw7"]
-resource_name = "Stone"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_mbd56")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2d:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array()]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:shape")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CircleShape2D_uicsi")]
-}
-
-[sub_resource type="Animation" id="Animation_qhwfl"]
+[sub_resource type="Animation" id="Animation_tis30"]
 resource_name = "Coal"
 length = 0.001
 tracks/0/type = "value"
@@ -192,10 +73,50 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_uicsi")]
+"values": [SubResource("CircleShape2D_330pn")]
 }
 
-[sub_resource type="Animation" id="Animation_4oeu8"]
+[sub_resource type="Animation" id="Animation_4i6ao"]
+resource_name = "Iron"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_o3au0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2d:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array()]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_330pn")]
+}
+
+[sub_resource type="Animation" id="Animation_d7x4g"]
 resource_name = "IronBar"
 length = 0.001
 tracks/0/type = "value"
@@ -235,8 +156,8 @@ tracks/2/keys = {
 "values": [null]
 }
 
-[sub_resource type="Animation" id="Animation_1a8vh"]
-resource_name = "Iron"
+[sub_resource type="Animation" id="Animation_wvp3j"]
+resource_name = "Log"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -248,7 +169,46 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_o3au0")]
+"values": [ExtResource("4_7ojpl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2d:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-16, 8, -8, 16, 16, -8, 8, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_kw77j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -272,30 +232,70 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_uicsi")]
+"values": [null]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbs2r"]
+[sub_resource type="Animation" id="Animation_n5t7u"]
+resource_name = "Stone"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_mbd56")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2d:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array()]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_330pn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kjqn7"]
 _data = {
-"Coal": SubResource("Animation_qhwfl"),
-"Iron": SubResource("Animation_1a8vh"),
-"IronBar": SubResource("Animation_4oeu8"),
-"Log": SubResource("Animation_0keop"),
-"RESET": SubResource("Animation_j8ykl"),
-"Stone": SubResource("Animation_61aw7")
+"Coal": SubResource("Animation_tis30"),
+"Iron": SubResource("Animation_4i6ao"),
+"IronBar": SubResource("Animation_d7x4g"),
+"Log": SubResource("Animation_wvp3j"),
+"RESET": SubResource("Animation_kw77j"),
+"Stone": SubResource("Animation_n5t7u")
 }
 
 [node name="DroppedResource" instance=ExtResource("1_cs688")]
-material = SubResource("ShaderMaterial_xg1hl")
+material = SubResource("ShaderMaterial_svfns")
 script = ExtResource("3_xkw4e")
 own_z = 10
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_8cvgi")
+material = SubResource("ShaderMaterial_ivy4j")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_xbs2r")
+"": SubResource("AnimationLibrary_kjqn7")
 }

@@ -9,7 +9,7 @@ var StoredItems: Array = Array([null, null, null, null, null, null, null, null, 
 
 
 var stored_objects = 0
-var temp_obj: Movable = null
+
 
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
