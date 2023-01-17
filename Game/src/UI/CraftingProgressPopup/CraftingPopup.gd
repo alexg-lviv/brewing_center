@@ -26,3 +26,12 @@ func initialise_container(res_in: String, res_out: String, max_value: float, tim
 func clear():
 	for child in container.get_children():
 		child.queue_free()
+
+
+## make popup more transparent on hower
+func _on_mouse_entered() -> void:
+	modulate = "ffffff62"
+
+## restore transparency when unhowered
+func _on_mouse_exited() -> void:
+	modulate = "ffffffff"

@@ -6,13 +6,18 @@
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(0.4, 0.4)
+mouse_filter = 1
 script = ExtResource("1_kegrr")
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = -65.0
 offset_top = -20.0
 offset_right = 64.0
 offset_bottom = 20.0
 pivot_offset = Vector2(2.08165e-12, 20)
 alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
