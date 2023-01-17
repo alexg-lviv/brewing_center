@@ -24,7 +24,8 @@ func _process(_delta: float) -> void:
 	else:
 		AnimPlayer.play("Idle")
 
-
+## function to initiate the building process  
+## add demands to the main scene, set preview sprite, set popup
 func initiate_building(build_type: String):
 	sprite.texture = load(Glob.previews_dict[build_type])
 	sprite.modulate = "ffffff64"
@@ -42,6 +43,9 @@ func initiate_building(build_type: String):
 		scene.update_build_rss_demand(key, my_demand[key], self)
 
 
+## accept resource, called from Movable if you drag it in with the mouse
+## or from skeleton. if called from skeleton, the skeleton instance is passed in and
+## the skeleton is removed from the reservation dictionary
 func get_resource(item: Movable, skeleton: Skeleton = null):
 	var resource_name = item.rss_name
 	if skeleton != null:
@@ -59,6 +63,8 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	if done: finish_building()
 
+
+## funush building, call function to instantiate the building, and die ourselves
 func finish_building() -> void:
 	scene.build_object(build_type, center_pos, rotation)
 	scene.demand_build_buildings.erase(self)
@@ -77,5 +83,7 @@ func _on_area_exited(area: Area2D) -> void:
 		area.forget_about_reservation_building()
 		temp_obj = null
 
+
+## remember that the resource should bring us resource so we dont need other skeletons to bring it
 func reserve_demanded_res_by_skeleton(skeleton: Skeleton, resource: String):
 	my_reserved_demand[resource].append(skeleton)

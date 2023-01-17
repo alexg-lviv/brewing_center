@@ -67,8 +67,6 @@ var demand_buid_res_dict: Dictionary = {}
 var demand_craft_res_dict: Dictionary = {}
 
 
-
-
 ## array of buildings that need resources to build
 var demand_build_buildings: Array = []
 var demand_craft_buildings: Array = []
@@ -121,14 +119,15 @@ func _process(_delta):
 #########################################
 #########################################
 
-
+## function to update the array to add all the tiles that were drawn  
+## the tiles are taken from the input dictionary as keys
 func update_drawn_array(dict: Dictionary) -> Array:
 	var res: Array = []
 	for key in dict.keys():
 		if dict[key] != null: res.append(key)
 	return res
 	
-
+## the function to handle areas drawing
 func handle_areas_drawing() -> void:
 	if Input.is_action_pressed("ui_cancel"): 
 		Glob.draw_area_mode = false
@@ -155,7 +154,7 @@ func handle_areas_drawing() -> void:
 
 	set_area_prewiew()
 	update_area_prewiew()
-	
+
 	if is_drawing:
 		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position())
 		HighlightMap.set_cell(layer, grid_pos / Glob.GRID_STEP, 0, Vector2(1, 1))
@@ -172,17 +171,20 @@ func handle_areas_drawing() -> void:
 		elif layer == 1:
 			drawn_harvest_area.erase(grid_pos)
 
+## set the TileMap layers to invisible and hide preview sprite
 func reset_areas_prewiew() -> void:
 	AreaPrev.visible = false
 	HighlightMap.set_layer_enabled(0, false)
 	HighlightMap.set_layer_enabled(1, false)
 
+## set area preview based on what build_type is active
 func set_area_prewiew() -> void:
 	AreaPrev.visible = true
 	AreaPrev.modulate = areas_modulate[build_type]
 	var layer = areas_dict[build_type]
 	HighlightMap.set_layer_enabled(layer, true)
 
+## update the position of preview
 func update_area_prewiew() -> void:
 	AreaPrev.global_position = get_grid_pos(get_global_mouse_position())
 
@@ -219,17 +221,20 @@ func destroy_object(grid_pos: Vector2):
 	remove_building_from_instances_dict(obj_pos, dimensions)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and Glob.build_mode and can_build:
-		var dismensions: bool = true if (Glob.dismensions_dict[build_type].x % 2 == 0) else false
-		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position(), dismensions)
-		place_object(build_type, grid_pos)
 
 ####################
 ####################
 ####  building  ####
 ####################
 ####################
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and Glob.build_mode and can_build:
+		var dismensions: bool = true if (Glob.dismensions_dict[build_type].x % 2 == 0) else false
+		var grid_pos: Vector2 = get_grid_pos(get_global_mouse_position(), dismensions)
+		place_object(build_type, grid_pos)
+
 
 ## if we are in build mode, the function handles everything connected to it
 ## previews object, shades it, checks if we can place it there
@@ -346,6 +351,8 @@ func place_object(object_name: String, grid_pos: Vector2):
 			Glob.build_mode = false
 			reset_preview()
 
+## called from the InProgressBuilfing class
+## used to actually place the building we were intending to build
 func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
 	var NewObj = load(Glob.objects_dict[object_name]).instantiate()
 	BuildingsContainer.get_node(object_name).add_child(NewObj)
@@ -500,6 +507,7 @@ func get_storages() -> Array:
 			res.append(storage)
 	return res
 
+## get all the static big resources on map
 func get_resources() -> Array[InteractableTimed]:
 	var res: Array[InteractableTimed] = []
 	for resource in ResourcesContainer.get_children():
@@ -508,6 +516,8 @@ func get_resources() -> Array[InteractableTimed]:
 			res.append(resource)
 	return res
 
+## get all the buildings that need to be built based on resource name
+## returns all the active constructions that need the stated rss
 func get_build_building(resource: String) -> Array[InProgressBuilding]:
 	var result: Array[InProgressBuilding] = []
 	if !demand_buid_res_dict.has(resource): return result
@@ -516,6 +526,8 @@ func get_build_building(resource: String) -> Array[InProgressBuilding]:
 			result.append(build)
 	return result
 
+## get all the buildings that want to craft something
+## returns all the buildings that need the stated rss
 func get_craft_buildings(resource: String) -> Array[Building]:
 	var result: Array[InProgressBuilding] = []
 	if !demand_craft_res_dict.has(resource): return result
@@ -524,6 +536,7 @@ func get_craft_buildings(resource: String) -> Array[Building]:
 			result.append(build)
 	return result
 
+## update the demand for construction
 func update_build_rss_demand(res: String, amount: int, building: InProgressBuilding):
 	if amount > 0:
 		if demand_buid_res_dict.has(res):
@@ -535,6 +548,7 @@ func update_build_rss_demand(res: String, amount: int, building: InProgressBuild
 		if demand_buid_res_dict.has(res):
 			demand_buid_res_dict[res].erase(building)
 
+## update the demand for crafting
 func update_craft_rss_demand(res: String, amount: int, building: Building):
 	if amount > 0:
 		if demand_craft_res_dict.has(res):
@@ -595,7 +609,7 @@ func get_all_resources_by_name(res_name: String) -> Array[Movable]:
 			result.append(res)
 	return result
 
-
+## check if there are any available storages
 func check_available_storages() -> bool:
 	for storage in storages:
 		if storage.stored_objects < 9:

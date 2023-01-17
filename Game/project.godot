@@ -100,7 +100,7 @@ _global_script_classes=[{
 "path": "res://src/UI/BuildingBuildPopup/ResAndCount.gd"
 }, {
 "base": "InteractableTimed",
-"class": &"Rss",
+"class": &"ResourceOnMap",
 "language": &"GDScript",
 "path": "res://src/Interactables/Resource.gd"
 }, {
@@ -183,7 +183,7 @@ _global_script_class_icons={
 "Player": "res://art/icons/witch.png",
 "Receiver": "",
 "ResAndCount": "",
-"Rss": "res://art/icons/tree.png",
+"ResourceOnMap": "res://art/icons/tree.png",
 "Skeleton": "res://art/icons/skeleton.png",
 "SkeletonBaseState": "",
 "SkeletonBuildState": "",

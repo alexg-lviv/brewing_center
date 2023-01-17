@@ -39,7 +39,9 @@ func _process(_delta: float) -> void:
 	else:
 		PulserAnimPlayer.play("Idle")
 
-
+## accept resource, called from Movable if you drag it in with the mouse
+## or from skeleton. if called from skeleton, the skeleton instance is passed in and
+## the skeleton is removed from the reservation dictionary
 func get_resource(item: Movable, skeleton: Skeleton = null):
 	var resource_name = item.rss_name
 	if skeleton != null:
@@ -47,8 +49,6 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
-	
-	# TODO: UPDATE RSS DEMAND ON SCENE
 	
 	var done = true
 	for res in my_demand.keys():
@@ -58,6 +58,7 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	popup.update_res_count(resource_name, my_demand[resource_name])
 	if done: start_smelting()
 
+## start the smelting of an object
 func start_smelting() -> void:
 	# TODO: rework time system here
 	FurnaceAnimPlayer.play("Active")
@@ -69,7 +70,7 @@ func start_smelting() -> void:
 	popup.clear_popup()
 	scene.remove_demanding_craft_building(self)
 
-
+## finish the smelting and create an instance of resource
 func _on_smelting_timer_timeout() -> void:
 	CraftPopup.clear()
 	FurnaceAnimPlayer.play("Idle")
@@ -81,13 +82,14 @@ func _on_smelting_timer_timeout() -> void:
 	set_demand()
 	popup.show()
 
-
-
+## reset demand to none
 func reset_demand():
 	my_demand = {}
 	my_reserved_demand = {}
 	popup.clear_popup()
 
+## set demand to all ones  
+## to be reworked completely
 func set_demand():
 	# TODO: change to more complex system
 	my_demand[fuel_selected] = 1
@@ -96,6 +98,7 @@ func set_demand():
 	my_reserved_demand[object_to_smelt_selected] = []
 	update_demand()
 
+## update demand, update variables on the scene and the popup
 func update_demand():
 	for res in my_demand.keys():
 		popup.add_resource(res, my_demand[res])
@@ -116,6 +119,7 @@ func _on_area_exited(area: Area2D) -> void:
 			area.forget_about_reservation_building()
 			temp_obj = null
 
+## remember that the resource should bring us resource so we dont need other skeletons to bring it
 func reserve_demanded_res_by_skeleton(skeleton: Skeleton, resource: String):
 	my_reserved_demand[resource].append(skeleton)
 
