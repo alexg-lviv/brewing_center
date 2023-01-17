@@ -34,3 +34,11 @@ func hide():
 
 func show():
 	visible = true
+
+
+func _on_mouse_entered() -> void:
+	modulate = "ffffff62"
+
+
+func _on_mouse_exited() -> void:
+	modulate = "ffffffff"
