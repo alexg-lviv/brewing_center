@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://e2m3v4i65jgb" path="res://art/Resources/IronOre1.png" id="6_qwqhc"]
 [ext_resource type="Texture2D" uid="uid://ct6o3a4626fmj" path="res://art/Resources/CoalOre1.png" id="7_bjrtu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_swmc0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjqnk"]
 resource_local_to_scene = true
 shader = ExtResource("2_5dyu5")
 shader_parameter/intensity = 50
@@ -20,7 +20,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2vfl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4v5va"]
 resource_local_to_scene = true
 shader = ExtResource("2_5dyu5")
 shader_parameter/intensity = 50
@@ -32,10 +32,10 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrgib"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehboh"]
 size = Vector2(64, 40)
 
-[sub_resource type="Animation" id="Animation_smhyi"]
+[sub_resource type="Animation" id="Animation_104j2"]
 resource_name = "CoalOre"
 length = 0.001
 tracks/0/type = "value"
@@ -60,7 +60,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("RectangleShape2D_xrgib")]
+"values": [SubResource("RectangleShape2D_ehboh")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -72,10 +72,22 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -20)]
+"values": [Vector2(0, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_mwba3"]
+[sub_resource type="Animation" id="Animation_55f6u"]
 resource_name = "IronOre"
 length = 0.001
 tracks/0/type = "value"
@@ -100,7 +112,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("RectangleShape2D_xrgib")]
+"values": [SubResource("RectangleShape2D_ehboh")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -112,10 +124,22 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -20)]
+"values": [Vector2(0, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_324yv"]
+[sub_resource type="Animation" id="Animation_v0v06"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -153,8 +177,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, -32)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
-[sub_resource type="Animation" id="Animation_t4mqr"]
+[sub_resource type="Animation" id="Animation_xph6i"]
 resource_name = "Rock"
 length = 0.001
 tracks/0/type = "value"
@@ -179,7 +215,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("RectangleShape2D_xrgib")]
+"values": [SubResource("RectangleShape2D_ehboh")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -191,14 +227,26 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -20)]
+"values": [Vector2(0, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_heahr"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xsbiu"]
 radius = 32.0
 height = 128.0
 
-[sub_resource type="Animation" id="Animation_ngssg"]
+[sub_resource type="Animation" id="Animation_dxnc7"]
 resource_name = "Tree"
 length = 0.001
 tracks/0/type = "value"
@@ -223,7 +271,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CapsuleShape2D_heahr")]
+"values": [SubResource("CapsuleShape2D_xsbiu")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -237,29 +285,40 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, -32)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sbdab"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evxsg"]
 _data = {
-"CoalOre": SubResource("Animation_smhyi"),
-"IronOre": SubResource("Animation_mwba3"),
-"RESET": SubResource("Animation_324yv"),
-"Rock": SubResource("Animation_t4mqr"),
-"Tree": SubResource("Animation_ngssg")
+"CoalOre": SubResource("Animation_104j2"),
+"IronOre": SubResource("Animation_55f6u"),
+"RESET": SubResource("Animation_v0v06"),
+"Rock": SubResource("Animation_xph6i"),
+"Tree": SubResource("Animation_dxnc7")
 }
 
 [node name="Resource" instance=ExtResource("1_3gcpl")]
 z_as_relative = false
-material = SubResource("ShaderMaterial_swmc0")
+material = SubResource("ShaderMaterial_jjqnk")
 script = ExtResource("3_mt3tt")
 
 [node name="CollisionShape2d" parent="." index="0"]
 position = Vector2(0, -32)
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_b2vfl")
-position = Vector2(0, -32)
+material = SubResource("ShaderMaterial_4v5va")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_sbdab")
+"": SubResource("AnimationLibrary_evxsg")
 }

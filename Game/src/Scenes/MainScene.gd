@@ -9,7 +9,7 @@ class_name GameWorld
 @export var trees_prob: float = 0.1
 @export var rock_prob: float = 0.08
 @export var coal_prob: float = 0.02
-@export var iron_ore_prob: float = 0.005
+@export var iron_ore_prob: float = 0.01
 @export var scene_size: Vector2 = Vector2(3000, 1000)
 
 # BUILD MODE VARS
