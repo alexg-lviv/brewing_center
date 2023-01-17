@@ -63,21 +63,29 @@ var drawn_harvest_area: Dictionary = {}
 var harvest_tiles: Array
 
 
-var demand_res_dict: Dictionary = {}
+var demand_buid_res_dict: Dictionary = {}
+var demand_craft_res_dict: Dictionary = {}
 
 
 
 
 ## array of buildings that need resources to build
-var demand_buildings: Array
-var storages: Array
+var demand_build_buildings: Array = []
+var demand_craft_buildings: Array = []
+var storages: Array = []
 var resources_in_storages: Dictionary = {
 	"Log": [],
-	"Stone": []
+	"Stone": [],
+	"Iron": [],
+	"Coal": [],
+	"IronBar": []
 }
 var amount_in_storages: Dictionary = {
 	"Log": [],
-	"Stone": []
+	"Stone": [],
+	"Iron": [],
+	"Coal": [],
+	"IronBar": []
 }
 
 func _ready():
@@ -332,7 +340,7 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.initiate_building(object_name)
 	add_to_positions_dict(grid_pos, NewObj)
 	
-	demand_buildings.push_back(NewObj)
+	demand_build_buildings.push_back(NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
@@ -500,25 +508,43 @@ func get_resources() -> Array[InteractableTimed]:
 			res.append(resource)
 	return res
 
-func get_building(resource: String) -> Array[InProgressBuilding]:
+func get_build_building(resource: String) -> Array[InProgressBuilding]:
 	var result: Array[InProgressBuilding] = []
-	if !demand_res_dict.has(resource): return result
-	for build in demand_res_dict[resource]:
+	if !demand_buid_res_dict.has(resource): return result
+	for build in demand_buid_res_dict[resource]:
 		if build != null:
 			result.append(build)
+	return result
 
+func get_craft_buildings(resource: String) -> Array[Building]:
+	var result: Array[InProgressBuilding] = []
+	if !demand_craft_res_dict.has(resource): return result
+	for build in demand_craft_res_dict[resource]:
+		if build != null:
+			result.append(build)
 	return result
 
 func update_build_rss_demand(res: String, amount: int, building: InProgressBuilding):
 	if amount > 0:
-		if demand_res_dict.has(res):
-			if !demand_res_dict[res].has(building):
-				demand_res_dict[res].append(building)
+		if demand_buid_res_dict.has(res):
+			if !demand_buid_res_dict[res].has(building):
+				demand_buid_res_dict[res].append(building)
 		else:
-			demand_res_dict[res] = [building]
+			demand_buid_res_dict[res] = [building]
 	else:
-		if demand_res_dict.has(res):
-			demand_res_dict[res].erase(building)
+		if demand_buid_res_dict.has(res):
+			demand_buid_res_dict[res].erase(building)
+
+func update_craft_rss_demand(res: String, amount: int, building: Building):
+	if amount > 0:
+		if demand_craft_res_dict.has(res):
+			if !demand_craft_res_dict[res].has(building):
+				demand_craft_res_dict[res].append(building)
+		else:
+			demand_craft_res_dict[res] = [building]
+	else:
+		if demand_craft_res_dict.has(res):
+			demand_craft_res_dict[res].erase(building)
 
 ## when the resource is added to the storage,
 ## update the scene dictionary with the resourcources as keys and arrays of storages as values
@@ -544,8 +570,18 @@ func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
 	return false
 
 ## simply a getter
-func get_demanding_buildings() -> Array:
-	return demand_buildings
+func get_demanding_build_buildings() -> Array:
+	return demand_build_buildings
+
+func add_demanding_craft_building(building: Building) -> void:
+	if !demand_craft_buildings.has(building):
+		demand_craft_buildings.append(building)
+
+func get_demanding_craft_buildings() -> Array:
+	return demand_craft_buildings
+
+func remove_demanding_craft_building(building: Building) -> void:
+	demand_craft_buildings.erase(building)
 
 ## get all the available resource of this type by rss name
 func get_all_resources_by_name(res_name: String) -> Array[Movable]:

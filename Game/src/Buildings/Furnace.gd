@@ -48,8 +48,9 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	# TODO: UPDATE RSS DEMAND ON SCENE
 	
 	var done = true
-	for val in my_demand.values():
-		if val != 0: done = false
+	for res in my_demand.keys():
+		scene.update_craft_rss_demand(res, my_demand[res], self)
+		if my_demand[res] != 0: done = false
 	
 	popup.update_res_count(resource_name, my_demand[resource_name])
 	if done: start_smelting()
@@ -67,6 +68,8 @@ func start_smelting() -> void:
 									time_to_smelt, SmeltTimer)
 	popup.hide()
 	popup.clear_popup()
+	scene.remove_demanding_craft_building(self)
+
 
 func _on_smelting_timer_timeout() -> void:
 	CraftPopup.clear()
@@ -90,11 +93,15 @@ func set_demand():
 	# TODO: change to more complex system
 	my_demand[fuel_selected] = 1
 	my_demand[object_to_smelt_selected] = 1
+	my_reserved_demand[fuel_selected] = []
+	my_reserved_demand[object_to_smelt_selected] = []
 	update_demand()
 
 func update_demand():
 	for res in my_demand.keys():
 		popup.add_resource(res, my_demand[res])
+		scene.add_demanding_craft_building(self)
+		scene.update_craft_rss_demand(res, my_demand[res], self)
 
 ## remember that item entered yourself
 func _on_area_entered(area: Area2D) -> void:

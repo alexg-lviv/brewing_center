@@ -1,16 +1,16 @@
-class_name SkeletonBuildState
+class_name SkeletonCraftState
 extends SkeletonBaseState
 
 var heading_to_resource: bool = false
 var heading_to_building: bool = false
 
-var building: InProgressBuilding = null
+var building: Building = null
 var resource_chosen: Movable = null
 
 func enter() -> void:
 	building = null
 	resource_chosen = null
-	var building_and_res: Array = skeleton.chooose_target_and_resource_to_build()
+	var building_and_res: Array = skeleton.chose_target_and_resource_to_craft()
 	if building_and_res.size() == 2:
 		building = building_and_res[0]
 		resource_chosen = building_and_res[1]
@@ -24,7 +24,7 @@ func exit() -> void:
 
 func process(delta: float, target_reached: bool) -> int:
 	if resource_chosen == null: 
-		return States.CraftState
+		return States.CleanState
 	if target_reached and heading_to_resource:
 		heading_to_resource = false
 		heading_to_building = true
@@ -36,8 +36,7 @@ func process(delta: float, target_reached: bool) -> int:
 		skeleton.place_object_to_building()
 		heading_to_building = false
 		skeleton.target = null
-		enter()
-		return States.NullState
+		return States.BuildState
 	
 	# TODO: if the building reservation for me disappeared (was rejected by had-dropping of rss)
 	# - return States.CleanState

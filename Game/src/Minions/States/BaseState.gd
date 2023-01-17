@@ -3,6 +3,7 @@ extends Node
 
 enum States {
 	BuildState,
+	CraftState,
 	CleanState,
 	HarvestState,
 	NullState

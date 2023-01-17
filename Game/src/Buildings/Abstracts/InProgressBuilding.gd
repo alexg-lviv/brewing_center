@@ -67,7 +67,7 @@ func take_object():
 
 func finish_building() -> void:
 	scene.build_object(build_type, center_pos, rotation)
-	scene.demand_buildings.erase(self)
+	scene.demand_build_buildings.erase(self)
 	queue_free()
 
 

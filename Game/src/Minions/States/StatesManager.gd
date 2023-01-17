@@ -3,8 +3,9 @@ extends Node
 
 @onready var States = {
 	SkeletonBaseState.States.HarvestState: get_node("HarvestState"),
-	SkeletonBaseState.States.CleanState:  get_node("CleanState"),
-	SkeletonBaseState.States.BuildState:   get_node("BuildState")
+	SkeletonBaseState.States.CleanState:   get_node("CleanState"),
+	SkeletonBaseState.States.BuildState:   get_node("BuildState"),
+	SkeletonBaseState.States.CraftState:   get_node("CraftState")
 }
 
 var current_state: SkeletonBaseState

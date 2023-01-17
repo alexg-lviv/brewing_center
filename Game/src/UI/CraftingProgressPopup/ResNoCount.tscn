@@ -17,11 +17,11 @@ alignment = 1
 script = ExtResource("1_t6goq")
 
 [node name="TextureBg" type="TextureRect" parent="."]
-layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
 texture = ExtResource("2_i1ngl")
 
 [node name="Texture" type="TextureRect" parent="TextureBg"]
-layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 4.0

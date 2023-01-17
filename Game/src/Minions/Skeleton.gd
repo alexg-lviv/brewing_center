@@ -33,13 +33,32 @@ func forget_about_object():
 
 func chooose_target_and_resource_to_build() -> Array:
 	NavAgent.target_desired_distance = 70
-	var buildings: Array = Scene.get_demanding_buildings()
+	var buildings: Array = Scene.get_demanding_build_buildings()
 	# iterate through all the buildings that need something
 	for building in buildings:
 		# iterate through resources that this building needs
 		for res in building.my_demand:
 			# check if it still needs resources, and if they are not reserved
 			if (building.my_demand[res] - building.my_reserved_demand[res].size()) > 0:
+				# get all the instances of the resource on scene that can be taken
+				var resources = Scene.get_all_resources_by_name(res)
+				if resources.is_empty(): continue
+				var closest: Movable = get_min_distance_object(resources)
+				closest.get_reserved_by_skeleton(self)
+				if closest.current_building != null: 
+					Scene.try_remove_stored_resource(closest.current_building, closest.rss_name)
+				return [building, closest]
+	return []
+
+func chose_target_and_resource_to_craft() -> Array:
+	NavAgent.target_desired_distance = 70
+	var buildings: Array = Scene.get_demanding_craft_buildings()
+	# iterate through all the buildings that need something
+	for building in buildings:
+		# iterate through resources that this building needs
+		for res in building.my_demand:
+			# check if it still needs resources, and if they are not reserved
+			if !building.my_reserved_demand.has(res) or (building.my_demand[res] - building.my_reserved_demand[res].size()) > 0:
 				# get all the instances of the resource on scene that can be taken
 				var resources = Scene.get_all_resources_by_name(res)
 				if resources.is_empty(): continue
