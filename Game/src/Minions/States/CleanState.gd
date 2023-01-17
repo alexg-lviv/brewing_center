@@ -18,6 +18,8 @@ func process(delta: float, target_reached: bool) -> int:
 	if !skeleton.Scene.check_available_storages():
 		if skeleton.object_in_hands:
 			skeleton.drop_object()
+		elif skeleton.target:
+			skeleton.unreserve_object()
 		return States.HarvestState
 
 	if target_reached and heading_to_resource:
@@ -29,7 +31,7 @@ func process(delta: float, target_reached: bool) -> int:
 		return States.NullState
 	
 	if target_reached and heading_to_storage:
-		skeleton.place_object_to_storage()
+		skeleton.place_object_to_building()
 		return States.BuildState
 	
 	if heading_to_storage: skeleton.chose_target_to_store()

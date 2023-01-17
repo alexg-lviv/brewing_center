@@ -49,7 +49,7 @@ var build_cost_dict: Dictionary = {
 		"Log": 2,
 	},
 	"Furnace": {
-		"Stone": 4
+		"Stone": 1
 	}
 }
 

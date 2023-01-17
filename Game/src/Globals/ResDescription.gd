@@ -21,6 +21,10 @@ var dropped_rss_types: Dictionary = {
 	"Iron": "Burnable"
 }
 
+var rss_smelt_chains: Dictionary = {
+	"Iron": "IronBar"
+}
+
 var rss_drop_bounds: Dictionary = {
 	"Rock":    Vector2i(1, 2),
 	"IronOre": Vector2i(1, 1),

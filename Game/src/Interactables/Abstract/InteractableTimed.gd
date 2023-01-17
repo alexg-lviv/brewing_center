@@ -1,7 +1,7 @@
 class_name InteractableTimed
 extends Interactable
 
-@onready var progress := preload("res://src/UI/InteractionProgress.tscn")
+@onready var progress := preload("res://src/UI/ProgressBars/InteractionProgress.tscn")
 @onready var InteractionTimer : Timer = get_node("InteractionTimer")
 
 var bar

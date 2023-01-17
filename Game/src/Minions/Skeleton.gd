@@ -103,12 +103,9 @@ func drop_object() -> void:
 	object_in_hands.get_dropped_by_skeleton()
 	object_in_hands = null
 
-## release object tht you are carrying
-## reset the states and make the storage take the object
-func place_object_to_storage() -> void:
-	target.take_object(true, object_in_hands)
+func unreserve_object() -> void:
+	target.get_dropped_by_skeleton()
 	target = null
-	object_in_hands = null
 
 func harvest_resource():
 	target.get_harvested_by_skeleton(self, 3)
@@ -118,6 +115,8 @@ func finish_harvesting():
 	harvesting = false
 	finished_harvesting = true
 
+## release object tht you are carrying
+## reset the states and make the storage take the object
 func place_object_to_building():
 	target.get_resource(object_in_hands, self)
 	target = null

@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "TextureProgressBar",
+"class": &"ArrowProgress",
+"language": &"GDScript",
+"path": "res://src/UI/ProgressBars/ArrowProgress.gd"
+}, {
 "base": "Building1",
 "class": &"Belt",
 "language": &"GDScript",
@@ -23,6 +28,16 @@ _global_script_classes=[{
 "class": &"Building1",
 "language": &"GDScript",
 "path": "res://src/OldBuildings/Abstracts/Building.gd"
+}, {
+"base": "Control",
+"class": &"BuildingPopup",
+"language": &"GDScript",
+"path": "res://src/UI/BuildingBuildPopup/BuildingPopup.gd"
+}, {
+"base": "Control",
+"class": &"CraftingPopup",
+"language": &"GDScript",
+"path": "res://src/UI/CraftingProgressPopup/CraftingPopup.gd"
 }, {
 "base": "Movable",
 "class": &"DroppedResource",
@@ -145,9 +160,12 @@ _global_script_classes=[{
 "path": "res://src/WaveFunctionCollapse/WFC.gd"
 }]
 _global_script_class_icons={
+"ArrowProgress": "",
 "Belt": "",
 "Building": "",
 "Building1": "",
+"BuildingPopup": "",
+"CraftingPopup": "",
 "DroppedResource": "res://art/icons/log1.png",
 "Extractor": "",
 "Furnace": "res://art/buildings/FurnaceBurning.png",

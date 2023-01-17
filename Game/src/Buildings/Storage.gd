@@ -26,24 +26,20 @@ func _process(_delta: float) -> void:
 
 
 ## accept the object if there is free place and add to counter
-func take_object(from_skeleton: bool = false, object: Movable = null) -> void:
-	if from_skeleton:
-		for i in range(len(StoredItems)):
-			if StoredItems[i] != null: continue
-			object.get_taken_by_building(self)
-			object.move(Slots[i].global_position)
-			StoredItems[i] = object
-			stored_objects += 1
-			break
-	else:
-		for i in range(len(StoredItems)):
-			if StoredItems[i] != null: continue
-			temp_obj.get_taken_by_building(self)
-			temp_obj.move(Slots[i].global_position)
-			StoredItems[i] = temp_obj
-			temp_obj = null
-			stored_objects += 1
-			break
+func get_resource(item: Movable, skeleton: Skeleton = null) -> void:
+	if skeleton == null:
+		item = temp_obj
+		temp_obj = null
+	for i in range(len(StoredItems)):
+		if StoredItems[i] != null: continue
+		item.get_taken_by_building(self)
+		item.move(Slots[i].global_position)
+		StoredItems[i] = item
+		stored_objects += 1
+		break
+
+func take_object() -> void:
+	get_resource(temp_obj)
 
 ## release item and let it travel to the bright future
 func forget_about_item(item: Interactable) -> void:

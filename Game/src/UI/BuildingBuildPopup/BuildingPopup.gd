@@ -1,4 +1,5 @@
 extends Control
+class_name BuildingPopup
 
 @onready var container: HBoxContainer = get_node("HBoxContainer")
 @onready var texture: TextureRect = get_node("TextureRect")
@@ -23,3 +24,13 @@ func add_resource(resource: String, desired_amount: int) -> void:
 func update_res_count(resource_name: String, amount_left: int) -> void:
 	var res_ui_container = container.get_node(resource_name)
 	res_ui_container.set_count_label(res_ui_container.desired_amount - amount_left)
+
+func clear_popup():
+	for node in container.get_children():
+		node.queue_free()
+
+func hide():
+	visible = false
+
+func show():
+	visible = true

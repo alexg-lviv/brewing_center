@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk5yaioi0iaum"]
+
+[ext_resource type="Script" path="res://src/UI/ProgressBars/ArrowProgress.gd" id="1_gvp45"]
+[ext_resource type="Texture2D" uid="uid://c2mt6t5chjg6h" path="res://art/progress_arrow/progress_aroow_small2.png" id="1_ll47t"]
+[ext_resource type="Texture2D" uid="uid://clqinri0qq7hh" path="res://art/progress_arrow/progress_aroow_small1.png" id="2_thunw"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = 0.01
+value = 6.0
+texture_under = ExtResource("1_ll47t")
+texture_progress = ExtResource("2_thunw")
+script = ExtResource("1_gvp45")
+metadata/_edit_use_anchors_ = true

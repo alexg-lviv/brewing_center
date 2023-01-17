@@ -39,7 +39,7 @@ func initiate_building(build_type: String):
 		popup.add_resource(key, resources[key])
 		my_demand[key] = resources[key]
 		my_reserved_demand[key] = []
-		scene.update_rss_demand(key, my_demand[key], self)
+		scene.update_build_rss_demand(key, my_demand[key], self)
 
 
 func get_resource(item: Movable, skeleton: Skeleton = null):
@@ -49,7 +49,7 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
-	scene.update_rss_demand(resource_name, my_demand[resource_name], self)
+	scene.update_build_rss_demand(resource_name, my_demand[resource_name], self)
 	
 	var done = true
 	for val in my_demand.values():

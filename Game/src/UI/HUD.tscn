@@ -40,8 +40,6 @@ alignment = 1
 
 [node name="Demolish" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_right = 32.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Demolish"]
@@ -62,9 +60,6 @@ texture = ExtResource("3")
 
 [node name="Clear" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 36.0
-offset_right = 68.0
-offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
@@ -87,9 +82,6 @@ texture = ExtResource("4_g3p2b")
 
 [node name="Harvest" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 72.0
-offset_right = 104.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Harvest"]
@@ -112,9 +104,6 @@ texture = ExtResource("5_eojv5")
 [node name="Spawner" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Spawner"]
@@ -128,9 +117,6 @@ texture = ExtResource("4")
 [node name="Belt" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Belt"]
@@ -144,9 +130,6 @@ texture = ExtResource("2")
 [node name="Trash" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Trash"]
@@ -160,9 +143,6 @@ texture = ExtResource("5_n221g")
 [node name="Receiver" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 visible = false
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Receiver"]
@@ -175,9 +155,6 @@ texture = ExtResource("7_tq52d")
 
 [node name="Storage" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 108.0
-offset_right = 140.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Storage"]
@@ -190,9 +167,6 @@ texture = ExtResource("8_o0qfd")
 
 [node name="Furnace" type="TextureButton" parent="HBoxContainer" groups=["BuildButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-offset_left = 144.0
-offset_right = 176.0
-offset_bottom = 32.0
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Furnace"]

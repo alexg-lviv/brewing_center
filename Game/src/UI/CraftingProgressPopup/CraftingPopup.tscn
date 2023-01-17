@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc42ijfofhger"]
+
+[ext_resource type="Script" path="res://src/UI/CraftingProgressPopup/CraftingPopup.gd" id="1_kegrr"]
+
+[node name="CraftingPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_kegrr")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -65.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+pivot_offset = Vector2(2.08165e-12, 20)
+alignment = 1

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://grwc0m1w3maa"]
+
+[ext_resource type="Script" path="res://src/UI/CraftingProgressPopup/ResNoCount.gd" id="1_t6goq"]
+[ext_resource type="Texture2D" uid="uid://qfuhrlq4hjs7" path="res://art/icons/res_preview_bg.png" id="2_i1ngl"]
+
+[node name="ResNoCount" type="HBoxContainer"]
+texture_filter = 1
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(20, 20)
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 2
+alignment = 1
+script = ExtResource("1_t6goq")
+
+[node name="TextureBg" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_i1ngl")
+
+[node name="Texture" type="TextureRect" parent="TextureBg"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 36.0

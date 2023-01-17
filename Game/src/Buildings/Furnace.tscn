@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bw7rrlh787rod"]
+[gd_scene load_steps=16 format=3 uid="uid://bw7rrlh787rod"]
 
 [ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_r627i"]
 [ext_resource type="Script" path="res://src/Buildings/Furnace.gd" id="2_ecsnp"]
 [ext_resource type="Texture2D" uid="uid://d4h17xuvephks" path="res://art/buildings/Furnace.png" id="3_tvlmp"]
 [ext_resource type="Texture2D" uid="uid://873snkap7iuu" path="res://art/buildings/FurnaceBurning.png" id="4_h0bis"]
+[ext_resource type="PackedScene" uid="uid://cc42ijfofhger" path="res://src/UI/CraftingProgressPopup/CraftingPopup.tscn" id="5_6j0p7"]
 [ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="5_yrink"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kybo"]
@@ -168,8 +169,14 @@ libraries = {
 }
 
 [node name="BuildingPopup" parent="." index="5" instance=ExtResource("5_yrink")]
-offset_top = 4.0
-offset_bottom = 4.0
+
+[node name="CraftingPopup" parent="." index="6" instance=ExtResource("5_6j0p7")]
+offset_top = -36.0
+offset_bottom = -36.0
+
+[node name="SmeltingTimer" type="Timer" parent="." index="7"]
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="SmeltingTimer" to="." method="_on_smelting_timer_timeout"]

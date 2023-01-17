@@ -509,7 +509,7 @@ func get_building(resource: String) -> Array[InProgressBuilding]:
 
 	return result
 
-func update_rss_demand(res: String, amount: int, building: InProgressBuilding):
+func update_build_rss_demand(res: String, amount: int, building: InProgressBuilding):
 	if amount > 0:
 		if demand_res_dict.has(res):
 			if !demand_res_dict[res].has(building):
