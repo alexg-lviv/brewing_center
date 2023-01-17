@@ -39,9 +39,13 @@ func process(delta: float, target_reached: bool) -> int:
 		enter()
 		return States.NullState
 	
-	# TODO: if the building reservation for me disappeared (was rejected by had-dropping of rss)
-	# - return States.CleanState
-	# - drop resource
+	
+	if heading_to_building and skeleton.target == null:
+		skeleton.drop_object()
+		return States.CraftState
+	if heading_to_resource and skeleton.target == null:
+		return States.CraftState
+
 	
 	skeleton.NavAgent.set_target_location(skeleton.target.global_position)
 	var direction := skeleton.global_position.direction_to(skeleton.NavAgent.get_next_location())

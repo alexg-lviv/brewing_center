@@ -62,7 +62,7 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"InProgressBuilding",
 "language": &"GDScript",
-"path": "res://src/Buildings/Abstracts/InProgressBuilding.gd"
+"path": "res://src/Buildings/InProgressBuilding.gd"
 }, {
 "base": "Area2D",
 "class": &"Interactable",

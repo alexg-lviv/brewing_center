@@ -37,7 +37,7 @@ func process(delta: float, target_reached: bool) -> int:
 	if heading_to_storage: skeleton.chose_target_to_store()
 	# if you have chosen the storage and it is null.. there is no storage
 	if skeleton.target == null: 
-		# TODO: skeleton.drop_resource
+		skeleton.drop_object()
 		return States.BuildState
 	
 	skeleton.NavAgent.set_target_location(skeleton.target.global_position)

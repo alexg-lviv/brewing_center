@@ -336,7 +336,7 @@ func reset_preview():
 ## create object to scene, set its gridified position and rotation
 ## add it to the building instances dict
 func place_object(object_name: String, grid_pos: Vector2):
-	var NewObj = load("res://src/Buildings/Abstracts/InProgressBuilding.tscn").instantiate()
+	var NewObj = load("res://src/Buildings/InProgressBuilding.tscn").instantiate()
 	BuildingsContainer.get_node("InProgress").add_child(NewObj)
 	NewObj.global_position = grid_pos
 	NewObj.rotation = build_rotation

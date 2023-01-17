@@ -119,6 +119,7 @@ func pick_up_object() -> void:
 	object_in_hands.get_taken_by_skeleton(self)
 
 func drop_object() -> void:
+	object_in_hands.move(global_position + Vector2(0, 10))
 	object_in_hands.get_dropped_by_skeleton()
 	object_in_hands = null
 
@@ -140,3 +141,6 @@ func place_object_to_building():
 	target.get_resource(object_in_hands, self)
 	target = null
 	object_in_hands = null
+
+func get_rejected_by_building():
+	target = null

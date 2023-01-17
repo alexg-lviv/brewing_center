@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://beaajjrsycnys"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_xo0ce"]
-[ext_resource type="Script" path="res://src/Buildings/Abstracts/InProgressBuilding.gd" id="2_8el8l"]
+[ext_resource type="Script" path="res://src/Buildings/InProgressBuilding.gd" id="2_8el8l"]
 [ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="3_onp86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqoww"]

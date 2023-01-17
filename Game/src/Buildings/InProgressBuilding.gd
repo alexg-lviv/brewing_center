@@ -50,6 +50,10 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	var resource_name = item.rss_name
 	if skeleton != null:
 		my_reserved_demand[resource_name].erase(skeleton)
+	else:
+		var temp_skel: Skeleton = my_reserved_demand[resource_name].pop_back()
+		if temp_skel != null: temp_skel.get_rejected_by_building()
+		
 	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
