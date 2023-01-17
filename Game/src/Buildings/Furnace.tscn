@@ -169,6 +169,8 @@ libraries = {
 }
 
 [node name="BuildingPopup" parent="." index="5" instance=ExtResource("5_yrink")]
+offset_top = -52.0
+offset_bottom = -52.0
 
 [node name="CraftingPopup" parent="." index="6" instance=ExtResource("5_6j0p7")]
 offset_top = -36.0

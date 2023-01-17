@@ -6,6 +6,7 @@ class_name BuildingPopup
 
 @onready var element = preload("res://src/UI/BuildingBuildPopup/ResAndCount.tscn")
 
+## on ready, update container, set scale and offset
 func _ready():
 	update_container()
 

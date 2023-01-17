@@ -1,3 +1,6 @@
+## Furnace class
+##
+## Accepts a fuel and a material to smelt
 extends Building
 class_name Furnace
 @icon("res://art/buildings/FurnaceBurning.png")
@@ -22,10 +25,10 @@ var object_to_smelt_selected: String = "Iron"
 var my_demand:          Dictionary = {}
 var my_reserved_demand: Dictionary = {}
 
+## reset demand
 func _ready():
 	reset_demand()
 	set_demand()
-	popup.position.y -= Glob.GRID_STEP
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
 ## TODO: add visibility notifiers for optimisation
@@ -54,10 +57,6 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	popup.update_res_count(resource_name, my_demand[resource_name])
 	if done: start_smelting()
-
-## accept the object if there is free place and add to counter
-func take_object(from_skeleton: bool = false, object: DroppedResource = null) -> void:
-	get_resource(temp_obj)
 
 func start_smelting() -> void:
 	# TODO: rework time system here

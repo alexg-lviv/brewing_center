@@ -38,9 +38,6 @@ func get_resource(item: Movable, skeleton: Skeleton = null) -> void:
 		stored_objects += 1
 		break
 
-func take_object() -> void:
-	get_resource(temp_obj)
-
 ## release item and let it travel to the bright future
 func forget_about_item(item: Interactable) -> void:
 	StoredItems[StoredItems.find(item)] = null

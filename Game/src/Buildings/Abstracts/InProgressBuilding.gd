@@ -59,12 +59,6 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	if done: finish_building()
 
-func take_object():
-	# TODO: well maybe we will tell skeleton that he doesnt have to bring
-	#       that rss anymore???????????
-	get_resource(temp_obj)
-	temp_obj = null
-
 func finish_building() -> void:
 	scene.build_object(build_type, center_pos, rotation)
 	scene.demand_build_buildings.erase(self)

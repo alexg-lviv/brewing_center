@@ -53,7 +53,7 @@ func _process(_delta: float) -> void:
 		follow_cursor = false
 		if !in_focus: Sprite.material.set_shader_parameter("active", false)
 		if reserved_by_building: 
-			reservation_building.take_object()
+			reservation_building.get_resource(self)
 		else:
 			continue_followig = true
 			last_mouse_pos = get_global_mouse_position()
