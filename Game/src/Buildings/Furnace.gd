@@ -31,6 +31,7 @@ var object_to_smelt_selected: String = "Iron"
 
 var my_demand:          Dictionary = {}
 var my_reserved_demand: Dictionary = {}
+var received_rss:       Dictionary = {}
 
 ## reset demand
 func _ready():
@@ -60,6 +61,10 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
+	if received_rss.has(resource_name):
+		received_rss[resource_name] += 1
+	else:
+		received_rss[resource_name] = 1
 	
 	var done = true
 	for res in my_demand.keys():
@@ -83,13 +88,14 @@ func start_smelting() -> void:
 
 ## finish the smelting and create an instance of resource
 func _on_smelting_timer_timeout() -> void:
+	reset_demand()
 	CraftPopup.clear()
 	FurnaceAnimPlayer.play("Idle")
 	var result_obj: DroppedResource= ResObject.instantiate()
 	DroppedResources.add_child(result_obj)
 	result_obj.global_position = center_pos
 	result_obj.rss_name = ResDescription.rss_smelt_chains[object_to_smelt_selected]
-	result_obj.move(center_pos + Vector2(0, 96))
+	result_obj.move(center_pos + Vector2(0, 96) + Vector2(randf_range(-5, 5), randf_range(-5, 5)))
 	set_demand()
 	popup.show()
 
@@ -97,24 +103,68 @@ func _on_smelting_timer_timeout() -> void:
 func reset_demand():
 	my_demand = {}
 	my_reserved_demand = {}
+	received_rss = {}
 	popup.clear_popup()
 
 ## set demand to all ones  
 ## to be reworked completely
 func set_demand():
-	reset_demand()
+#	var new_demand: Dictionary = {}
+#	for res in my_demand.keys():
+#		if my_demand[res] > 0:
+#			new_demand[res] = my_demand[res]
+#	my_demand = new_demand
+#
+	my_demand = {}
 	my_demand[fuel_selected] = int(ceil(float(ResDescription.res_heat_required[object_to_smelt_selected]) / float(ResDescription.res_heat_produced[fuel_selected])))
 	my_demand[object_to_smelt_selected] = 1
-	my_reserved_demand[fuel_selected] = []
-	my_reserved_demand[object_to_smelt_selected] = []
+	
+	var new_reserved_demand: Dictionary = {}
+	for res in my_reserved_demand.keys():
+		if res == fuel_selected:
+			new_reserved_demand[res] = my_reserved_demand[res]
+		elif res == object_to_smelt_selected:
+			new_reserved_demand[res] = my_reserved_demand[res]
+	unreserve_demand()
+	my_reserved_demand = new_reserved_demand
+	if !my_reserved_demand.has(fuel_selected): 
+		my_reserved_demand[fuel_selected] = []
+	if !my_reserved_demand.has(object_to_smelt_selected):
+		my_reserved_demand[object_to_smelt_selected] = []
 	update_demand()
+	update_already_received()
+
+func update_already_received():
+	for rss in received_rss.keys():
+		if my_demand.has(rss) and my_demand[rss] > 0:
+			my_demand[rss] -= received_rss[rss]
+			popup.call_deferred("update_res_count", rss, my_demand[rss])
+		else:
+			throw_rss_out(rss, received_rss[rss])
+			received_rss.erase(rss)
 
 ## update demand, update variables on the scene and the popup
 func update_demand():
+	popup.clear_popup()
 	for res in my_demand.keys():
 		popup.add_resource(res, my_demand[res])
 		scene.add_demanding_craft_building(self)
 		scene.update_craft_rss_demand(res, my_demand[res], self)
+
+func unreserve_demand():
+	for rss in my_reserved_demand.keys():
+		if rss != fuel_selected and rss != object_to_smelt_selected:
+			for skeleton in my_reserved_demand[rss]:
+				skeleton.get_rejected_by_building()
+
+func throw_rss_out(rss: String, amount: int) -> void:
+	for i in range(amount):
+		var result_obj: DroppedResource= ResObject.instantiate()
+		DroppedResources.add_child(result_obj)
+		result_obj.global_position = center_pos
+		result_obj.rss_name = rss
+		result_obj.move(center_pos + Vector2(0, 96) + Vector2(randf_range(-5, 5), randf_range(-5, 5)))
+		
 
 ## remember that item entered yourself
 func _on_area_entered(area: Area2D) -> void:

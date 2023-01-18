@@ -529,7 +529,7 @@ func get_build_building(resource: String) -> Array[InProgressBuilding]:
 ## get all the buildings that want to craft something
 ## returns all the buildings that need the stated rss
 func get_craft_buildings(resource: String) -> Array[Building]:
-	var result: Array[InProgressBuilding] = []
+	var result: Array[Building] = []
 	if !demand_craft_res_dict.has(resource): return result
 	for build in demand_craft_res_dict[resource]:
 		if build != null:

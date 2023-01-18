@@ -36,6 +36,11 @@ func update_res_count(resource_name: String, amount_left: int) -> void:
 	var res_ui_container = container.get_node(resource_name)
 	res_ui_container.set_count_label(res_ui_container.desired_amount - amount_left)
 
+## add count of resources when we put resource to the destination
+func update_res_count_absolute(resource_name: String, amount_got: int) -> void:
+	var res_ui_container = container.get_node(resource_name)
+	res_ui_container.set_count_label(amount_got)
+
 func set_warning():
 	var instance = warning.instantiate()
 	container.call_deferred("add_child", instance)
