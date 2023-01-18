@@ -35,6 +35,11 @@ _global_script_classes=[{
 "path": "res://src/UI/BuildingBuildPopup/BuildingPopup.gd"
 }, {
 "base": "Control",
+"class": &"CraftRssSelection",
+"language": &"GDScript",
+"path": "res://src/UI/CraftingRssSelection/CraftingRssSelection.gd"
+}, {
+"base": "Control",
 "class": &"CraftingPopup",
 "language": &"GDScript",
 "path": "res://src/UI/CraftingProgressPopup/CraftingPopup.gd"
@@ -53,6 +58,11 @@ _global_script_classes=[{
 "class": &"Furnace",
 "language": &"GDScript",
 "path": "res://src/Buildings/Furnace.gd"
+}, {
+"base": "Control",
+"class": &"FurnaceRssSelector",
+"language": &"GDScript",
+"path": "res://src/UI/CraftingRssSelection/RssSelection.gd"
 }, {
 "base": "Node2D",
 "class": &"GameWorld",
@@ -170,10 +180,12 @@ _global_script_class_icons={
 "Building": "",
 "Building1": "",
 "BuildingPopup": "",
+"CraftRssSelection": "",
 "CraftingPopup": "",
 "DroppedResource": "res://art/icons/log1.png",
 "Extractor": "",
 "Furnace": "res://art/buildings/FurnaceBurning.png",
+"FurnaceRssSelector": "",
 "GameWorld": "res://art/icons/world.png",
 "InProgressBuilding": "",
 "Interactable": "",

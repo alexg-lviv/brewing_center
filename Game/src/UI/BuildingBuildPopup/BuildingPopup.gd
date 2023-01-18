@@ -1,10 +1,15 @@
 extends Control
 class_name BuildingPopup
 
+signal popup_pressed
+
 @onready var container: HBoxContainer = get_node("HBoxContainer")
 @onready var texture: TextureRect = get_node("TextureRect")
 
 @onready var element = preload("res://src/UI/BuildingBuildPopup/ResAndCount.tscn")
+@onready var warning = preload("res://src/UI/CraftingRssSelection/Warning.tscn")
+
+var warn: bool = false
 
 ## on ready, update container, set scale and offset
 func _ready():
@@ -31,8 +36,14 @@ func update_res_count(resource_name: String, amount_left: int) -> void:
 	var res_ui_container = container.get_node(resource_name)
 	res_ui_container.set_count_label(res_ui_container.desired_amount - amount_left)
 
+func set_warning():
+	var instance = warning.instantiate()
+	container.call_deferred("add_child", instance)
+	warn = true
+
 ## clear all the resources in the node
 func clear_popup():
+	warn = false
 	for node in container.get_children():
 		node.queue_free()
 
@@ -46,8 +57,16 @@ func show():
 
 ## make popup more transparent on hower
 func _on_mouse_entered() -> void:
-	modulate = "ffffff62"
+	if warn:
+		modulate = "b7a9b1ff"
+	else:
+		modulate = "ffffff62"
 
 ## restore transparency when unhowered
 func _on_mouse_exited() -> void:
 	modulate = "ffffffff"
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("click"):
+		emit_signal("popup_pressed")

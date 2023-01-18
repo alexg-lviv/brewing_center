@@ -17,8 +17,13 @@ var dropped_rss_sprites: Dictionary = {
 }
 
 var dropped_rss_types: Dictionary = {
-	"Coal": "Fuel",
-	"Iron": "Burnable"
+	"Fuel": ["Log", "Coal"],
+	"Burnable": ["Iron"]
+}
+
+var burning_force: Dictionary = {
+	"Log": 1,
+	"Coal": 3,
 }
 
 var rss_smelt_chains: Dictionary = {
@@ -27,7 +32,7 @@ var rss_smelt_chains: Dictionary = {
 
 var rss_drop_bounds: Dictionary = {
 	"Rock":    Vector2i(1, 2),
-	"IronOre": Vector2i(1, 1),
+	"IronOre": Vector2i(2, 4),
 	"CoalOre": Vector2i(1, 3),
 	"Tree":    Vector2i(2, 3),
 }

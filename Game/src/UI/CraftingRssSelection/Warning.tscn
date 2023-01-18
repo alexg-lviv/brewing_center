@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6f8rc8sa8cdy"]
+
+[ext_resource type="Texture2D" uid="uid://0h4vl1dya2c1" path="res://art/ui/attention.png" id="1_o0sh4"]
+
+[node name="Warning" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 56.0
+texture = ExtResource("1_o0sh4")

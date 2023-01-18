@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjhn58vw5m0yv"]
+
+[ext_resource type="Script" path="res://src/UI/CraftingRssSelection/RssSelection.gd" id="1_mgtub"]
+[ext_resource type="Texture2D" uid="uid://c2ylpqxdnw4ee" path="res://art/ui/RssSelectionBg.png" id="1_unkyy"]
+[ext_resource type="Texture2D" uid="uid://vvu6wo3yo1t2" path="res://art/ui/Ramka.png" id="2_oklra"]
+[ext_resource type="Texture2D" uid="uid://c7iqrqbuiylyo" path="res://art/ui/Fire.png" id="3_tol05"]
+[ext_resource type="Texture2D" uid="uid://blmerlw3446kp" path="res://art/ui/Arrow.png" id="4_ttemt"]
+
+[node name="FurnaceRssSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_mgtub")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("1_unkyy")
+
+[node name="FuelButton" type="TextureButton" parent="Background"]
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 52.0
+offset_bottom = 68.0
+texture_normal = ExtResource("2_oklra")
+
+[node name="TextureRect" type="TextureRect" parent="Background/FuelButton"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 34.0
+offset_bottom = 34.0
+
+[node name="BurnableButton" type="TextureButton" parent="Background"]
+anchors_preset = -1
+anchor_left = -0.03125
+anchor_right = -0.03125
+offset_left = 80.0
+offset_top = 32.0
+offset_right = 116.0
+offset_bottom = 68.0
+texture_normal = ExtResource("2_oklra")
+
+[node name="TextureRect" type="TextureRect" parent="Background/BurnableButton"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 34.0
+offset_bottom = 34.0
+
+[node name="Fire" type="TextureRect" parent="Background"]
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 48.0
+offset_bottom = 104.0
+texture = ExtResource("3_tol05")
+
+[node name="Arrow" type="TextureRect" parent="Background"]
+offset_left = 80.0
+offset_top = 85.0
+offset_right = 108.0
+offset_bottom = 105.0
+pivot_offset = Vector2(14, 10)
+texture = ExtResource("4_ttemt")
+
+[connection signal="pressed" from="Background/FuelButton" to="." method="_on_fuel_button_pressed"]
+[connection signal="pressed" from="Background/BurnableButton" to="." method="_on_burnable_button_pressed"]

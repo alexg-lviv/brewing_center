@@ -4,8 +4,8 @@
 ## serves as the masterclass for all the resources  
 ## the sprite and kind of resource, and the drop behaviour are determined by
 ## rss_name with its setter function
-extends InteractableTimed
 class_name ResourceOnMap
+extends InteractableTimed
 @icon("res://art/icons/tree.png")
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")

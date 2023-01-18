@@ -1,8 +1,8 @@
 ## Main game world
 ##
 ## a field  for construction, harvesting and all the gameplay
-extends Node2D
 class_name GameWorld
+extends Node2D
 @icon("res://art/icons/world.png")
 
 

@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2o122ycvymoc"]
+
+[ext_resource type="Script" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.gd" id="1_4ajft"]
+[ext_resource type="Texture2D" uid="uid://c2ylpqxdnw4ee" path="res://art/ui/RssSelectionBg.png" id="1_pti8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4xah"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22drx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86h60"]
+
+[node name="CraftingRssSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_4ajft")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("1_pti8i")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect"]
+texture_filter = 1
+custom_minimum_size = Vector2(116, 2.08165e-12)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 122.0
+offset_bottom = 122.0
+horizontal_scroll_mode = 0
+
+[node name="ItemList" type="ItemList" parent="TextureRect/ScrollContainer"]
+texture_filter = 1
+clip_contents = false
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 30
+theme_override_constants/icon_margin = 30
+theme_override_font_sizes/font_size = 25
+theme_override_styles/panel = SubResource("StyleBoxEmpty_u4xah")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_22drx")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_86h60")
+auto_height = true
+same_column_width = true
+fixed_column_width = 116
+
+[connection signal="item_activated" from="TextureRect/ScrollContainer/ItemList" to="." method="_on_item_list_item_activated"]

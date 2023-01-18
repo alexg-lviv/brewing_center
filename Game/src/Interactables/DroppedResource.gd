@@ -1,5 +1,5 @@
-extends Movable
 class_name DroppedResource
+extends Movable
 @icon("res://art/icons/log1.png")
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")

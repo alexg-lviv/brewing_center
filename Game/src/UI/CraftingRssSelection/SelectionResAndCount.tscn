@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://wych8nnt77pp"]
+
+[ext_resource type="Texture2D" uid="uid://ck84js616g00o" path="res://art/Resources/Dropped/Coal.png" id="1_c6ecn"]
+
+[node name="SelectionResAndCount" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -10.0
+offset_right = -1222.0
+offset_bottom = -710.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(58, 10)
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="."]
+offset_left = 35.0
+offset_right = 67.0
+offset_bottom = 32.0
+texture = ExtResource("1_c6ecn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 71.0
+offset_top = 3.0
+offset_right = 81.0
+offset_bottom = 29.0
+text = "1"
