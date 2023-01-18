@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 
 func clear():
 	List.clear()
+	items.clear()
 
 func add_item(item: String, count: int) -> void:
 	List.add_item(str(count), load(ResDescription.dropped_rss_sprites[item]))

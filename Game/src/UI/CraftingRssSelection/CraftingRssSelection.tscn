@@ -10,6 +10,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86h60"]
 
 [node name="CraftingRssSelection" type="Control"]
+z_index = 120
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(0.5, 0.5)
@@ -17,6 +18,7 @@ script = ExtResource("1_4ajft")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
+layout_mode = 0
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0

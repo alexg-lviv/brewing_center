@@ -103,6 +103,7 @@ func reset_demand():
 ## to be reworked completely
 func set_demand():
 	# TODO: change to more complex system
+	reset_demand()
 	my_demand[fuel_selected] = 1
 	my_demand[object_to_smelt_selected] = 1
 	my_reserved_demand[fuel_selected] = []
@@ -139,9 +140,13 @@ func _on_crafting_rss_selection_item_activated(item: String) -> void:
 	if selection == "Fuel":
 		BurnableOrFuelSelectionPopup.set_fuel_texture(item)
 		is_fuel_selected = true
+		fuel_selected = item
 	elif selection == "Burnable":
 		BurnableOrFuelSelectionPopup.set_burnable_texture(item)
 		is_burnable_selected = true
+		object_to_smelt_selected = item
+	if is_fuel_selected and is_burnable_selected:
+		set_demand()
 
 
 func _on_building_popup_popup_pressed() -> void:
