@@ -21,8 +21,8 @@ func clear():
 	List.clear()
 	items.clear()
 
-func add_item(item: String, count: int) -> void:
-	List.add_item(str(count), load(ResDescription.dropped_rss_sprites[item]))
+func add_item(item: String, string_to_write: String) -> void:
+	List.add_item(string_to_write, load(ResDescription.dropped_rss_sprites[item]))
 	items.append(item)
 
 

@@ -21,8 +21,13 @@ var dropped_rss_types: Dictionary = {
 	"Burnable": ["Iron"]
 }
 
-var burning_force: Dictionary = {
-	"Log": 1,
+
+var res_heat_required: Dictionary = {
+	"Iron": 3
+}
+
+var res_heat_produced: Dictionary = {
+	"Log": 2,
 	"Coal": 3,
 }
 

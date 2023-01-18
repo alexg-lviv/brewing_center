@@ -45,6 +45,7 @@ func set_warning():
 func clear_popup():
 	warn = false
 	for node in container.get_children():
+		node.name = "A"
 		node.queue_free()
 
 ## turn off visibility

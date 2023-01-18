@@ -102,9 +102,8 @@ func reset_demand():
 ## set demand to all ones  
 ## to be reworked completely
 func set_demand():
-	# TODO: change to more complex system
 	reset_demand()
-	my_demand[fuel_selected] = 1
+	my_demand[fuel_selected] = int(ceil(float(ResDescription.res_heat_required[object_to_smelt_selected]) / float(ResDescription.res_heat_produced[fuel_selected])))
 	my_demand[object_to_smelt_selected] = 1
 	my_reserved_demand[fuel_selected] = []
 	my_reserved_demand[object_to_smelt_selected] = []
@@ -161,7 +160,7 @@ func _on_furnace_rss_selection_enter_burnable_selection() -> void:
 	ResourcesSelectionPopup.clear()
 	ResourcesSelectionPopup.show()
 	for res in ResDescription.dropped_rss_types["Burnable"]:
-		ResourcesSelectionPopup.add_item(res, 1)
+		ResourcesSelectionPopup.add_item(res, "heat requiered" + str(ResDescription.res_heat_required[res]))
 	selection = "Burnable"
 
 
@@ -169,5 +168,5 @@ func _on_furnace_rss_selection_enter_fuel_selection() -> void:
 	ResourcesSelectionPopup.clear()
 	ResourcesSelectionPopup.show()
 	for res in ResDescription.dropped_rss_types["Fuel"]:
-		ResourcesSelectionPopup.add_item(res, 1)
+		ResourcesSelectionPopup.add_item(res, "heat produced" + str(ResDescription.res_heat_produced[res]))
 	selection = "Fuel"
