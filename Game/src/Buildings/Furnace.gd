@@ -3,7 +3,7 @@
 ## Accepts a fuel and a material to smelt
 extends Building
 class_name Furnace
-@icon("res://art/buildings/FurnaceBurning.png")
+@icon("res://art/buildings/Furnace/FurnaceBurning1.png")
 
 @onready var FurnaceAnimPlayer: AnimationPlayer = get_node("FurnaceAnimation")
 @onready var PulserAnimPlayer: AnimationPlayer = get_node("AvailabilityAnimaion")

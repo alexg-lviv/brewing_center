@@ -1,20 +1,29 @@
-[gd_scene load_steps=18 format=3 uid="uid://bw7rrlh787rod"]
+[gd_scene load_steps=25 format=3 uid="uid://bw7rrlh787rod"]
 
 [ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_r627i"]
 [ext_resource type="Script" path="res://src/Buildings/Furnace.gd" id="2_ecsnp"]
 [ext_resource type="Texture2D" uid="uid://d4h17xuvephks" path="res://art/buildings/Furnace.png" id="3_tvlmp"]
-[ext_resource type="Texture2D" uid="uid://873snkap7iuu" path="res://art/buildings/FurnaceBurning.png" id="4_h0bis"]
+[ext_resource type="Texture2D" uid="uid://m83tt11orllm" path="res://art/buildings/Furnace/FurnaceBurning1.png" id="4_dc6r0"]
 [ext_resource type="PackedScene" uid="uid://cc42ijfofhger" path="res://src/UI/CraftingProgressPopup/CraftingPopup.tscn" id="5_6j0p7"]
+[ext_resource type="Texture2D" uid="uid://2oo08gonwqi8" path="res://art/buildings/Furnace/FurnaceBurning2.png" id="5_hk40g"]
 [ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="5_yrink"]
+[ext_resource type="Texture2D" uid="uid://dyjb7htw1opyo" path="res://art/buildings/Furnace/FurnaceBurning3.png" id="6_csmru"]
+[ext_resource type="Texture2D" uid="uid://drvq3yndyip8m" path="res://art/buildings/Furnace/FurnaceBurning4.png" id="7_jw2bx"]
 [ext_resource type="PackedScene" uid="uid://bjhn58vw5m0yv" path="res://src/UI/CraftingRssSelection/RssSelection.tscn" id="7_ksqte"]
 [ext_resource type="PackedScene" uid="uid://c2o122ycvymoc" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.tscn" id="7_oywve"]
+[ext_resource type="Texture2D" uid="uid://6tmqoyjkm0uv" path="res://art/buildings/Furnace/FurnaceBurning5.png" id="8_lr07o"]
+[ext_resource type="Texture2D" uid="uid://iqjvy302gkn3" path="res://art/buildings/Furnace/FurnaceBurning6.png" id="9_g634r"]
+[ext_resource type="Texture2D" uid="uid://dp58yhtm34svd" path="res://art/buildings/Furnace/FurnaceBurning7.png" id="10_nembh"]
+[ext_resource type="Texture2D" uid="uid://cyv7h7yn4sdri" path="res://art/buildings/Furnace/Furnace.png" id="11_0ke2n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kybo"]
 radius = 12.0
 
 [sub_resource type="Animation" id="Animation_lc3bd"]
 resource_name = "Active"
-length = 0.001
+length = 2.1
+loop_mode = 1
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,10 +31,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_h0bis")]
+"values": [ExtResource("4_dc6r0"), ExtResource("5_hk40g"), ExtResource("6_csmru"), ExtResource("7_jw2bx"), ExtResource("8_lr07o"), ExtResource("9_g634r"), ExtResource("10_nembh")]
 }
 
 [sub_resource type="Animation" id="Animation_42uya"]
@@ -41,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_tvlmp")]
+"values": [ExtResource("11_0ke2n")]
 }
 
 [sub_resource type="Animation" id="Animation_g33qx"]

@@ -43,10 +43,10 @@ var rss_drop_bounds: Dictionary = {
 }
 
 var rss_harvest_time: Dictionary = {
-	"Rock":    3,
-	"IronOre": 5,
-	"CoalOre": 4,
-	"Tree":    2,
+	"Rock":    0.5,
+	"IronOre": 0.5,
+	"CoalOre": 0.5,
+	"Tree":    0.5,
 }
 
 var rss_drop_resource_types: Dictionary = {

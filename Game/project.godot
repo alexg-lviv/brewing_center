@@ -184,7 +184,7 @@ _global_script_class_icons={
 "CraftingPopup": "",
 "DroppedResource": "res://art/icons/log1.png",
 "Extractor": "",
-"Furnace": "res://art/buildings/FurnaceBurning.png",
+"Furnace": "res://art/buildings/Furnace/FurnaceBurning1.png",
 "FurnaceRssSelector": "",
 "GameWorld": "res://art/icons/world.png",
 "InProgressBuilding": "",
