@@ -15,7 +15,6 @@ anchor_bottom = 1.0
 script = ExtResource("1_qwjn8")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,7 +29,6 @@ grow_vertical = 2
 texture = ExtResource("1_m01ti")
 
 [node name="HFlowContainer" type="HFlowContainer" parent="Background"]
-layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 590.0
@@ -39,15 +37,17 @@ scale = Vector2(2, 2)
 theme_override_constants/h_separation = 30
 
 [node name="Furnace" type="TextureButton" parent="Background/HFlowContainer" groups=["BuildButton"]]
-layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
 texture_normal = ExtResource("3_0mpel")
 
 [node name="Storage" type="TextureButton" parent="Background/HFlowContainer" groups=["BuildButton"]]
-layout_mode = 2
+offset_left = 94.0
+offset_right = 158.0
+offset_bottom = 64.0
 texture_normal = ExtResource("4_brp17")
 
 [node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 1
 offset_left = 1216.0
 offset_top = 34.0
 offset_right = 1246.0
