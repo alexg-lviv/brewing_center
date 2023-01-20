@@ -33,7 +33,7 @@ var is_erasing: bool = false
 @onready var BuildingsContainer: Node2D = get_node("Buildings")
 @onready var AreaPrev: Sprite2D = get_node("AreaPreview")
 @onready var HighlightMap: TileMap = get_node("HighlightMap")
-
+@onready var BuildSelectionPopup: BuildingSelection = get_node("UI/BuildingSelectionPopup")
 
 @onready var RssOnMap = preload("res://src/Interactables/Resource.tscn")
 
@@ -89,8 +89,11 @@ var amount_in_storages: Dictionary = {
 func _ready():
 	create_environment(scene_size)
 	
+	for button in get_tree().get_nodes_in_group("ActionButton"):
+		button.connect("pressed", Callable(self, "_on_action_button_pressed").bind(button.get_name()))
+	
 	for button in get_tree().get_nodes_in_group("BuildButton"):
-		button.connect("pressed",Callable(self,"_on_build_button_pressed").bind(button.get_name()))
+		button.connect("pressed", Callable(self, "_on_build_button_pressed").bind(button.get_name()))
 	
 	Signals.connect("object_howered", Callable(self,"_on_object_howered"))
 	Signals.connect("object_unhowered", Callable(self,"_on_object_unhowered"))
@@ -278,28 +281,33 @@ func handle_rotation():
 ## signal that handles UI build button actions
 ## it can eather specify which object to build
 ## or enter demolition mode
-func _on_build_button_pressed(building_type: String):
-	if building_type == "Demolish":
+func _on_action_button_pressed(action_type: String):
+	if action_type == "Demolish":
 		# TODO: REWRITE IT TO SETTER
 		Glob.build_mode = false
 		Glob.demolish_mode = true
 		Glob.draw_area_mode = false
 		reset_preview()
 		reset_areas_prewiew()
-	elif building_type == "Clear" or building_type == "Harvest":
+	elif action_type == "Clear" or action_type == "Harvest":
 		Glob.draw_area_mode = true
 		Glob.build_mode = false
 		Glob.demolish_mode = false
-		build_type = building_type
+		build_type = action_type
 		reset_preview()
-	else:
-		# TODO: REWRITE IT TO SETTER
-		Glob.build_mode = true
-		Glob.demolish_mode = false
-		Glob.draw_area_mode = false
-		build_type = building_type
-		set_preview(build_type)
-		reset_areas_prewiew()
+	elif action_type == "Build":
+		BuildSelectionPopup.show()
+
+
+func _on_build_button_pressed(build_name: String):
+	# TODO: REWRITE IT TO SETTER
+	BuildSelectionPopup.hide()
+	Glob.build_mode = true
+	Glob.demolish_mode = false
+	Glob.draw_area_mode = false
+	build_type = build_name
+	set_preview(build_type)
+	reset_areas_prewiew()
 
 
 ## set prewiew of the object we are going to build

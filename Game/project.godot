@@ -35,6 +35,11 @@ _global_script_classes=[{
 "path": "res://src/UI/BuildingBuildPopup/BuildingPopup.gd"
 }, {
 "base": "Control",
+"class": &"BuildingSelection",
+"language": &"GDScript",
+"path": "res://src/UI/BuildingSelectionScreen/BuildingSelectionPopup.gd"
+}, {
+"base": "Control",
 "class": &"CraftRssSelection",
 "language": &"GDScript",
 "path": "res://src/UI/CraftingRssSelection/CraftingRssSelection.gd"
@@ -180,6 +185,7 @@ _global_script_class_icons={
 "Building": "",
 "Building1": "",
 "BuildingPopup": "",
+"BuildingSelection": "",
 "CraftRssSelection": "",
 "CraftingPopup": "",
 "DroppedResource": "res://art/icons/log1.png",
