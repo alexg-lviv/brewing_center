@@ -62,7 +62,7 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"Furnace",
 "language": &"GDScript",
-"path": "res://src/Buildings/Furnace.gd"
+"path": "res://src/Buildings/Furnace/Furnace.gd"
 }, {
 "base": "Control",
 "class": &"FurnaceRssSelector",
@@ -73,6 +73,11 @@ _global_script_classes=[{
 "class": &"GameWorld",
 "language": &"GDScript",
 "path": "res://src/Scenes/MainScene.gd"
+}, {
+"base": "Building",
+"class": &"GardenPit",
+"language": &"GDScript",
+"path": "res://src/Buildings/GardenPit/GardenPit.gd"
 }, {
 "base": "Building",
 "class": &"InProgressBuilding",
@@ -162,7 +167,7 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"Storage",
 "language": &"GDScript",
-"path": "res://src/Buildings/Storage.gd"
+"path": "res://src/Buildings/Storage/Storage.gd"
 }, {
 "base": "Building1",
 "class": &"Storage1",
@@ -193,6 +198,7 @@ _global_script_class_icons={
 "Furnace": "res://art/buildings/Furnace/FurnaceBurning1.png",
 "FurnaceRssSelector": "",
 "GameWorld": "res://art/icons/world.png",
+"GardenPit": "",
 "InProgressBuilding": "",
 "Interactable": "",
 "InteractableTimed": "",

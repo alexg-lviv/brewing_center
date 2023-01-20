@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bo2l54wgujk1e"]
+[gd_scene load_steps=21 format=3 uid="uid://bo2l54wgujk1e"]
 
 [ext_resource type="PackedScene" uid="uid://l032ugses10v" path="res://src/Interactables/Abstract/Movable.tscn" id="1_cs688"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_s3mka"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://ck84js616g00o" path="res://art/Resources/Dropped/Coal.png" id="6_fa624"]
 [ext_resource type="Texture2D" uid="uid://dn4fmvwo02ss6" path="res://art/Resources/Dropped/IronBar.png" id="7_6f37g"]
 [ext_resource type="Texture2D" uid="uid://do68k6u000ryd" path="res://art/Resources/Dropped/Iron.png" id="8_o3au0"]
+[ext_resource type="Texture2D" uid="uid://waxfixrgsj4m" path="res://art/Resources/Dropped/acorn.png" id="9_o6wag"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_svfns"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cmap"]
 resource_local_to_scene = true
 shader = ExtResource("2_s3mka")
 shader_parameter/intensity = 50
@@ -21,7 +22,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivy4j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqfn1"]
 resource_local_to_scene = true
 shader = ExtResource("2_s3mka")
 shader_parameter/intensity = 18
@@ -33,10 +34,10 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_330pn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0y4wn"]
 radius = 16.0
 
-[sub_resource type="Animation" id="Animation_tis30"]
+[sub_resource type="Animation" id="Animation_i55jx"]
 resource_name = "Coal"
 length = 0.001
 tracks/0/type = "value"
@@ -73,10 +74,22 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_330pn")]
+"values": [SubResource("CircleShape2D_0y4wn")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_4i6ao"]
+[sub_resource type="Animation" id="Animation_a58ap"]
 resource_name = "Iron"
 length = 0.001
 tracks/0/type = "value"
@@ -113,10 +126,22 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_330pn")]
+"values": [SubResource("CircleShape2D_0y4wn")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_d7x4g"]
+[sub_resource type="Animation" id="Animation_jvilv"]
 resource_name = "IronBar"
 length = 0.001
 tracks/0/type = "value"
@@ -155,8 +180,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [null]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_wvp3j"]
+[sub_resource type="Animation" id="Animation_6aw2c"]
 resource_name = "Log"
 length = 0.001
 tracks/0/type = "value"
@@ -195,8 +232,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [null]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_kw77j"]
+[sub_resource type="Animation" id="Animation_hr25t"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -234,8 +283,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [null]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_n5t7u"]
+[sub_resource type="Animation" id="Animation_y4hnd"]
 resource_name = "Stone"
 length = 0.001
 tracks/0/type = "value"
@@ -272,30 +333,95 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("CircleShape2D_330pn")]
+"values": [SubResource("CircleShape2D_0y4wn")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kjqn7"]
+[sub_resource type="Animation" id="Animation_f160k"]
+resource_name = "Acorn"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_o6wag")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2d:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array()]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2d:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_0y4wn")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2d:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_65fmx"]
 _data = {
-"Coal": SubResource("Animation_tis30"),
-"Iron": SubResource("Animation_4i6ao"),
-"IronBar": SubResource("Animation_d7x4g"),
-"Log": SubResource("Animation_wvp3j"),
-"RESET": SubResource("Animation_kw77j"),
-"Stone": SubResource("Animation_n5t7u")
+"Acorn": SubResource("Animation_f160k"),
+"Coal": SubResource("Animation_i55jx"),
+"Iron": SubResource("Animation_a58ap"),
+"IronBar": SubResource("Animation_jvilv"),
+"Log": SubResource("Animation_6aw2c"),
+"RESET": SubResource("Animation_hr25t"),
+"Stone": SubResource("Animation_y4hnd")
 }
 
 [node name="DroppedResource" instance=ExtResource("1_cs688")]
-material = SubResource("ShaderMaterial_svfns")
+material = SubResource("ShaderMaterial_7cmap")
 script = ExtResource("3_xkw4e")
 own_z = 10
 
 [node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="." index="1"]
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_ivy4j")
+material = SubResource("ShaderMaterial_wqfn1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_kjqn7")
+"": SubResource("AnimationLibrary_65fmx")
 }

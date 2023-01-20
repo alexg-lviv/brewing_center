@@ -1,20 +1,20 @@
 [gd_scene load_steps=25 format=3 uid="uid://bw7rrlh787rod"]
 
-[ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_r627i"]
-[ext_resource type="Script" path="res://src/Buildings/Furnace.gd" id="2_ecsnp"]
-[ext_resource type="Texture2D" uid="uid://d4h17xuvephks" path="res://art/buildings/Furnace.png" id="3_tvlmp"]
-[ext_resource type="Texture2D" uid="uid://m83tt11orllm" path="res://art/buildings/Furnace/FurnaceBurning1.png" id="4_dc6r0"]
-[ext_resource type="PackedScene" uid="uid://cc42ijfofhger" path="res://src/UI/CraftingProgressPopup/CraftingPopup.tscn" id="5_6j0p7"]
-[ext_resource type="Texture2D" uid="uid://2oo08gonwqi8" path="res://art/buildings/Furnace/FurnaceBurning2.png" id="5_hk40g"]
-[ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="5_yrink"]
-[ext_resource type="Texture2D" uid="uid://dyjb7htw1opyo" path="res://art/buildings/Furnace/FurnaceBurning3.png" id="6_csmru"]
-[ext_resource type="Texture2D" uid="uid://drvq3yndyip8m" path="res://art/buildings/Furnace/FurnaceBurning4.png" id="7_jw2bx"]
-[ext_resource type="PackedScene" uid="uid://bjhn58vw5m0yv" path="res://src/UI/CraftingRssSelection/RssSelection.tscn" id="7_ksqte"]
-[ext_resource type="PackedScene" uid="uid://c2o122ycvymoc" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.tscn" id="7_oywve"]
-[ext_resource type="Texture2D" uid="uid://6tmqoyjkm0uv" path="res://art/buildings/Furnace/FurnaceBurning5.png" id="8_lr07o"]
-[ext_resource type="Texture2D" uid="uid://iqjvy302gkn3" path="res://art/buildings/Furnace/FurnaceBurning6.png" id="9_g634r"]
-[ext_resource type="Texture2D" uid="uid://dp58yhtm34svd" path="res://art/buildings/Furnace/FurnaceBurning7.png" id="10_nembh"]
-[ext_resource type="Texture2D" uid="uid://cyv7h7yn4sdri" path="res://art/buildings/Furnace/Furnace.png" id="11_0ke2n"]
+[ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_kfka2"]
+[ext_resource type="Script" path="res://src/Buildings/Furnace/Furnace.gd" id="2_yac1p"]
+[ext_resource type="Texture2D" uid="uid://d4h17xuvephks" path="res://art/buildings/Furnace.png" id="3_si5lf"]
+[ext_resource type="Texture2D" uid="uid://m83tt11orllm" path="res://art/buildings/Furnace/FurnaceBurning1.png" id="4_uwu1l"]
+[ext_resource type="Texture2D" uid="uid://2oo08gonwqi8" path="res://art/buildings/Furnace/FurnaceBurning2.png" id="5_xwkbf"]
+[ext_resource type="Texture2D" uid="uid://dyjb7htw1opyo" path="res://art/buildings/Furnace/FurnaceBurning3.png" id="6_hxd3c"]
+[ext_resource type="Texture2D" uid="uid://drvq3yndyip8m" path="res://art/buildings/Furnace/FurnaceBurning4.png" id="7_dydmk"]
+[ext_resource type="Texture2D" uid="uid://6tmqoyjkm0uv" path="res://art/buildings/Furnace/FurnaceBurning5.png" id="8_huf5g"]
+[ext_resource type="Texture2D" uid="uid://iqjvy302gkn3" path="res://art/buildings/Furnace/FurnaceBurning6.png" id="9_y6xyq"]
+[ext_resource type="Texture2D" uid="uid://dp58yhtm34svd" path="res://art/buildings/Furnace/FurnaceBurning7.png" id="10_ssdet"]
+[ext_resource type="Texture2D" uid="uid://cyv7h7yn4sdri" path="res://art/buildings/Furnace/Furnace.png" id="11_ija6c"]
+[ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="12_wwqmm"]
+[ext_resource type="PackedScene" uid="uid://cc42ijfofhger" path="res://src/UI/CraftingProgressPopup/CraftingPopup.tscn" id="13_3aips"]
+[ext_resource type="PackedScene" uid="uid://bjhn58vw5m0yv" path="res://src/UI/CraftingRssSelection/RssSelection.tscn" id="14_h6cyt"]
+[ext_resource type="PackedScene" uid="uid://c2o122ycvymoc" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.tscn" id="15_26in4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kybo"]
 radius = 12.0
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_dc6r0"), ExtResource("5_hk40g"), ExtResource("6_csmru"), ExtResource("7_jw2bx"), ExtResource("8_lr07o"), ExtResource("9_g634r"), ExtResource("10_nembh")]
+"values": [ExtResource("4_uwu1l"), ExtResource("5_xwkbf"), ExtResource("6_hxd3c"), ExtResource("7_dydmk"), ExtResource("8_huf5g"), ExtResource("9_y6xyq"), ExtResource("10_ssdet")]
 }
 
 [sub_resource type="Animation" id="Animation_42uya"]
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_0ke2n")]
+"values": [ExtResource("11_ija6c")]
 }
 
 [sub_resource type="Animation" id="Animation_g33qx"]
@@ -65,7 +65,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_tvlmp")]
+"values": [ExtResource("3_si5lf")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_461u3"]
@@ -154,14 +154,14 @@ _data = {
 "RESET": SubResource("Animation_wex3q")
 }
 
-[node name="Furnace" instance=ExtResource("1_r627i")]
-script = ExtResource("2_ecsnp")
+[node name="Furnace" instance=ExtResource("1_kfka2")]
+script = ExtResource("2_yac1p")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_7kybo")
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("3_tvlmp")
+texture = ExtResource("3_si5lf")
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="2"]
 position = Vector2(0.0131836, 0)
@@ -179,19 +179,19 @@ libraries = {
 "": SubResource("AnimationLibrary_ngw51")
 }
 
-[node name="BuildingPopup" parent="." index="5" instance=ExtResource("5_yrink")]
+[node name="BuildingPopup" parent="." index="5" instance=ExtResource("12_wwqmm")]
 offset_top = -52.0
 offset_bottom = -52.0
 
-[node name="CraftingPopup" parent="." index="6" instance=ExtResource("5_6j0p7")]
+[node name="CraftingPopup" parent="." index="6" instance=ExtResource("13_3aips")]
 offset_top = -36.0
 offset_bottom = -36.0
 
-[node name="FurnaceRssSelection" parent="." index="7" instance=ExtResource("7_ksqte")]
+[node name="FurnaceRssSelection" parent="." index="7" instance=ExtResource("14_h6cyt")]
 offset_top = -40.5
 offset_bottom = -40.5
 
-[node name="CraftingRssSelection" parent="." index="8" instance=ExtResource("7_oywve")]
+[node name="CraftingRssSelection" parent="." index="8" instance=ExtResource("15_26in4")]
 offset_top = 24.5
 offset_bottom = 24.5
 

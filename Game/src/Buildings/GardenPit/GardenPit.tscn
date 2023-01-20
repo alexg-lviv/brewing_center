@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c780w3wd0ksgo"]
+
+[ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_1jia2"]
+[ext_resource type="Script" path="res://src/Buildings/GardenPit/GardenPit.gd" id="2_vi3fj"]
+
+[node name="GardenPit" instance=ExtResource("1_1jia2")]
+script = ExtResource("2_vi3fj")
