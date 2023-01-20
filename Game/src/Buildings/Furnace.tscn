@@ -188,16 +188,12 @@ offset_top = -36.0
 offset_bottom = -36.0
 
 [node name="FurnaceRssSelection" parent="." index="7" instance=ExtResource("7_ksqte")]
-offset_left = 64.5
 offset_top = -40.0
-offset_right = 64.5
 offset_bottom = -40.0
 
 [node name="CraftingRssSelection" parent="." index="8" instance=ExtResource("7_oywve")]
-offset_left = 64.5
-offset_top = 25.5
-offset_right = 64.5
-offset_bottom = 25.5
+offset_top = 24.0
+offset_bottom = 24.0
 
 [node name="SmeltingTimer" type="Timer" parent="." index="9"]
 one_shot = true
@@ -205,7 +201,9 @@ one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="popup_pressed" from="BuildingPopup" to="." method="_on_building_popup_popup_pressed"]
+[connection signal="closed" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_closed"]
 [connection signal="enter_burnable_selection" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_enter_burnable_selection"]
 [connection signal="enter_fuel_selection" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_enter_fuel_selection"]
+[connection signal="closed" from="CraftingRssSelection" to="." method="_on_crafting_rss_selection_closed"]
 [connection signal="item_activated" from="CraftingRssSelection" to="." method="_on_crafting_rss_selection_item_activated"]
 [connection signal="timeout" from="SmeltingTimer" to="." method="_on_smelting_timer_timeout"]

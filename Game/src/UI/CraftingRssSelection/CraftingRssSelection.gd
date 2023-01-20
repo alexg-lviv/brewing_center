@@ -2,6 +2,7 @@ extends Control
 class_name CraftRssSelection
 
 signal item_activated(item: String)
+signal closed
 
 @onready var List: ItemList = get_node("TextureRect/ScrollContainer/ItemList")
 
@@ -34,3 +35,8 @@ func hide() -> void:
 
 func show() -> void:
 	visible = true
+
+
+func _on_texture_button_pressed() -> void:
+	emit_signal("closed")
+	hide()

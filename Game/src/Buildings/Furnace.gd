@@ -220,3 +220,11 @@ func _on_furnace_rss_selection_enter_fuel_selection() -> void:
 	for res in ResDescription.dropped_rss_types["Fuel"]:
 		ResourcesSelectionPopup.add_item(res, "heat produced" + str(ResDescription.res_heat_produced[res]))
 	selection = "Fuel"
+
+
+func _on_furnace_rss_selection_closed() -> void:
+	ResourcesSelectionPopup.hide()
+
+
+func _on_crafting_rss_selection_closed() -> void:
+	pass # Replace with function body.
