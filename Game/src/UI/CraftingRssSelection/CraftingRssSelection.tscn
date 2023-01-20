@@ -30,10 +30,10 @@ texture = ExtResource("1_pti8i")
 [node name="ScrollContainer" type="ScrollContainer" parent="TextureRect"]
 texture_filter = 1
 clip_contents = false
-custom_minimum_size = Vector2(110, 2.08165e-12)
-offset_left = 12.0
+custom_minimum_size = Vector2(120, 2.08165e-12)
+offset_left = 4.0
 offset_top = 6.0
-offset_right = 122.0
+offset_right = 124.0
 offset_bottom = 122.0
 horizontal_scroll_mode = 0
 
@@ -41,18 +41,21 @@ horizontal_scroll_mode = 0
 texture_filter = 1
 clip_contents = false
 layout_direction = 1
-offset_right = 110.0
+offset_right = 120.0
+offset_bottom = 116.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/h_separation = 30
 theme_override_constants/icon_margin = 5
 theme_override_font_sizes/font_size = 10
 theme_override_styles/panel = SubResource("StyleBoxEmpty_u4xah")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_22drx")
 theme_override_styles/selected = SubResource("StyleBoxEmpty_86h60")
-max_text_lines = 2
+max_text_lines = 5
 auto_height = true
 same_column_width = true
-fixed_column_width = 116
+fixed_column_width = 120
+icon_mode = 0
 
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = 40.0

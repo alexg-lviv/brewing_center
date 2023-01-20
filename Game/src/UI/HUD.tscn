@@ -19,7 +19,6 @@ mouse_filter = 2
 script = ExtResource("1_ald1r")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -37,13 +36,13 @@ alignment = 1
 
 [node name="Demolish" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Demolish"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -61,13 +60,14 @@ texture = ExtResource("3")
 
 [node name="Clear" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_top = 36.0
+offset_right = 32.0
+offset_bottom = 68.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Clear"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -85,13 +85,14 @@ texture = ExtResource("4_g3p2b")
 
 [node name="Harvest" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_top = 72.0
+offset_right = 32.0
+offset_bottom = 104.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Harvest"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -109,13 +110,14 @@ texture = ExtResource("5_eojv5")
 
 [node name="Build" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
-layout_mode = 2
+offset_top = 108.0
+offset_right = 32.0
+offset_bottom = 140.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/Build"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

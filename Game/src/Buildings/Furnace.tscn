@@ -188,12 +188,12 @@ offset_top = -36.0
 offset_bottom = -36.0
 
 [node name="FurnaceRssSelection" parent="." index="7" instance=ExtResource("7_ksqte")]
-offset_top = -40.0
-offset_bottom = -40.0
+offset_top = -40.5
+offset_bottom = -40.5
 
 [node name="CraftingRssSelection" parent="." index="8" instance=ExtResource("7_oywve")]
-offset_top = 24.0
-offset_bottom = 24.0
+offset_top = 24.5
+offset_bottom = 24.5
 
 [node name="SmeltingTimer" type="Timer" parent="." index="9"]
 one_shot = true
