@@ -2,10 +2,14 @@ extends Node
 
 
 var rss_sprites: Dictionary = {
-	"Rock":    "res://art/Resources/Rock1.png",
-	"IronOre": "res://art/Resources/IronOre1.png",
-	"CoalOre": "res://art/Resources/CoalOre1.png",
-	"Tree":    "res://art/rss/tree1.png",
+	"Rock":    ["res://art/Resources/Rock1.png"],
+	"IronOre": ["res://art/Resources/IronOre1.png"],
+	"CoalOre": ["res://art/Resources/CoalOre1.png"],
+	"Tree":    ["res://art/rss/tree1.png",
+				"res://art/Resources/Tree2.png",
+				"res://art/Resources/Tree3.png",
+				"res://art/Resources/Tree4.png",
+				"res://art/Resources/Tree5.png"]
 }
 
 var dropped_rss_sprites: Dictionary = {
@@ -14,6 +18,7 @@ var dropped_rss_sprites: Dictionary = {
 	"IronBar": "res://art/Resources/Dropped/IronBar.png",
 	"Log":     "res://art/Resources/Dropped/Log.png",
 	"Coal":    "res://art/Resources/Dropped/Coal.png",
+	"Acorn":   "res://art/Resources/Dropped/acorn.png"
 }
 
 var dropped_rss_types: Dictionary = {

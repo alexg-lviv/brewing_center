@@ -21,7 +21,8 @@ var previews_dict: Dictionary = {
 #	"Extractor": "res://art/buildings/spawner.png",
 #	"Receiver": "res://art/buildings/sender.png",
 	"Storage": "res://art/buildings/storage.png",
-	"Furnace": "res://art/buildings/Furnace.png"
+	"Furnace": "res://art/buildings/Furnace.png",
+	"GardenBed": "res://art/buildings/GardenBed/GardenBed.png",
 }
 var objects_dict: Dictionary = {
 #	"Belt": "res://src/Buildings/Belt/Belt.tscn",
@@ -31,7 +32,7 @@ var objects_dict: Dictionary = {
 #	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
 	"Storage": "res://src/Buildings/Storage/Storage.tscn",
 	"Furnace": "res://src/Buildings/Furnace/Furnace.tscn",
-	"GardenPit": "res://src/Buildings/GardenPit/GardenPit.tscn",
+	"GardenBed": "res://src/Buildings/GardenBed/GardenBed.tscn",
 }
 
 var dismensions_dict: Dictionary = {
@@ -42,7 +43,7 @@ var dismensions_dict: Dictionary = {
 #	"Receiver": Vector2i(1, 1),
 	"Storage": Vector2i(2, 2),
 	"Furnace": Vector2i(2, 2),
-	"GardenPit": Vector2i(1, 1),
+	"GardenBed": Vector2i(1, 1),
 }
 
 var build_cost_dict: Dictionary = {
@@ -53,9 +54,7 @@ var build_cost_dict: Dictionary = {
 	"Furnace": {
 		"Stone": 1
 	},
-	"GardenPit": {
-		
-	}
+	"GardenBed": null
 }
 
 var modulate_clear: String = "ffffff"

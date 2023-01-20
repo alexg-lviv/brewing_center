@@ -9,6 +9,7 @@ extends InteractableTimed
 @icon("res://art/icons/tree.png")
 
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+@onready var ResSprite: Sprite2D = get_node("Sprite2d")
 
 @onready var dropped_item := preload("res://src/Interactables/DroppedResource.tscn")
 
@@ -52,4 +53,10 @@ func die():
 func _set_rss_name(new_name: String) -> void:
 	rss_name = new_name
 	AnimPlayer.play(rss_name)
+	var temp_arr = ResDescription.rss_sprites[rss_name]
+	ResSprite.texture = load(temp_arr[randi_range(0, temp_arr.size()-1)])
+	
 	interaction_time = ResDescription.rss_harvest_time[rss_name]
+
+func mirror() -> void:
+	scale.x = -1

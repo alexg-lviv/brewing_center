@@ -77,7 +77,7 @@ _global_script_classes=[{
 "base": "Building",
 "class": &"GardenPit",
 "language": &"GDScript",
-"path": "res://src/Buildings/GardenPit/GardenPit.gd"
+"path": "res://src/Buildings/GardenBed/GardenBed.gd"
 }, {
 "base": "Building",
 "class": &"InProgressBuilding",

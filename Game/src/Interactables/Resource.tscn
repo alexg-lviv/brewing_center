@@ -1,14 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://eibxl1ngbpu2"]
+[gd_scene load_steps=15 format=3 uid="uid://eibxl1ngbpu2"]
 
 [ext_resource type="PackedScene" uid="uid://bvllcws5pag8k" path="res://src/Interactables/Abstract/InteractableTimed.tscn" id="1_3gcpl"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_5dyu5"]
 [ext_resource type="Script" path="res://src/Interactables/Resource.gd" id="3_mt3tt"]
-[ext_resource type="Texture2D" uid="uid://l0nu721vuhfe" path="res://art/rss/tree1.png" id="4_5112l"]
 [ext_resource type="Texture2D" uid="uid://dh32v2ac7iaxa" path="res://art/Resources/Rock1.png" id="5_iaa60"]
-[ext_resource type="Texture2D" uid="uid://e2m3v4i65jgb" path="res://art/Resources/IronOre1.png" id="6_qwqhc"]
-[ext_resource type="Texture2D" uid="uid://ct6o3a4626fmj" path="res://art/Resources/CoalOre1.png" id="7_bjrtu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5nqa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbvjt"]
 resource_local_to_scene = true
 shader = ExtResource("2_5dyu5")
 shader_parameter/intensity = 50
@@ -20,7 +17,7 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = null
 shader_parameter/active = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dyscc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12ug1"]
 resource_local_to_scene = true
 shader = ExtResource("2_5dyu5")
 shader_parameter/intensity = 50
@@ -32,119 +29,95 @@ shader_parameter/use_outline_uv = null
 shader_parameter/useTexture = false
 shader_parameter/active = false
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlswl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_icyxf"]
 size = Vector2(64, 40)
 
-[sub_resource type="Animation" id="Animation_6pkob"]
+[sub_resource type="Animation" id="Animation_w6bo2"]
 resource_name = "CoalOre"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/path = NodePath("CollisionShape2d:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_bjrtu")]
+"values": [SubResource("RectangleShape2D_icyxf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/path = NodePath("CollisionShape2d:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_hlswl")]
+"update": 0,
+"values": [Vector2(0, 12)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/path = NodePath("Sprite2d:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 12)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2d:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_vp3md"]
+[sub_resource type="Animation" id="Animation_ph3m0"]
 resource_name = "IronOre"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/path = NodePath("CollisionShape2d:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_qwqhc")]
+"values": [SubResource("RectangleShape2D_icyxf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/path = NodePath("CollisionShape2d:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_hlswl")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 12)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2d:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2d:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_rgvim"]
+[sub_resource type="Animation" id="Animation_dv46n"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/path = NodePath("CollisionShape2d:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -156,127 +129,103 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/path = NodePath("CollisionShape2d:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
+"update": 0,
+"values": [Vector2(0, -32)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/path = NodePath("Sprite2d:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -32)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2d:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_82qrk"]
+[sub_resource type="Animation" id="Animation_5a8n5"]
 resource_name = "Rock"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/path = NodePath("CollisionShape2d:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_iaa60")]
+"values": [SubResource("RectangleShape2D_icyxf")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/path = NodePath("CollisionShape2d:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_hlswl")]
+"update": 0,
+"values": [Vector2(0, 12)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/path = NodePath("Sprite2d:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 12)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2d:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bdmhl"]
-radius = 32.0
-height = 128.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k2ems"]
+radius = 56.0
+height = 112.0
 
-[sub_resource type="Animation" id="Animation_kg4gp"]
+[sub_resource type="Animation" id="Animation_mm230"]
 resource_name = "Tree"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2d:texture")
+tracks/0/path = NodePath("CollisionShape2d:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_5112l")]
+"values": [SubResource("CapsuleShape2D_k2ems")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2d:shape")
+tracks/1/path = NodePath("CollisionShape2d:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CapsuleShape2D_bdmhl")]
+"update": 0,
+"values": [Vector2(0, -32)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2d:position")
+tracks/2/path = NodePath("Sprite2d:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -285,40 +234,29 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, -32)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2d:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -32)]
-}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h1tj8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_er7aw"]
 _data = {
-"CoalOre": SubResource("Animation_6pkob"),
-"IronOre": SubResource("Animation_vp3md"),
-"RESET": SubResource("Animation_rgvim"),
-"Rock": SubResource("Animation_82qrk"),
-"Tree": SubResource("Animation_kg4gp")
+"CoalOre": SubResource("Animation_w6bo2"),
+"IronOre": SubResource("Animation_ph3m0"),
+"RESET": SubResource("Animation_dv46n"),
+"Rock": SubResource("Animation_5a8n5"),
+"Tree": SubResource("Animation_mm230")
 }
 
 [node name="Resource" instance=ExtResource("1_3gcpl")]
 z_as_relative = false
-material = SubResource("ShaderMaterial_v5nqa")
+material = SubResource("ShaderMaterial_kbvjt")
 script = ExtResource("3_mt3tt")
 
 [node name="CollisionShape2d" parent="." index="0"]
 position = Vector2(0, -32)
 
 [node name="Sprite2d" parent="." index="2"]
-material = SubResource("ShaderMaterial_dyscc")
+material = SubResource("ShaderMaterial_12ug1")
+texture = ExtResource("5_iaa60")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_h1tj8")
+"": SubResource("AnimationLibrary_er7aw")
 }

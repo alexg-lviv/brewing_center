@@ -14,6 +14,7 @@ var my_reserved_demand: Dictionary = {}
 
 var build_type: String
 
+var died: bool = false
 
 ## if the drag_mode is active - all the storages signal that they are available to place items
 ## TODO: add visibility notifiers for optimisation
@@ -26,11 +27,17 @@ func _process(_delta: float) -> void:
 
 ## function to initiate the building process  
 ## add demands to the main scene, set preview sprite, set popup
-func initiate_building(build_type: String):
+func initiate_building(build_type: String) -> void:
+	var resources = Glob.build_cost_dict[build_type]
+	var dismensions: Vector2 = Glob.dismensions_dict[build_type]
+	if resources == null:
+		finish_building()
+		return
 	sprite.texture = load(Glob.previews_dict[build_type])
 	sprite.modulate = "ffffff64"
-	var resources: Dictionary = Glob.build_cost_dict[build_type]
-	var dismensions: Vector2 = Glob.dismensions_dict[build_type]
+	
+	scene.add_demanding_build_building(self)
+	
 	
 	collision.shape.size = Vector2(dismensions.x * Glob.GRID_STEP / 2, dismensions.y * Glob.GRID_STEP / 2)
 	
@@ -51,8 +58,9 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	if skeleton != null:
 		my_reserved_demand[resource_name].erase(skeleton)
 	else:
-		var temp_skel: Skeleton = my_reserved_demand[resource_name].pop_back()
-		if temp_skel != null: temp_skel.get_rejected_by_building()
+		if my_reserved_demand.has(resource_name):
+			var temp_skel: Skeleton = my_reserved_demand[resource_name].pop_back()
+			if temp_skel != null: temp_skel.get_rejected_by_building()
 		
 	
 	item.move_and_die(center_pos)
@@ -70,6 +78,7 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 
 ## funush building, call function to instantiate the building, and die ourselves
 func finish_building() -> void:
+	died = true
 	scene.build_object(build_type, center_pos, rotation)
 	scene.demand_build_buildings.erase(self)
 	queue_free()

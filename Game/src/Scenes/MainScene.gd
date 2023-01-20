@@ -6,10 +6,10 @@ extends Node2D
 @icon("res://art/icons/world.png")
 
 
-@export var trees_prob: float = 0.1
-@export var rock_prob: float = 0.08
-@export var coal_prob: float = 0.02
-@export var iron_ore_prob: float = 0.01
+@export var trees_prob: float = 0.08
+@export var rock_prob: float = 0.015
+@export var coal_prob: float = 0.008
+@export var iron_ore_prob: float = 0.002
 @export var scene_size: Vector2 = Vector2(3000, 1000)
 
 # BUILD MODE VARS
@@ -351,9 +351,8 @@ func place_object(object_name: String, grid_pos: Vector2):
 	NewObj.center_pos = grid_pos
 	NewObj.build_type = object_name
 	NewObj.initiate_building(object_name)
-	add_to_positions_dict(grid_pos, NewObj)
-	
-	demand_build_buildings.push_back(NewObj)
+	if !NewObj.died:
+		add_to_positions_dict(grid_pos, NewObj)
 	
 	if Glob.exit_build_mode_on_build:
 			Glob.build_mode = false
@@ -367,13 +366,10 @@ func build_object(object_name: String, grid_pos: Vector2, b_rotation: float):
 	NewObj.global_position = grid_pos
 	NewObj.rotation = b_rotation
 	NewObj.center_pos = grid_pos
-	add_to_positions_dict(grid_pos, NewObj, object_name)
+	if is_instance_valid(NewObj):
+		add_to_positions_dict(grid_pos, NewObj, object_name)
 	if object_name == "Storage":
 		storages.append(NewObj)
-	
-	if Glob.exit_build_mode_on_build:
-			Glob.build_mode = false
-			reset_preview()
 
 
 ###############################
@@ -409,7 +405,7 @@ func get_covering_positions(pos: Vector2, dismesions: Vector2i) -> Array[Vector2
 
 ## put an item to the positions dict and
 ## if the building spans more than one cell, iterate over them
-func add_to_positions_dict(grid_pos: Vector2, object: Object, type: String = "") -> void:
+func add_to_positions_dict(grid_pos: Vector2, object, type: String = "") -> void:
 	if type == "": type = build_type
 	for pos in get_covering_positions(grid_pos, Glob.dismensions_dict[type]):
 		instances_dict[pos] = object
@@ -440,14 +436,15 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 ##############################
 ##############################
 
+
 ## helper function to create environment and populate it with all the requiered resources
 func create_environment(world_size: Vector2) -> void:
 	create_trees(world_size)
 
 ## function to create trees with specific probability over the specific area
 func create_trees(world_size: Vector2) -> void:
-	for i in range(0, world_size.x, Glob.GRID_STEP):
-		for j in range(0, world_size.y, Glob.GRID_STEP):
+	for i in range(0, world_size.x, Glob.GRID_STEP*0.3):
+		for j in range(0, world_size.y, Glob.GRID_STEP*1.5):
 			var to_spawn: bool = false
 			var obj: Interactable
 			var curr_obj: String = ""
@@ -473,6 +470,8 @@ func create_trees(world_size: Vector2) -> void:
 			obj.set_deferred("center_pos", pos)
 			obj.call_deferred("update_z")
 			obj.set_deferred("rss_name", curr_obj)
+#			if randi_range(0, 2) == 1:
+#				obj.call_deferred("mirror")
 			instances_dict[pos] = obj
 			clear_nav(pos)
 
@@ -598,6 +597,9 @@ func get_demanding_build_buildings() -> Array:
 func add_demanding_craft_building(building: Building) -> void:
 	if !demand_craft_buildings.has(building):
 		demand_craft_buildings.append(building)
+
+func add_demanding_build_building(building: Building) -> void:
+	demand_build_buildings.push_back(building)
 
 func get_demanding_craft_buildings() -> Array:
 	return demand_craft_buildings
