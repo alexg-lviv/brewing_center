@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://m83tt11orllm" path="res://art/buildings/Furnace/FurnaceBurning1.png" id="3_0mpel"]
 [ext_resource type="Texture2D" uid="uid://das8iuowlxvpa" path="res://art/ui/cross_hovered.png" id="3_ctdiw"]
 [ext_resource type="Texture2D" uid="uid://db6624v2f8waj" path="res://art/buildings/storage.png" id="4_brp17"]
-[ext_resource type="Texture2D" uid="uid://msbdogxgn40o" path="res://art/buildings/GardenBed/GardenBed.png" id="5_2vrvh"]
+[ext_resource type="Texture2D" uid="uid://bywhevmrsw0d4" path="res://art/buildings/GardenBed/GardenBed.png" id="5_2vrvh"]
 
 [node name="BuildingSelectionPopup" type="Control"]
 layout_mode = 3

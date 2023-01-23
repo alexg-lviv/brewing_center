@@ -15,7 +15,7 @@ extends InteractableTimed
 
 var rss_name: String = "" : set = _set_rss_name
 
-var scene
+var scene: GameWorld
 var center_pos: Vector2
 var destructable = false
 

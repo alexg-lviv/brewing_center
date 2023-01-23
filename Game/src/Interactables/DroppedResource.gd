@@ -9,6 +9,6 @@ var rss_type: String = ""
 
 func _set_rss_name(new_name: String) -> void:
 	rss_name = new_name
-	if ResDescription.dropped_rss_types.has(rss_name):
-		rss_type = ResDescription.dropped_rss_types[rss_name]
+	if ResDescription.dropped_type_by_rss.has(rss_name):
+		rss_type = ResDescription.dropped_type_by_rss[rss_name]
 	AnimPlayer.play(rss_name)

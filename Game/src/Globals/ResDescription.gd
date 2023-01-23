@@ -5,7 +5,7 @@ var rss_sprites: Dictionary = {
 	"Rock":    ["res://art/Resources/Rock1.png"],
 	"IronOre": ["res://art/Resources/IronOre1.png"],
 	"CoalOre": ["res://art/Resources/CoalOre1.png"],
-	"Tree":    ["res://art/rss/tree1.png",
+	"Tree":    [
 				"res://art/Resources/Tree2.png",
 				"res://art/Resources/Tree3.png",
 				"res://art/Resources/Tree4.png",
@@ -21,9 +21,18 @@ var dropped_rss_sprites: Dictionary = {
 	"Acorn":   "res://art/Resources/Dropped/acorn.png"
 }
 
+
 var dropped_rss_types: Dictionary = {
 	"Fuel": ["Log", "Coal"],
-	"Burnable": ["Iron"]
+	"Burnable": ["Iron"],
+	"Seed": ["Acorn"]
+}
+
+var dropped_type_by_rss: Dictionary = {
+	"Log": "Fuel",
+	"Coal": "Fuel",
+	"Iron": "Burnable",
+	"Acorn": "Seed"
 }
 
 

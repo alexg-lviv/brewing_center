@@ -109,12 +109,6 @@ func reset_demand():
 ## set demand to all ones  
 ## to be reworked completely
 func set_demand():
-#	var new_demand: Dictionary = {}
-#	for res in my_demand.keys():
-#		if my_demand[res] > 0:
-#			new_demand[res] = my_demand[res]
-#	my_demand = new_demand
-#
 	my_demand = {}
 	my_demand[fuel_selected] = int(ceil(float(ResDescription.res_heat_required[object_to_smelt_selected]) / float(ResDescription.res_heat_produced[fuel_selected])))
 	my_demand[object_to_smelt_selected] = 1

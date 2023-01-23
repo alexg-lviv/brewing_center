@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://btrobfooe8qf2"]
+
+[ext_resource type="Script" path="res://src/Buildings/GardenBed/States/GardenBedStatesManager.gd" id="1_qhpmb"]
+[ext_resource type="Script" path="res://src/Buildings/GardenBed/States/EmptyState.gd" id="2_ypnj4"]
+[ext_resource type="Script" path="res://src/Buildings/GardenBed/States/PlantedState.gd" id="3_ap4n0"]
+[ext_resource type="Script" path="res://src/Buildings/GardenBed/States/AlmostDoneState.gd" id="4_mmo6p"]
+
+[node name="GardenBedStatesManager" type="Node2D"]
+script = ExtResource("1_qhpmb")
+
+[node name="EmptyState" type="Node" parent="."]
+script = ExtResource("2_ypnj4")
+
+[node name="PlantedState" type="Node" parent="."]
+script = ExtResource("3_ap4n0")
+
+[node name="AlmostDoneState" type="Node" parent="."]
+script = ExtResource("4_mmo6p")
