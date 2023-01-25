@@ -29,8 +29,6 @@ var rss: bool = false
 var fuel_selected:           String = "Coal"
 var object_to_smelt_selected: String = "Iron"
 
-var my_demand:          Dictionary = {}
-var my_reserved_demand: Dictionary = {}
 var received_rss:       Dictionary = {}
 
 ## reset demand
@@ -84,7 +82,7 @@ func start_smelting() -> void:
 									time_to_smelt, SmeltTimer)
 	popup.hide()
 	popup.clear_popup()
-	scene.remove_demanding_craft_building(self)
+	scene.remove_demanding_buildings(self, Glob.Actions.Craft)
 
 ## finish the smelting and create an instance of resource
 func _on_smelting_timer_timeout() -> void:
@@ -142,7 +140,7 @@ func update_demand():
 	popup.clear_popup()
 	for res in my_demand.keys():
 		popup.add_resource(res, my_demand[res])
-		scene.add_demanding_craft_building(self)
+		scene.add_demanding_buildings(self, Glob.Actions.Craft)
 		scene.update_rss_demand(res, my_demand[res], self, Glob.Actions.Craft)
 
 func unreserve_demand():
@@ -174,9 +172,6 @@ func _on_area_exited(area: Area2D) -> void:
 			area.forget_about_reservation_building()
 			temp_obj = null
 
-## remember that the resource should bring us resource so we dont need other skeletons to bring it
-func reserve_demanded_res_by_skeleton(skeleton: Skeleton, resource: String):
-	my_reserved_demand[resource].append(skeleton)
 
 
 func _on_crafting_rss_selection_item_activated(item: String) -> void:

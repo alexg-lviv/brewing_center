@@ -11,6 +11,9 @@ var destructable = true
 
 var temp_obj: DroppedResource = null
 
+var my_reserved_demand: Dictionary = {}
+var my_demand: Dictionary = {}
+
 
 ## calculates relative direction from which other belt is connected to current belt 
 func get_relative_rotation(other_rotation: float) -> float:
@@ -23,3 +26,9 @@ func die() -> void:
 
 func forget_about_item(_item: Interactable) -> void:
 	pass
+
+
+## remember that the resource should bring us resource so we dont need other skeletons to bring it
+func reserve_demanded_res_by_skeleton(skeleton: Skeleton, resource: String):
+	my_reserved_demand[resource].append(skeleton)
+

@@ -9,8 +9,6 @@ extends Building
 @onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 @onready var Pulser := get_node("Polygon2D")
 
-var my_demand: Dictionary = {}
-var my_reserved_demand: Dictionary = {}
 
 var build_type: String
 

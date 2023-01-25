@@ -11,8 +11,6 @@ class_name GardenBed
 @onready var WaterTimer: Timer = get_node("WaterTimer")
 @onready var GrowthTimer: Timer = get_node("GrowthTimer")
 
-var my_demand: Dictionary = {}
-var my_reserved_demand: Dictionary = {}
 
 var state: int : set = _set_state
 
@@ -71,7 +69,9 @@ func get_resource(item: Movable, skeleton: Skeleton = null) -> void:
 		Scene.update_rss_demand(res, my_demand[res], self, Glob.Actions.Plant)
 		if my_demand[res] != 0: done = false
 	
-	if done: start_growth()
+	if done: 
+		start_growth()
+		Scene.remove_demanding_buildings(self, Glob.Actions.Plant)
 
 func start_growth():
 	state += 1
@@ -81,7 +81,9 @@ func reset_demand() -> void:
 	my_demand = {"Seed": 1}
 	my_reserved_demand = {}
 	for key in my_demand.keys():
+		Scene.update_rss_demand(key, my_demand[key], self, Glob.Actions.Plant)
 		my_reserved_demand[key] = []
+	Scene.add_demanding_buildings(self, Glob.Actions.Plant)
 
 
 ## remember that item entered yourself

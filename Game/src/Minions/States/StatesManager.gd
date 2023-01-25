@@ -5,7 +5,8 @@ extends Node
 	SkeletonBaseState.States.HarvestState: get_node("HarvestState"),
 	SkeletonBaseState.States.CleanState:   get_node("CleanState"),
 	SkeletonBaseState.States.BuildState:   get_node("BuildState"),
-	SkeletonBaseState.States.CraftState:   get_node("CraftState")
+	SkeletonBaseState.States.CraftState:   get_node("CraftState"),
+	SkeletonBaseState.States.PlantState:   get_node("PlantState")
 }
 
 var current_state: SkeletonBaseState

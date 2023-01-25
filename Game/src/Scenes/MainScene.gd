@@ -613,21 +613,32 @@ func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
 func get_demanding_buildings(action: int) -> Array:
 	return DictOfDemandBuildings[action]
 
-func add_demanding_craft_building(building: Building) -> void:
-	if !demand_craft_buildings.has(building):
-		demand_craft_buildings.append(building)
+func add_demanding_buildings(building: Building, action: int) -> void:
+	var temp_arr = DictOfDemandBuildings[action]
+	if !temp_arr.has(building):
+		temp_arr.append(building)
 
-func add_demanding_build_building(building: Building) -> void:
-	demand_build_buildings.push_back(building)
-
-func remove_demanding_craft_building(building: Building) -> void:
-	demand_craft_buildings.erase(building)
+func remove_demanding_buildings(building: Building, action: int) -> void:
+	var temp_arr = DictOfDemandBuildings[action]
+	temp_arr.erase(building)
 
 ## get all the available resource of this type by rss name
 func get_all_resources_by_name(res_name: String) -> Array[Movable]:
 	var result: Array[Movable] = []
 	for res in DroppedResources.get_children():
 		if (res.rss_name == res_name 
+				and res.current_skeleton     == null 
+				and res.reservation_skeleton == null
+				and (get_grid_pos(res.global_position) in pickup_tiles
+					or res.taken_by_building)):
+			result.append(res)
+	return result
+
+
+func get_all_resources_by_type(res_type: String) -> Array[Movable]:
+	var result: Array[Movable] = []
+	for res in DroppedResources.get_children():
+		if (res.rss_type == res_type 
 				and res.current_skeleton     == null 
 				and res.reservation_skeleton == null
 				and (get_grid_pos(res.global_position) in pickup_tiles

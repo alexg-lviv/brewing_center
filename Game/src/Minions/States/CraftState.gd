@@ -24,7 +24,7 @@ func exit() -> void:
 
 func process(delta: float, target_reached: bool) -> int:
 	if resource_chosen == null: 
-		return States.CleanState
+		return States.PlantState
 	if target_reached and heading_to_resource:
 		heading_to_resource = false
 		heading_to_building = true
@@ -40,7 +40,7 @@ func process(delta: float, target_reached: bool) -> int:
 	
 	if heading_to_building and skeleton.target == null:
 		skeleton.drop_object()
-		return States.CleanState
+		return States.PlantState
 	if heading_to_resource and skeleton.target == null:
 		return States.CraftState
 	

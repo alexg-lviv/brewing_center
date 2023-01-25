@@ -41,7 +41,11 @@ func chose_target_and_resource(action: int) -> Array:
 			# check if it still needs resources, and if they are not reserved
 			if (building.my_demand[res] - building.my_reserved_demand[res].size()) > 0:
 				# get all the instances of the resource on scene that can be taken
-				var resources = Scene.get_all_resources_by_name(res)
+				var resources
+				if res in ResDescription.dropped_rss_sprites.keys():
+					resources = Scene.get_all_resources_by_name(res)
+				elif res in ResDescription.dropped_rss_types.keys():
+					resources = Scene.get_all_resources_by_type(res)
 				if resources.is_empty(): continue
 				var closest: Movable = get_min_distance_object(resources)
 				closest.get_reserved_by_skeleton(self)

@@ -88,6 +88,8 @@ _data = {
 [node name="InProgressBuilding" instance=ExtResource("1_xo0ce")]
 position = Vector2(704, 256)
 script = ExtResource("2_8el8l")
+health = null
+self_cells_size = null
 metadata/_edit_vertical_guides_ = []
 
 [node name="CollisionShape2D" parent="." index="0"]
