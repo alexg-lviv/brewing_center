@@ -11,6 +11,7 @@ extends Node2D
 @export var coal_prob: float = 0.008
 @export var iron_ore_prob: float = 0.002
 @export var scene_size: Vector2 = Vector2(3000, 1000)
+@export var skeletopns_num: int = 5
 
 # BUILD MODE VARS
 var build_type: String
@@ -36,6 +37,7 @@ var is_erasing: bool = false
 @onready var BuildSelectionPopup: BuildingSelection = get_node("UI/BuildingSelectionPopup")
 
 @onready var RssOnMap = preload("res://src/Interactables/Resource.tscn")
+@onready var Minion = preload("res://src/Minions/Skeleton.tscn")
 
 
 var areas_dict: Dictionary = {
@@ -65,11 +67,14 @@ var harvest_tiles: Array
 
 var demand_buid_res_dict: Dictionary = {}
 var demand_craft_res_dict: Dictionary = {}
+var demand_plant_res_dict: Dictionary = {}
 
 
 ## array of buildings that need resources to build
 var demand_build_buildings: Array = []
 var demand_craft_buildings: Array = []
+var demand_plant_buildings: Array = []
+
 var storages: Array = []
 var resources_in_storages: Dictionary = {
 	"Log": [],
@@ -86,7 +91,21 @@ var amount_in_storages: Dictionary = {
 	"IronBar": []
 }
 
+
+var DictOfDicts: Dictionary = {}
+var DictOfDemandBuildings: Dictionary = {}
+
 func _ready():
+	
+	DictOfDicts[Glob.Actions.Craft] = demand_craft_res_dict
+	DictOfDicts[Glob.Actions.Build] = demand_buid_res_dict
+	DictOfDicts[Glob.Actions.Plant] = demand_plant_res_dict
+	
+	DictOfDemandBuildings[Glob.Actions.Craft] = demand_craft_buildings
+	DictOfDemandBuildings[Glob.Actions.Build] = demand_build_buildings
+	DictOfDemandBuildings[Glob.Actions.Plant] = demand_plant_buildings
+	
+	
 	create_environment(scene_size)
 	
 	for button in get_tree().get_nodes_in_group("ActionButton"):
@@ -440,6 +459,13 @@ func remove_building_from_instances_dict(obj_pos: Vector2, dimensions: Vector2i)
 ## helper function to create environment and populate it with all the requiered resources
 func create_environment(world_size: Vector2) -> void:
 	create_trees(world_size)
+	spawn_skeletons()
+
+func spawn_skeletons():
+	for i in range(skeletopns_num):
+		var temp_skeleton = Minion.instantiate()
+		call_deferred("add_child", temp_skeleton)
+		temp_skeleton.set_deferred("global_position", Vector2(500, 500))
 
 ## function to create trees with specific probability over the specific area
 func create_trees(world_size: Vector2) -> void:
@@ -525,47 +551,40 @@ func get_resources() -> Array[InteractableTimed]:
 
 ## get all the buildings that need to be built based on resource name
 ## returns all the active constructions that need the stated rss
-func get_build_building(resource: String) -> Array[InProgressBuilding]:
+func get_build_building(resource: String, action: int) -> Array[InProgressBuilding]:
 	var result: Array[InProgressBuilding] = []
-	if !demand_buid_res_dict.has(resource): return result
-	for build in demand_buid_res_dict[resource]:
-		if build != null:
-			result.append(build)
-	return result
-
-## get all the buildings that want to craft something
-## returns all the buildings that need the stated rss
-func get_craft_buildings(resource: String) -> Array[Building]:
-	var result: Array[Building] = []
-	if !demand_craft_res_dict.has(resource): return result
-	for build in demand_craft_res_dict[resource]:
+	var temp_dict = DictOfDicts[action]
+	if !temp_dict.has(resource): return result
+	for build in temp_dict[resource]:
 		if build != null:
 			result.append(build)
 	return result
 
 ## update the demand for construction
-func update_build_rss_demand(res: String, amount: int, building: InProgressBuilding):
+func update_rss_demand(res: String, amount: int, building: Building, action: int):
+	var temp_dict = DictOfDicts[action]
 	if amount > 0:
-		if demand_buid_res_dict.has(res):
-			if !demand_buid_res_dict[res].has(building):
-				demand_buid_res_dict[res].append(building)
+		if temp_dict.has(res):
+			if !temp_dict[res].has(building):
+				temp_dict[res].append(building)
 		else:
-			demand_buid_res_dict[res] = [building]
+			temp_dict[res] = [building]
 	else:
-		if demand_buid_res_dict.has(res):
-			demand_buid_res_dict[res].erase(building)
+		if temp_dict.has(res):
+			temp_dict[res].erase(building)
+
 
 ## update the demand for crafting
-func update_craft_rss_demand(res: String, amount: int, building: Building):
+func update_plant_rss_demand(res: String, amount: int, building: Building):
 	if amount > 0:
-		if demand_craft_res_dict.has(res):
-			if !demand_craft_res_dict[res].has(building):
-				demand_craft_res_dict[res].append(building)
+		if demand_plant_res_dict.has(res):
+			if !demand_plant_res_dict[res].has(building):
+				demand_plant_res_dict[res].append(building)
 		else:
-			demand_craft_res_dict[res] = [building]
+			demand_plant_res_dict[res] = [building]
 	else:
-		if demand_craft_res_dict.has(res):
-			demand_craft_res_dict[res].erase(building)
+		if demand_plant_res_dict.has(res):
+			demand_plant_res_dict[res].erase(building)
 
 ## when the resource is added to the storage,
 ## update the scene dictionary with the resourcources as keys and arrays of storages as values
@@ -591,8 +610,8 @@ func try_remove_stored_resource(storage: Storage, resource: String) -> bool:
 	return false
 
 ## simply a getter
-func get_demanding_build_buildings() -> Array:
-	return demand_build_buildings
+func get_demanding_buildings(action: int) -> Array:
+	return DictOfDemandBuildings[action]
 
 func add_demanding_craft_building(building: Building) -> void:
 	if !demand_craft_buildings.has(building):
@@ -600,9 +619,6 @@ func add_demanding_craft_building(building: Building) -> void:
 
 func add_demanding_build_building(building: Building) -> void:
 	demand_build_buildings.push_back(building)
-
-func get_demanding_craft_buildings() -> Array:
-	return demand_craft_buildings
 
 func remove_demanding_craft_building(building: Building) -> void:
 	demand_craft_buildings.erase(building)

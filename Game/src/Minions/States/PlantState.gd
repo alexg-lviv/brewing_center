@@ -1,4 +1,4 @@
-class_name SkeletonCraftState
+class_name SkeletonPlantState
 extends SkeletonBaseState
 
 var heading_to_resource: bool = false
@@ -10,7 +10,7 @@ var resource_chosen: Movable = null
 func enter() -> void:
 	building = null
 	resource_chosen = null
-	var building_and_res: Array = skeleton.chose_target_and_resource(Glob.Actions.Craft)
+	var building_and_res: Array = skeleton.chose_target_and_resource(Glob.Actions.Plant)
 	if building_and_res.size() == 2:
 		building = building_and_res[0]
 		resource_chosen = building_and_res[1]

@@ -47,7 +47,7 @@ func initiate_building(build_type: String) -> void:
 		popup.add_resource(key, resources[key])
 		my_demand[key] = resources[key]
 		my_reserved_demand[key] = []
-		scene.update_build_rss_demand(key, my_demand[key], self)
+		scene.update_rss_demand(key, my_demand[key], self, Glob.Actions.Build)
 
 
 ## accept resource, called from Movable if you drag it in with the mouse
@@ -65,7 +65,7 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	item.move_and_die(center_pos)
 	my_demand[resource_name] -= 1
-	scene.update_build_rss_demand(resource_name, my_demand[resource_name], self)
+	scene.update_rss_demand(resource_name, my_demand[resource_name], self, Glob.Actions.Build)
 	
 	var done = true
 	for val in my_demand.values():

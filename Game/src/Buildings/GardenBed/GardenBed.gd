@@ -63,12 +63,12 @@ func get_resource(item: Movable, skeleton: Skeleton = null) -> void:
 		var temp_skel: Skeleton = my_reserved_demand[resource_type].pop_back()
 		if temp_skel != null: temp_skel.get_rejected_by_building()
 	
-	item.move_and_die(center_pos)
+	item.move_and_die(center_pos, 0.3)
 	my_demand[resource_type] -= 1
 	
 	var done = true
 	for res in my_demand.keys():
-		Scene.update_craft_rss_demand(res, my_demand[res], self)
+		Scene.update_rss_demand(res, my_demand[res], self, Glob.Actions.Plant)
 		if my_demand[res] != 0: done = false
 	
 	if done: start_growth()

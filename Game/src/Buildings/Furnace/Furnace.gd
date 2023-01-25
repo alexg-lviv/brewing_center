@@ -68,7 +68,7 @@ func get_resource(item: Movable, skeleton: Skeleton = null):
 	
 	var done = true
 	for res in my_demand.keys():
-		scene.update_craft_rss_demand(res, my_demand[res], self)
+		scene.update_rss_demand(res, my_demand[res], self, Glob.Actions.Craft)
 		if my_demand[res] != 0: done = false
 	
 	popup.update_res_count(resource_name, my_demand[resource_name])
@@ -143,7 +143,7 @@ func update_demand():
 	for res in my_demand.keys():
 		popup.add_resource(res, my_demand[res])
 		scene.add_demanding_craft_building(self)
-		scene.update_craft_rss_demand(res, my_demand[res], self)
+		scene.update_rss_demand(res, my_demand[res], self, Glob.Actions.Craft)
 
 func unreserve_demand():
 	for rss in my_reserved_demand.keys():

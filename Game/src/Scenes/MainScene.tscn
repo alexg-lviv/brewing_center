@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://2l27t5xtd4wq"]
+[gd_scene load_steps=10 format=3 uid="uid://2l27t5xtd4wq"]
 
 [ext_resource type="PackedScene" uid="uid://bq5572wyp80be" path="res://src/Tilemaps/Tilemap.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bs3sl6u5krqgw" path="res://src/Characters/Player.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://hmeyhd4ujwj" path="res://src/Minions/Skeleton.tscn" id="2_sjh5k"]
 [ext_resource type="PackedScene" uid="uid://dddws5syoltu4" path="res://src/UI/UI.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Scenes/MainScene.gd" id="4"]
 [ext_resource type="PackedScene" path="res://src/Tilemaps/ObjMap.tscn" id="5_kmcxf"]
@@ -16,28 +15,11 @@ render_priority = 0
 shader = SubResource("Shader_bxf5m")
 
 [node name="Scene" type="Node2D"]
+y_sort_enabled = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_y36bm")
 script = ExtResource("4")
 metadata/_edit_horizontal_guides_ = []
-
-[node name="Skeleton" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
-
-[node name="Skeleton2" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
-
-[node name="Skeleton3" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
-
-[node name="Skeleton4" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
-
-[node name="Skeleton5" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
-
-[node name="Skeleton6" parent="." instance=ExtResource("2_sjh5k")]
-position = Vector2(1404.24, 494.403)
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(641.938, 358.841)
@@ -70,25 +52,36 @@ layer_1/tile_data = PackedInt32Array(-1179666, 2, 0, -1114130, 2, 0, -1048594, 2
 layer_0/tile_data = PackedInt32Array()
 
 [node name="Resources" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="DroppedResources" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Buildings" type="Node2D" parent="."]
 
 [node name="Belt" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Pump" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Receiver" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Spawner" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Storage" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Trash" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="InProgress" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Furnace" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="GardenBed" type="Node2D" parent="Buildings"]
+y_sort_enabled = true

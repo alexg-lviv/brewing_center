@@ -6,7 +6,8 @@ enum States {
 	CraftState,
 	CleanState,
 	HarvestState,
-	NullState
+	PlantState,
+	NullState,
 }
 
 #enum BuildStates {

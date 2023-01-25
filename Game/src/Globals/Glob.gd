@@ -14,6 +14,12 @@ var drag_rss  : Movable = null
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false
 
+enum Actions{
+	Craft,
+	Build,
+	Plant,
+}
+
 var previews_dict: Dictionary = {
 #	"Belt": "res://art/belt/s.png",
 #	"Spawner": "res://art/buildings/spawner.png",
