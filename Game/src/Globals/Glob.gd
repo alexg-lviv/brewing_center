@@ -11,6 +11,12 @@ var draw_area_mode: bool = false
 var drag_mode : bool = false
 var drag_rss  : Movable = null
 
+
+var curr_tool_selected = null: set = _set_curr_tool
+
+func _set_curr_tool(new_tool) -> void:
+	pass
+
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false
 
@@ -21,32 +27,17 @@ enum Actions{
 }
 
 var previews_dict: Dictionary = {
-#	"Belt": "res://art/belt/s.png",
-#	"Spawner": "res://art/buildings/spawner.png",
-#	"Trash": "res://art/buildings/Trash.png",
-#	"Extractor": "res://art/buildings/spawner.png",
-#	"Receiver": "res://art/buildings/sender.png",
 	"Storage": "res://art/buildings/storage.png",
 	"Furnace": "res://art/buildings/Furnace.png",
 	"GardenBed": "res://art/buildings/GardenBed/GardenBed.png",
 }
 var objects_dict: Dictionary = {
-#	"Belt": "res://src/Buildings/Belt/Belt.tscn",
-#	"Spawner": "res://src/Buildings/Spawner/Spawner.tscn",
-#	"Trash": "res://src/Buildings/Trash/Trash.tscn",
-#	"Extractor": "res://src/Buildings/Pump/Pump.tscn",
-#	"Receiver": "res://src/Buildings/Receiver/Receiver.tscn",
 	"Storage": "res://src/Buildings/Storage/Storage.tscn",
 	"Furnace": "res://src/Buildings/Furnace/Furnace.tscn",
 	"GardenBed": "res://src/Buildings/GardenBed/GardenBed.tscn",
 }
 
 var dismensions_dict: Dictionary = {
-#	"Belt": Vector2i(1, 1),
-#	"Spawner": Vector2i(1, 1),
-#	"Trash": Vector2i(1, 1),
-#	"Extractor": Vector2i(1, 1),
-#	"Receiver": Vector2i(1, 1),
 	"Storage": Vector2i(2, 2),
 	"Furnace": Vector2i(2, 2),
 	"GardenBed": Vector2i(1, 1),

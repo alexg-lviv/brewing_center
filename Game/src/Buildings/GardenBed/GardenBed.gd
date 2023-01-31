@@ -37,7 +37,7 @@ var animations_to_state_dict: Dictionary = {
 }
 
 func _set_state(new_state: int) -> void:
-	state = new_state
+	state = new_state	
 	SelfAnimation.play(animations_to_state_dict[state])
 
 func _ready() -> void:
@@ -108,10 +108,10 @@ func transition_states() -> void:
 func spawn_result() -> void:
 	var instance = Res.instantiate()
 	ResourcesContainer.call_deferred("add_child", instance)
-	instance.set_deferred("global_position", global_position + Vector2(0, -20))
+	instance.set_deferred("global_position", global_position + Vector2(0, -Glob.GRID_STEP/2))
 	instance.set_deferred("rss_name", "Tree")
 	instance.set_deferred("scene", Scene)
-	Scene.instances_dict[global_position + Vector2(0, -20)] = instance
+	Scene.instances_dict[global_position + Vector2(0, -Glob.GRID_STEP/2)] = instance
 	queue_free()
 
 func _on_growth_timer_timeout() -> void:

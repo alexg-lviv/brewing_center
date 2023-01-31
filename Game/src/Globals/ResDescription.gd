@@ -41,7 +41,7 @@ var res_heat_required: Dictionary = {
 }
 
 var res_heat_produced: Dictionary = {
-	"Log": 2,
+	"Log": 1,
 	"Coal": 3,
 }
 

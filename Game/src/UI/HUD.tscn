@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhy2scbfp31d6"]
+[gd_scene load_steps=9 format=3 uid="uid://b0b0vvbt4bv6d"]
 
 [ext_resource type="Texture2D" uid="uid://dnlrifiiyx3vw" path="res://art/bg.png" id="1_4utof"]
 [ext_resource type="Script" path="res://src/UI/HUD.gd" id="1_ald1r"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://1oxms6rghd2x" path="res://art/tools/broom.png" id="4_g3p2b"]
 [ext_resource type="Texture2D" uid="uid://c2376fvd1jji2" path="res://art/tools/picaxe.png" id="5_eojv5"]
 [ext_resource type="Texture2D" uid="uid://b7en30k0m0o0r" path="res://art/icons/hammer.png" id="6_wr27p"]
+[ext_resource type="Texture2D" uid="uid://dqvptyo1mqkcs" path="res://art/tools/tools_bg_inactive.png" id="7_xy487"]
+[ext_resource type="Texture2D" uid="uid://dgnamawp17pg5" path="res://art/tools/axe.png" id="8_hm0i5"]
 
 [node name="HUD" type="Control"]
 texture_filter = 1
@@ -18,23 +20,23 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ald1r")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="."]
+[node name="ActionsContainer" type="VBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -552.0
-offset_right = -544.0
-offset_bottom = -412.0
+offset_left = -616.0
+offset_top = -528.0
+offset_right = -584.0
+offset_bottom = -388.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(2, 2)
 mouse_filter = 2
 alignment = 1
 
-[node name="Demolish" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
+[node name="Demolish" type="TextureButton" parent="ActionsContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
 offset_right = 32.0
 offset_bottom = 32.0
@@ -42,7 +44,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Demolish"]
+[node name="TextureRect" type="TextureRect" parent="ActionsContainer/Demolish"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -58,7 +60,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("3")
 
-[node name="Clear" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
+[node name="Clear" type="TextureButton" parent="ActionsContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
 offset_top = 36.0
 offset_right = 32.0
@@ -67,7 +69,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Clear"]
+[node name="TextureRect" type="TextureRect" parent="ActionsContainer/Clear"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -83,7 +85,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(17, 28)
 texture = ExtResource("4_g3p2b")
 
-[node name="Harvest" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
+[node name="Harvest" type="TextureButton" parent="ActionsContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
 offset_top = 72.0
 offset_right = 32.0
@@ -92,7 +94,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Harvest"]
+[node name="TextureRect" type="TextureRect" parent="ActionsContainer/Harvest"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,7 +110,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(24, 25)
 texture = ExtResource("5_eojv5")
 
-[node name="Build" type="TextureButton" parent="HBoxContainer" groups=["ActionButton"]]
+[node name="Build" type="TextureButton" parent="ActionsContainer" groups=["ActionButton"]]
 self_modulate = Color(0.262745, 0.427451, 0.792157, 1)
 offset_top = 108.0
 offset_right = 32.0
@@ -117,7 +119,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("1_4utof")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Build"]
+[node name="TextureRect" type="TextureRect" parent="ActionsContainer/Build"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -132,3 +134,87 @@ grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("6_wr27p")
+
+[node name="ToolsContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+pivot_offset = Vector2(40, 2.08165e-12)
+alignment = 1
+
+[node name="Hand" type="TextureButton" parent="ToolsContainer" groups=["ActionButton"]]
+offset_right = 24.0
+offset_bottom = 23.0
+size_flags_vertical = 4
+texture_normal = ExtResource("7_xy487")
+
+[node name="TextureRect" type="TextureRect" parent="ToolsContainer/Hand"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(20, 28)
+texture = ExtResource("4_g3p2b")
+
+[node name="Axe" type="TextureButton" parent="ToolsContainer" groups=["ActionButton"]]
+offset_left = 28.0
+offset_right = 52.0
+offset_bottom = 23.0
+size_flags_vertical = 4
+texture_normal = ExtResource("7_xy487")
+
+[node name="TextureRect" type="TextureRect" parent="ToolsContainer/Axe"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("8_hm0i5")
+
+[node name="Pickaxe" type="TextureButton" parent="ToolsContainer" groups=["ActionButton"]]
+offset_left = 56.0
+offset_right = 80.0
+offset_bottom = 23.0
+size_flags_vertical = 4
+texture_normal = ExtResource("7_xy487")
+
+[node name="TextureRect" type="TextureRect" parent="ToolsContainer/Pickaxe"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(24, 25)
+texture = ExtResource("5_eojv5")

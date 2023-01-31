@@ -469,8 +469,8 @@ func spawn_skeletons():
 
 ## function to create trees with specific probability over the specific area
 func create_trees(world_size: Vector2) -> void:
-	for i in range(0, world_size.x, Glob.GRID_STEP*0.3):
-		for j in range(0, world_size.y, Glob.GRID_STEP*1.5):
+	for i in range(0, world_size.x, Glob.GRID_STEP):
+		for j in range(Glob.GRID_STEP / 2, world_size.y, Glob.GRID_STEP):
 			var to_spawn: bool = false
 			var obj: Interactable
 			var curr_obj: String = ""

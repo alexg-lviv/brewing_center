@@ -34,7 +34,7 @@ func initiate_building(build_type: String) -> void:
 	sprite.texture = load(Glob.previews_dict[build_type])
 	sprite.modulate = "ffffff64"
 	
-	scene.add_demanding_build_building(self)
+	scene.add_demanding_buildings(self, Glob.Actions.Build)
 	
 	
 	collision.shape.size = Vector2(dismensions.x * Glob.GRID_STEP / 2, dismensions.y * Glob.GRID_STEP / 2)
