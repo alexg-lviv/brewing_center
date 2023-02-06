@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/Minions/Skeleton.gd" id="1_50q6l"]
 [ext_resource type="PackedScene" uid="uid://cc46axed4bnmj" path="res://src/Minions/States/StatesManager.tscn" id="3_e4ywr"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eff0i"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7fxuh"]
 height = 48.0
 
 [node name="Skeleton" type="Area2D"]
@@ -17,19 +17,26 @@ script = ExtResource("1_50q6l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)
-shape = SubResource("CapsuleShape2D_eff0i")
+shape = SubResource("CapsuleShape2D_7fxuh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
 texture = ExtResource("1_3imrd")
 
-[node name="Hand" type="Marker2D" parent="."]
+[node name="LeftHand" type="Marker2D" parent="."]
 position = Vector2(8, -24)
+
+[node name="RightHand" type="Marker2D" parent="."]
+position = Vector2(-8, -24)
 
 [node name="OverHead" type="Marker2D" parent="."]
 position = Vector2(0, -56)
 
 [node name="StatesManager" parent="." instance=ExtResource("3_e4ywr")]
+
+[node name="ToolSprite" type="Sprite2D" parent="."]
+position = Vector2(-8, -24)
+scale = Vector2(0.3, 0.3)
 
 [connection signal="target_reached" from="NavigationAgent2D" to="StatesManager" method="_on_navigation_agent_2d_target_reached"]
 

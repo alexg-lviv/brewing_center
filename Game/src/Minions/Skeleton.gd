@@ -5,9 +5,11 @@ class_name Skeleton
 # TODO: SWITCH NAVIGATION TO ASTAR2DGRID
 
 @onready var NavAgent :NavigationAgent2D = get_node("NavigationAgent2D")
-@onready var HandsMarker: Marker2D = get_node("Hand")
+@onready var LeftHandMarker: Marker2D = get_node("LeftHand")
+@onready var RightHandMarker: Marker2D = get_node("RightHand")
 @onready var OverHeadMarker: Marker2D = get_node("OverHead")
 @onready var StatesManager: SkeletonStatesManager = get_node("StatesManager")
+@onready var ToolSprite: Sprite2D = get_node("ToolSprite")
 
 @onready var Scene :GameWorld = get_parent() 
 
@@ -17,9 +19,15 @@ var object_in_hands: Movable = null
 
 var target = null
 
+@export var tool: String : set = _update_tool
+
 func _ready() -> void:
 	StatesManager.initialise(self)
 
+
+func _update_tool(new_tool: String) -> void:
+	tool = new_tool
+	ToolSprite.texture = load(Glob.tools_sprites[tool])
 
 ## every tick chose tje target where to go and actualy move
 func _process(_delta: float) -> void:
@@ -55,9 +63,9 @@ func chose_target_and_resource(action: int) -> Array:
 	return []
 
 
-func chose_target_to_harvest() -> void:
+func chose_target_to_harvest(tool: String) -> void:
 	NavAgent.target_desired_distance = 50
-	var resources: Array = Scene.get_resources()
+	var resources: Array = Scene.get_resources(tool)
 	var resource_selected = get_min_distance_object(resources)
 	if resource_selected == null: 
 		target = null

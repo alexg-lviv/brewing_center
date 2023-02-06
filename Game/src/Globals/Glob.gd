@@ -29,6 +29,11 @@ enum Actions{
 	Plant,
 }
 
+var tools_sprites: Dictionary = {
+	"Axe": "res://art/tools/axe.png",
+	"Pickaxe": "res://art/tools/picaxe.png",
+}
+
 var previews_dict: Dictionary = {
 	"Storage": "res://art/buildings/storage.png",
 	"Furnace": "res://art/buildings/Furnace.png",

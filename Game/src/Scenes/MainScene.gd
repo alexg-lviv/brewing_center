@@ -479,6 +479,7 @@ func spawn_skeletons():
 		var temp_skeleton = Minion.instantiate()
 		call_deferred("add_child", temp_skeleton)
 		temp_skeleton.set_deferred("global_position", Vector2(500, 500))
+		temp_skeleton.set_deferred("tool", Glob.tools_sprites.keys()[randi_range(0, 1)])
 
 ## function to create trees with specific probability over the specific area
 func create_trees(world_size: Vector2) -> void:
@@ -554,11 +555,12 @@ func get_storages() -> Array:
 	return res
 
 ## get all the static big resources on map
-func get_resources() -> Array[InteractableTimed]:
+func get_resources(tool: String) -> Array[InteractableTimed]:
 	var res: Array[InteractableTimed] = []
 	for resource in ResourcesContainer.get_children():
 		if resource.reserved_by_skeleton: continue
-		if get_grid_pos(resource.global_position) in harvest_tiles:
+		if (get_grid_pos(resource.global_position) in harvest_tiles
+			and ResDescription.rss_harvest_tool[resource.rss_name] == tool):
 			res.append(resource)
 	return res
 

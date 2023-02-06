@@ -2,7 +2,7 @@ class_name SkeletonHarvestState
 extends SkeletonBaseState
 
 func enter() -> void:
-	skeleton.chose_target_to_harvest()
+	skeleton.chose_target_to_harvest(skeleton.tool)
 
 func exit() -> void:
 	skeleton.target = null
