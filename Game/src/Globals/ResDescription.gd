@@ -72,6 +72,13 @@ var rss_harvest_time: Dictionary = {
 	"Tree":    0.5,
 }
 
+var rss_harvest_tool: Dictionary = {
+	"Rock":    "Pickaxe",
+	"IronOre": "Pickaxe",
+	"CoalOre": "Pickaxe",
+	"Tree":    "Axe",
+}
+
 var rss_drop_resource_types: Dictionary = {
 	"Rock":    "Stone",
 	"IronOre": "Iron",

@@ -107,6 +107,9 @@ func _ready():
 	
 	
 	create_environment(scene_size)
+	Glob.curr_tool_selected = "Hand"
+	
+	
 	
 	for button in get_tree().get_nodes_in_group("ActionButton"):
 		button.connect("pressed", Callable(self, "_on_action_button_pressed").bind(button.get_name()))
@@ -133,7 +136,17 @@ func _process(_delta):
 		handle_demolition()
 	elif Glob.draw_area_mode:
 		handle_areas_drawing()
+	
+	handle_tools_selection()
 
+
+func handle_tools_selection() -> void:
+	if Input.is_action_just_pressed("numpad_1"):
+		Glob.curr_tool_selected = "Hand"
+	if Input.is_action_just_pressed("numpad_2"):
+		Glob.curr_tool_selected = "Axe"
+	if Input.is_action_just_pressed("numpad_3"):
+		Glob.curr_tool_selected = "Pickaxe"
 
 #########################################
 #########################################

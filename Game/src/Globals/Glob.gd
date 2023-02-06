@@ -1,5 +1,7 @@
 extends Node
 
+signal selected_tool_changed(tool: String)
+
 const FLOAT_EPSILON = 0.01
 
 var GRID_STEP: int = 64
@@ -12,10 +14,11 @@ var drag_mode : bool = false
 var drag_rss  : Movable = null
 
 
-var curr_tool_selected = null: set = _set_curr_tool
+var curr_tool_selected: String: set = _set_curr_tool
 
-func _set_curr_tool(new_tool) -> void:
-	pass
+func _set_curr_tool(new_tool: String) -> void:
+	curr_tool_selected = new_tool
+	emit_signal("selected_tool_changed", curr_tool_selected)
 
 # DEMOLISH MODE VARS
 var demolish_mode: bool = false
@@ -59,7 +62,7 @@ var modulate_green: String = "73feb0"
 var modulate_red:   String = "ff6565"
 
 ## a helper function of comparison of 2 floating-point vectors
-func compare(first: Vector2, second: Vector2) -> bool:
-	if abs(first.x - second.x) < 1 and abs(first.y - second.y) < 1:
+func compare(first: Vector2, second: Vector2, precision: float = 1.) -> bool:
+	if abs(first.x - second.x) < precision and abs(first.y - second.y) < precision:
 		return false
 	return true

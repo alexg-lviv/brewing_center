@@ -24,7 +24,8 @@ func _ready():
 	own_z = 10
 
 func interact() -> void:
-	super()
+	if ResDescription.rss_harvest_tool[rss_name] == Glob.curr_tool_selected:
+		super()
 
 ## a function to continue interaction, owerrided from the parent class
 ## spawns the random amount of resources dropped from self and dies
