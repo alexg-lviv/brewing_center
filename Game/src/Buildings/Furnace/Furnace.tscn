@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bw7rrlh787rod"]
+[gd_scene load_steps=25 format=3 uid="uid://dpvqcw6adm3wr"]
 
 [ext_resource type="PackedScene" uid="uid://cqrbqisqsq1mv" path="res://src/Buildings/Abstracts/Building.tscn" id="1_kfka2"]
 [ext_resource type="Script" path="res://src/Buildings/Furnace/Furnace.gd" id="2_yac1p"]
@@ -13,8 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://cyv7h7yn4sdri" path="res://art/buildings/Furnace/Furnace.png" id="11_ija6c"]
 [ext_resource type="PackedScene" uid="uid://c8mirukmbig14" path="res://src/UI/BuildingBuildPopup/BuildingPopup.tscn" id="12_wwqmm"]
 [ext_resource type="PackedScene" uid="uid://cc42ijfofhger" path="res://src/UI/CraftingProgressPopup/CraftingPopup.tscn" id="13_3aips"]
-[ext_resource type="PackedScene" uid="uid://bjhn58vw5m0yv" path="res://src/UI/CraftingRssSelection/RssSelection.tscn" id="14_h6cyt"]
-[ext_resource type="PackedScene" uid="uid://c2o122ycvymoc" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.tscn" id="15_26in4"]
+[ext_resource type="PackedScene" uid="uid://bvn377ear6hat" path="res://src/UI/FurnaceRssSelection/BurnableAndFuel.tscn" id="14_h6cyt"]
+[ext_resource type="PackedScene" uid="uid://bnmko6unoesvm" path="res://src/UI/FurnaceRssSelection/RssSelectionList.tscn" id="15_26in4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kybo"]
 radius = 12.0
@@ -188,12 +188,10 @@ offset_top = -36.0
 offset_bottom = -36.0
 
 [node name="FurnaceRssSelection" parent="." index="7" instance=ExtResource("14_h6cyt")]
-offset_top = -40.5
-offset_bottom = -40.5
+offset_top = -65.0
+offset_bottom = -65.0
 
 [node name="CraftingRssSelection" parent="." index="8" instance=ExtResource("15_26in4")]
-offset_top = 24.5
-offset_bottom = 24.5
 
 [node name="SmeltingTimer" type="Timer" parent="." index="9"]
 one_shot = true
@@ -201,9 +199,7 @@ one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="popup_pressed" from="BuildingPopup" to="." method="_on_building_popup_popup_pressed"]
-[connection signal="closed" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_closed"]
 [connection signal="enter_burnable_selection" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_enter_burnable_selection"]
 [connection signal="enter_fuel_selection" from="FurnaceRssSelection" to="." method="_on_furnace_rss_selection_enter_fuel_selection"]
-[connection signal="closed" from="CraftingRssSelection" to="." method="_on_crafting_rss_selection_closed"]
 [connection signal="item_activated" from="CraftingRssSelection" to="." method="_on_crafting_rss_selection_item_activated"]
 [connection signal="timeout" from="SmeltingTimer" to="." method="_on_smelting_timer_timeout"]

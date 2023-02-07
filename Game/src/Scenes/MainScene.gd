@@ -6,11 +6,11 @@ extends Node2D
 @icon("res://art/icons/world.png")
 
 
-@export var trees_prob: float = 0.08
-@export var rock_prob: float = 0.015
-@export var coal_prob: float = 0.008
-@export var iron_ore_prob: float = 0.002
-@export var scene_size: Vector2 = Vector2(3000, 1000)
+@export var trees_prob: float = 0.15
+@export var rock_prob: float = 0.06
+@export var coal_prob: float = 0.04
+@export var iron_ore_prob: float = 0.02
+@export var scene_size: Vector2 = Vector2(3000, 2000)
 @export var skeletopns_num: int = 5
 
 # BUILD MODE VARS

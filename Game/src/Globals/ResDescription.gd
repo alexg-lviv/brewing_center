@@ -50,9 +50,9 @@ var rss_smelt_chains: Dictionary = {
 }
 
 var rss_drop_bounds: Dictionary = {
-	"Rock":    {
+	"Rock": {
 		"Stone": Vector2i(1, 2),
-		"Pickaxe": Vector2i(2, 2),
+		"Pickaxe": Vector2i(1, 1),
 	},
 	"IronOre": {
 		"Iron": Vector2i(2, 4),
@@ -79,11 +79,4 @@ var rss_harvest_tool: Dictionary = {
 	"IronOre": "Pickaxe",
 	"CoalOre": "Pickaxe",
 	"Tree":    "Axe",
-}
-
-var rss_drop_resource_types: Dictionary = {
-	"Rock":    "Stone",
-	"IronOre": "Iron",
-	"CoalOre": "Coal",
-	"Tree":    "Log",
 }

@@ -42,7 +42,7 @@ _global_script_classes=[{
 "base": "Control",
 "class": &"CraftRssSelection",
 "language": &"GDScript",
-"path": "res://src/UI/CraftingRssSelection/CraftingRssSelection.gd"
+"path": "res://src/UI/FurnaceRssSelection/RssSelectionList.gd"
 }, {
 "base": "Control",
 "class": &"CraftingPopup",
@@ -67,7 +67,7 @@ _global_script_classes=[{
 "base": "Control",
 "class": &"FurnaceRssSelector",
 "language": &"GDScript",
-"path": "res://src/UI/CraftingRssSelection/RssSelection.gd"
+"path": "res://src/UI/FurnaceRssSelection/BurnableAndFuel.gd"
 }, {
 "base": "Node2D",
 "class": &"GameWorld",

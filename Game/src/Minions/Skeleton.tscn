@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/Minions/Skeleton.gd" id="1_50q6l"]
 [ext_resource type="PackedScene" uid="uid://cc46axed4bnmj" path="res://src/Minions/States/StatesManager.tscn" id="3_e4ywr"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36w0a"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xoiov"]
 height = 48.0
 
 [node name="Skeleton" type="Area2D"]
@@ -17,7 +17,7 @@ script = ExtResource("1_50q6l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)
-shape = SubResource("CapsuleShape2D_36w0a")
+shape = SubResource("CapsuleShape2D_xoiov")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)

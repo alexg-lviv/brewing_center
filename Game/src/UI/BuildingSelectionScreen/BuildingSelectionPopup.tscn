@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bywhevmrsw0d4" path="res://art/buildings/GardenBed/GardenBed.png" id="5_2vrvh"]
 
 [node name="BuildingSelectionPopup" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2o122ycvymoc"]
+[gd_scene load_steps=8 format=3 uid="uid://bnmko6unoesvm"]
 
-[ext_resource type="Script" path="res://src/UI/CraftingRssSelection/CraftingRssSelection.gd" id="1_4ajft"]
-[ext_resource type="Texture2D" uid="uid://c2ylpqxdnw4ee" path="res://art/ui/RssSelectionBg.png" id="1_pti8i"]
-[ext_resource type="Texture2D" uid="uid://cm8q7krmlg52d" path="res://art/ui/cross.png" id="3_fqioy"]
-[ext_resource type="Texture2D" uid="uid://das8iuowlxvpa" path="res://art/ui/cross_hovered.png" id="4_xe7mc"]
+[ext_resource type="Script" path="res://src/UI/FurnaceRssSelection/RssSelectionList.gd" id="1_avmap"]
+[ext_resource type="Texture2D" uid="uid://c2ylpqxdnw4ee" path="res://art/ui/RssSelectionBg.png" id="2_0ef6g"]
+[ext_resource type="Texture2D" uid="uid://cm8q7krmlg52d" path="res://art/ui/cross.png" id="3_j6nvy"]
+[ext_resource type="Texture2D" uid="uid://das8iuowlxvpa" path="res://art/ui/cross_hovered.png" id="4_4dylv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4xah"]
 
@@ -16,7 +16,7 @@ z_index = 120
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_4ajft")
+script = ExtResource("1_avmap")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -25,7 +25,7 @@ offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
 pivot_offset = Vector2(64, 64)
-texture = ExtResource("1_pti8i")
+texture = ExtResource("2_0ef6g")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TextureRect"]
 texture_filter = 1
@@ -62,9 +62,9 @@ offset_left = 40.0
 offset_top = -70.0
 offset_right = 70.0
 offset_bottom = -40.0
-texture_normal = ExtResource("3_fqioy")
-texture_hover = ExtResource("4_xe7mc")
-texture_focused = ExtResource("4_xe7mc")
+texture_normal = ExtResource("3_j6nvy")
+texture_hover = ExtResource("4_4dylv")
+texture_focused = ExtResource("4_4dylv")
 
 [connection signal="item_activated" from="TextureRect/ScrollContainer/ItemList" to="." method="_on_item_list_item_activated"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

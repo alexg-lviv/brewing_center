@@ -7,7 +7,7 @@ signal popup_pressed
 @onready var texture: TextureRect = get_node("TextureRect")
 
 @onready var element = preload("res://src/UI/BuildingBuildPopup/ResAndCount.tscn")
-@onready var warning = preload("res://src/UI/CraftingRssSelection/Warning.tscn")
+@onready var warning = preload("res://src/UI/FurnaceRssSelection/Warning.tscn")
 
 var warn: bool = false
 
