@@ -9,7 +9,7 @@ extends Area2D
 var center_pos: Vector2
 var destructable = true
 
-var temp_obj: DroppedResource = null
+var temp_obj: DroppedItem = null
 
 var my_reserved_demand: Dictionary = {}
 var my_demand: Dictionary = {}

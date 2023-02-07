@@ -16,7 +16,7 @@ class_name Furnace
 @onready var CraftPopup: CraftingPopup = get_node("CraftingPopup")
 @onready var BurnableOrFuelSelectionPopup: FurnaceRssSelector = get_node("FurnaceRssSelection")
 
-@onready var ResObject:= preload("res://src/Interactables/DroppedResource.tscn")
+@onready var ResObject:= preload("res://src/Interactables/DroppedItem.tscn")
 
 var selection: String
 
@@ -40,7 +40,7 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
-	if Glob.drag_mode and (!fuel or !rss) and (Glob.drag_rss.rss_name in my_demand.keys() and my_demand[Glob.drag_rss.rss_name] > 0):
+	if Glob.drag_mode and (!fuel or !rss) and (Glob.drag_rss.self_name in my_demand.keys() and my_demand[Glob.drag_rss.self_name] > 0):
 		PulserAnimPlayer.play("Pulsing")
 		Pulser.self_modulate = "#00ff00"
 	else:
@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 ## or from skeleton. if called from skeleton, the skeleton instance is passed in and
 ## the skeleton is removed from the reservation dictionary
 func get_resource(item: Movable, skeleton: Skeleton = null):
-	var resource_name = item.rss_name
+	var resource_name = item.self_name
 	if skeleton != null:
 		my_reserved_demand[resource_name].erase(skeleton)
 	else:
@@ -89,10 +89,10 @@ func _on_smelting_timer_timeout() -> void:
 	reset_demand()
 	CraftPopup.clear()
 	FurnaceAnimPlayer.play("Idle")
-	var result_obj: DroppedResource= ResObject.instantiate()
+	var result_obj: DroppedItem= ResObject.instantiate()
 	DroppedResources.add_child(result_obj)
 	result_obj.global_position = center_pos
-	result_obj.rss_name = ResDescription.rss_smelt_chains[object_to_smelt_selected]
+	result_obj.self_name = ResDescription.rss_smelt_chains[object_to_smelt_selected]
 	result_obj.move(center_pos + Vector2(0, 96) + Vector2(randf_range(-5, 5), randf_range(-5, 5)))
 	set_demand()
 	popup.show()
@@ -151,24 +151,24 @@ func unreserve_demand():
 
 func throw_rss_out(rss: String, amount: int) -> void:
 	for i in range(amount):
-		var result_obj: DroppedResource= ResObject.instantiate()
+		var result_obj: DroppedItem= ResObject.instantiate()
 		DroppedResources.add_child(result_obj)
 		result_obj.global_position = center_pos
-		result_obj.rss_name = rss
+		result_obj.self_name = rss
 		result_obj.move(center_pos + Vector2(0, 96) + Vector2(randf_range(-5, 5), randf_range(-5, 5)))
 		
 
 ## remember that item entered yourself
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Movables"):
-		if (fuel_selected == area.rss_name) or (object_to_smelt_selected == area.rss_name):
+		if (fuel_selected == area.self_name) or (object_to_smelt_selected == area.self_name):
 			temp_obj = area
 			area.get_reserved_by_building(self)
 
 ## ok forget about it, its GONE
 func _on_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Movables"):
-		if (fuel_selected == area.rss_name) or (object_to_smelt_selected == area.rss_name):
+		if (fuel_selected == area.self_name) or (object_to_smelt_selected == area.self_name):
 			area.forget_about_reservation_building()
 			temp_obj = null
 

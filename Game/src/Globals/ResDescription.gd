@@ -52,6 +52,7 @@ var rss_smelt_chains: Dictionary = {
 var rss_drop_bounds: Dictionary = {
 	"Rock":    {
 		"Stone": Vector2i(1, 2),
+		"Pickaxe": Vector2i(2, 2),
 	},
 	"IronOre": {
 		"Iron": Vector2i(2, 4),
@@ -61,7 +62,8 @@ var rss_drop_bounds: Dictionary = {
 	},
 	"Tree": {
 		"Log": Vector2i(2, 3),
-		"Acorn": Vector2i(0, 1)
+		"Acorn": Vector2i(0, 1),
+		"Axe": Vector2i(1, 1),
 	},
 }
 

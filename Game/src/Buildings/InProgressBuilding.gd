@@ -17,7 +17,7 @@ var died: bool = false
 ## if the drag_mode is active - all the storages signal that they are available to place items
 ## TODO: add visibility notifiers for optimisation
 func _process(_delta: float) -> void:
-	if Glob.drag_mode and (Glob.drag_rss.rss_name in my_demand.keys() and my_demand[Glob.drag_rss.rss_name] > 0):
+	if Glob.drag_mode and (Glob.drag_rss.self_name in my_demand.keys() and my_demand[Glob.drag_rss.self_name] > 0):
 		AnimPlayer.play("Pulsing")
 		Pulser.self_modulate = "#00ff00"
 	else:
@@ -52,7 +52,7 @@ func initiate_building(build_type: String) -> void:
 ## or from skeleton. if called from skeleton, the skeleton instance is passed in and
 ## the skeleton is removed from the reservation dictionary
 func get_resource(item: Movable, skeleton: Skeleton = null):
-	var resource_name = item.rss_name
+	var resource_name = item.self_name
 	if skeleton != null:
 		my_reserved_demand[resource_name].erase(skeleton)
 	else:

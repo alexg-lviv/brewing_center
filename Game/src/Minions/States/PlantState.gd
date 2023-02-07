@@ -14,7 +14,7 @@ func enter() -> void:
 	if building_and_res.size() == 2:
 		building = building_and_res[0]
 		resource_chosen = building_and_res[1]
-		building.reserve_demanded_res_by_skeleton(skeleton, resource_chosen.rss_type)
+		building.reserve_demanded_res_by_skeleton(skeleton, resource_chosen.type)
 		resource_chosen.get_reserved_by_skeleton(skeleton)
 	skeleton.target = resource_chosen
 	heading_to_resource = true

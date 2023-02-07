@@ -509,7 +509,7 @@ func create_trees(world_size: Vector2) -> void:
 			obj.set_deferred("scene", self)
 			obj.set_deferred("center_pos", pos)
 			obj.call_deferred("update_z")
-			obj.set_deferred("rss_name", curr_obj)
+			obj.set_deferred("self_name", curr_obj)
 #			if randi_range(0, 2) == 1:
 #				obj.call_deferred("mirror")
 			instances_dict[pos] = obj
@@ -560,7 +560,7 @@ func get_resources(tool: String) -> Array[InteractableTimed]:
 	for resource in ResourcesContainer.get_children():
 		if resource.reserved_by_skeleton: continue
 		if (get_grid_pos(resource.global_position) in harvest_tiles
-			and ResDescription.rss_harvest_tool[resource.rss_name] == tool):
+			and ResDescription.rss_harvest_tool[resource.self_name] == tool):
 			res.append(resource)
 	return res
 
@@ -641,7 +641,7 @@ func remove_demanding_buildings(building: Building, action: int) -> void:
 func get_all_resources_by_name(res_name: String) -> Array[Movable]:
 	var result: Array[Movable] = []
 	for res in DroppedResources.get_children():
-		if (res.rss_name == res_name 
+		if (res.self_name == res_name 
 				and res.current_skeleton     == null 
 				and res.reservation_skeleton == null
 				and (get_grid_pos(res.global_position) in pickup_tiles
@@ -653,7 +653,7 @@ func get_all_resources_by_name(res_name: String) -> Array[Movable]:
 func get_all_resources_by_type(res_type: String) -> Array[Movable]:
 	var result: Array[Movable] = []
 	for res in DroppedResources.get_children():
-		if (res.rss_type == res_type 
+		if (res.type == res_type 
 				and res.current_skeleton     == null 
 				and res.reservation_skeleton == null
 				and (get_grid_pos(res.global_position) in pickup_tiles

@@ -45,7 +45,7 @@ func _ready() -> void:
 	state = States.EmptyState
 
 func _process(_delta: float) -> void:
-	if Glob.drag_mode and state == States.EmptyState and Glob.drag_rss.rss_name in ResDescription.dropped_rss_types["Seed"]:
+	if Glob.drag_mode and state == States.EmptyState and Glob.drag_rss.self_name in ResDescription.dropped_rss_types["Seed"]:
 		PulserAnimPlayer.play("Pulsing")
 		Pulser.self_modulate = "#00ff00"
 	else:
@@ -53,8 +53,8 @@ func _process(_delta: float) -> void:
 
 
 func get_resource(item: Movable, skeleton: Skeleton = null) -> void:
-	var resource_name = item.rss_name
-	var resource_type = item.rss_type
+	var resource_name = item.self_name
+	var resource_type = item.type
 	if skeleton != null:
 		my_reserved_demand[resource_type].erase(skeleton)
 	else:
@@ -88,13 +88,13 @@ func reset_demand() -> void:
 
 ## remember that item entered yourself
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Movables") and area.rss_type in my_demand.keys():
+	if area.is_in_group("Movables") and area.type in my_demand.keys():
 		temp_obj = area
 		area.get_reserved_by_building(self)
 
 ## ok forget about it, its GONE
 func _on_area_exited(area: Area2D) -> void:
-	if area.is_in_group("Movables") and area.rss_type in my_demand.keys():
+	if area.is_in_group("Movables") and area.type in my_demand.keys():
 		area.forget_about_reservation_building()
 		temp_obj = null
 
@@ -109,7 +109,7 @@ func spawn_result() -> void:
 	var instance = Res.instantiate()
 	ResourcesContainer.call_deferred("add_child", instance)
 	instance.set_deferred("global_position", global_position + Vector2(0, -Glob.GRID_STEP/2))
-	instance.set_deferred("rss_name", "Tree")
+	instance.set_deferred("self_name", "Tree")
 	instance.set_deferred("scene", Scene)
 	Scene.instances_dict[global_position + Vector2(0, -Glob.GRID_STEP/2)] = instance
 	queue_free()

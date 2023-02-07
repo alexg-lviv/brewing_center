@@ -58,7 +58,7 @@ func chose_target_and_resource(action: int) -> Array:
 				var closest: Movable = get_min_distance_object(resources)
 				closest.get_reserved_by_skeleton(self)
 				if closest.current_building != null: 
-					Scene.try_remove_stored_resource(closest.current_building, closest.rss_name)
+					Scene.try_remove_stored_resource(closest.current_building, closest.self_name)
 				return [building, closest]
 	return []
 
